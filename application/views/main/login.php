@@ -50,12 +50,12 @@
             <div class="brand">
                 <img class="brand-img" src="<?php echo base_url(); ?>assets/images/logo.png">
             </div>
-            <form method="post" action="home.php">
+            <form method="post" action="loginvalidation">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Username" required>
+                    <input type="text" class="form-control" placeholder="Username" required name="username">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password" required>
+                    <input type="password" class="form-control" placeholder="Password" required name="password">
                 </div>
                 <button type="submit" class="btn btn-primary btn-block"><b>Masuk</b></button>
             </form>
