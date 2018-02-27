@@ -80,4 +80,67 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function manajemen_mahasiswa_data(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_mahasiswa_data');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function manajemen_mahasiswa_insert(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_mahasiswa_insert');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function manajemen_mahasiswa_edit(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_mahasiswa_edit');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function manajemen_kos_data(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_kos_data');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function manajemen_kos_edit(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_kos_edit');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function manajemen_kos_insert(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_kos_insert');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function manajemen_kos_kamar(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_kos_kamar');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
 }
