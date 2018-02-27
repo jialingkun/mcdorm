@@ -17,8 +17,6 @@ class Main extends CI_Controller {
 
     public function login()
     {
-        $this->load->helper('cookie');
-        $this->load->helper('cookie');
         $this->load->view('main/login');
     }
 
@@ -70,6 +68,16 @@ class Main extends CI_Controller {
     {
         $this->load->helper('cookie');
         echo $this->input->cookie('backendCookie',true);
+    }
+
+    public function home()
+    {
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/home');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
     }
 
 }

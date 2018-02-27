@@ -50,14 +50,14 @@
             <div class="brand">
                 <img class="brand-img" src="<?php echo base_url(); ?>assets/images/logo.png">
             </div>
-            <form method="post" action="loginvalidation">
+            <form method="post" id="form">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Username" required name="username">
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" required name="password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block"><b>Masuk</b></button>
+                <button type="button" class="btn btn-primary btn-block" id="submit"><b>Masuk</b></button>
             </form>
 
             <footer class="page-copyright">
@@ -112,6 +112,22 @@
                 Site.run();
             });
         })(document, window, jQuery);
+
+
+        $(document).on('click', '#submit', function(){
+            var urls='main/loginvalidation';
+            var dataString = $("#form").serialize();
+            $.ajax({
+              url:"<?php echo base_url() ?>index.php/"+urls,
+              type: 'POST',
+              data:dataString,
+              success: function(response){
+                alert(response);
+            }
+        });
+        });
+
+
     </script>
 
 </body>
