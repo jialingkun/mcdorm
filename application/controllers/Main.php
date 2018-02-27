@@ -98,6 +98,24 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function insertMahasiswa(){
+        $data = array(
+            'id_mahasiswa' => $this->input->post('id'),
+            'password' => $this->input->post('password'),
+            'nama' => $this->input->post('nama'),
+            'email' => $this->input->post('email'),
+            'notelp' => $this->input->post('notelp'),
+            'status' => "baru",
+            'id_kos' => NULL,
+            'id_kos' => NULL,
+            'tanggal_masuk' => NULL,
+            'kadaluarsa' => NULL
+        );
+
+        $insertStatus = $this->main_model->insert_new_mahasiswa($data);
+        echo $insertStatus;
+    }
+
     public function manajemen_mahasiswa_edit(){
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');

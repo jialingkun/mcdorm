@@ -12,30 +12,30 @@
             <!-- Example Basic Form -->
             <div class="example-wrap">
               <div class="example">
-                <form>
+                <form method="POST" action="insertMahasiswa">
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">NIM</label>
-                      <input type="text" class="form-control"/>
+                      <input type="text" class="form-control" name="id" />
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
-                      <input type="text" class="form-control"/>
+                      <input type="text" class="form-control" name="nama"/>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">Password</label>
-                      <input type="password" class="form-control"/>
+                      <input type="password" class="form-control" name="password"/>
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Email</label>
-                      <input type="email" class="form-control"/>
+                      <input type="email" class="form-control" name="email"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label">No Telepon</label>
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" name="notelp"/>
                   </div>
                   <div class="form-group pull-right">
                     <button type="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
