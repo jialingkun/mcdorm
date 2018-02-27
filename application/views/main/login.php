@@ -50,7 +50,7 @@
             <div class="brand">
                 <img class="brand-img" src="<?php echo base_url(); ?>assets/images/logo.png">
             </div>
-            <form id="FormId">
+            <form method="post" id="form">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="Username" required name="username">
                 </div>
@@ -116,14 +116,13 @@
 
         $(document).on('click', '#submit', function(){
             var urls='main/loginvalidation';
-            var dataString = $("#FormId").serialize();
+            var dataString = $("#form").serialize();
             $.ajax({
               url:"<?php echo base_url() ?>index.php/"+urls,
               type: 'POST',
               data:dataString,
               success: function(response){
                 alert(response);
-                
             }
         });
         });
