@@ -1,13 +1,13 @@
  <!-- Page -->
  <div class="page animsition">
   <div class="page-header">
-    <h1 class="page-title">Manajemen Mahasiswa</h1>
+    <h1 class="page-title" >Manajemen Mahasiswa</h1>
   </div>
   <div class="page-content">
     <!-- Panel Basic -->
     <div class="panel">
       <header class="panel-heading">
-        <h3 class="panel-title">Data Mahasiswa</h3>
+        <h3 class="panel-title" >Data Mahasiswa</h3>
         <div id="exampleTableAddToolbar">
           <a href="manajemen_mahasiswa_insert">
             <button class="btn btn-info" type="button">
@@ -16,7 +16,7 @@
           </a>
         </div>
         <div class="panel-body">
-          <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable">
+          <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable"  >
             <thead>
               <tr>
                 <th>NIM</th>
@@ -39,53 +39,54 @@
                 <th>Cancel</th>
               </tr>
             </tfoot>
-            <tbody>
-              <tr>
-                <td>311410001</td>
-                <td>Adrianus Wiraatmadja</td>
-                <td>adrianus@gmail.com</td>
-                <td>12jackson12</td>
-                <td style="color: #56ad34"><b>Terkonfirmasi</b></td>
-                <td>
-                  <a href="manajemen_mahasiswa_edit.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
-                      <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
-                    </button>
-                  </a>
-                </td>
-                 <td>
-                  <a href="#">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-warning btn-sm">
-                      <span><i class="icon fa-close"></i> &nbsp<b>Cancel</b></span>
-                    </button>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>311410002</td>
-                <td>Angelika Swan</td>
-                <td>angelika9@gmail.com</td>
-                <td>13chiko13</td>
-                <td style="color: #ef2349"><b>Belum Terkonfirmasi</b></td>
-                <td>
-                  <a href="manajemen_mahasiswa_edit.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
-                      <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <a href="#">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-warning btn-sm">
-                      <span><i class="icon fa-close"></i> &nbsp<b>Cancel</b></span>
-                    </button>
-                  </a>
-                </td>
-            </tr>
-          </tbody>
-        </table>
+            <tbody id="tabelMahasiswa">
+
+            </tbody>
+          </table>
+
+        </div>
       </div>
+      <!-- End Panel Basic -->
     </div>
-    <!-- End Panel Basic -->
   </div>
-</div>
+
+    
+
+
+
+  <script>
+    window.onload = function() {
+
+      var urls='main/getmahasiswa';
+      
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/"+urls,
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+          var len = response.length;
+          for(var i=0; i<len; i++){
+            var id = response[i].id_mahasiswa;
+            var username = response[i].nama;
+            var email = response[i].email;
+            var password = response[i].password;
+            var status = response[i].status;
+
+            var tr_str = "<tr>" +
+            "<td>" + id + "</td>" +
+            "<td>" + username + "</td>" +
+            "<td>" + email + "</td>" +
+            "<td>" + password + "</td>" +
+            "<td>" + status + "</td>" +
+            "<td>" + "<a href='manajemen_mahasiswa_edit'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
+            "<td>" + "<a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-warning btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Cancel</b></span></button></a>" + "</td>" +
+            "</tr>";
+            $('#tabelMahasiswa').append(tr_str);
+          }
+        }
+      });
+    }
+  </script>
+
+
+
