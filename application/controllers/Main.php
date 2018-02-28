@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'backendCookie',
-                   'value'  => md5($data['admin']['id_admin']),
-                   'expire' => '0',
-               );
+                 'name'   => 'backendCookie',
+                 'value'  => md5($data['admin']['id_admin']),
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -87,6 +87,18 @@ class Main extends CI_Controller {
         $this->load->view('main/manajemen_mahasiswa_data');
         $this->load->view('templates/JS');
         $this->load->view('templates/footer');
+    }
+
+    public function getmahasiswa($id = NULL)
+    {
+        $data = $this->main_model->get_data_mahasiswa($id);
+
+        if (empty($data))
+        {
+            show_404();
+        }
+
+        echo json_encode($data);
     }
 
     public function manajemen_mahasiswa_insert(){

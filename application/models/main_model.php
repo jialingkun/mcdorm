@@ -25,4 +25,18 @@ class main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function get_data_mahasiswa($id = NULL)
+	{
+		if ($id == NULL)
+		{
+			$query = $this->db->get('user_mahasiswa');
+			return $query->result_array();
+		}else{
+			$query = $this->db->get_where('user_mahasiswa', array('id_mahasiswa' => $id));
+			return $query->row_array();
+		}
+
+		
+	}
+
 }
