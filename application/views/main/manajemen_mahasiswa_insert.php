@@ -38,8 +38,7 @@
                     <input type="text" class="form-control" name="notelp" required pattern="[0-9]+"/>
                   </div>
                   <div class="form-group pull-right">
-                    <input id="submit" type="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
-                      <span><i class="icon fa-plus"></i> &nbsp<b>Tambahkan Data</b></span>
+                    <input id="submit" type="submit" class="btn btn-animate btn-animate-side btn-info btn-md" value="Tambahkan Data">
                     </input>
                     <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
                       <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>

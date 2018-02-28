@@ -467,7 +467,6 @@
   })(document, window, jQuery);
 
 // My Scripts //
-  
 
 
 function myFunction() {
