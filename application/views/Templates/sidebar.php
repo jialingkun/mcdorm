@@ -12,7 +12,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="manajemen_mahasiswa_data.php">
+                  <a class="animsition-link" href="manajemen_mahasiswa_data">
                     <i class="site-menu-icon fa-database"></i>
                     <span class="site-menu-title">Data Mahasiswa</span>
                   </a>
@@ -27,7 +27,7 @@
               </a>
               <ul class="site-menu-sub">
                 <li class="site-menu-item">
-                  <a class="animsition-link" href="manajemen_kos_data.php">
+                  <a class="animsition-link" href="manajemen_kos_data">
                     <i class="site-menu-icon fa-database"></i>
                     <span class="site-menu-title">Data Kos</span>
                   </a>

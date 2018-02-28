@@ -122,7 +122,12 @@
               type: 'POST',
               data:dataString,
               success: function(response){
-                alert(response);
+                if (response == 1) {
+                    window.location.href = 'home'
+                }else{
+                    alert(response);
+                }
+                
             }
         });
         });
