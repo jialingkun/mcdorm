@@ -40,7 +40,7 @@
 <script src="<?php echo base_url(); ?>assets/vendor/icheck/icheck.min.js"></script>
 
 
-  <script src="<?php echo base_url(); ?>assets/vendor/bootstrap-select/bootstrap-select.js"></script>
+<script src="<?php echo base_url(); ?>assets/vendor/bootstrap-select/bootstrap-select.js"></script>
 
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>assets/js/core.js"></script>
@@ -65,9 +65,9 @@
 <script src="<?php echo base_url(); ?>assets/js/components/bootstrap-select.js"></script>
 
 <script>
-function myFunction() {
+  function myFunction() {
     location.reload();
-}
+  }
 </script>
 
 <script>
@@ -364,7 +364,7 @@ function myFunction() {
           '</div>' +
           '</div>' +
           '{% } %}'
-        ),
+          ),
         downloadTemplate: tmpl(
           '{% for (var i=0, file; file=o.files[i]; i++) { %}' +
           '<div class="file template-download fade col-lg-2 col-md-4 col-sm-6 {%=file.type.search("image") !== -1? "image" : "other-file"%}">' +
@@ -383,7 +383,7 @@ function myFunction() {
           '</div>' +
           '</div>' +
           '{% } %}'
-        ),
+          ),
         forceResize: true,
         previewCanvas: false,
         previewMaxWidth: false,
@@ -394,75 +394,102 @@ function myFunction() {
 
         for (var i = 0; i < length; i++) {
           if (!data.files[i].type.match(
-              /^image\/(gif|jpeg|png|svg\+xml)$/)) {
+            /^image\/(gif|jpeg|png|svg\+xml)$/)) {
             data.files[i].filetype = 'other-file';
-          } else {
-            data.files[i].filetype = 'image';
-          }
-        }
-      }).on('fileuploadadded', function(e) {
-        var $this = $(e.target);
-
-        if ($this.find('.file').length > 0) {
-          $this.addClass('has-file');
         } else {
-          $this.removeClass('has-file');
+          data.files[i].filetype = 'image';
         }
-      }).on('fileuploadfinished', function(e) {
-        var $this = $(e.target);
+      }
+    }).on('fileuploadadded', function(e) {
+      var $this = $(e.target);
 
-        if ($this.find('.file').length > 0) {
-          $this.addClass('has-file');
-        } else {
-          $this.removeClass('has-file');
+      if ($this.find('.file').length > 0) {
+        $this.addClass('has-file');
+      } else {
+        $this.removeClass('has-file');
+      }
+    }).on('fileuploadfinished', function(e) {
+      var $this = $(e.target);
+
+      if ($this.find('.file').length > 0) {
+        $this.addClass('has-file');
+      } else {
+        $this.removeClass('has-file');
+      }
+    }).on('fileuploaddestroyed', function(e) {
+      var $this = $(e.target);
+
+      if ($this.find('.file').length > 0) {
+        $this.addClass('has-file');
+      } else {
+        $this.removeClass('has-file');
+      }
+    }).on('click', function(e) {
+      if ($(e.target).parents('.file').length === 0) $('#inputUpload')
+        .trigger('click');
+    });
+
+    $(document).bind('dragover', function(e) {
+      var dropZone = $('#exampleUploadForm'),
+      timeout = window.dropZoneTimeout;
+      if (!timeout) {
+        dropZone.addClass('in');
+      } else {
+        clearTimeout(timeout);
+      }
+      var found = false,
+      node = e.target;
+      do {
+        if (node === dropZone[0]) {
+          found = true;
+          break;
         }
-      }).on('fileuploaddestroyed', function(e) {
-        var $this = $(e.target);
+        node = node.parentNode;
+      } while (node !== null);
+      if (found) {
+        dropZone.addClass('hover');
+      } else {
+        dropZone.removeClass('hover');
+      }
+      window.dropZoneTimeout = setTimeout(function() {
+        window.dropZoneTimeout = null;
+        dropZone.removeClass('in hover');
+      }, 100);
+    });
 
-        if ($this.find('.file').length > 0) {
-          $this.addClass('has-file');
-        } else {
-          $this.removeClass('has-file');
-        }
-      }).on('click', function(e) {
-        if ($(e.target).parents('.file').length === 0) $('#inputUpload')
-          .trigger('click');
-      });
+    $('#inputUpload').on('click', function(e) {
+      e.stopPropagation();
+    });
 
-      $(document).bind('dragover', function(e) {
-        var dropZone = $('#exampleUploadForm'),
-          timeout = window.dropZoneTimeout;
-        if (!timeout) {
-          dropZone.addClass('in');
-        } else {
-          clearTimeout(timeout);
-        }
-        var found = false,
-          node = e.target;
-        do {
-          if (node === dropZone[0]) {
-            found = true;
-            break;
-          }
-          node = node.parentNode;
-        } while (node !== null);
-        if (found) {
-          dropZone.addClass('hover');
-        } else {
-          dropZone.removeClass('hover');
-        }
-        window.dropZoneTimeout = setTimeout(function() {
-          window.dropZoneTimeout = null;
-          dropZone.removeClass('in hover');
-        }, 100);
-      });
+    $('#uploadlink').on('click', function(e) {
+      e.stopPropagation();
+    });
+  })(document, window, jQuery);
 
-      $('#inputUpload').on('click', function(e) {
-        e.stopPropagation();
-      });
+// My Scripts //
+  
 
-      $('#uploadlink').on('click', function(e) {
-        e.stopPropagation();
-      });
-    })(document, window, jQuery);
-  </script>
+
+function myFunction() {
+  var urls='main/insertMahasiswa';
+  var dataString = $("#insertMahasiswa").serialize();
+  
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data:dataString,
+    success: function(response){
+      if (response == 1) {
+        window.location.href = 'manajemen_mahasiswa_data'
+      }else{
+        alert(response);
+      }
+    }
+  }); 
+  }
+
+</script>
+
+
+
+

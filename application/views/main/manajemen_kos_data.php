@@ -10,7 +10,7 @@
       <header class="panel-heading">
         <h3 class="panel-title">Data Kos</h3>
         <div id="exampleTableAddToolbar">
-          <a href="manajemen_kos_insert.php">
+          <a href="manajemen_kos_insert">
             <button class="btn btn-info" type="button">
               <i class="icon fa-plus"></i> <b>Tambah Data</b>
             </button>
