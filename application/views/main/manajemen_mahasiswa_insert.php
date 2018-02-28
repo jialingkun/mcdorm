@@ -12,11 +12,11 @@
             <!-- Example Basic Form -->
             <div class="example-wrap">
               <div class="example">
-                <form  id="insertMahasiswa" onsubmit="myFunction()">
+                <form  id="insertMahasiswa" onsubmit="insertfunction(event)">
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">NIM</label>
-                      <input type="text" class="form-control" name="id" required pattern="[0-9]{9}" onchange="checkId()" />
+                      <input type="text" class="form-control" name="id" required/>
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
@@ -39,24 +39,52 @@
                   </div>
                   <div class="form-group pull-right">
                     <input id="submit" type="submit" class="btn btn-animate btn-animate-side btn-info btn-md" value="Tambahkan Data">
-                    </input>
-                    <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                      <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+                  </input>
+                  <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
+                    <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+                  </button>
+                  <a href="manajemen_mahasiswa_data.php">
+                    <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+                      <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                     </button>
-                    <a href="manajemen_mahasiswa_data.php">
-                      <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-                        <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
-                      </button>
-                    </a>
-                  </div>
-                </form>
-              </div>
+                  </a>
+                </div>
+              </form>
             </div>
-            <!-- End Example Basic Form -->
           </div>
+          <!-- End Example Basic Form -->
         </div>
       </div>
     </div>
   </div>
 </div>
+</div>
 <!-- End Page -->
+<script>
+
+  function insertfunction(e) {
+  e.preventDefault();// will stop the form submission
+  var urls='main/insertMahasiswa';
+  var dataString = $("#insertMahasiswa").serialize();
+  $buttonname = $("#submit").val();
+  $("#submit").val("Tunggu...");
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data:dataString,
+    success: function(response){
+      if (response == 1) {
+        alert("Berhasil menambah data");
+        window.location.href = 'manajemen_mahasiswa_data';
+      }else{
+        alert(response);
+      }
+    },
+    error: function(){
+      alert('failure');
+      $("#submit").val($buttonname);
+    }
+  }); 
+}
+
+</script>

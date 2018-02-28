@@ -466,27 +466,6 @@
     });
   })(document, window, jQuery);
 
-// My Scripts //
-
-
-function myFunction() {
-  var urls='main/insertMahasiswa';
-  var dataString = $("#insertMahasiswa").serialize();
-  
-  $.ajax({
-    url:"<?php echo base_url() ?>index.php/"+urls,
-    type: 'POST',
-    data:dataString,
-    success: function(response){
-      if (response == 1) {
-        window.location.href = 'manajemen_mahasiswa_data'
-      }else{
-        alert(response);
-      }
-    }
-  }); 
-  }
-
 </script>
 
 
