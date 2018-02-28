@@ -12,11 +12,11 @@
             <!-- Example Basic Form -->
             <div class="example-wrap">
               <div class="example">
-                <form  id="insertMahasiswa" onsubmit="myFunction()">
+                <form  id="insertMahasiswa" onsubmit="insertfunction(event)">
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">NIM</label>
-                      <input type="text" class="form-control" name="id" required pattern="[0-9]{9}" onchange="checkId()" />
+                      <input type="text" class="form-control" name="id" required onchange="checkId()" />
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
@@ -60,3 +60,26 @@
   </div>
 </div>
 <!-- End Page -->
+<script>
+  
+function insertfunction(e) {
+  e.preventDefault();// will stop the form submission
+  var urls='main/insertMahasiswa';
+  var dataString = $("#insertMahasiswa").serialize();
+  
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data:dataString,
+    success: function(response){
+      if (response == 1) {
+        alert("Berhasil menambah data");
+        window.location.href = 'manajemen_mahasiswa_data'
+      }else{
+        alert(response);
+      }
+    }
+  }); 
+  }
+
+</script>
