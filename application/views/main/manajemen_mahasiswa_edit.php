@@ -16,26 +16,27 @@
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">NIM</label>
-                      <input type="text" class="form-control" value="321410001"/>
+                      <input type="text" class="form-control" value="321410001" id="id_mahasiswa"
+                      name="id_mahasiswa"/>
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
-                      <input type="text" class="form-control" value="Adrianus Wiraatmadja"/>
+                      <input type="text" class="form-control" value="Adrianus Wiraatmadja" id="nama" name="nama" />
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">Password</label>
-                      <input type="password" class="form-control" value="12jackson12"/>
+                      <input type="password" class="form-control" value="12jackson12" id="password" name="password" />
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Email</label>
-                      <input type="email" class="form-control" value="adrian@gmail.com"/>
+                      <input type="email" class="form-control" value="adrian@gmail.com" id="email" name="email" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label">No Telepon</label>
-                    <input type="text" class="form-control" value="08125976873" />
+                    <input type="text" class="form-control" value="08125976873" id="notelp" name="notelp" />
                   </div>
                   <div class="col-sm-12">
                    <div class="form-group pull-right">
@@ -112,4 +113,13 @@
 
 </body>
 
+<script>
+window.onload = function() {
+  // $('#id_mahasiswa').val("2") ;
+  document.getElementById("id_mahasiswa").value = '999999';
+alert($('#id_mahasiswa').val());
+    
+    }  
+
+</script> 
 </html>

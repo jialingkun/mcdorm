@@ -73,18 +73,24 @@
             var status = response[i].status;
 
             var tr_str = "<tr>" +
-            "<td>" + id + "</td>" +
+            "<td  value = "+id+" >" + id + "</td>" +
             "<td>" + username + "</td>" +
             "<td>" + email + "</td>" +
             "<td>" + password + "</td>" +
             "<td>" + status + "</td>" +
-            "<td>" + "<a href='manajemen_mahasiswa_edit'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
+            "<td>" + "<a href='manajemen_mahasiswa_edit' onclick='editDataSiswa("+id+")'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
             "<td>" + "<a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-warning btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Cancel</b></span></button></a>" + "</td>" +
             "</tr>";
             $('#tabelMahasiswa').append(tr_str);
           }
         }
       });
+    }
+
+
+    function editDataSiswa(x){
+          document.cookie = "editDataSiswa="+x+"; path=/mcdorm/index.php/main;"
+
     }
   </script>
 
