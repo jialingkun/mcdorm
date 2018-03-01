@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'backendCookie',
-                 'value'  => md5($data['admin']['id_admin']),
-                 'expire' => '0',
-             );
+                   'name'   => 'backendCookie',
+                   'value'  => md5($data['admin']['id_admin']),
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -113,7 +113,7 @@ class Main extends CI_Controller {
     public function insertMahasiswa(){
         $data = array(
             'id_mahasiswa' => $this->input->post('id'),
-            'password' => $this->input->post('password'),
+            'password' => md5($this->input->post('password')),
             'nama_mahasiswa' => $this->input->post('nama'),
             'email' => $this->input->post('email'),
             'notelp_mahasiswa' => $this->input->post('notelp'),
@@ -137,8 +137,18 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function updateMahasiswa(){
-        
+    public function updateMahasiswa($jenis = NULL,$id = NULL){
+
+        if ($jenis == 'profil') {
+            $data = array(
+                'nama_mahasiswa' => $this->input->post('nama'),
+                'email' => $this->input->post('email'),
+                'notelp_mahasiswa' => $this->input->post('notelp')
+            );
+        }
+
+        $insertStatus = $this->main_model->update_mahasiswa($data,$id);
+        echo $insertStatus;
     }
 
     public function manajemen_kos_data(){
