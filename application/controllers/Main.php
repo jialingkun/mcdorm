@@ -114,12 +114,12 @@ class Main extends CI_Controller {
         $data = array(
             'id_mahasiswa' => $this->input->post('id'),
             'password' => $this->input->post('password'),
-            'nama' => $this->input->post('nama'),
+            'nama_mahasiswa' => $this->input->post('nama'),
             'email' => $this->input->post('email'),
-            'notelp' => $this->input->post('notelp'),
+            'notelp_mahasiswa' => $this->input->post('notelp'),
             'status' => "baru",
             'id_kos' => NULL,
-            'id_kos' => NULL,
+            'id_kamar' => NULL,
             'tanggal_masuk' => NULL,
             'kadaluarsa' => NULL
         );
@@ -135,6 +135,10 @@ class Main extends CI_Controller {
         $this->load->view('main/manajemen_mahasiswa_edit');
         $this->load->view('templates/JS');
         $this->load->view('templates/footer');
+    }
+
+    public function updateMahasiswa(){
+        
     }
 
     public function manajemen_kos_data(){

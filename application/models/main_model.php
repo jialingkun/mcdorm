@@ -32,7 +32,12 @@ class main_model extends CI_Model {
 			$query = $this->db->get('user_mahasiswa');
 			return $query->result_array();
 		}else{
-			$query = $this->db->get_where('user_mahasiswa', array('id_mahasiswa' => $id));
+			$this->db->select('*');
+			$this->db->from('user_mahasiswa'); 
+			$this->db->join('user_kos', 'user_mahasiswa.id_kos = user_kos.id_kos', 'left');
+			$this->db->join('kamar', 'user_mahasiswa.id_kamar = kamar.id_kamar', 'left');
+			$this->db->where('id_mahasiswa',$id);
+			$query = $this->db->get();
 			return $query->row_array();
 		}
 
