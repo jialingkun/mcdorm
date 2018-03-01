@@ -66,7 +66,7 @@
   e.preventDefault();// will stop the form submission
   var urls='main/insertMahasiswa';
   var dataString = $("#insertMahasiswa").serialize();
-  $buttonname = $("#submit").val();
+  var buttonname = $("#submit").val();
   $("#submit").val("Tunggu...");
   $.ajax({
     url:"<?php echo base_url() ?>index.php/"+urls,
@@ -78,11 +78,12 @@
         window.location.href = 'manajemen_mahasiswa_data';
       }else{
         alert(response);
+        $("#submit").val(buttonname);
       }
     },
     error: function(){
-      alert('failure');
-      $("#submit").val($buttonname);
+      alert('Gagal menambahkan data');
+      $("#submit").val(buttonname);
     }
   }); 
 }

@@ -32,11 +32,30 @@ class main_model extends CI_Model {
 			$query = $this->db->get('user_mahasiswa');
 			return $query->result_array();
 		}else{
-			$query = $this->db->get_where('user_mahasiswa', array('id_mahasiswa' => $id));
+			$this->db->select('*');
+			$this->db->from('user_mahasiswa'); 
+			$this->db->join('user_kos', 'user_mahasiswa.id_kos = user_kos.id_kos', 'left');
+			$this->db->join('kamar', 'user_mahasiswa.id_kamar = kamar.id_kamar', 'left');
+			$this->db->where('id_mahasiswa',$id);
+			$query = $this->db->get();
 			return $query->row_array();
 		}
 
 		
+	}
+
+	public function update_mahasiswa($data,$id)
+	{
+		$this->db->where('id_mahasiswa', $id);
+		$this->db->update('user_mahasiswa', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
 	}
 
 }
