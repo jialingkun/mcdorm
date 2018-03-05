@@ -105,6 +105,27 @@ class Main extends CI_Controller {
         if (empty($data))
         {
             show_404();
+        } else if ($id == NULL) {
+            foreach ($data as &$row){ //add & to call by reference
+                if ($row['status']=="Belum Bayar") {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now >= $expire) {
+                        $row['status'] = 'expired';
+                    }
+                }
+                
+            }
+        }else{
+            if ($data['status']=="Belum Bayar") {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($data['kadaluarsa']);
+                    if ($now >= $expire) {
+                        $data['status'] = 'expired';
+                    }
+                }
         }
 
         echo json_encode($data);
