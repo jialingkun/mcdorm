@@ -117,7 +117,7 @@ class Main extends CI_Controller {
             'nama_mahasiswa' => $this->input->post('nama'),
             'email' => $this->input->post('email'),
             'notelp_mahasiswa' => $this->input->post('notelp'),
-            'status' => "baru",
+            'status' => "Belum Pesan",
             'id_kos' => NULL,
             'id_kamar' => NULL,
             'tanggal_masuk' => NULL,
@@ -138,12 +138,28 @@ class Main extends CI_Controller {
     }
 
     public function updateMahasiswa($jenis = NULL,$id = NULL){
-
         if ($jenis == 'profil') {
             $data = array(
                 'nama_mahasiswa' => $this->input->post('nama'),
                 'email' => $this->input->post('email'),
                 'notelp_mahasiswa' => $this->input->post('notelp')
+            );
+        } else if ($jenis == 'verifikasi') {
+            $data = array(
+                'status' => 'Terverifikasi'
+            );
+        } else if ($jenis == 'cancel') {
+            $data = array(
+                'status' => 'Belum Pesan'
+            );
+        } else if ($jenis == 'bayar') {
+            $data = array(
+                'status' => 'Belum Verifikasi'
+            );
+        } else if ($jenis == 'pesan') {
+            $data = array(
+                'status' => 'Belum Bayar'
+                // pending detail kamar yang dipesan
             );
         }
 
