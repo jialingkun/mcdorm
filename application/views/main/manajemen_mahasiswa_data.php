@@ -67,7 +67,7 @@
           var len = response.length;
           for(var i=0; i<len; i++){
             var id = response[i].id_mahasiswa;
-            var username = response[i].nama;
+            var username = response[i].nama_mahasiswa;
             var email = response[i].email;
             var password = response[i].password;
             var status = response[i].status;
