@@ -64,20 +64,29 @@ class Main extends CI_Controller {
         }
     }
 
-    function getcookieAdmin()
+    public function checkCookieAdmin()
     {
         $this->load->helper('cookie');
-        echo $this->input->cookie('backendCookie',true);
+        if ($this->input->cookie('backendCookie',true)!=NULL) {
+            return true;
+        }else{
+            return false;
+        } 
     }
 
     public function home()
     {
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/home');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/home');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function manajemen_mahasiswa_data(){
@@ -117,7 +126,7 @@ class Main extends CI_Controller {
             'nama_mahasiswa' => $this->input->post('nama'),
             'email' => $this->input->post('email'),
             'notelp_mahasiswa' => $this->input->post('notelp'),
-            'status' => "baru",
+            'status' => "Belum Pesan",
             'id_kos' => NULL,
             'id_kamar' => NULL,
             'tanggal_masuk' => NULL,
@@ -138,12 +147,31 @@ class Main extends CI_Controller {
     }
 
     public function updateMahasiswa($jenis = NULL,$id = NULL){
-
         if ($jenis == 'profil') {
             $data = array(
                 'nama_mahasiswa' => $this->input->post('nama'),
                 'email' => $this->input->post('email'),
                 'notelp_mahasiswa' => $this->input->post('notelp')
+            );
+        } else if ($jenis == 'verifikasi') {
+            $data = array(
+                'status' => 'Terverifikasi',
+                'kadaluarsa'=> NULL
+            );
+        } else if ($jenis == 'cancel') {
+            $data = array(
+                'status' => 'Belum Pesan',
+                'kadaluarsa'=> NULL
+            );
+        } else if ($jenis == 'bayar') {
+            $data = array(
+                'status' => 'Belum Verifikasi',
+                'kadaluarsa'=> NULL
+            );
+        } else if ($jenis == 'pesan') {
+            $data = array(
+                'status' => 'Belum Bayar'
+                // pending detail kamar yang dipesan dan kadaluarsa
             );
         }
 
