@@ -64,20 +64,29 @@ class Main extends CI_Controller {
         }
     }
 
-    function getcookieAdmin()
+    public function checkCookieAdmin()
     {
         $this->load->helper('cookie');
-        echo $this->input->cookie('backendCookie',true);
+        if ($this->input->cookie('backendCookie',true)!=NULL) {
+            return true;
+        }else{
+            return false;
+        } 
     }
 
     public function home()
     {
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/home');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/home');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function manajemen_mahasiswa_data(){
@@ -146,20 +155,23 @@ class Main extends CI_Controller {
             );
         } else if ($jenis == 'verifikasi') {
             $data = array(
-                'status' => 'Terverifikasi'
+                'status' => 'Terverifikasi',
+                'kadaluarsa'=> NULL
             );
         } else if ($jenis == 'cancel') {
             $data = array(
-                'status' => 'Belum Pesan'
+                'status' => 'Belum Pesan',
+                'kadaluarsa'=> NULL
             );
         } else if ($jenis == 'bayar') {
             $data = array(
-                'status' => 'Belum Verifikasi'
+                'status' => 'Belum Verifikasi',
+                'kadaluarsa'=> NULL
             );
         } else if ($jenis == 'pesan') {
             $data = array(
                 'status' => 'Belum Bayar'
-                // pending detail kamar yang dipesan
+                // pending detail kamar yang dipesan dan kadaluarsa
             );
         }
 
