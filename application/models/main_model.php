@@ -71,4 +71,30 @@ class main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function get_data_kos($id = NULL)
+	{
+		if ($id == NULL)
+		{
+			$query = $this->db->get('user_kos');
+			return $query->result_array();
+		}else{
+			$query = $this->db->get_where('user_kos', array('id_kos' => $id));
+			return $query->row_array();
+		}
+	}
+
+	public function update_kos($data,$id)
+	{
+		$this->db->where('id_kos', $id);
+		$this->db->update('user_kos', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
 }
