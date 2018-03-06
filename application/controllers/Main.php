@@ -227,6 +227,21 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function insertKos(){
+        $data = array(
+            'id_kos' => $this->input->post('id'),
+            'nama_kos' => $this->input->post('nama'),
+            'alamat' => $this->input->post('alamat'),
+            'notelp_kos' => $this->input->post('notelp'),
+            'fasilitas_kos' => implode(', ', $this->input->post('fasilitas')),
+            'deskripsi_kos' => $this->input->post('deskripsi'),
+            'gender_kos' => $this->input->post('gender')
+        );
+
+        $insertStatus = $this->main_model->insert_new_kos($data);
+        echo $insertStatus;
+    }
+
     public function manajemen_kos_kamar(){
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');
