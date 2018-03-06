@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'backendCookie',
-                   'value'  => md5($data['admin']['id_admin']),
-                   'expire' => '0',
-               );
+                 'name'   => 'backendCookie',
+                 'value'  => md5($data['admin']['id_admin']),
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -119,13 +119,13 @@ class Main extends CI_Controller {
             }
         }else{
             if ($data['status']=="Belum Bayar") {
-                    date_default_timezone_set('Asia/Jakarta');
-                    $now = time();
-                    $expire = strtotime($data['kadaluarsa']);
-                    if ($now >= $expire) {
-                        $data['status'] = 'expired';
-                    }
+                date_default_timezone_set('Asia/Jakarta');
+                $now = time();
+                $expire = strtotime($data['kadaluarsa']);
+                if ($now >= $expire) {
+                    $data['status'] = 'expired';
                 }
+            }
         }
 
         echo json_encode($data);
@@ -209,6 +209,18 @@ class Main extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    public function getkos($id = NULL)
+    {
+        $data = $this->main_model->get_data_kos($id);
+
+        if (empty($data))
+        {
+            show_404();
+        }
+
+        echo json_encode($data);
+    }
+
     public function manajemen_kos_edit(){
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');
@@ -216,6 +228,22 @@ class Main extends CI_Controller {
         $this->load->view('main/manajemen_kos_edit');
         $this->load->view('templates/JS');
         $this->load->view('templates/footer');
+    }
+
+    public function updateKos($jenis = NULL,$id = NULL){
+        if ($jenis == 'profil') {
+            $data = array(
+                'nama_kos' => $this->input->post('nama'),
+                'alamat' => $this->input->post('alamat'),
+                'notelp_kos' => $this->input->post('notelp'),
+                'fasilitas_kos' => implode(', ', $this->input->post('fasilitas')),
+                'deskripsi_kos' => $this->input->post('deskripsi'),
+                'gender_kos' => $this->input->post('gender')
+            );
+        }
+
+        $insertStatus = $this->main_model->update_kos($data,$id);
+        echo $insertStatus;
     }
 
     public function manajemen_kos_insert(){
@@ -241,6 +269,9 @@ class Main extends CI_Controller {
         $insertStatus = $this->main_model->insert_new_kos($data);
         echo $insertStatus;
     }
+
+
+    
 
     public function manajemen_kos_kamar(){
         $this->load->view('templates/header');
