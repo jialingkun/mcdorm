@@ -21,9 +21,9 @@
             <thead>
               <tr>
                 <th>Username</th>
-                <th>Password</th>
+                
                 <th>Nama</th>
-                <th>Jumlah Kamar</th>
+                
                 <th>Alamat</th>
                 <th>No.Telepon</th>
                 <th>Update</th>
@@ -33,21 +33,21 @@
             <tfoot>
               <tr>
                 <th>Username</th>
-                <th>Password</th>
+                
                 <th>Nama</th>
-                <th>Jumlah Kamar</th>
+                
                 <th>Alamat</th>
                 <th>No.Telepon</th>
                 <th>Update</th>
                 <th>Reset Password</th>
               </tr>
             </tfoot>
-            <tbody>
-              <tr>
+            <tbody id="tabelKos">
+             <!--  <tr>
                 <td>kosmachung1</td>
-                <td>**********</td>
+                
                 <td>Semangka 5</td>
-                <td>2 Kamar</td>
+                
                 <td>Jl. Semangka 5 Bareng, Kawi, Malang</td>
                 <td>089345432312</td>
                 <td>
@@ -67,9 +67,9 @@
               </tr>
               <tr>
                 <td>kosmachung2</td>
-                <td>***********</td>
+                
                 <td>Loji Rejo</td>
-                <td>3 Kamar</td>
+                
                 <td>Villa Puncak Tidar N-05, Dau, Malang</td>
                 <td>0341655677</td>
                 <td>
@@ -86,7 +86,7 @@
                     </button>
                   </a>
                 </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
@@ -95,3 +95,43 @@
   </div>
 </div>
 <!-- End Page -->
+
+
+  <script>
+    window.onload = function() {
+
+      var urls='main/getkos';
+      
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/"+urls,
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+          var len = response.length;
+          for(var i=0; i<len; i++){
+            var id = response[i].id_kos;
+            var username = response[i].nama_kos;
+            var alamat = response[i].alamat;
+
+            var notelp = response[i].notelp;
+
+            var tr_str = "<tr>" +
+            "<td  value = "+id+" >" + id + "</td>" +
+            "<td>" + username + "</td>" +
+            "<td>" + alamat + "</td>" +
+            "<td>" + notelp + "</td>" +
+            "<td>" + "<a href='manajemen_kos_edit' onclick='editDataKos("+id+")'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
+            "<td>" + "<a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Reset</b></span></button></a>" + "</td>" +
+            "</tr>";
+            $('#tabelKos').append(tr_str);
+          }
+        }
+      });
+    }
+
+
+    function editDataSiswa(x){
+          // document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
+
+    }
+  </script>

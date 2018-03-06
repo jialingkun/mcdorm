@@ -148,11 +148,11 @@
 
           
 
-          if (response.status == "expired") {
+          if (response.status == "Expired") {
             $('#konfirmasi').attr('disabled','disabled');
           }else{
             $('#konfirmasi').attr('disabled');
-            if (response.status == "terferifikasi") {
+            if (response.status == "Terverifikasi") {
               $('#konfirmasi').attr('disabled','disabled');
             }else{
               $('#konfirmasi').attr('disabled');
@@ -197,7 +197,6 @@
       if (response == 1) {
         window.location.href = 'manajemen_mahasiswa_data'
       }else{
-        alert(response);
         // $("#submit").val(buttonname);
       }
     }
@@ -205,20 +204,21 @@
 }
 
 function verifikasi(){
-
-  var urls='main/updateMahasiswa/verifikasi/'+getCookie("editDataSiswa")+"";
-$.ajax({
-    url:"<?php echo base_url() ?>index.php/"+urls,
-    type: 'POST',
-    success: function(response){
-      if (response == 1) {
-        alert(response);
-      }else{
-        alert(response);
-        
+  
+  var r = confirm("Apakah anda ingin verifikasi?");
+  if (r == true) {
+    var urls='main/updateMahasiswa/verifikasi/'+getCookie("editDataSiswa")+"";
+    $.ajax({
+      url:"<?php echo base_url() ?>index.php/"+urls,
+      type: 'POST',
+      success: function(response){
+        if (response == 1) {
+          alert("Verifikasi Berhasil!");
+                  window.location.href = 'manajemen_mahasiswa_edit'
+        }
       }
-    }
-  });   
+    });
+  } 
 }
 
 </script> 
