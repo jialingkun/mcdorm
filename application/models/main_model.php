@@ -97,4 +97,44 @@ class main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function insert_new_kamar($data)
+	{
+		$this->db->insert('kamar', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
+	public function get_data_kamar($idkos,$idkamar = NULL)
+	{
+		if ($idkamar == NULL)
+		{
+			$query = $this->db->get_where('kamar', array('id_kos' => $idkos));
+			return $query->result_array();
+		}else{
+			$query = $this->db->get_where('kamar', array('id_kos' => $idkos, 'id_kamar' => $idkamar));
+			return $query->row_array();
+		}
+	}
+
+	public function update_kamar($data,$idkos,$idkamar)
+	{
+		$this->db->where('id_kos', $idkos);
+		$this->db->where('id_kamar', $idkamar);
+		$this->db->update('kamar', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
 }

@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'backendCookie',
-                 'value'  => md5($data['admin']['id_admin']),
-                 'expire' => '0',
-             );
+                   'name'   => 'backendCookie',
+                   'value'  => md5($data['admin']['id_admin']),
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -112,7 +112,7 @@ class Main extends CI_Controller {
                     $now = time();
                     $expire = strtotime($row['kadaluarsa']);
                     if ($now >= $expire) {
-                        $row['status'] = 'expired';
+                        $row['status'] = 'Expired';
                     }
                 }
                 
@@ -123,7 +123,7 @@ class Main extends CI_Controller {
                 $now = time();
                 $expire = strtotime($data['kadaluarsa']);
                 if ($now >= $expire) {
-                    $data['status'] = 'expired';
+                    $data['status'] = 'Expired';
                 }
             }
         }
@@ -280,6 +280,45 @@ class Main extends CI_Controller {
         $this->load->view('main/manajemen_kos_kamar');
         $this->load->view('templates/JS');
         $this->load->view('templates/footer');
+    }
+
+
+    public function getkamar($idkos,$idkamar = NULL)
+    {
+        $data = $this->main_model->get_data_kamar($idkos,$idkamar);
+
+        if (empty($data))
+        {
+            show_404();
+        }
+
+        echo json_encode($data);
+    }
+
+    public function updateKamar($idkos,$idkamar){
+        $data = array(
+            'nama_kamar' => $this->input->post('nama'),
+            'harga' => $this->input->post('harga'),
+            'panjang' => $this->input->post('panjang'),
+            'lebar' => $this->input->post('lebar'),
+            'fasilitas_kamar' => implode(', ', $this->input->post('fasilitas'))
+        );
+        $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
+        echo $insertStatus;
+    }
+
+    public function insertKamar($idkos){
+        $data = array(
+            'id_kos' => $idkos,
+            'nama_kamar' => $this->input->post('nama'),
+            'harga' => $this->input->post('harga'),
+            'panjang' => $this->input->post('panjang'),
+            'lebar' => $this->input->post('lebar'),
+            'fasilitas_kamar' => implode(', ', $this->input->post('fasilitas'))
+        );
+
+        $insertStatus = $this->main_model->insert_new_kamar($data);
+        echo $insertStatus;
     }
 
 }
