@@ -236,7 +236,7 @@ class Main extends CI_Controller {
                 'nama_kos' => $this->input->post('nama'),
                 'alamat' => $this->input->post('alamat'),
                 'notelp_kos' => $this->input->post('notelp'),
-                'fasilitas_kos' => implode(', ', $this->input->post('fasilitas')),
+                'fasilitas_kos' => implode(',', $this->input->post('fasilitas')),
                 'deskripsi_kos' => $this->input->post('deskripsi'),
                 'gender_kos' => $this->input->post('gender')
             );
@@ -261,7 +261,7 @@ class Main extends CI_Controller {
             'nama_kos' => $this->input->post('nama'),
             'alamat' => $this->input->post('alamat'),
             'notelp_kos' => $this->input->post('notelp'),
-            'fasilitas_kos' => implode(', ', $this->input->post('fasilitas')),
+            'fasilitas_kos' => implode(',', $this->input->post('fasilitas')),
             'deskripsi_kos' => $this->input->post('deskripsi'),
             'gender_kos' => $this->input->post('gender')
         );
@@ -301,7 +301,7 @@ class Main extends CI_Controller {
             'harga' => $this->input->post('harga'),
             'panjang' => $this->input->post('panjang'),
             'lebar' => $this->input->post('lebar'),
-            'fasilitas_kamar' => implode(', ', $this->input->post('fasilitas'))
+            'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
         );
         $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
         echo $insertStatus;
@@ -314,7 +314,7 @@ class Main extends CI_Controller {
             'harga' => $this->input->post('harga'),
             'panjang' => $this->input->post('panjang'),
             'lebar' => $this->input->post('lebar'),
-            'fasilitas_kamar' => implode(', ', $this->input->post('fasilitas'))
+            'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
         );
 
         $insertStatus = $this->main_model->insert_new_kamar($data);
