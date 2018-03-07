@@ -113,7 +113,7 @@
             var username = response[i].nama_kos;
             var alamat = response[i].alamat;
 
-            var notelp = response[i].notelp;
+            var notelp = response[i].notelp_kos;
 
             var tr_str = "<tr>" +
             "<td  value = "+id+" >" + id + "</td>" +
@@ -130,8 +130,9 @@
     }
 
 
-    function editDataSiswa(x){
-          // document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
+    function editDataKos(x){
+      
+          document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
 
     }
   </script>

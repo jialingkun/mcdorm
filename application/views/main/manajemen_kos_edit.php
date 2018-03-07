@@ -1,6 +1,6 @@
 
- <!-- Page -->
- <div class="page animsition">
+<!-- Page -->
+<div class="page animsition">
   <div class="page-header">
     <h1 class="page-title">Edit Data Kos</h1>
   </div>
@@ -15,107 +15,113 @@
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form>
+              <form id="updateData">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Username</b></label>
-                    <input type="text" class="form-control" placeholder="kosmachung1" readonly/>
+                    <input type="text" class="form-control" name="id" id="id" />
                   </div>
                   <div class="col-sm-6">
-                    <label class="control-label"><b>Password</b></label>
-                    <input type="password" class="form-control" placeholder="*******" readonly/>
+                    <label class="control-label"><b>Gender Kos</b></label>
+                    <div class="col-sm-12">
+                      <div class="radio-inline">
+                        <label><input  id="gender" type="radio" name="gender" value="pria">Pria</label>
+                      </div>
+                      <div class="radio-inline">
+                        <label><input id="gender" type="radio" name="gender" value="wanita">Wanita</label>
+                      </div>
+                      <div class="radio-inline">
+                        <label><input id="gender" type="radio" name="gender" value="campuran">Campuran</label>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Nama Tempat</b></label>
-                    <input type="text" class="form-control" placeholder="Semangka 5" />
+                    <input type="text" class="form-control" name="nama" id="nama"/>
                   </div>
-                  <div class="col-sm-6">
-                    <label class="control-label"><b>Alamat</b></label>
-                    <input type="text" class="form-control" placeholder="Jl. Semangka 5, Bareng, Malang" />
-                  </div>
-                </div>
-                <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>No. Telpon</b></label>
-                    <input type="text" class="form-control" placeholder="081245444333" />
-                  </div>
-                  <div class="col-sm-6">
-                    <label class="control-label"><b>Jumlah Kamar</b></label>
-                    <input type="number" class="form-control" placeholder="3" />
+                    <input type="text" class="form-control" name="notelp" id="notelp"/>
                   </div>
                 </div>
                 <div class="form-group row">
-                  <div class="col-sm-12">
-                    <label class="control-label"><b>Fasilitas</b></label>
-                    <div class="form-group">
-                      <div class="col-sm-2">
-                        <input type="checkbox" class="icheckbox-primary"
-                        data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"
-                        checked />
-                        <label for="inputChecked">WiFi</label>
-                      </div>
-                      <div class="col-sm-2">
-                       <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
-                       <label>Parkir</label>
-                     </div>
-                     <div class="col-sm-2">
-                       <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" checked />
-                       <label>Nasi</label>
-                     </div>
-                     <div class="col-sm-2">
-                       <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
-                       <label>Air Putih</label>
-                     </div>
-                     <div class="col-sm-2">
-                       <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
-                       <label>24 Jam</label>
-                     </div>
-                     <div class="col-sm-2">
-                       <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
-                       <label>Laundry</label>
-                     </div>
+                 <div class="col-sm-12">
+                  <label class="control-label"><b>Alamat</b></label>
+                  <input id="alamat" type="text" class="form-control" name="alamat"/>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <label class="control-label"><b>Fasilitas</b></label>
+                  <div class="form-group">
+                    <div class="col-sm-2">
+
+                     <input id="fasilitas1" type="checkbox" name="fasilitas[]" value="WiFi"/>
+                     <label for="inputUnchecked">WiFi</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas2" type="checkbox" name="fasilitas[]" value="Parkir"/>
+                     <label for="inputUnchecked">Parkir</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas3" type="checkbox"  name="fasilitas[]" value="Nasi"/>
+                     <label for="inputUnchecked">Nasi</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas4" type="checkbox" name="fasilitas[]" value="Air Putih"/>
+                     <label for="inputUnchecked">Air Putih</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas5" type="checkbox"  name="fasilitas[]" value="24Jam"/>
+                     <label for="inputUnchecked">24 Jam</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas6" type="checkbox"  name="fasilitas[]" value="Laundry" />
+                     <label for="inputUnchecked">Laundry</label>
                    </div>
                  </div>
                </div>
-               <div class="form-group">
-                <label class="control-label"><b>Deskripsi</b></label>
-                <textarea class="form-control" rows="5">Kos bagus</textarea>
-              </div>
-            </form>
-          </div>
+             </div>
+             <div class="form-group">
+              <label class="control-label"><b>Deskripsi</b></label>
+              <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
+            </div>
+
+          </form>
         </div>
-        <!-- End Example Basic Form -->
       </div>
+      <!-- End Example Basic Form -->
     </div>
-    <form class="upload-form" id="exampleUploadForm" method="POST" style="margin-top: -80px;">
-      <input type="file" id="inputUpload" name="files[]" multiple="" />
-      <div class="uploader-inline">
-        <h1 class="upload-instructions">Upload foto / gambar</h1>
-      </div>
-      <div class="file-wrap container-fluid">
-        <div class="file-list row"></div>
-      </div>
-    </form>
-    <div class="form-group pull-right" style="margin-top: 25px;">
-      <button type="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
-        <span><i class="icon fa-exchange"></i> &nbsp<b>Ubah Data</b></span>
-      </button>
-      <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-        <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-      </button>
-      <a href="manajemen_kos_data.php">
-        <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-          <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
-        </button>
-      </a>
+  </div>
+  <form class="upload-form" id="exampleUploadForm" method="POST" style="margin-top: -80px;">
+    <input type="file" id="inputUpload" name="files[]" multiple="" />
+    <div class="uploader-inline">
+      <h1 class="upload-instructions">Upload foto / gambar</h1>
     </div>
+    <div class="file-wrap container-fluid">
+      <div class="file-list row"></div>
+    </div>
+  </form>
+  <div class="form-group pull-right" style="margin-top: 25px;">
+    <button type="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
+      <span><i class="icon fa-exchange"></i> &nbsp<b>Ubah Data</b></span>
+    </button>
+    <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
+      <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+    </button>
+    <a href="manajemen_kos_data.php">
+      <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+        <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+      </button>
+    </a>
   </div>
 </div>
 </div>
 </div>
-
+</div>
 <div class="page animsition" style="margin-top: -50px;">
   <div class="page-content">
     <!-- Panel Basic -->
@@ -199,4 +205,71 @@
       <!-- End Panel Basic -->
     </div>
   </div>
-<!-- End Page -->
+
+  <!-- End Page -->
+  <script>
+
+    window.onload = function() {
+  // $('#id_mahasiswa').val("2") ;
+//   document.getElementById("id_mahasiswa").value = '999999';
+// alert($('#id_mahasiswa').val());
+    // alert( getCookie('editDataKos'));
+    var urls='main/getkos/'+getCookie("editDataKos")+"";
+      // alert(urls);
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/"+urls,
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+          $('#id').val(response.id_kos);
+          $('#nama').val(response.nama_kos);
+          $('#notelp').val(response.notelp_kos);
+          $('#alamat').val(response.alamat);
+          $('#deskripsi').html(response.deskripsi_kos);
+          $("input[name=gender][value="+response.gender_kos+"]").prop("checked",true);
+          // $('#fasilitas').html(response.fasilitas_kos);
+          var fas = response.fasilitas_kos;
+          var res = fas.split(",");
+          // alert(res);
+          // alert(res[2]);
+          for (var i = 0; i < 3; i++) {
+            if ($("#fasilitas1").val()==res[i]) {
+              $("#fasilitas1").attr('checked', true);
+            }
+            else if ($("#fasilitas2").val()==res[i]) {
+              $("#fasilitas2").attr('checked', true);
+            }
+            else if ($("#fasilitas3").val()==res[i]) {
+              $("#fasilitas3").attr('checked', true);
+            }
+            else if ($("#fasilitas4").val()==res[i]) {
+              $("#fasilitas4").attr('checked', true);
+            }
+            else if ($("#fasilitas5").val()==res[i]) {
+              $("#fasilitas5").attr('checked', true);
+            }
+            else if ($("#fasilitas6").val()==res[i]) {
+              $("#fasilitas6").attr('checked', true);
+            }
+          }
+        }
+      });
+    }  
+    
+
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+  </script> 
