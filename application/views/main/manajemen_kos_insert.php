@@ -23,7 +23,18 @@
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label"><b>Gender Kos</b></label>
-                    <input type="text" class="form-control" name="gender"/>
+                    <div class="col-sm-12">
+                    <div class="radio-inline">
+                      <label><input type="radio" name="gender" value="pria">Pria</label>
+                    </div>
+                    <div class="radio-inline">
+                      <label><input type="radio" name="gender" value="wanita">Wanita</label>
+                    </div>
+                    <div class="radio-inline">
+                      <label><input type="radio" name="gender" value="campuran">Campuran</label>
+                    </div>
+                    </div>
+                    
                   </div>
                 </div>
                 <div class="form-group row">
@@ -78,7 +89,7 @@
               <label class="control-label"><b>Deskripsi</b></label>
               <textarea class="form-control" rows="5" name="deskripsi"></textarea>
             </div>
-           
+
           </form>
         </div>
       </div>
@@ -95,18 +106,18 @@
     </div>
   </form>
   <div class="form-group pull-right" style="margin-top: 25px;">
- <button  class="btn btn-animate btn-animate-side btn-info btn-md" onclick="insertDataKos()">
-              <span><i class="icon fa-plus"></i> &nbsp<b>Tambahkan Data</b></span>
-            </button>
-    <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-      <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+   <button  class="btn btn-animate btn-animate-side btn-info btn-md" onclick="insertDataKos()">
+    <span><i class="icon fa-plus"></i> &nbsp<b>Tambahkan Data</b></span>
+  </button>
+  <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
+    <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+  </button>
+  <a href="manajemen_kos_data.php">
+    <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+      <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
     </button>
-    <a href="manajemen_kos_data.php">
-      <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-        <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
-      </button>
-    </a>
-  </div>
+  </a>
+</div>
 </div>
 </div>
 </div>
@@ -116,11 +127,11 @@
 <script>
 
   function insertDataKos() {
-    
+
     var urls='main/insertkos';
     var dataString = $("#insertData").serialize();
 
-alert('klik');
+    // alert('klik');
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
       type: 'POST',

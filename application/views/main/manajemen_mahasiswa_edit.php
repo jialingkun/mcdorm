@@ -125,6 +125,7 @@
 <script>
 
   window.onload = function() {
+  
   // $('#id_mahasiswa').val("2") ;
 //   document.getElementById("id_mahasiswa").value = '999999';
 // alert($('#id_mahasiswa').val());
