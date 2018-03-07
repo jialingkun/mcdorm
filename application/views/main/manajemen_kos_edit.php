@@ -15,11 +15,11 @@
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form id="updateData">
+              <form id="updateData" onsubmit="insertfunction(event)">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Username</b></label>
-                    <input type="text" class="form-control" name="id" id="id" />
+                    <p  class="form-control" name="id" id="id" > </p>
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label"><b>Gender Kos</b></label>
@@ -89,7 +89,19 @@
               <label class="control-label"><b>Deskripsi</b></label>
               <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
             </div>
-
+            <div class="form-group pull-right" style="margin-top: 25px;">
+              <button type="submit" id="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
+                <span><i class="icon fa-exchange"></i> &nbsp<b>Ubah Data</b></span>
+              </button>
+              <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
+                <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+              </button>
+              <a href="manajemen_kos_data.php">
+                <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+                  <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+                </button>
+              </a>
+            </div>
           </form>
         </div>
       </div>
@@ -105,19 +117,7 @@
       <div class="file-list row"></div>
     </div>
   </form>
-  <div class="form-group pull-right" style="margin-top: 25px;">
-    <button type="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
-      <span><i class="icon fa-exchange"></i> &nbsp<b>Ubah Data</b></span>
-    </button>
-    <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-      <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-    </button>
-    <a href="manajemen_kos_data.php">
-      <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-        <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
-      </button>
-    </a>
-  </div>
+  
 </div>
 </div>
 </div>
@@ -221,7 +221,7 @@
         type: 'get',
         dataType: "json",
         success: function (response) {
-          $('#id').val(response.id_kos);
+          $('#id').html(response.id_kos);
           $('#nama').val(response.nama_kos);
           $('#notelp').val(response.notelp_kos);
           $('#alamat').val(response.alamat);
@@ -232,7 +232,9 @@
           var res = fas.split(",");
           // alert(res);
           // alert(res[2]);
-          for (var i = 0; i < 3; i++) {
+          for (var i = 0; i < res.length; i++) {
+            // alert( res[i].replace(/\s/g, ''));
+            
             if ($("#fasilitas1").val()==res[i]) {
               $("#fasilitas1").attr('checked', true);
             }
@@ -272,4 +274,26 @@
       }
       return "";
     }
-  </script> 
+
+
+    function insertfunction(e) {
+
+      var urls='main/updatekos/profil/'+getCookie("editDataKos")+"";
+  e.preventDefault();// will stop the form submission
+  
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data: $("#updateData").serialize(),
+    success: function(response){
+      if (response == 1) {
+        window.location.href = 'manajemen_kos_data';
+      }else{
+        // $("#submit").val(buttonname);
+        alert(response);
+      }
+    }
+  });   
+}
+
+</script> 
