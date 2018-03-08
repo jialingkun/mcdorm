@@ -129,7 +129,7 @@
       <header class="panel-heading">
         <h3 class="panel-title"><b>Data Kamar</b> Kos Semangka 5</h3>
         <div id="exampleTableAddToolbar">
-          <a href="manajemen_kos_kamar_insert.php">
+          <a href="manajemen_kos_kamar_insert">
             <button class="btn btn-info" type="button">
               <i class="icon fa-plus"></i> <b>Tambah Kamar</b>
             </button>
@@ -164,7 +164,7 @@
                 <td>4 x 5</td>
                 <td>5</td>
                 <td>
-                  <a href="manajemen_kos_kamar_insert.php">
+                  <a href="manajemen_kos_kamar_edit">
                     <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
                       <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
                     </button>
@@ -184,7 +184,7 @@
                 <td>5 x 8</td>
                 <td>6</td>
                 <td>
-                  <a href="manajemen_kos_kamar_insert.php">
+                  <a href="manajemen_kos_kamar_edit">
                     <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
                       <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
                     </button>
@@ -216,6 +216,7 @@
     // alert( getCookie('editDataKos'));
     var urls='main/getkos/'+getCookie("editDataKos")+"";
       // alert(urls);
+      
       $.ajax({
         url:"<?php echo base_url() ?>index.php/"+urls,
         type: 'get',
