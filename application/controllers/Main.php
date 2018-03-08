@@ -273,11 +273,34 @@ class Main extends CI_Controller {
 
     
 
-    public function manajemen_kos_kamar(){
+    public function manajemen_kos_kamar_insert(){
         $this->load->view('templates/header');
         $this->load->view('templates/navbar');
         $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_kamar');
+        $this->load->view('main/manajemen_kos_kamar_insert');
+        $this->load->view('templates/JS');
+        $this->load->view('templates/footer');
+    }
+
+    public function insertKamar($idkos){
+        $data = array(
+            'id_kos' => $idkos,
+            'nama_kamar' => $this->input->post('nama'),
+            'harga' => $this->input->post('harga'),
+            'panjang' => $this->input->post('panjang'),
+            'lebar' => $this->input->post('lebar'),
+            'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
+        );
+
+        $insertStatus = $this->main_model->insert_new_kamar($data);
+        echo $insertStatus;
+    }
+
+    public function manajemen_kos_kamar_edit(){
+        $this->load->view('templates/header');
+        $this->load->view('templates/navbar');
+        $this->load->view('templates/sidebar');
+        $this->load->view('main/manajemen_kos_kamar_edit');
         $this->load->view('templates/JS');
         $this->load->view('templates/footer');
     }
@@ -304,20 +327,6 @@ class Main extends CI_Controller {
             'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
         );
         $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
-        echo $insertStatus;
-    }
-
-    public function insertKamar($idkos){
-        $data = array(
-            'id_kos' => $idkos,
-            'nama_kamar' => $this->input->post('nama'),
-            'harga' => $this->input->post('harga'),
-            'panjang' => $this->input->post('panjang'),
-            'lebar' => $this->input->post('lebar'),
-            'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
-        );
-
-        $insertStatus = $this->main_model->insert_new_kamar($data);
         echo $insertStatus;
     }
 
