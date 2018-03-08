@@ -15,25 +15,25 @@
       <!-- Example Basic Form -->
       <div class="example-wrap">
         <div class="example">
-          <form>
+          <form id="insertData">
             <div class="form-group row">
               <div class="col-sm-6">
                 <label class="control-label"><b>Tipe Kamar</b></label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" name="nama" />
               </div>
               <div class="col-sm-6">
                 <label class="control-label"><b>Harga/Bulan</b></label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" name="harga" />
               </div>
             </div>
             <div class="form-group row">
               <div class="col-sm-6">
                 <label class="control-label"><b>Panjang (m<sup>2</sup>)</b></label>
-                <input type="text" class="form-control"/>
+                <input type="text" class="form-control" name="panjang" />
               </div>
               <div class="col-sm-6">
                <label class="control-label"><b>Lebar (m<sup>2</sup>)</b></label>
-               <input type="text" class="form-control"/>
+               <input type="text" class="form-control" name="lebar" />
              </div>
            </div>
            <div class="form-group row">
@@ -41,27 +41,27 @@
               <label class="control-label"><b>Fasilitas</b></label>
               <div class="form-group">
                 <div class="col-sm-2">
-                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
+                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" />
                  <label>AC</label>
                </div>
                <div class="col-sm-2">
-                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
+                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]"/>
                  <label>KM Dalam</label>
                </div>
                <div class="col-sm-2">
-                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
+                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]"/>
                  <label>Lemari</label>
                </div>
                <div class="col-sm-2">
-                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
+                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]"/>
                  <label>Kipas Angin</label>
                </div>
                <div class="col-sm-2">
-                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
+                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]"/>
                  <label>Kunci Duplikat</label>
                </div>
                <div class="col-sm-2">
-                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue"/>
+                 <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]"/>
                  <label>Listrik Token</label>
                </div>
              </div>
@@ -70,7 +70,7 @@
           <div class="form-group row">
               <div class="col-sm-6">
                 <label class="control-label"><b>Jumlah Kamar</b></label>
-                <input type="number" class="form-control"/>
+                <input type="number" class="form-control" name="kuota" />
               </div>
            </div>
       </form>
@@ -89,8 +89,8 @@
   </div>
 </form>
 <div class="form-group pull-right" style="margin-top: 25px;">
-  <button type="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
-    <span><i class="icon fa-plus"></i> &nbsp<b>Tambahkan Data</b></span>
+  <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
+    <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
   </button>
   <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
     <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
@@ -106,3 +106,49 @@
 </div>
 </div>
 <!-- End Page -->
+
+
+<script>
+
+  function insertDataKamar() {
+    var urls='main/insertKamar/'+getCookie("editDataKos")+"";
+
+    var dataString = $("#insertData").serialize();
+    var buttonname = $("#submit").val();
+    $("#submit").html("Tunggu...");
+    $("#submitButton").prop("disabled",true);
+
+    // alert('klik');
+    $.ajax({
+      url:"<?php echo base_url() ?>index.php/"+urls,
+      type: 'POST',
+      data:dataString,
+      success: function(response){
+        if (response == 1) {
+          alert("Berhasil menambah data");
+          window.location.href = 'manajemen_kos_edit';
+          $("#submit").html(buttonname);
+        }else{
+          alert(response);
+          $("#submit").html(buttonname);
+        }
+      }
+    }); 
+  }
+
+  function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+
+      for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+</script>
