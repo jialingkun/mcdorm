@@ -67,7 +67,8 @@
   var urls='main/insertMahasiswa';
   var dataString = $("#insertMahasiswa").serialize();
   var buttonname = $("#submit").val();
-  $("#submit").val("Tunggu...");
+   $("#submit").val("Tunggu...");
+    $("#submit").prop("disabled",true);
   $.ajax({
     url:"<?php echo base_url() ?>index.php/"+urls,
     type: 'POST',

@@ -120,7 +120,7 @@
             "<td>" + username + "</td>" +
             "<td>" + alamat + "</td>" +
             "<td>" + notelp + "</td>" +
-            "<td>" + "<a href='manajemen_kos_edit' onclick='editDataKos("+id+")'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
+            "<td>" + "<a href='manajemen_kos_edit' onclick='editDataKos(&quot;"+id+"&quot;)'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
             "<td>" + "<a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Reset</b></span></button></a>" + "</td>" +
             "</tr>";
             $('#tabelKos').append(tr_str);
@@ -131,7 +131,7 @@
 
 
     function editDataKos(x){
-      
+
           document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
 
     }

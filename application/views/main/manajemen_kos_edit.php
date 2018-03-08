@@ -90,8 +90,8 @@
               <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
             </div>
             <div class="form-group pull-right" style="margin-top: 25px;">
-              <button type="submit" id="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
-                <span><i class="icon fa-exchange"></i> &nbsp<b>Ubah Data</b></span>
+              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
+                <span><i class="icon fa-exchange"></i> &nbsp<b id="submit">Ubah Data</b></span>
               </button>
               <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
                 <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
@@ -280,7 +280,9 @@
 
       var urls='main/updatekos/profil/'+getCookie("editDataKos")+"";
   e.preventDefault();// will stop the form submission
-  
+  var buttonname = $("#submit").val();
+    $("#submit").html("Tunggu...");
+    $("#submitButton").prop("disabled",true);
   $.ajax({
     url:"<?php echo base_url() ?>index.php/"+urls,
     type: 'POST',
@@ -288,9 +290,11 @@
     success: function(response){
       if (response == 1) {
         window.location.href = 'manajemen_kos_data';
+        $("#submit").html(buttonname);
       }else{
         // $("#submit").val(buttonname);
         alert(response);
+        $("#submit").html(buttonname);
       }
     }
   });   

@@ -42,7 +42,7 @@
                   </div>
                   <div class="col-sm-12">
                    <div class="form-group pull-right">
-                    <input type="submit" id="submit" class="btn btn-animate btn-animate-side btn-info btn-md">
+                    <input type="submit" id="submit" class="btn btn-animate btn-animate-side btn-info btn-md" value="Submit">
 
                     
                     <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
@@ -125,7 +125,7 @@
 <script>
 
   window.onload = function() {
-  
+
   // $('#id_mahasiswa').val("2") ;
 //   document.getElementById("id_mahasiswa").value = '999999';
 // alert($('#id_mahasiswa').val());
@@ -185,7 +185,10 @@
 
       var urls='main/updateMahasiswa/profil/'+getCookie("editDataSiswa")+"";
   e.preventDefault();// will stop the form submission
-  
+  var buttonname = $("#submit").val();
+  $("#submit").val("Tunggu...");
+  $("#submit").prop("disabled",true);
+
   $.ajax({
     url:"<?php echo base_url() ?>index.php/"+urls,
     type: 'POST',
@@ -196,8 +199,11 @@
     },
     success: function(response){
       if (response == 1) {
+        $("#submit").val(buttonname);
         window.location.href = 'manajemen_mahasiswa_data'
+
       }else{
+        $("#submit").val(buttonname);
         // $("#submit").val(buttonname);
       }
     }
@@ -205,7 +211,7 @@
 }
 
 function verifikasi(){
-  
+
   var r = confirm("Apakah anda ingin verifikasi?");
   if (r == true) {
     var urls='main/updateMahasiswa/verifikasi/'+getCookie("editDataSiswa")+"";
@@ -215,7 +221,7 @@ function verifikasi(){
       success: function(response){
         if (response == 1) {
           alert("Verifikasi Berhasil!");
-                  window.location.href = 'manajemen_mahasiswa_edit'
+          window.location.href = 'manajemen_mahasiswa_edit'
         }
       }
     });
