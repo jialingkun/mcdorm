@@ -289,6 +289,7 @@ class Main extends CI_Controller {
             'harga' => $this->input->post('harga'),
             'panjang' => $this->input->post('panjang'),
             'lebar' => $this->input->post('lebar'),
+            'kuota' => $this->input->post('kuota'),
             'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
         );
 
@@ -324,6 +325,7 @@ class Main extends CI_Controller {
             'harga' => $this->input->post('harga'),
             'panjang' => $this->input->post('panjang'),
             'lebar' => $this->input->post('lebar'),
+            'kuota' => $this->input->post('kuota'),
             'fasilitas_kamar' => implode(',', $this->input->post('fasilitas'))
         );
         $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
