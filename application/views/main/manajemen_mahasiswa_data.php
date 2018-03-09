@@ -90,7 +90,6 @@
 
     function editDataSiswa(x){
           document.cookie = "editDataSiswa="+x+"; path=/mcdorm/index.php/main;"
-
     }
   </script>
 

@@ -91,32 +91,32 @@
             </div>
             <div class="form-group pull-right" style="margin-top: 25px;">
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="insertDataKos()">
-              <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
-            </button>
-            <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-              <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-            </button>
-            <a href="manajemen_kos_data.php">
-              <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-                <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+                <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
-            </a>
-          </div>
-        </form>
+              <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
+                <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+              </button>
+              <a href="manajemen_kos_data.php">
+                <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+                  <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+                </button>
+              </a>
+            </div>
+          </form>
+        </div>
       </div>
+      <!-- End Example Basic Form -->
     </div>
-    <!-- End Example Basic Form -->
   </div>
-</div>
-<form class="upload-form" id="exampleUploadForm" method="POST" style="margin-top: -80px;">
-  <input type="file" id="inputUpload" name="files[]" multiple="" />
-  <div class="uploader-inline">
-    <h1 class="upload-instructions">Upload foto / gambar</h1>
-  </div>
-  <div class="file-wrap container-fluid">
-    <div class="file-list row"></div>
-  </div>
-</form>
+  <form class="upload-form" id="exampleUploadForm" method="POST" style="margin-top: -80px;">
+    <input type="file" id="inputUpload" name="files[]" multiple="" />
+    <div class="uploader-inline">
+      <h1 class="upload-instructions">Upload foto / gambar</h1>
+    </div>
+    <div class="file-wrap container-fluid">
+      <div class="file-list row"></div>
+    </div>
+  </form>
 
 </div>
 </div>
