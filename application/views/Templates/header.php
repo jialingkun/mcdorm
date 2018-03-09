@@ -37,6 +37,9 @@
   <!-- Page -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dashboard/v2.css">
 
+  <!-- Image Upload -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/dropzone.css">
+
   <!-- Fonts -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/fonts/web-icons/web-icons.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/fonts/brand-icons/brand-icons.min.css">

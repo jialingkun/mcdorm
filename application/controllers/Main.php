@@ -332,4 +332,42 @@ class Main extends CI_Controller {
         echo $insertStatus;
     }
 
+
+    public function uploadImage($filename,$idkos,$idkamar = NULL){
+        $ds          = DIRECTORY_SEPARATOR;
+        if ($idkamar == NULL) {
+            $storeFolder = base_url().'photos/'.$idkos.$ds;
+        }else{
+            $storeFolder = base_url().'photos/'.$idkos.$ds.$idkamar.$ds;
+        }
+
+        //if directory not exists, create it
+        if(!is_dir($storeFolder)){
+            mkdir($storeFolder, 0777);
+        }
+
+        
+        if (!empty($_FILES)) {
+            $tempFile = $_FILES['file']['tmp_name'];
+            $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;
+            $targetFile =  $targetPath. $filename;
+            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
+            if ($ext == "png" || $ext == "PNG") {
+                $image = imagecreatefrompng($tempFile);
+                $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
+                imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+                imagealphablending($bg, TRUE);
+                imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+                imagedestroy($image);
+                $quality = 100;
+                imagejpeg($bg, $targetFile . ".jpg", $quality);
+                imagedestroy($bg);
+            }else if($ext == "jpg" || $ext == "JPG" || $ext == "jpeg" || $ext == "JPEG"){
+                move_uploaded_file($tempFile,$targetFile.".jpg");
+            }
+        }
+
+    }
+
 }
