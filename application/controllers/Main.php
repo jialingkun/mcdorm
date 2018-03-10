@@ -297,11 +297,27 @@ class Main extends CI_Controller {
         );
 
         $insertStatus = $this->main_model->insert_new_kos($data);
+
+        if ($insertStatus == 1) {
+            try {
+                $ds          = DIRECTORY_SEPARATOR;
+                $tempDir = getcwd().$ds.'photos'.$ds.'temp'.$ds;
+                $permanentDir = getcwd().$ds.'photos'.$ds.$this->input->post('id').$ds;
+                if (is_dir($permanentDir)) {
+                    rmdir($permanentDir);
+                }
+                rename($tempDir, $permanentDir);
+            } catch (Exception $e) {
+                $insertStatus = $e;
+            }
+        }
+
+
         echo $insertStatus;
     }
 
 
-    
+
 
     public function manajemen_kos_kamar_insert(){
         if ($this->checkCookieAdmin()) {
@@ -314,7 +330,7 @@ class Main extends CI_Controller {
         }else{
             $this->login();
         }
-        
+
     }
 
     public function insertKamar($idkos){
@@ -329,6 +345,26 @@ class Main extends CI_Controller {
         );
 
         $insertStatus = $this->main_model->insert_new_kamar($data);
+
+        if ($insertStatus != 0) {
+            //insertstatus = insertID
+            try {
+                $ds          = DIRECTORY_SEPARATOR;
+                $tempDir = getcwd().$ds.'photos'.$ds.$idkos.$ds.'temp'.$ds;
+                $permanentDir = getcwd().$ds.'photos'.$ds.$idkos.$ds.$insertStatus.$ds;
+                if (is_dir($permanentDir)) {
+                    rmdir($permanentDir);
+                }
+                rename($tempDir, $permanentDir);
+                $insertStatus = 1;
+            } catch (Exception $e) {
+                $insertStatus = $e;
+            }
+        }else{
+            $insertStatus = "Failed to insert Record";
+        }
+
+
         echo $insertStatus;
     }
 
@@ -343,7 +379,7 @@ class Main extends CI_Controller {
         }else{
             $this->login();
         }
-        
+
     }
 
 
@@ -383,7 +419,7 @@ class Main extends CI_Controller {
         }
 
         if (!is_dir($targetPath)) {
-            mkdir($targetPath, 0777, true);
+            mkdir($targetPath, 0755, true);
         }
 
 
