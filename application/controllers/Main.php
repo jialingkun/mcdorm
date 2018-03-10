@@ -90,12 +90,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_data(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_mahasiswa_data');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_mahasiswa_data');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+
     }
 
     public function getmahasiswa($id = NULL)
@@ -132,12 +137,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_insert(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_mahasiswa_insert');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_mahasiswa_insert');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function insertMahasiswa(){
@@ -159,12 +169,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_edit(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_mahasiswa_edit');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_mahasiswa_edit');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function updateMahasiswa($jenis = NULL,$id = NULL){
@@ -201,12 +216,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_data(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_data');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_data');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function getkos($id = NULL)
@@ -222,12 +242,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_edit(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_edit');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_edit');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function updateKos($jenis = NULL,$id = NULL){
@@ -247,12 +272,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_insert(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_insert');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_insert');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function insertKos(){
@@ -274,12 +304,17 @@ class Main extends CI_Controller {
     
 
     public function manajemen_kos_kamar_insert(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_kamar_insert');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_kamar_insert');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
     public function insertKamar($idkos){
@@ -298,12 +333,17 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_kamar_edit(){
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_kamar_edit');
-        $this->load->view('templates/JS');
-        $this->load->view('templates/footer');
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_kamar_edit');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
     }
 
 

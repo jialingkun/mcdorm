@@ -110,9 +110,9 @@
   </div>
 
   <!-- DROPZONE -->
-  <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone"></form>
-  <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot2/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone"></form>
-  <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot3/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone"></form>
+  <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+  <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot2/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+  <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot3/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
 
 
   
