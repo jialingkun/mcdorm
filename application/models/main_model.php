@@ -100,11 +100,12 @@ class main_model extends CI_Model {
 	public function insert_new_kamar($data)
 	{
 		$this->db->insert('kamar', $data);
+		$insert_id = $this->db->insert_id();
 		//get insert status fail or not
 		if ($this->db->affected_rows() > 0 ) {
-			$return_message = '1';
+			$return_message = $insert_id;
 		}else{
-			$return_message = 'Failed to insert record';
+			$return_message = 0;
 		}
 
 		return $return_message;
