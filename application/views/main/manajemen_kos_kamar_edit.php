@@ -11,6 +11,19 @@
     </div>
     <div class="panel-body container-fluid">
       <div class="row row-lg">
+        <div class="col-sm-12" style="margin-bottom: 5%;">
+          <h4>Upload Foto Kamar</h4>
+          <hr>
+          <h5><b>*Drag kembali untuk mengganti foto</b></h5>
+          <!-- DROPZONE -->
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot2/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot3/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot4/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot5/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          
+          
+        </div>
         <div class="col-md-12">
           <!-- Example Basic Form -->
           <div class="example-wrap">
@@ -92,15 +105,6 @@
       <!-- End Example Basic Form -->
     </div>
   </div>
-  <form class="upload-form" id="exampleUploadForm" method="POST" style="margin-top: -80px;">
-    <input type="file" id="inputUpload" name="files[]" multiple="" />
-    <div class="uploader-inline">
-      <h1 class="upload-instructions">Upload foto / gambar</h1>
-    </div>
-    <div class="file-wrap container-fluid">
-      <div class="file-list row"></div>
-    </div>
-  </form>
   
 </div>
 </div>
