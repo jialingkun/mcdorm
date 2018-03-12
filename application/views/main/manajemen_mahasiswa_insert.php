@@ -20,7 +20,7 @@
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
-                      <input type="text" class="form-control" name="nama" required pattern="[A-Za-z]+" />
+                      <input type="text" class="form-control" name="nama" required pattern="^[a-zA-Z\s]+$" />
                     </div>
                   </div>
                   <div class="form-group row">

@@ -149,22 +149,15 @@
 
           
 
-          if (response.status == "Expired") {
-            $('#konfirmasi').attr('disabled','disabled');
-          }else{
-            $('#konfirmasi').attr('disabled');
-            if (response.status == "Terverifikasi") {
-              $('#konfirmasi').attr('disabled','disabled');
-            }else{
-              $('#konfirmasi').attr('disabled');
-            }
+
+          if (response.status.toString() != "Belum Verifikasi") {
+            $('#konfirmasi').prop('disabled','true');
           }
         }
       });
 
     }  
     
-
     function getCookie(cname) {
       var name = cname + "=";
       var ca = document.cookie.split(';');
@@ -179,6 +172,7 @@
       }
       return "";
     }
+
 
 
     function insertfunction(e) {

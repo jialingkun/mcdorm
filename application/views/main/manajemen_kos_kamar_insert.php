@@ -116,13 +116,12 @@
 
   function insertDataKamar() {
     var urls='main/insertKamar/'+getCookie("editDataKos")+"";
-    alert(urls);
+    
     var dataString = $("#insertData").serialize();
     var buttonname = $("#submit").val();
     $("#submit").html("Tunggu...");
     $("#submitButton").prop("disabled",true);
 
-    // alert('klik');
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
       type: 'POST',
