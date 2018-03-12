@@ -1,23 +1,23 @@
 <?php
-class Main extends CI_Controller {
+class Front extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('main_model');
+        $this->load->model('front_model');
         $this->load->helper('url_helper');
     }
 
     public function index()
     {
-        echo "empty";
+        $this->home();
     }
 
 
 
     public function login()
     {
-        $this->load->view('main/login');
+        $this->load->view('front/login');
     }
 
     public function LoginValidation()
@@ -34,25 +34,22 @@ class Main extends CI_Controller {
         }
         else
         {
+            $username=$this->input->post('username');
+            $password=$this->input->post('password');
 
-            $data['username']=$this->input->post('username');
-            $data['password']=$this->input->post('password');
+            $row = $this->front_model->get_mahasiswa_login($username,md5($password));
 
-            $data['admin'] = $this->main_model->get_admin_login();
-
-            if ($data['username']==$data['admin']['id_admin'] && md5($data['password']) == $data['admin']['password']) {
+            if (!empty($row)) {
                 //echo "login admin success! ";
 
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'backendCookie',
-                 'value'  => md5($data['admin']['id_admin']),
+                 'name'   => 'frontCookie',
+                 'value'  => $username,
                  'expire' => '0',
              );
                 $this->input->set_cookie($cookie);
-                //echo "Session created : ";
-                //$this->getcookieAdmin();
 
                 echo "1";
             }else{
@@ -64,10 +61,10 @@ class Main extends CI_Controller {
         }
     }
 
-    public function checkCookieAdmin()
+    public function checkCookieMahasiswa()
     {
         $this->load->helper('cookie');
-        if ($this->input->cookie('backendCookie',true)!=NULL) {
+        if ($this->input->cookie('frontCookie',true)!=NULL) {
             return true;
         }else{
             return false;
@@ -76,13 +73,13 @@ class Main extends CI_Controller {
 
     public function home()
     {
-        if ($this->checkCookieAdmin()) {
-            $this->load->view('templates/header');
-            $this->load->view('templates/navbar');
-            $this->load->view('templates/sidebar');
-            $this->load->view('main/home');
-            $this->load->view('templates/JS');
-            $this->load->view('templates/footer');
+        if ($this->checkCookieMahasiswa()) {
+            $this->load->view('templates/front/header');
+            $this->load->view('templates/front/control');
+            $this->load->view('templates/front/navbar');
+            $this->load->view('front/home');
+            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/footer');
         }else{
             $this->login();
         }
