@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 echo "1";
@@ -73,16 +73,12 @@ class Front extends CI_Controller {
 
     public function home()
     {
-        if ($this->checkCookieMahasiswa()) {
-            $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
-            $this->load->view('templates/front/navbar');
-            $this->load->view('front/home');
-            $this->load->view('templates/front/JS');
-            $this->load->view('templates/front/footer');
-        }else{
-            $this->login();
-        }
+        $this->load->view('templates/front/header');
+        $this->load->view('templates/front/control');
+        $this->load->view('templates/front/navbar');
+        $this->load->view('front/home');
+        $this->load->view('templates/front/JS');
+        $this->load->view('templates/front/footer');
         
     }
 
@@ -455,11 +451,11 @@ class Front extends CI_Controller {
 
 
         if (!empty($_FILES)) {
-           $tempFile = $_FILES['file']['tmp_name'];
-           $targetFile =  $targetPath. $filename;
-           $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+         $tempFile = $_FILES['file']['tmp_name'];
+         $targetFile =  $targetPath. $filename;
+         $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-           if ($ext == "png" || $ext == "PNG") {
+         if ($ext == "png" || $ext == "PNG") {
             $image = imagecreatefrompng($tempFile);
             $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
             imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
