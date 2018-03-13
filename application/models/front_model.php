@@ -9,12 +9,29 @@ class front_model extends CI_Model {
 	public function get_mahasiswa_login($id,$password)
 	{
 		$this->db->select('*');
-			$this->db->from('user_mahasiswa'); 
-			$this->db->where('id_mahasiswa',$id);
-			$this->db->where('password',$password);
-			$query = $this->db->get();
-			return $query->row_array();
+		$this->db->from('user_mahasiswa'); 
+		$this->db->where('id_mahasiswa',$id);
+		$this->db->where('password',$password);
+		$query = $this->db->get();
+		return $query->row_array();
 	}
+
+	public function get_search_kamar($gender,$hargamin,$hargamax)
+	{
+		// $this->db->select('*');
+		// $this->db->from('kamar');
+		// $this->db->join('user_kos', 'kamar.id_kos = user_kos.id_kos', 'left'); 
+		// $this->db->where('id_mahasiswa',$id);
+		// $this->db->where('password',$password);
+		// $query = $this->db->get();
+		// return $query->row_array();
+		return "YES";
+	}
+
+
+
+
+
 
 	public function get_data_mahasiswa($id = NULL)
 	{

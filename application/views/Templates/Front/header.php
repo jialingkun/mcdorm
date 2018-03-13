@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>McLodge</title>
-    <link rel="icon" href="<?php echo base_url(); ?>assets/img/m.png">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/m.png">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- GOOGLE FONTS -->
