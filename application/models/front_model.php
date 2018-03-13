@@ -18,14 +18,14 @@ class front_model extends CI_Model {
 
 	public function get_search_kamar($gender,$hargamin,$hargamax)
 	{
-		// $this->db->select('*');
-		// $this->db->from('kamar');
-		// $this->db->join('user_kos', 'kamar.id_kos = user_kos.id_kos', 'left'); 
-		// $this->db->where('id_mahasiswa',$id);
-		// $this->db->where('password',$password);
-		// $query = $this->db->get();
-		// return $query->row_array();
-		return "YES";
+		$this->db->select('*');
+		$this->db->from('kamar');
+		$this->db->join('user_kos', 'kamar.id_kos = user_kos.id_kos', 'left'); 
+		$this->db->where('gender_kos',$gender);
+		$this->db->where('harga >',$hargamin);
+		$this->db->where('harga <',$hargamax);
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 
 
