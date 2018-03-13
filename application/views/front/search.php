@@ -53,66 +53,85 @@
         <div class="row">
             <div class="col-md-3">
                 <aside class="booking-filters text-white">
+                    <form action="/getsearch" method="get">
+
                     <h3>Filter :</h3>
                     <ul class="list booking-filters-list">
                         <li>
                             <h5 class="booking-filters-title">Harga</h5>
-                            <input type="text" id="price-slider">
+                            <input type="text" id="price-slider" name="harga">
                         </li>
                         <li>
                             <h5 class="booking-filters-title">Fasilitas</h5>
-                            <div class="checkbox">
+                            <div class="checkbox" value="WiFi">
                                 <label>
-                                    <input class="i-check" type="checkbox" />AC
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="WiFi"/>Wifi
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Kamar Mandi Dalam
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir" />Parkir
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />TV
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Nasi"/>Nasi
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Dapur
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Air Putih"/>Air Putih
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />WiFi
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="24Jam"/>24 Jam
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Parkir
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Laundry"/>Laundry
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Nasi
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Dapur"/>Dapur
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Air Putih
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="AC"/>AC
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Ruangan Serbaguna
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="KM Dalam"/>KM Dalam
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input class="i-check" type="checkbox" />Laundry
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Lemari"/>Lemari
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Kipas Angin"/>Kipas Angin
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Kunci Duplikat"/>Kunci Duplikat
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Listrik Token"/>Listrik Token
                                 </label>
                             </div>
                         </li>
                     </ul>
+                      <input type="submit" value="Submit">
+                    </form>
                 </aside>
             </div>
             <div class="col-md-9">
