@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 echo "1";
@@ -106,17 +106,25 @@ class Front extends CI_Controller {
         }
     }
 
-    public function confirmed(){
-        if ($this->checkCookieMahasiswa()) {
-            $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
-            $this->load->view('templates/front/navbar');
-            $this->load->view('front/confirmed');
-            $this->load->view('templates/front/JS');
-            $this->load->view('templates/front/footer');
+    public function getSearch(){
+        if ($this->input->post('fasilitaskos')) {
+            $fasilitaskos = $this->input->post('fasilitaskos');
         }else{
-            $this->login();
+            $fasilitaskos = "";
         }
+        if ($this->input->post('fasilitaskamar')) {
+            $fasilitaskamar = $this->input->post('fasilitaskamar');
+        }else{
+            $fasilitaskamar = "";
+        }
+        $harga = explode(';',$this->input->post('harga'));
+        $gender = $this->input->post('gender');
+
+        echo $gender."<br>".$harga[0]."<br>".$harga[1]."<br>";
+        var_dump($fasilitaskos);
+
+        //$insertStatus = $this->front_model->get_search_kamar($gender,(int)$harga[0],(int)$harga[1]);
+        //echo $insertStatus;
     }
 
     public function detail(){
@@ -138,6 +146,19 @@ class Front extends CI_Controller {
             $this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/payment');
+            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/footer');
+        }else{
+            $this->login();
+        }
+    }
+
+    public function confirmed(){
+        if ($this->checkCookieMahasiswa()) {
+            $this->load->view('templates/front/header');
+            $this->load->view('templates/front/control');
+            $this->load->view('templates/front/navbar');
+            $this->load->view('front/confirmed');
             $this->load->view('templates/front/JS');
             $this->load->view('templates/front/footer');
         }else{
