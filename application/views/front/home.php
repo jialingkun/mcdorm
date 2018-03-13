@@ -11,47 +11,16 @@
 							<li>di Ma Chung aja</li>
 						</ul>
 					</div>
-					<div class="search-tabs search-tabs-bg search-tabs-bottom mb50">
-						<div class="tabbable">
-							<ul class="nav nav-tabs" id="myTab">
-								<li class="active"><a href="#tab-1" data-toggle="tab"><i class="fa fa-building-o"></i> <span >Kos</span></a>
-								</li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane fade in active" id="tab-1">
-									<h2>Cari Kos Impianmu Disini</h2>
-									<form action="result.php">
-										<div class="row">
-											<div class="col-md-12">
-												<div class="input-daterange" data-date-format="M d, D">
-													<div class="row">
-														<div class="col-md-6">
-															<div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
-																<label>Tanggal Masuk</label>
-																<input class="date-pick form-control" type="text" />
-															</div>
-														</div>
-														<div class="col-md-6">
-															<div class="form-group form-group-lg">
-																<label>Gender</label>
-																<select class="form-control">
-																	<option>Laki-laki</option>
-																	<option>Perempuan</option>
-																	<option>Campur</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<button class="btn btn-primary btn-md btn-block" type="submit"><b>Pesan Sekarang</b></button>
-									</form>
-								</div>
-							</div>
-						</div>
+					
+					<div style="text-align: center;   padding-top: 30%;padding-bottom: 30%;">
+						<a href="http://localhost/mcdorm/index.php/search">
+					<button  class="btn btn-primary btn-md" type="submit" style="padding-top:1%;
+					padding-bottom:1%; min-width: 40%;   "><b style="font-size: 30px; ">Pesan Sekarang</b></button>		
+						</a>
+					
 					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="owl-carousel owl-slider owl-carousel-area visible-lg" id="owl-carousel-slider" data-nav="false">
