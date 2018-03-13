@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-md-3">
                 <aside class="booking-filters text-white">
-                    <form action="/getsearch" method="get">
+                    <form action="getsearch" method="post">
 
                     <h3>Filter :</h3>
                     <ul class="list booking-filters-list">
