@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'frontCookie',
-                   'value'  => $username,
-                   'expire' => '0',
-               );
+                 'name'   => 'frontCookie',
+                 'value'  => $username,
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
 
                 echo "1";
@@ -110,21 +110,57 @@ class Front extends CI_Controller {
         if ($this->input->post('fasilitaskos')) {
             $fasilitaskos = $this->input->post('fasilitaskos');
         }else{
-            $fasilitaskos = "";
+            $fasilitaskos = NULL;
         }
         if ($this->input->post('fasilitaskamar')) {
             $fasilitaskamar = $this->input->post('fasilitaskamar');
         }else{
-            $fasilitaskamar = "";
+            $fasilitaskamar = NULL;
         }
         $harga = explode(';',$this->input->post('harga'));
         $gender = $this->input->post('gender');
 
-        echo $gender."<br>".$harga[0]."<br>".$harga[1]."<br>";
-        var_dump($fasilitaskos);
+        // echo $gender."<br>".$harga[0]."<br>".$harga[1]."<br>";
+        // var_dump($fasilitaskos);
 
-        //$insertStatus = $this->front_model->get_search_kamar($gender,(int)$harga[0],(int)$harga[1]);
-        //echo $insertStatus;
+        $data = $this->front_model->get_search_kamar($gender,(int)$harga[0],(int)$harga[1]);
+
+        $result = [];
+        foreach ($data as $row){
+            $dataFasilitasKos = explode(',',$row['fasilitas_kos']);
+            $dataFasilitasKamar = explode(',',$row['fasilitas_kamar']);
+            $fasilitasKosCocok = true;
+            $fasilitasKamarCocok = true;
+            if ($fasilitaskos!=NULL) {
+                foreach ($fasilitaskos as $value) {
+                    if (!in_array($value, $dataFasilitasKos)) {
+                        $fasilitasKosCocok = false;
+                    }
+                }
+            }
+            
+            if ($fasilitaskamar!=NULL){
+                foreach ($fasilitaskamar as $value) {
+                    if (!in_array($value, $dataFasilitasKamar)) {
+                        $fasilitasKamarCocok = false;
+                    }
+                }
+            }
+
+            if ($fasilitasKosCocok && $fasilitasKamarCocok) {
+                $result[] = $row;
+            }
+        }
+
+
+
+
+
+
+
+
+
+        echo json_encode($result);
     }
 
     public function detail(){
