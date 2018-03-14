@@ -114,26 +114,13 @@
             </li>
         </ul>
     </div>
-    <div class="row row-wrap">
-        <div class="col-md-4">
-            <div class="thumb">
-                <header class="thumb-header">
-                    <a class="hover-img" href="detail.php">
-                        <img src="<?php echo base_url(); ?>assets/images/hotel_1_800x600.jpg"/>
-                        <h5 class="hover-title-center">Pesan Sekarang</h5>
-                    </a>
-                </header>
-                <div class="thumb-caption"> 
-                    <h5 class="thumb-title"><a class="text-darken" href="detail.php">Semangka 5</a></h5>
-                    <p class="mb0"><small>Jl. Semangka 5 Kec. Bareng, Kawi, Malang</small>
-                    </p>
-                    <p class="mb0 text-darken"><span class="text-lg lh1em">Rp 650.000</span><small>/bulan</small>
-                    </p>
-                    <p class="mb0" style="font-size: 15px;color: #ff023c"><b>2 Kamar Tersisa !</b>
-                    </p>
-                </div>
-            </div>
+    <div class="row row-wrap" >
+        <div id="kamar">
+            <div id="dataKamar">
+
+            </div>    
         </div>
+        
         <hr />
         <div class="row">
             <div class="col-md-12">
@@ -161,6 +148,7 @@
 <script>
 
     function insertfunction(e) {
+        $('#dataKamar').detach();
    e.preventDefault();// will stop alethe form submission
    var dataString = $("#insertData").serialize();
    $.ajax({
@@ -168,12 +156,40 @@
     type: 'POST',
     data:dataString,
     success: function(response){
-        if (response != null) {
-            alert('sip');
+        if (response != "null") {
+
+            var data = JSON.parse(response);
+
+            $('#kamar').append('<div id="dataKamar"></div>');
+            for (var i = 0; i < data.length; i++) {
+
+                var div =  '<div class="col-md-4">'+
+                '<div class="thumb">'+
+                '<header class="thumb-header">'+
+                '<a class="hover-img" href="detail.php">'+
+                '<img src="http://localhost/mcdorm/photos/'+data[i].id_kos+'/slot1.jpg" />'+
+                '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
+                '</a>'+
+                '</header>'+
+                '<div class="thumb-caption"> '+
+                '<h5 class="thumb-title"><a class="text-darken" href="detail">'+data[i].nama_kos+'</a></h5>'+
+                '<p class="mb0"><small>'+data[i].alamat+'</small>'+
+                '</p>'+
+                '<p class="mb0 text-darken"><span class="text-lg lh1em">'+data[i].harga+'</span><small>/bulan</small>'+
+                '</p>'+
+                '<p class="mb0" style="font-size: 15px;color: #ff023c"><b>'+data[i].kuota+' Kamar Tersisa !</b>'+
+                '</p>'+
+                '</div>'+
+                '</div>'+
+                '</div>';
+
+                $('#dataKamar').append(div);
+            }
+
         }else{
-            alert('sup');
+            alert(response);
         }
-        alert(response);
+        
     },
     error: function(){
       alert('Gagal menambahkan data');
