@@ -17,14 +17,10 @@
           <hr>
           <h5><b>*Drag kembali untuk mengganti foto</b></h5>
           <!-- DROPZONE -->
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone" >
-           <!--  <div class="dz-preview dz-processing dz-image-preview dz-success dz-complete">
-              <div ><img id="slot" data-dz-thumbnail="" alt="slot1.jpg" height="auto" width="120" src="" ></div>  
-
-            </div> -->
-            
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone" ondrop="berubah()">
+            <img id="imageslot1"> src="<?php echo base_url() ?>photos/<?php echo $_COOKIE['editDataKos'] ?>/slot1.jpg">
           </form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot2/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot2/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone" ></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot3/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot4/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot5/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
@@ -182,6 +178,9 @@
 
   <!-- End Page -->
   <script>
+    function berubah(){
+      $("#imageslot1").attr("src","<?php echo base_url() ?>photos/<?php echo $_COOKIE['editDataKos'] ?>/slot1.jpg");
+    }
 
     window.onload = function() {
       // $('#slot').attr("src","http://localhost/mcdorm/photos/9019/slot1.jpg");

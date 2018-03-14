@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-3">
             <aside class="booking-filters text-white">
-                <form action="getsearch" method="post">
+                <form  id="insertData" onsubmit="insertfunction(event)">
 
                     <h3>Filter :</h3>
                     <ul class="list booking-filters-list">
@@ -17,7 +17,7 @@
                             <h5 class="booking-filters-title">Jenis Kelamin</h5>
                             <div>
                               <div class="radio-inline">
-                                <label><input type="radio" name="gender" value="pria">Pria</label>
+                                <label><input type="radio" name="gender" value="pria" checked>Pria</label>
                             </div>
                             <div class="radio-inline">
                                 <label><input type="radio" name="gender" value="wanita">Wanita</label>
@@ -94,9 +94,10 @@
                                 <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Listrik Token"/>Listrik Token
                             </label>
                         </div>
+                        <input id="search" class="btn btn-primary" type="submit" value="Submit">
                     </li>
                 </ul>
-                <input type="submit" value="Submit">
+                
             </form>
         </aside>
     </div>
@@ -133,80 +134,57 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="thumb">
-                <header class="thumb-header">
-                    <a class="hover-img" href="#">
-                        <img src="<?php echo base_url(); ?>assets/images/hotel_1_800x600.jpg"/>
-                        <h5 class="hover-title-center">Pesan Sekarang</h5>
-                    </a>
-                </header>
-                <div class="thumb-caption"> 
-                    <h5 class="thumb-title"><a class="text-darken" href="#">Semangka 5</a></h5>
-                    <p class="mb0"><small>Jl. Semangka 5 Kec. Bareng, Kawi, Malang</small>
-                    </p>
-                    <p class="mb0 text-darken"><span class="text-lg lh1em">Rp 650.000</span><small>/bulan</small>
-                    </p>
-                    <p class="mb0" style="font-size: 15px;color: #ff023c"><b>3 Kamar Tersisa !</b>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="thumb">
-                    <header class="thumb-header">
-                        <a class="hover-img" href="#">
-                            <img src="<?php echo base_url(); ?>assets/images/hotel_1_800x600.jpg"/>
-                            <h5 class="hover-title-center">Pesan Sekarang</h5>
-                        </a>
-                    </header>
-                    <div class="thumb-caption"> 
-                        <h5 class="thumb-title"><a class="text-darken" href="#">Semangka 5</a></h5>
-                        <p class="mb0"><small>Jl. Semangka 5 Kec. Bareng, Kawi, Malang</small>
-                        </p>
-                        <p class="mb0 text-darken"><span class="text-lg lh1em">Rp 650.000</span><small>/bulan</small>
-                        </p>
-                        <p class="mb0" style="font-size: 15px;color: #ff023c"><b>1 Kamar Tersisa !</b>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumb">
-                        <header class="thumb-header">
-                            <a class="hover-img" href="#">
-                                <img src="<?php echo base_url(); ?>assets/images/hotel_1_800x600.jpg"/>
-                                <h5 class="hover-title-center">Pesan Sekarang</h5>
-                            </a>
-                        </header>
-                        <div class="thumb-caption"> 
-                            <h5 class="thumb-title"><a class="text-darken" href="#">Semangka 5</a></h5>
-                            <p class="mb0"><small>Jl. Semangka 5 Kec. Bareng, Kawi, Malang</small>
-                            </p>
-                            <p class="mb0 text-darken"><span class="text-lg lh1em">Rp 650.000</span><small>/bulan</small>
-                            </p>
-                            <p class="mb0" style="font-size: 15px;color: #ff023c"><b>5 Kamar Tersisa !</b>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-md-12">
-                        <ul class="pagination">
-                            <li class="active"><a href="#">1</a>
-                            </li>
-                            <li><a href="#">2</a>
-                            </li>
-                            <li><a href="#">3</a>
-                            </li>
-                            <li class="dots">...</li>
-                            <li><a href="#">10</a>
-                            </li>
-                            <li class="next"><a href="#">Next Page</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="pagination">
+                    <li class="active"><a href="#">1</a>
+                    </li>
+                    <li><a href="#">2</a>
+                    </li>
+                    <li><a href="#">3</a>
+                    </li>
+                    <li class="dots">...</li>
+                    <li><a href="#">10</a>
+                    </li>
+                    <li class="next"><a href="#">Next Page</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="gap"></div>
     </div>
+</div>
+<div class="gap"></div>
+</div>
+
+
+<script>
+
+    function insertfunction(e) {
+   e.preventDefault();// will stop alethe form submission
+   var dataString = $("#insertData").serialize();
+   $.ajax({
+    url:"<?php echo base_url() ?>index.php/getsearch",
+    type: 'POST',
+    data:dataString,
+    success: function(response){
+        if (response != null) {
+            alert('sip');
+        }else{
+            alert('sup');
+        }
+        alert(response);
+        // if( !$.isArray(response) ||  !response.length ) {
+        //     alert('isi');
+        // }
+
+
+    },
+    error: function(){
+      alert('Gagal menambahkan data');
+  }
+}); 
+}
+
+
+</script>

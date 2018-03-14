@@ -228,6 +228,7 @@
 
                 // Input events
                 self.on(_click + '.i focus.i blur.i keyup.i keydown.i keypress.i', function(event) {
+                    
                     var type = event[_type],
                         key = event.keyCode;
 
