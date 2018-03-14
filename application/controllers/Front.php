@@ -61,6 +61,57 @@ class Front extends CI_Controller {
         }
     }
 
+
+    public function getmahasiswa($id = NULL)
+    {
+        $data = $this->front_model->get_data_mahasiswa($id);
+
+        if (empty($data))
+        {
+            show_404();
+        } else if ($id == NULL) {
+            $result = [];
+            foreach ($data as $row){ //add & to call by reference
+                date_default_timezone_set('Asia/Jakarta');
+                $now = time();
+                $expire = strtotime($row['kadaluarsa']);
+                if ($now < $expire) {
+                    $result[] = $row;
+                }
+            }
+            $data = $result;
+        }else{
+            if ($data['status']=="Belum Bayar") {
+                date_default_timezone_set('Asia/Jakarta');
+                $now = time();
+                $expire = strtotime($data['kadaluarsa']);
+                if ($now >= $expire) {
+                    $data['status'] = 'Expired';
+                }
+            }
+        }
+
+        echo json_encode($data);
+    }
+
+
+    public function getisikamar($idkamar){
+        $data = $this->front_model->get_data_isikamar($idkamar);
+
+        $count = 0;
+        if ($data){
+            foreach ($data as $row){
+                date_default_timezone_set('Asia/Jakarta');
+                $now = time();
+                $expire = strtotime($row['kadaluarsa']);
+                if ($now < $expire) {
+                    $count = $count + 1;
+                }
+            }
+        }
+        return $count;
+    }
+
     public function checkCookieMahasiswa()
     {
         $this->load->helper('cookie');
@@ -126,7 +177,7 @@ class Front extends CI_Controller {
         $data = $this->front_model->get_search_kamar($gender,(int)$harga[0],(int)$harga[1]);
 
         $result = [];
-        foreach ($data as $row){
+        foreach ($data as &$row){
             $dataFasilitasKos = explode(',',$row['fasilitas_kos']);
             $dataFasilitasKamar = explode(',',$row['fasilitas_kamar']);
             $fasilitasKosCocok = true;
@@ -147,18 +198,11 @@ class Front extends CI_Controller {
                 }
             }
 
-            if ($fasilitasKosCocok && $fasilitasKamarCocok) {
+            $row['kuota'] = $row['kuota'] - $this->getisikamar($row['id_kamar']);
+            if ($fasilitasKosCocok && $fasilitasKamarCocok && $row['kuota']>0) {
                 $result[] = $row;
             }
         }
-
-
-
-
-
-
-
-
 
         echo json_encode($result);
     }
