@@ -174,11 +174,6 @@
             alert('sup');
         }
         alert(response);
-        // if( !$.isArray(response) ||  !response.length ) {
-        //     alert('isi');
-        // }
-
-
     },
     error: function(){
       alert('Gagal menambahkan data');
