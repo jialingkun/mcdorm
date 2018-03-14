@@ -203,7 +203,9 @@ class Front extends CI_Controller {
                 $result[] = $row;
             }
         }
-
+        if (empty($result)) {
+            $result = NULL;
+        }
         echo json_encode($result);
     }
 
