@@ -196,7 +196,7 @@
                 '</a>'+
                 '</header>'+
                 '<div class="thumb-caption"> '+
-                '<h5 class="thumb-title"><a class="text-darken" href="" onclick="getDetail('+data[i].id_kos+')">'+data[i].nama_kos+'</a></h5>'+
+                '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+data[i].nama_kos+'</a></h5>'+
                 '<p class="mb0"><small>'+data[i].alamat+'</small>'+
                 '</p>'+
                 '<p class="mb0 text-darken"><span class="text-lg lh1em">'+data[i].harga+'</span><small>/bulan</small>'+
@@ -230,6 +230,6 @@ error: function(){
 }
 
 function getDetail(x){
-    document.cookie = "detailKamar="+x+"; path=/mcdorm/index.php/main;"
+    document.cookie = "detailKamar="+x+"; path=/mcdorm/index.php/detail;"
 }
 </script>
