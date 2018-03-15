@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 echo "1";
@@ -281,6 +281,21 @@ class Front extends CI_Controller {
             }
         }
 
+        echo json_encode($data);
+    }
+
+
+    public function getAllImagePath($idkos){
+        $targetPath = base_url().'photos';
+        $targetPath = $targetPath.'/'.$idkos.'/';
+        $maxslot = 10;
+        $data = [];
+        for ($i=1; $i <= $maxslot; $i++) { 
+            $filepath = $targetPath."slot".$i.".jpg";
+            if (@getimagesize($filepath)) {
+                $data[] = $filepath;
+            }
+        } 
         echo json_encode($data);
     }
 
