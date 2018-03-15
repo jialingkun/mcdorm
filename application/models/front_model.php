@@ -44,4 +44,16 @@ class front_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function get_data_kos($id,$table)
+	{
+		if ($table == 'kamar')
+		{
+			$query = $this->db->get_where('kamar', array('id_kos' => $id));
+			return $query->result_array();
+		}else{
+			$query = $this->db->get_where('user_kos', array('id_kos' => $id));
+			return $query->row_array();
+		}
+	}
+
 }
