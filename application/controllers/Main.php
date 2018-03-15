@@ -460,25 +460,24 @@ class Main extends CI_Controller {
 
 
         if (!empty($_FILES)) {
-           $tempFile = $_FILES['file']['tmp_name'];
-           $targetFile =  $targetPath. $filename;
-           $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+            $tempFile = $_FILES['file']['tmp_name'];
+            $targetFile =  $targetPath. $filename;
+            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-           if ($ext == "png" || $ext == "PNG") {
-            $image = imagecreatefrompng($tempFile);
-            $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
-            imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
-            imagealphablending($bg, TRUE);
-            imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
-            imagedestroy($image);
-            $quality = 100;
-            imagejpeg($bg, $targetFile . ".jpg", $quality);
-            imagedestroy($bg);
-        }else if($ext == "jpg" || $ext == "JPG" || $ext == "jpeg" || $ext == "JPEG"){
-            move_uploaded_file($tempFile,$targetFile.".jpg");
+            if ($ext == "png" || $ext == "PNG") {
+                $image = imagecreatefrompng($tempFile);
+                $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
+                imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+                imagealphablending($bg, TRUE);
+                imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+                imagedestroy($image);
+                $quality = 100;
+                imagejpeg($bg, $targetFile . ".jpg", $quality);
+                imagedestroy($bg);
+            }else if($ext == "jpg" || $ext == "JPG" || $ext == "jpeg" || $ext == "JPEG"){
+                move_uploaded_file($tempFile,$targetFile.".jpg");
+            }
         }
     }
-
-}
 
 }
