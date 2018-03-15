@@ -27,8 +27,9 @@
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <h5 class="booking-filters-title">Fasilitas</h5>
+                    
+                    <h5 class="booking-filters-title" style="padding-left: 15px; padding-top: 15px;">Fasilitas</h5>
+                    <div class="col-sm-5">
                         <div class="checkbox" value="WiFi">
                             <label>
                                 <input class="i-check" type="checkbox" name="fasilitaskos[]" value="WiFi"/>Wifi
@@ -64,6 +65,9 @@
                                 <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Dapur"/>Dapur
                             </label>
                         </div>
+                    </div>
+                    <div class="col-sm-7">
+
                         <div class="checkbox">
                             <label>
                                 <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="AC"/>AC
@@ -94,8 +98,12 @@
                                 <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Listrik Token"/>Listrik Token
                             </label>
                         </div>
-                        <input id="search" class="btn btn-primary" type="submit" value="Submit">
-                    </li>
+                    </div>
+
+                    <input style="margin-top: 40px; margin-left: 15px;" id="search" class="btn btn-primary" type="submit" value="Submit">
+
+
+                    
                 </ul>
                 
             </form>
@@ -147,8 +155,14 @@
 
 <script>
 
+    window.onload = function() {
+
+    }
+
+
     function insertfunction(e) {
         $('#dataKamar').detach();
+        $('#failed').detach();
    e.preventDefault();// will stop alethe form submission
    var dataString = $("#insertData").serialize();
    $.ajax({
@@ -157,10 +171,20 @@
     data:dataString,
     success: function(response){
         if (response != "null") {
+          $("#search").prop("disabled",true);
 
-            var data = JSON.parse(response);
+          $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="http://localhost/mcdorm/assets/images/spin.gif" />');
+          var data = JSON.parse(response);
 
-            $('#kamar').append('<div id="dataKamar"></div>');
+          $('#kamar').append('<div id="dataKamar"></div>');
+
+          
+
+          setTimeout(function(){
+            $("#search").prop("disabled",false);
+            $('#load').detach();
+
+
             for (var i = 0; i < data.length; i++) {
 
                 var div =  '<div class="col-md-4">'+
@@ -172,7 +196,7 @@
                 '</a>'+
                 '</header>'+
                 '<div class="thumb-caption"> '+
-                '<h5 class="thumb-title"><a class="text-darken" href="detail">'+data[i].nama_kos+'</a></h5>'+
+                '<h5 class="thumb-title"><a class="text-darken" href="" onclick="getDetail('+data[i].id_kos+')">'+data[i].nama_kos+'</a></h5>'+
                 '<p class="mb0"><small>'+data[i].alamat+'</small>'+
                 '</p>'+
                 '<p class="mb0 text-darken"><span class="text-lg lh1em">'+data[i].harga+'</span><small>/bulan</small>'+
@@ -186,16 +210,26 @@
                 $('#dataKamar').append(div);
             }
 
-        }else{
-            alert(response);
-        }
-        
-    },
-    error: function(){
-      alert('Gagal menambahkan data');
-  }
+        }, 2000);
+      }
+      if(response == "null"){
+        $("#search").prop("disabled",true);
+        $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="http://localhost/mcdorm/assets/images/spin.gif" />');
+        setTimeout(function(){
+            $("#search").prop("disabled",false);
+            $('#load').detach();
+            $('#kamar').append('<div id="failed"> <h3>Maaf Pencarian Tidak Ditemukan</h3></div>');
+        }, 2000);
+    }
+
+},
+error: function(){
+  alert('Gagal menambahkan data');
+}
 }); 
 }
 
-
+function getDetail(x){
+    document.cookie = "detailKamar="+x+"; path=/mcdorm/index.php/main;"
+}
 </script>
