@@ -123,6 +123,22 @@ class Front extends CI_Controller {
         return $count;
     }
 
+    public function getAllKamar(){
+        $data = $this->front_model->get_all_kamar();
+        $result = [];
+        foreach ($data as &$row){ //add & to call by reference
+            //kuota dikurangi jumlah pemesan
+            $row['kuota'] = $row['kuota'] - $this->getJumlahPesananKamar($row['id_kamar']);
+            if ($row['kuota']>0) {
+                $result[] = $row;
+            }
+        }
+        if (empty($result)) {
+            $result = NULL;
+        }
+        echo json_encode($result);
+    }
+
     public function getSearch(){
         if ($this->input->post('fasilitaskos')) {
             $fasilitaskos = $this->input->post('fasilitaskos');
@@ -244,6 +260,28 @@ class Front extends CI_Controller {
         }else{
             $this->login();
         }
+    }
+
+    public function getmahasiswa($id)
+    {
+        $data = $this->front_model->get_mahasiswa($id);
+
+        if (empty($data))
+        {
+            show_404();
+        }else{
+            unset($data['password']);
+            if ($data['status']=="Belum Bayar") {
+                date_default_timezone_set('Asia/Jakarta');
+                $now = time();
+                $expire = strtotime($data['kadaluarsa']);
+                if ($now >= $expire) {
+                    $data['status'] = 'Expired';
+                }
+            }
+        }
+
+        echo json_encode($data);
     }
 
 }

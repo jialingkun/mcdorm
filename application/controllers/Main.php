@@ -112,6 +112,7 @@ class Main extends CI_Controller {
             show_404();
         } else if ($id == NULL) {
             foreach ($data as &$row){ //add & to call by reference
+                unset($row['password']);
                 if ($row['status']=="Belum Bayar") {
                     date_default_timezone_set('Asia/Jakarta');
                     $now = time();
@@ -123,6 +124,7 @@ class Main extends CI_Controller {
                 
             }
         }else{
+            unset($data['password']);
             if ($data['status']=="Belum Bayar") {
                 date_default_timezone_set('Asia/Jakarta');
                 $now = time();

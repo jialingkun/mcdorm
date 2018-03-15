@@ -16,6 +16,17 @@ class front_model extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function get_mahasiswa($id)
+	{
+		$this->db->select('*');
+		$this->db->from('user_mahasiswa'); 
+		$this->db->join('user_kos', 'user_mahasiswa.id_kos = user_kos.id_kos', 'left');
+		$this->db->join('kamar', 'user_mahasiswa.id_kamar = kamar.id_kamar', 'left');
+		$this->db->where('id_mahasiswa',$id);
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+
 	public function get_data_isikamar($idkamar)
 	{
 		$this->db->select('*');
@@ -29,6 +40,16 @@ class front_model extends CI_Model {
 		}else{
 			return FALSE;
 		}
+	}
+
+	public function get_all_kamar()
+	{
+		$this->db->select('*');
+		$this->db->from('kamar');
+		$this->db->join('user_kos', 'kamar.id_kos = user_kos.id_kos', 'left'); 
+		$this->db->order_by("harga", "asc");
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 
 	public function get_search_kamar($gender,$hargamin,$hargamax)
