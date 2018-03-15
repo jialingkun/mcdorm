@@ -69,14 +69,7 @@
                      <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" id="fasilitas4" value="Kipas Angin"/>
                      <label>Kipas Angin</label>
                    </div>
-                   <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" d name="fasilitas[]" id="fasilitas5" value="Kunci Duplikat"/>
-                     <label>Kunci Duplikat</label>
-                   </div>
-                   <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" id="fasilitas6" value="Listrik Token"/>
-                     <label>Listrik Token</label>
-                   </div>
+                   
                  </div>
                </div>
              </div>
@@ -147,12 +140,7 @@
             else if ($("#fasilitas4").val()==res[i]) {
               $("#fasilitas4").attr('checked', true);
             }
-            else if ($("#fasilitas5").val()==res[i]) {
-              $("#fasilitas5").attr('checked', true);
-            }
-            else if ($("#fasilitas6").val()==res[i]) {
-              $("#fasilitas6").attr('checked', true);
-            }
+            
           }
           
         }

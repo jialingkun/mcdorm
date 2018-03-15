@@ -129,7 +129,7 @@
             </div>    
         </div>
         
-        <hr />
+        
         <div class="row">
             <div class="col-md-12">
                 <ul class="pagination">
@@ -156,13 +156,44 @@
 <script>
 
     window.onload = function() {
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/getallkamar",
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+            var data = response;
+          for (var i = 0; i < response.length ; i++) {
+            
+            var div =  '<div class="col-md-4">'+
+            '<div class="thumb">'+
+            '<header class="thumb-header">'+
+            '<a class="hover-img" href="detail.php">'+
+            '<img src="http://localhost/mcdorm/photos/'+data[i].id_kos+'/slot1.jpg" />'+
+            '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
+            '</a>'+
+            '</header>'+
+            '<div class="thumb-caption"> '+
+            '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+data[i].nama_kos+'</a></h5>'+
+            '<p class="mb0"><small>'+data[i].alamat+'</small>'+
+            '</p>'+
+            '<p class="mb0 text-darken"><span class="text-lg lh1em">'+data[i].harga+'</span><small>/bulan</small>'+
+            '</p>'+
+            '<p class="mb0" style="font-size: 15px;color: #ff023c"><b>'+data[i].kuota+' Kamar Tersisa !</b>'+
+            '</p>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
 
+            $('#dataKamar').append(div);
+        }
     }
+});
+  }
 
 
-    function insertfunction(e) {
-        $('#dataKamar').detach();
-        $('#failed').detach();
+  function insertfunction(e) {
+    $('#dataKamar').detach();
+    $('#failed').detach();
    e.preventDefault();// will stop alethe form submission
    var dataString = $("#insertData").serialize();
    $.ajax({
