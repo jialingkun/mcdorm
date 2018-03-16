@@ -6,7 +6,6 @@
         <div class="col-md-3">
             <aside class="booking-filters text-white">
                 <form  id="insertData" onsubmit="insertfunction(event)">
-
                     <h3>Filter :</h3>
                     <ul class="list booking-filters-list">
                         <li>
@@ -100,10 +99,7 @@
                         </div>
                     </div>
 
-                    <input style="margin-top: 40px; margin-left: 15px;" id="search" class="btn btn-primary" type="submit" value="Submit">
-
-
-                    
+                    <input style="margin-top: 40px; margin-left: 15px;" id="search" class="btn btn-primary" type="submit" value="Submit">                    
                 </ul>
                 
             </form>
@@ -128,8 +124,6 @@
 
             </div>    
         </div>
-        
-        
         <div class="row">
             <div class="col-md-12">
                 <ul class="pagination">
@@ -167,7 +161,7 @@
             var div =  '<div class="col-md-4">'+
             '<div class="thumb">'+
             '<header class="thumb-header">'+
-            '<a class="hover-img" href="detail.php">'+
+            '<a class="hover-img" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+
             '<img src="http://localhost/mcdorm/photos/'+data[i].id_kos+'/slot1.jpg" />'+
             '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
             '</a>'+
@@ -221,7 +215,7 @@
                 var div =  '<div class="col-md-4">'+
                 '<div class="thumb">'+
                 '<header class="thumb-header">'+
-                '<a class="hover-img" href="detail.php">'+
+                '<a class="hover-img" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+
                 '<img src="http://localhost/mcdorm/photos/'+data[i].id_kos+'/slot1.jpg" />'+
                 '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
                 '</a>'+
@@ -237,7 +231,6 @@
                 '</div>'+
                 '</div>'+
                 '</div>';
-
                 $('#dataKamar').append(div);
             }
 
@@ -252,7 +245,6 @@
             $('#kamar').append('<div id="failed"> <h3>Maaf Pencarian Tidak Ditemukan</h3></div>');
         }, 2000);
     }
-
 },
 error: function(){
   alert('Gagal menambahkan data');
