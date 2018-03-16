@@ -69,14 +69,7 @@
                      <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Kipas Angin" />
                      <label>Kipas Angin</label>
                    </div>
-                   <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Kunci Duplikat" />
-                     <label>Kunci Duplikat</label>
-                   </div>
-                   <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Listrik Token" />
-                     <label>Listrik Token</label>
-                   </div>
+                  
                  </div>
                </div>
              </div>
