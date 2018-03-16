@@ -64,9 +64,6 @@
 <script src="<?php echo base_url(); ?>assets/js/components/icheck.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/components/bootstrap-select.js"></script>
 
-<!-- File upload DROPZONE -->
-<script src="<?php echo base_url(); ?>assets/js/dropzone.js"></script>
-
 <script>
   function myFunction() {
     location.reload();
