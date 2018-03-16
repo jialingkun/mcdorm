@@ -64,6 +64,9 @@
 <script src="<?php echo base_url(); ?>assets/js/components/icheck.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/components/bootstrap-select.js"></script>
 
+<!-- File upload DROPZONE -->
+<script src="<?php echo base_url(); ?>assets/js/dropzone.js"></script>
+
 <script>
   function myFunction() {
     location.reload();
@@ -323,6 +326,53 @@
         map.setStyle("map_style");
       })();
     });
+  </script>
+
+  <script>
+    // The recommended way from within the init configuration:
+    Dropzone.options.myAwesomeDropzone = {
+      init: function() {
+
+        //get photo url from form action url
+        var actionUrl = this.options.url;
+        var parts = actionUrl.split("/");
+        var baseUrl = "";
+        if (parts[parts.length-3].toLowerCase()=="uploadimage") {
+          var filenamePosition = 2;
+          var folderPath = parts[parts.length-1]+"/";
+        }else{
+          var filenamePosition = 3;
+          var folderPath = parts[parts.length-2]+"/"+parts[parts.length-1]+"/";
+        }
+        for (var i = 0; i < parts.length-filenamePosition-3; i++) {
+          baseUrl = baseUrl + parts[i] + "/";
+        }
+        var photoUrl = baseUrl+"photos/"+folderPath+parts[parts.length-filenamePosition]+".jpg";
+
+        //check if image exist
+        var http = new XMLHttpRequest();
+        http.open('HEAD', photoUrl, false);
+        http.send();
+        if (http.status != 404) {
+          var mockFile = { name: "preview", size: 0, dataURL: photoUrl };
+          var thisDropzone = this;
+          thisDropzone.emit('addedfile', mockFile);
+          thisDropzone.createThumbnailFromUrl(mockFile,
+            thisDropzone.options.thumbnailWidth, thisDropzone.options.thumbnailHeight,
+            thisDropzone.options.thumbnailMethod, true, function (thumbnail) {
+              thisDropzone.emit('thumbnail', mockFile, thumbnail);
+            });
+          thisDropzone.emit("complete", mockFile);
+          thisDropzone.files.push(mockFile);
+        }
+
+        this.on('addedfile', function(file) {
+          if (this.files.length > 1) {
+            this.removeFile(this.files[0]);
+          }
+        });
+      }
+    };
   </script>
 
 

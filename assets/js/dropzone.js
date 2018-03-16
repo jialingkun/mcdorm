@@ -3526,16 +3526,5 @@ function __guardMethod__(obj, methodName, transform) {
 }
 }
 
-// The recommended way from within the init configuration:
-Dropzone.options.myAwesomeDropzone = {
-  init: function() {
-    this.on('addedfile', function(file) {
-        if (this.files.length > 1) {
-          this.removeFile(this.files[0]);
-      }
-  });
-}
-};
-
 
 

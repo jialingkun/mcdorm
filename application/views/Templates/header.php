@@ -88,9 +88,6 @@
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>assets/vendor/modernizr/modernizr.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/breakpoints/breakpoints.js"></script>
-
-<!-- File upload DROPZONE -->
-<script src="<?php echo base_url(); ?>assets/js/dropzone.js"></script>
 <script>
   Breakpoints();
 </script>
