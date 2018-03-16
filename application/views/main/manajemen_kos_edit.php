@@ -295,33 +295,33 @@
     function insertfunction(e) {
 
       var urls='main/updatekos/profil/'+getCookie("editDataKos")+"";
-  e.preventDefault();// will stop the form submission
-  var buttonname = $("#submit").val();
-  $("#submit").html("Tunggu...");
-  $("#submitButton").prop("disabled",true);
-  $.ajax({
-    url:"<?php echo base_url() ?>index.php/"+urls,
-    type: 'POST',
-    data: $("#updateData").serialize(),
-    success: function(response){
-      if (response == 1) {
-        window.location.href = 'manajemen_kos_data';
-        $("#submit").html(buttonname);
-      }else{
-        // $("#submit").val(buttonname);
-        alert(response);
-        $("#submit").html(buttonname);
-      }
+      e.preventDefault();
+      var buttonname = $("#submit").html();
+      $("#submit").html("Tunggu...");
+      $("#submitButton").prop("disabled",true);
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/"+urls,
+        type: 'POST',
+        data: $("#updateData").serialize(),
+        success: function(response){
+          if (response == 1) {
+            window.location.href = 'manajemen_kos_data';
+            $("#submit").html(buttonname);
+          }else{
+            alert(response);
+            $("#submit").html(buttonname);
+            $("#submitButton").prop("disabled",false);
+          }
+        }
+      });   
     }
-  });   
-}
 
-function editDataKamar(x){
+    function editDataKamar(x){
 
-  document.cookie = "editDataKamar="+x+"; path=/mcdorm/index.php/main;"
-}
+      document.cookie = "editDataKamar="+x+"; path=/mcdorm/index.php/main;"
+    }
 
 
-</script> 
+  </script> 
 
 

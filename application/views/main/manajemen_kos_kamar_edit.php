@@ -165,7 +165,7 @@
   function insertfunction(e) {
     var urls='main/updatekamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
   e.preventDefault();// will stop the form submission
-  var buttonname = $("#submit").val();
+  var buttonname = $("#submit").html();
   $("#submit").html("Tunggu...");
   $("#submitButton").prop("disabled",true);
   $.ajax({
@@ -177,9 +177,9 @@
         window.location.href = 'manajemen_kos_edit';
         $("#submit").html(buttonname);
       }else{
-        // $("#submit").val(buttonname);
         alert(response);
         $("#submit").html(buttonname);
+        $("#submitButton").prop("disabled",false);
       }
     }
   });   

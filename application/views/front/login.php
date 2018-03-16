@@ -115,17 +115,23 @@
 
 
         $(document).on('click', '#submit', function(){
-            var urls='loginvalidation';
+            var urls='main/loginvalidation';
             var dataString = $("#form").serialize();
+            var buttonname = $("#submit").html();
+            $("#submit").html("Tunggu...");
+            $("#submit").prop("disabled",true);
             $.ajax({
               url:"<?php echo base_url() ?>index.php/"+urls,
               type: 'POST',
               data:dataString,
               success: function(response){
                 if (response == 1) {
-                    window.location.href = 'index'
+                    window.location.href = 'home'
+                    $("#submit").html(buttonname);
                 }else{
                     alert(response);
+                    $("#submit").prop("disabled",false);
+                    $("#submit").html(buttonname);
                 }
                 
             }

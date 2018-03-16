@@ -42,7 +42,9 @@
                   </div>
                   <div class="col-sm-12">
                    <div class="form-group pull-right">
-                    <input type="submit" id="submit" class="btn btn-animate btn-animate-side btn-info btn-md" value="Submit">
+                    <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
+                      <span><i class="icon fa-exchange"></i> &nbsp<b id="submit">Perbarui Data</b></span>
+                    </button>
 
                     
                     <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
@@ -178,49 +180,49 @@
     function insertfunction(e) {
 
       var urls='main/updateMahasiswa/profil/'+getCookie("editDataSiswa")+"";
-  e.preventDefault();// will stop the form submission
-  var buttonname = $("#submit").val();
-  $("#submit").val("Tunggu...");
-  $("#submit").prop("disabled",true);
+      e.preventDefault(); // will stop the form submission
+      var buttonname = $("#submit").html();
+      $("#submit").html("Tunggu...");
+      $("#submitButton").prop("disabled",true);
 
-  $.ajax({
-    url:"<?php echo base_url() ?>index.php/"+urls,
-    type: 'POST',
-    data: {
-      'nama':$('#nama').val() ,
-      'email': $('#email').val() ,
-      'notelp': $('#notelp').val() ,
-    },
-    success: function(response){
-      if (response == 1) {
-        $("#submit").val(buttonname);
-        window.location.href = 'manajemen_mahasiswa_data'
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/"+urls,
+        type: 'POST',
+        data: {
+          'nama':$('#nama').val() ,
+          'email': $('#email').val() ,
+          'notelp': $('#notelp').val() ,
+        },
+        success: function(response){
+          if (response == 1) {
+            window.location.href = 'manajemen_mahasiswa_data';
+            $("#submit").html(buttonname);
 
-      }else{
-        $("#submit").val(buttonname);
-        // $("#submit").val(buttonname);
-      }
-    }
-  });   
-}
-
-function verifikasi(){
-
-  var r = confirm("Apakah anda ingin verifikasi?");
-  if (r == true) {
-    var urls='main/updateMahasiswa/verifikasi/'+getCookie("editDataSiswa")+"";
-    $.ajax({
-      url:"<?php echo base_url() ?>index.php/"+urls,
-      type: 'POST',
-      success: function(response){
-        if (response == 1) {
-          alert("Verifikasi Berhasil!");
-          window.location.href = 'manajemen_mahasiswa_edit'
+          }else{
+            $("#submit").html(buttonname);
+            $("#submitButton").prop("disabled",false);
+          }
         }
-      }
-    });
-  } 
-}
+      });   
+    }
 
-</script> 
-</html>
+    function verifikasi(){
+
+      var r = confirm("Apakah anda ingin verifikasi?");
+      if (r == true) {
+        var urls='main/updateMahasiswa/verifikasi/'+getCookie("editDataSiswa")+"";
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'POST',
+          success: function(response){
+            if (response == 1) {
+              alert("Verifikasi Berhasil!");
+              window.location.href = 'manajemen_mahasiswa_edit'
+            }
+          }
+        });
+      } 
+    }
+
+  </script> 
+  </html>

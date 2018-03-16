@@ -38,55 +38,59 @@
                     <input type="text" class="form-control" name="notelp" required pattern="[0-9]+"/>
                   </div>
                   <div class="form-group pull-right">
-                    <input id="submit" type="submit" class="btn btn-animate btn-animate-side btn-info btn-md" value="Tambahkan Data">
-                  </input>
-                  <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                    <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-                  </button>
-                  <a href="manajemen_mahasiswa_data.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-                      <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+                    <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
+                      <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
                     </button>
-                  </a>
-                </div>
-              </form>
+                    <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
+                      <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
+                    </button>
+                    <a href="manajemen_mahasiswa_data.php">
+                      <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+                        <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+                      </button>
+                    </a>
+                  </div>
+                </form>
+              </div>
             </div>
+            <!-- End Example Basic Form -->
           </div>
-          <!-- End Example Basic Form -->
         </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 <!-- End Page -->
 <script>
 
   function insertfunction(e) {
-  e.preventDefault();// will stop the form submission
-  var urls='main/insertMahasiswa';
-  var dataString = $("#insertMahasiswa").serialize();
-  var buttonname = $("#submit").val();
-   $("#submit").val("Tunggu...");
-    $("#submit").prop("disabled",true);
-  $.ajax({
-    url:"<?php echo base_url() ?>index.php/"+urls,
-    type: 'POST',
-    data:dataString,
-    success: function(response){
-      if (response == 1) {
-        alert("Berhasil menambah data");
-        window.location.href = 'manajemen_mahasiswa_data';
-      }else{
-        alert(response);
-        $("#submit").val(buttonname);
+    e.preventDefault(); // will stop the form submission
+    var urls='main/insertMahasiswa';
+    var dataString = $("#insertMahasiswa").serialize();
+    var buttonname = $("#submit").html();
+    $("#submit").html("Tunggu...");
+    $("#submitButton").prop("disabled",true);
+    $.ajax({
+      url:"<?php echo base_url() ?>index.php/"+urls,
+      type: 'POST',
+      data:dataString,
+      success: function(response){
+        if (response == 1) {
+          alert("Berhasil menambah data");
+          window.location.href = 'manajemen_mahasiswa_data';
+          $("#submit").html(buttonname);
+        }else{
+          alert(response);
+          $("#submit").html(buttonname);
+          $("#submitButton").prop("disabled",false);
+        }
+      },
+      error: function(){
+        alert('Gagal menambahkan data');
+        $("#submit").html(buttonname);
+        $("#submitButton").prop("disabled",false);
       }
-    },
-    error: function(){
-      alert('Gagal menambahkan data');
-      $("#submit").val(buttonname);
-    }
-  }); 
-}
+    }); 
+  }
 
 </script>

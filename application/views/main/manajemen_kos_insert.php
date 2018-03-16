@@ -139,7 +139,7 @@
 
     var urls='main/insertkos';
     var dataString = $("#insertData").serialize();
-    var buttonname = $("#submit").val();
+    var buttonname = $("#submit").html();
     $("#submit").html("Tunggu...");
     $("#submitButton").prop("disabled",true);
 
@@ -156,6 +156,7 @@
         }else{
           alert(response);
           $("#submit").html(buttonname);
+          $("#submitButton").prop("disabled",false);
         }
       }
     }); 

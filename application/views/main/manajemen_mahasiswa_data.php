@@ -22,10 +22,8 @@
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Status Booking</th>
                 <th>Update</th>
-                <th>Cancel</th>
               </tr>
             </thead>
             <tfoot>
@@ -33,10 +31,8 @@
                 <th>NIM</th>
                 <th>Nama</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Status Booking</th>
                 <th>Update</th>
-                <th>Cancel</th>
               </tr>
             </tfoot>
             <tbody id="tabelMahasiswa">
@@ -69,17 +65,14 @@
             var id = response[i].id_mahasiswa;
             var username = response[i].nama_mahasiswa;
             var email = response[i].email;
-            var password = response[i].password;
             var status = response[i].status;
 
             var tr_str = "<tr>" +
             "<td  value = "+id+" >" + id + "</td>" +
             "<td>" + username + "</td>" +
             "<td>" + email + "</td>" +
-            "<td>" + password + "</td>" +
             "<td>" + status + "</td>" +
             "<td>" + "<a href='manajemen_mahasiswa_edit' onclick='editDataSiswa(&quot;"+id+"&quot;)'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
-            "<td>" + "<a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-warning btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Cancel</b></span></button></a>" + "</td>" +
             "</tr>";
             $('#tabelMahasiswa').append(tr_str);
           }
