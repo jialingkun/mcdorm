@@ -27,6 +27,20 @@ class front_model extends CI_Model {
 		return $query->row_array();
 	}
 
+	public function update_mahasiswa($data,$id)
+	{
+		$this->db->where('id_mahasiswa', $id);
+		$this->db->update('user_mahasiswa', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
 	public function get_data_isikamar($idkamar)
 	{
 		$this->db->select('*');

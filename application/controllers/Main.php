@@ -471,12 +471,10 @@ class Main extends CI_Controller {
                 imagealphablending($bg, TRUE);
                 imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
                 imagedestroy($image);
-                $quality = 100;
-                imagejpeg($bg, $targetFile . ".jpg", $quality);
+                imagejpeg($bg, $tempFile, 100);
                 imagedestroy($bg);
-            }else if($ext == "jpg" || $ext == "JPG" || $ext == "jpeg" || $ext == "JPEG"){
-                move_uploaded_file($tempFile,$targetFile.".jpg");
             }
+            move_uploaded_file($tempFile,$targetFile.".jpg");
         }
     }
 
