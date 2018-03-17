@@ -110,6 +110,35 @@
 </div>
 
 
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+  
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Konfirmasi Booking</h4>
+      </div>
+      <div class="modal-body">
+          <p>zzzz</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+  </div>
+
+</div>
+</div>
+
+</div>
+
+
 
 <script>
     window.onload = function() {
@@ -227,7 +256,7 @@
         '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/bulan</span>'+
         '</div>'+
         '<br><br><br><br>'+
-        '<button type="button" class="btn btn-primary pull-right" onclick="location.href="http://localhost:8080/kos/payment.php";"><b>Pesan Sekarang</b></button>'+
+        '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right"><b>Pesan Sekarang</b></button>'+
         '</div>'+
         '</div>'+
         '</a>'+
@@ -237,7 +266,7 @@
 }
 
 });
-
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 
 
