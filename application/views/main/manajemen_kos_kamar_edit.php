@@ -16,11 +16,7 @@
           <hr>
           <h5><b>*Drag kembali untuk mengganti foto</b></h5>
           <!-- DROPZONE -->
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot2/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot3/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot4/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot5/<?php echo $_COOKIE['editDataKos'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot1/<?php echo $_COOKIE['editDataKos'] ?>/<?php echo $_COOKIE['editDataKamar'] ?>" class="dropzone" id="my-awesome-dropzone"></form>
           
           
         </div>
@@ -169,7 +165,7 @@
   function insertfunction(e) {
     var urls='main/updatekamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
   e.preventDefault();// will stop the form submission
-  var buttonname = $("#submit").val();
+  var buttonname = $("#submit").html();
   $("#submit").html("Tunggu...");
   $("#submitButton").prop("disabled",true);
   $.ajax({
@@ -181,9 +177,9 @@
         window.location.href = 'manajemen_kos_edit';
         $("#submit").html(buttonname);
       }else{
-        // $("#submit").val(buttonname);
         alert(response);
         $("#submit").html(buttonname);
+        $("#submitButton").prop("disabled",false);
       }
     }
   });   

@@ -27,7 +27,6 @@
                 <th>Alamat</th>
                 <th>No.Telepon</th>
                 <th>Update</th>
-                <th>Reset Password</th>
               </tr>
             </thead>
             <tfoot>
@@ -39,7 +38,6 @@
                 <th>Alamat</th>
                 <th>No.Telepon</th>
                 <th>Update</th>
-                <th>Reset Password</th>
               </tr>
             </tfoot>
             <tbody id="tabelKos">
@@ -121,7 +119,6 @@
             "<td>" + alamat + "</td>" +
             "<td>" + notelp + "</td>" +
             "<td>" + "<a href='manajemen_kos_edit' onclick='editDataKos(&quot;"+id+"&quot;)'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
-            "<td>" + "<a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Reset</b></span></button></a>" + "</td>" +
             "</tr>";
             $('#tabelKos').append(tr_str);
           }

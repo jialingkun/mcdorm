@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'frontCookie',
-                   'value'  => $username,
-                   'expire' => '0',
-               );
+                 'name'   => 'frontCookie',
+                 'value'  => $username,
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
 
                 echo "1";
@@ -74,7 +74,7 @@ class Front extends CI_Controller {
     public function home()
     {
         $this->load->view('templates/front/header');
-        $this->load->view('templates/front/control');
+        //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/home');
         $this->load->view('templates/front/JS');
@@ -85,7 +85,7 @@ class Front extends CI_Controller {
     public function about()
     {
         $this->load->view('templates/front/header');
-        $this->load->view('templates/front/control');
+        //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/about');
         $this->load->view('templates/front/JS');
@@ -96,7 +96,7 @@ class Front extends CI_Controller {
     public function search(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/search');
             $this->load->view('templates/front/JS');
@@ -194,7 +194,7 @@ class Front extends CI_Controller {
     public function detail(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/detail');
             $this->load->view('templates/front/JS');
@@ -223,10 +223,27 @@ class Front extends CI_Controller {
         echo json_encode($data);
     }
 
+
+    public function order($idmahasiswa){
+        date_default_timezone_set('Asia/Jakarta');
+        $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
+
+        $data = array(
+            'status' => 'Belum Bayar',
+            'id_kos' => $this->input->post('idkos'),
+            'id_kamar' => $this->input->post('idkamar'),
+            'tanggal_masuk' => $this->input->post('tanggalmasuk'),
+            'kadaluarsa' => $kadaluarsa
+        );
+
+        $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
+        echo $insertStatus;
+    }
+
     public function payment(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/payment');
             $this->load->view('templates/front/JS');
@@ -236,10 +253,46 @@ class Front extends CI_Controller {
         }
     }
 
+    public function uploadImagePayment($idmahasiswa){
+        $ds          = DIRECTORY_SEPARATOR;
+        $targetPath = getcwd().$ds.'photos'.$ds.$idmahasiswa.$ds;
+        $filename = 'slotpayment';
+
+        if (!is_dir($targetPath)) {
+            mkdir($targetPath, 0755, true);
+        }
+
+        if (!empty($_FILES)) {
+            $tempFile = $_FILES['file']['tmp_name'];
+            $targetFile =  $targetPath. $filename;
+            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+
+            //image resize
+            $maxWidth = 1024;
+            list($width, $height, $type, $attr) = getimagesize($tempFile);
+            if ($width > $maxDim) {
+                $ratio = $width/$height;
+                $new_width = $maxWidth;
+                $new_height = $maxWidth/$ratio;
+            }else{
+                $new_width = $width;
+                $new_height = $height;
+            }
+            $src = imagecreatefromstring(file_get_contents($tempFile));
+            $dst = imagecreatetruecolor($new_width,$new_height);
+            imagecopyresampled($dst,$src,0,0,0,0,$new_width,$new_height,$width,$height);
+            imagedestroy($src);
+            imagejpeg($dst, $tempFile, 100);
+            imagedestroy($dst);
+
+            move_uploaded_file($tempFile,$targetFile.".jpg");
+        }
+    }
+
     public function confirmed(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/confirmed');
             $this->load->view('templates/front/JS');
@@ -252,7 +305,7 @@ class Front extends CI_Controller {
     public function status(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/status');
             $this->load->view('templates/front/JS');
@@ -285,18 +338,18 @@ class Front extends CI_Controller {
     }
 
 
-    public function getAllImagePath($idkos){
-        $targetPath = base_url().'photos';
-        $targetPath = $targetPath.'/'.$idkos.'/';
-        $maxslot = 10;
-        $data = [];
-        for ($i=1; $i <= $maxslot; $i++) { 
-            $filepath = $targetPath."slot".$i.".jpg";
-            if (@getimagesize($filepath)) {
-                $data[] = $filepath;
-            }
-        } 
-        echo json_encode($data);
-    }
+    // public function getAllImagePath($idkos){
+    //     $targetPath = base_url().'photos';
+    //     $targetPath = $targetPath.'/'.$idkos.'/';
+    //     $maxslot = 10;
+    //     $data = [];
+    //     for ($i=1; $i <= $maxslot; $i++) { 
+    //         $filepath = $targetPath."slot".$i.".jpg";
+    //         if (@getimagesize($filepath)) {
+    //             $data[] = $filepath;
+    //         }
+    //     } 
+    //     echo json_encode($data);
+    // }
 
 }

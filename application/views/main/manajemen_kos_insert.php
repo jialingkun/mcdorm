@@ -21,6 +21,11 @@
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot3/temp" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot4/temp" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot5/temp" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot6/temp" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot7/temp" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot8/temp" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot9/temp" class="dropzone" id="my-awesome-dropzone"></form>
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot10/temp" class="dropzone" id="my-awesome-dropzone"></form>
           
           
         </div>
@@ -134,7 +139,7 @@
 
     var urls='main/insertkos';
     var dataString = $("#insertData").serialize();
-    var buttonname = $("#submit").val();
+    var buttonname = $("#submit").html();
     $("#submit").html("Tunggu...");
     $("#submitButton").prop("disabled",true);
 
@@ -151,6 +156,7 @@
         }else{
           alert(response);
           $("#submit").html(buttonname);
+          $("#submitButton").prop("disabled",false);
         }
       }
     }); 
