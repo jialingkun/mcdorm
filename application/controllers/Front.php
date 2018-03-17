@@ -277,7 +277,7 @@ class Front extends CI_Controller {
             //image resize
             $maxWidth = 1024;
             list($width, $height, $type, $attr) = getimagesize($tempFile);
-            if ($width > $maxDim) {
+            if ($width > $maxWidth) {
                 $ratio = $width/$height;
                 $new_width = $maxWidth;
                 $new_height = $maxWidth/$ratio;
@@ -293,8 +293,12 @@ class Front extends CI_Controller {
             imagedestroy($dst);
 
             move_uploaded_file($tempFile,$targetFile.".jpg");
+
+
+
+            
         }else{
-            echo "File is empty";
+            echo "Upload failed";
         }
     }
 

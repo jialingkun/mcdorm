@@ -19,7 +19,7 @@
             </ul>
             <div class="gap gap-small"></div>
             <h4>Upload Bukti</h4>
-            <form class="cc-form" action="uploadimagepayment/<?php echo $_COOKIE['frontCookie'] ?>" method="post">
+            <form class="cc-form" action="uploadimagepayment/<?php echo $_COOKIE['frontCookie'] ?>" method="post" enctype="multipart/form-data">
                <input name="file" type="file" id="uploadImage" accept="/*" onchange="loadFile(event)">
 
                <input type="submit" class="btn btn-success" name="Submit" style="margin-top: 15px;">
