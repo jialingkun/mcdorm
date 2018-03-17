@@ -262,8 +262,8 @@ class Front extends CI_Controller {
 
     public function uploadImagePayment($idmahasiswa){
         $ds          = DIRECTORY_SEPARATOR;
-        $targetPath = getcwd().$ds.'photos'.$ds.$idmahasiswa.$ds;
-        $filename = 'slotpayment';
+        $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
+        $filename = $idmahasiswa;
 
         if (!is_dir($targetPath)) {
             mkdir($targetPath, 0755, true);
@@ -277,7 +277,7 @@ class Front extends CI_Controller {
             //image resize
             $maxWidth = 1024;
             list($width, $height, $type, $attr) = getimagesize($tempFile);
-            if ($width > $maxDim) {
+            if ($width > $maxWidth) {
                 $ratio = $width/$height;
                 $new_width = $maxWidth;
                 $new_height = $maxWidth/$ratio;
@@ -293,6 +293,12 @@ class Front extends CI_Controller {
             imagedestroy($dst);
 
             move_uploaded_file($tempFile,$targetFile.".jpg");
+
+
+
+            
+        }else{
+            echo "Upload failed";
         }
     }
 
