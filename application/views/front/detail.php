@@ -15,10 +15,21 @@
             <div class="col-md-7">
                 <div class="tabbable booking-details-tabbable">
                     <div class="tab-content">
-                        <div class="tab-pane fade in active" id="tab-1">
+                        <div class="tab-pane fade in active" id="tab-1" >
                             <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" id="gambarKos">
-
+                                <?php  
+                                $targetPath = base_url().'photos';
+                                $targetPath = $targetPath.'/'.$_COOKIE['detailKamar'].'/';
+                                $maxslot = 10;
+                                for ($i=1; $i <= $maxslot; $i++) { 
+                                    $filepath = $targetPath."slot".$i.".jpg";
+                                    if (@getimagesize($filepath)) {
+                                        echo "<img src='".$filepath."'>";
+                                    }
+                                }
+                                ?>
                             </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -29,7 +40,7 @@
                         <div class="input-daterange">
                             <h3>Detail Pemesanan</h3>
                             <div class="row">
-                                
+
                                 <div class="col-md-6">
                                     <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
                                         <label>Tanggal Masuk</label>
@@ -101,8 +112,7 @@
 
 
 <script>
-
-   window.onload = function() {
+    window.onload = function() {
 
       var urls='getdetail/'+getCookie("detailKamar");
 
@@ -111,8 +121,7 @@
         type: 'get',
         dataType: "json",
         success: function (response) {
-            var gambar = ' <img  src="<?php echo base_url(); ?>photos/9019/slot1.jpg"/>';
-            $('#gambarKos').append(gambar);
+
             $('#namaKos').html(response.nama_kos);
             $('#alamatKos').html(response.alamat);
             $('#hargaKos').html(response.harga);
@@ -121,8 +130,6 @@
             var fas = response.fasilitas_kos;
             var res = fas.split(",");
             for (var i = 0; i < res.length; i++) {
-
-
                 if ($("#fasilitas1").text()==res[i]) {
                   $('#fasilitas1').css('text-decoration','');
               }
@@ -142,8 +149,6 @@
                   $('#fasilitas6').css('text-decoration','');
               }
           }
-
-
       }
   });
 
@@ -160,7 +165,7 @@
                 var fas = response[i].fasilitas_kamar;
                 var res = fas.split(",");
                 for (var j = 0; j < res.length; j++) {
-                    
+
                     if (res[j]== "Lemari") {
                   // $('#fasilitas_kamar1').css('background-color','');
                   var fas1= '</li>'+
@@ -193,49 +198,52 @@
                 '</li>';
             }
             if (res[j] == "Kipas Angin") {
-                  // $('#fasilitas_kamar4').css('background-color','');
-                  var fas4 = 
-                  '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" >Kipas</span>'+
-                  '</li>';
-              }else{
-                var fas4 = 
-                '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" style="background-color: rgba(0, 0, 0, 0.3)"></i><span class="booking-item-feature-sign" >Kipas</span>'+
-                '</li>';
-            }
+              var fas4 = 
+              '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" >Kipas</span>'+
+              '</li>';
+          }else{
+            var fas4 = 
+            '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" style="background-color: rgba(0, 0, 0, 0.3)"></i><span class="booking-item-feature-sign" >Kipas</span></li>';
+
         }
-        $('#bookList').append(
-            '<li>'+
-            '<a class="booking-item">'+
-            '<div class="row">'+
-            '<div class="col-md-3">'+
-            '<img src="http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
-            '</div>'+
-            '<div class="col-md-4">'+
-            '<h5 class="booking-item-title" style="font-weight: 500;">'+response[i].nama_kamar+'</h5>'+
-            '<ul class="booking-item-features booking-item-features-sign clearfix">'+
-            '<li rel="tooltip" data-placement="top" title="Spring Bed"><i class="im im-bed" "></i><span class="booking-item-feature-sign">x 1</span>'+
-            '</li>'+
-            '<li rel="tooltip" data-placement="top" title="Luas Kamar"><i class="im im-width" ></i><span class="booking-item-feature-sign">'+response[i].panjang+'x'+response[i].lebar+'</span>'+fas1+fas2+fas3+fas4+
-            '</ul>'+
-            '</div>'+
-            '<div class="col-md-5">'+
-            '<div class="pull-right">'+
-            '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/bulan</span>'+
-            '</div>'+
-            '<br><br><br><br>'+
-            '<button type="button" class="btn btn-primary pull-right" onclick="location.href="http://localhost:8080/kos/payment.php";"><b>Pesan Sekarang</b></button>'+
-            '</div>'+
-            '</div>'+
-            '</a>'+
-            '</li>'
-            );
-
-
-
     }
+    $('#bookList').append(
+        '<li>'+
+        '<a class="booking-item">'+
+        '<div class="row">'+
+        '<div class="col-md-3">'+
+        '<img src="http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
+        '</div>'+
+        '<div class="col-md-4">'+
+        '<h5 class="booking-item-title" style="font-weight: 500;">'+response[i].nama_kamar+'</h5>'+
+        '<ul class="booking-item-features booking-item-features-sign clearfix">'+
+        '<li rel="tooltip" data-placement="top" title="Spring Bed"><i class="im im-bed" "></i><span class="booking-item-feature-sign">x 1</span>'+
+        '</li>'+
+        '<li rel="tooltip" data-placement="top" title="Luas Kamar"><i class="im im-width" ></i><span class="booking-item-feature-sign">'+response[i].panjang+'x'+response[i].lebar+'</span>'+fas1+fas2+fas3+fas4+
+        '</ul>'+
+        '</div>'+
+        '<div class="col-md-5">'+
+        '<div class="pull-right">'+
+        '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/bulan</span>'+
+        '</div>'+
+        '<br><br><br><br>'+
+        '<button type="button" class="btn btn-primary pull-right" onclick="location.href="http://localhost:8080/kos/payment.php";"><b>Pesan Sekarang</b></button>'+
+        '</div>'+
+        '</div>'+
+        '</a>'+
+        '</li>'
+        );
 }
+}
+
 });
+
+
+
+
+
 }
+
 
 function getCookie(cname) {
     var name = cname + "=";
