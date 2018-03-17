@@ -115,7 +115,7 @@
 
 
         $(document).on('click', '#submit', function(){
-            var urls='main/loginvalidation';
+            var urls='loginvalidation';
             var dataString = $("#form").serialize();
             var buttonname = $("#submit").html();
             $("#submit").html("Tunggu...");

@@ -74,7 +74,7 @@ class Front extends CI_Controller {
     public function home()
     {
         $this->load->view('templates/front/header');
-        $this->load->view('templates/front/control');
+        //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/home');
         $this->load->view('templates/front/JS');
@@ -85,7 +85,7 @@ class Front extends CI_Controller {
     public function about()
     {
         $this->load->view('templates/front/header');
-        $this->load->view('templates/front/control');
+        //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/about');
         $this->load->view('templates/front/JS');
@@ -96,7 +96,7 @@ class Front extends CI_Controller {
     public function search(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/search');
             $this->load->view('templates/front/JS');
@@ -194,7 +194,7 @@ class Front extends CI_Controller {
     public function detail(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/detail');
             $this->load->view('templates/front/JS');
@@ -226,7 +226,7 @@ class Front extends CI_Controller {
     public function payment(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/payment');
             $this->load->view('templates/front/JS');
@@ -239,7 +239,7 @@ class Front extends CI_Controller {
     public function confirmed(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/confirmed');
             $this->load->view('templates/front/JS');
@@ -252,7 +252,7 @@ class Front extends CI_Controller {
     public function status(){
         if ($this->checkCookieMahasiswa()) {
             $this->load->view('templates/front/header');
-            $this->load->view('templates/front/control');
+            //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/status');
             $this->load->view('templates/front/JS');
