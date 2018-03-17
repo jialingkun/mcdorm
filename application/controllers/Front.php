@@ -45,10 +45,17 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
+                $this->input->set_cookie($cookie);
+
+                $cookie= array(
+                    'name'   => 'frontNama',
+                   'value'  => $row['nama_mahasiswa'],
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 echo "1";
