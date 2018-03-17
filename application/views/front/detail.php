@@ -42,9 +42,9 @@
                             <div class="row">
 
                                 <div class="col-md-6">
-                                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
                                         <label>Tanggal Masuk</label>
-                                        <input class="date-pick form-control" type="text" value="" />
+                                        <input class="date-pick form-control" type="text" value=""  onchange="tanggalMasuk = this.value" />
                                     </div>
                                 </div>
                             </div>
@@ -126,12 +126,49 @@
           <h4 class="modal-title">Konfirmasi Booking</h4>
       </div>
       <div class="modal-body">
-          <p>zzzz</p>
-      </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-  </div>
+          <div>
+            <div class="booking-item-payment">
+                <header class="clearfix">
+                    <a class="booking-item-payment-img">
+                        <img id="modalImage" src=""/>
+                    </a>
+                    <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
+                    <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
+                    <small id="modalGender" >jl. Semangka 5 Malang</small><br>
+                    
+                </header>
+                <ul class="booking-item-payment-details">
+                    <li>
+                        <h5>Pemesanan Atas Nama</h5>
+                        <p id="modalMahasiswa"><b>Joni Jono</b></p>
+                    </li>
+                    <li>
+                        <h5>Tanggal Masuk</h5>
+                        <p id="modalTanggal"><b>32 Desember 2017</b></p>
+                    </li>
+                    <li>
+                        <h5>Detail Pemesanan</h5>
+                        <ul class="booking-item-payment-price">
+                            <li>
+                                <p id="modalKamar" class="booking-item-payment-price-title"></p>
+                                
+                                <p id="modalHarga" class="booking-item-payment-price-amount"><small></small>
+                                </p> 
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <p  class="booking-item-payment-total">Total Pemesanan: <span id="modalTotal"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()">Setuju</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+    </div>
+</div>
 
 </div>
 </div>
@@ -142,60 +179,69 @@
 
 <script>
     window.onload = function() {
+        var tanggalMasuk = null;
+        var bookKamar = null;
 
-      var urls='getdetail/'+getCookie("detailKamar");
 
-      $.ajax({
-        url:"<?php echo base_url() ?>index.php/"+urls,
-        type: 'get',
-        dataType: "json",
-        success: function (response) {
+        var urls='getdetail/'+getCookie("detailKamar");
 
-            $('#namaKos').html(response.nama_kos);
-            $('#alamatKos').html(response.alamat);
-            $('#hargaKos').html(response.harga);
-            $('#deskripsiKos').html(response.deskripsi_kos);
-            $('#genderKos').html(response.gender_kos);
-            var fas = response.fasilitas_kos;
-            var res = fas.split(",");
-            for (var i = 0; i < res.length; i++) {
-                if ($("#fasilitas1").text()==res[i]) {
-                  $('#fasilitas1').css('text-decoration','');
-              }
-              if ($("#fasilitas2").text()==res[i]) {
-                  $('#fasilitas2').css('text-decoration','');
-              }
-              if ($("#fasilitas3").text()==res[i]) {
-                  $('#fasilitas3').css('text-decoration','');
-              }
-              if ($("#fasilitas4").text()==res[i]) {
-                  $('#fasilitas4').css('text-decoration','');
-              }
-              if ($("#fasilitas5").text()==res[i]) {
-                  $('#fasilitas5').css('text-decoration','');
-              }
-              if ($("#fasilitas6").text()==res[i]) {
-                  $('#fasilitas6').css('text-decoration','');
+        $.ajax({
+            url:"<?php echo base_url() ?>index.php/"+urls,
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
+
+
+                $('#namaKos').html(response.nama_kos);
+                $('#modalNamaKos').html(response.nama_kos);
+
+                $('#alamatKos').html(response.alamat);
+                $('#modalAlamatKos').html(response.alamat);
+
+                $('#hargaKos').html(response.harga);
+                $('#deskripsiKos').html(response.deskripsi_kos);
+                $('#genderKos').html(response.gender_kos);
+                $('#modalGender').html(response.gender_kos);
+                var fas = response.fasilitas_kos;
+                var res = fas.split(",");
+                for (var i = 0; i < res.length; i++) {
+                    if ($("#fasilitas1").text()==res[i]) {
+                      $('#fasilitas1').css('text-decoration','');
+                  }
+                  if ($("#fasilitas2").text()==res[i]) {
+                      $('#fasilitas2').css('text-decoration','');
+                  }
+                  if ($("#fasilitas3").text()==res[i]) {
+                      $('#fasilitas3').css('text-decoration','');
+                  }
+                  if ($("#fasilitas4").text()==res[i]) {
+                      $('#fasilitas4').css('text-decoration','');
+                  }
+                  if ($("#fasilitas5").text()==res[i]) {
+                      $('#fasilitas5').css('text-decoration','');
+                  }
+                  if ($("#fasilitas6").text()==res[i]) {
+                      $('#fasilitas6').css('text-decoration','');
+                  }
               }
           }
-      }
-  });
+      });
 
 
 
-      $.ajax({
-        url:"<?php echo base_url() ?>index.php/"+urls+"/kamar",
-        type: 'get',
-        dataType: "json",
-        success: function (response) {
+        $.ajax({
+            url:"<?php echo base_url() ?>index.php/"+urls+"/kamar",
+            type: 'get',
+            dataType: "json",
+            success: function (response) {
 
-            for (var i = 0; i < response.length; i++) {
+                for (var i = 0; i < response.length; i++) {
 
-                var fas = response[i].fasilitas_kamar;
-                var res = fas.split(",");
-                for (var j = 0; j < res.length; j++) {
+                    var fas = response[i].fasilitas_kamar;
+                    var res = fas.split(",");
+                    for (var j = 0; j < res.length; j++) {
 
-                    if (res[j]== "Lemari") {
+                        if (res[j]== "Lemari") {
                   // $('#fasilitas_kamar1').css('background-color','');
                   var fas1= '</li>'+
                   '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" ></i><span class="booking-item-feature-sign">Lemari</span>'+
@@ -256,7 +302,7 @@
         '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/bulan</span>'+
         '</div>'+
         '<br><br><br><br>'+
-        '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right"><b>Pesan Sekarang</b></button>'+
+        '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" onclick="namaMhs(&quot;'+response[i].harga+'&quot;,&quot;'+response[i].nama_kamar+'&quot;,&quot;'+response[i].id_kamar+'&quot;)"><b>Pesan Sekarang</b></button>'+
         '</div>'+
         '</div>'+
         '</a>'+
@@ -266,13 +312,46 @@
 }
 
 });
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
 
 
 
 }
 
+function namaMhs(x,y,z){
+    $('#modalMahasiswa').html(getCookie('frontNama'));
+    $('#modalHarga').html('Rp '+x+',- /bulan');
+    $('#modalKamar').html(y);
+    bookKamar = z;
+    $('#modalTotal').html('Rp '+x+',- /bulan');
+    $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
+    $('#modalTanggal').html(tanggalMasuk);
+}
+
+function confirmBooking(){
+
+    var urls='order/'+getCookie('frontCookie')+'';
+alert(urls);
+    $.ajax({
+      url:"<?php echo base_url() ?>index.php/"+urls,
+      type: 'POST',
+      data:
+      {
+       'idkos':getCookie('detailKamar') ,
+       'idkamar': bookKamar ,
+       'tanggalmasuk': tanggalMasuk ,
+   }
+   ,
+   success: function(response){
+    if (response == 1) {
+
+      window.location.href = 'payment';
+
+  }else{
+      alert("Gagal");
+  }
+}
+}); 
+}
 
 function getCookie(cname) {
     var name = cname + "=";
