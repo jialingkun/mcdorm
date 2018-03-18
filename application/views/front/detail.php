@@ -347,7 +347,7 @@ alert(urls);
       window.location.href = 'payment';
 
   }else{
-      alert("Gagal");
+      alert(response);
   }
 }
 }); 
