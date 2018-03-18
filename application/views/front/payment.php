@@ -6,7 +6,15 @@
     <div class="row">
         <div class="col-md-4">
             <h4 style="font-weight: 500;">Terima Kasih telah Mempercayai Kami !</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia commodo condimentum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>	
+            <div style="border:1px dashed red; padding:10px;" >
+                <p>
+                    Silahkan lakukan proses transfer ke nomer rekening yang tertera. Kemudian upload foto bukti transfer melalui halaman ini dalam waktu kurang dari <b style="font-size: 15pt;">24 jam</b>. Anda bisa menutup halaman ini dan mengaksesnya lagi nanti melalui menu STATUS.
+                </p>
+                <hr>
+                <h5>Nama Bank : BCA</h5>
+                <h5>Atas Nama : Yayasan Harapan Bangsa Sejahtera</h5>
+                <h5><b>Nomor Rekening : 102938125810</b></h5>
+            </div>
         </div>
 
         <div class="col-md-4">
