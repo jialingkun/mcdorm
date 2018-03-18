@@ -193,23 +193,13 @@ class Main extends CI_Controller {
             );
         } else if ($jenis == 'verifikasi') {
             $data = array(
-                'status' => 'Terverifikasi',
+                'status' => 'Terpesan',
                 'kadaluarsa'=> NULL
             );
         } else if ($jenis == 'cancel') {
             $data = array(
                 'status' => 'Belum Pesan',
                 'kadaluarsa'=> NULL
-            );
-        } else if ($jenis == 'bayar') {
-            $data = array(
-                'status' => 'Belum Verifikasi',
-                'kadaluarsa'=> NULL
-            );
-        } else if ($jenis == 'pesan') {
-            $data = array(
-                'status' => 'Belum Bayar'
-                // pending detail kamar yang dipesan dan kadaluarsa
             );
         }
 
