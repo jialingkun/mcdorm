@@ -377,6 +377,20 @@ public function status(){
     }
 }
 
+public function gethistory($id)
+{
+    $data = $this->front_model->get_history($id);
+
+    if (empty($data))
+    {
+        show_404();
+    }else{
+        echo json_encode($data);
+    }
+
+    
+}
+
 
 
 public function getmahasiswa($id)
