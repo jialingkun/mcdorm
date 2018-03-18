@@ -293,7 +293,13 @@ public function payment(){
 
 public function thankyou(){
     if ($this->checkCookieMahasiswa()) {
+        $this->load->view('templates/front/header');
+            //$this->load->view('templates/front/control');
+        $this->load->view('templates/front/navbar');
         $this->load->view('front/thankyou');
+        $this->load->view('templates/front/JS');
+        $this->load->view('templates/front/footer');
+        
     }else{
         $this->login();
     }
@@ -358,19 +364,6 @@ public function uploadImagePayment($idmahasiswa){
     }
 }
 
-public function confirmed(){
-    if ($this->checkCookieMahasiswa()) {
-        $this->load->view('templates/front/header');
-            //$this->load->view('templates/front/control');
-        $this->load->view('templates/front/navbar');
-        $this->load->view('front/confirmed');
-        $this->load->view('templates/front/JS');
-        $this->load->view('templates/front/footer');
-    }else{
-        $this->login();
-    }
-}
-
 public function status(){
     if ($this->checkCookieMahasiswa()) {
         $this->load->view('templates/front/header');
@@ -383,6 +376,8 @@ public function status(){
         $this->login();
     }
 }
+
+
 
 public function getmahasiswa($id)
 {
