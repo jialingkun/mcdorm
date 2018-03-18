@@ -237,6 +237,13 @@
 
                 for (var i = 0; i < response.length; i++) {
 
+
+            var fas1 = '';
+            var fas2 = '';
+            var fas3 = '';
+            var fas4 = '';
+        
+
                     var fas = response[i].fasilitas_kamar;
                     var res = fas.split(",");
                     for (var j = 0; j < res.length; j++) {
@@ -246,41 +253,28 @@
                   var fas1= '</li>'+
                   '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" ></i><span class="booking-item-feature-sign">Lemari</span>'+
                   '</li>';
-              }else{ 
-                var fas1 =  '</li>'+
-                '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" style="background-color: rgba(0, 0, 0, 0.3)"></i><span class="booking-item-feature-sign">Lemari</span>'+
-                '</li>';
+              }
 
-            }
+            
             if (res[j]== "AC") {
                   // $('#fasilitas_kamar2').css('background-color','');
                   var fas2 = 
                   '<li rel="tooltip" data-placement="top" title="AC"><i id="fasilitas_kamar2" class="im im-air" ></i><span class="booking-item-feature-sign" >AC</span>'+
                   '</li>';
 
-              }else{
-                var fas2 = 
-                '<li rel="tooltip" data-placement="top" title="AC"><i id="fasilitas_kamar2" class="im im-air" style="background-color: rgba(0, 0, 0, 0.3)"></i><span class="booking-item-feature-sign" >AC</span>'+
-                '</li>';
-            }
+              }
+            
             if (res[j] == "KM Dalam") {
                   // $('#fasilitas_kamar3').css('background-color','');
                   var fas3 = 
                   '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" >KM</span>'+
                   '</li>';
-              }else{
-                var fas3 = '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" style="background-color: rgba(0, 0, 0, 0.3)"></i><span class="booking-item-feature-sign" >KM</span>'+
-                '</li>';
-            }
+              }
             if (res[j] == "Kipas Angin") {
               var fas4 = 
               '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" >Kipas</span>'+
               '</li>';
-          }else{
-            var fas4 = 
-            '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" style="background-color: rgba(0, 0, 0, 0.3)"></i><span class="booking-item-feature-sign" >Kipas</span></li>';
-
-        }
+          }
     }
     $('#bookList').append(
         '<li>'+
