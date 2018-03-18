@@ -13,7 +13,7 @@
             <h4>Pembayaran Via Transfer</h4>
             <ul class="card-select">
                 <li>
-                    <img id="output"/>
+                    <img id="output" src="http://localhost/mcdorm/photos/payment/<?php echo $_COOKIE['frontCookie'] ?>.jpg" />
                     <p><b>Bukti Transfer Bank</b><br></p>
                 </li>
             </ul>
