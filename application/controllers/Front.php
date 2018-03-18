@@ -290,6 +290,15 @@ public function payment(){
     }
 }
 
+
+public function thankyou(){
+    if ($this->checkCookieMahasiswa()) {
+        $this->load->view('front/thankyou');
+    }else{
+        $this->login();
+    }
+}
+
 public function uploadImagePayment($idmahasiswa){
     $ds          = DIRECTORY_SEPARATOR;
     $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
@@ -331,14 +340,16 @@ public function uploadImagePayment($idmahasiswa){
                 'status' => 'Belum Verifikasi',
                 'kadaluarsa'=> NULL
             );
-            $insertStatus = $this->main_model->update_mahasiswa($data,$idmahasiswa);
+            $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
             if ($insertStatus == 1) {
-                $this->load->view('front/thankyou');
+                header("Location: ".base_url()."index.php/thankyou");
+                die();
             }else{
                 echo $insertStatus;
             }
         }else{
-            $this->load->view('front/thankyou');
+            header("Location: ".base_url()."index.php/status");
+            die();
         }
 
 
