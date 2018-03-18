@@ -332,7 +332,7 @@ public function uploadImagePayment($idmahasiswa){
                 'kadaluarsa'=> NULL
             );
             $insertStatus = $this->main_model->update_mahasiswa($data,$idmahasiswa);
-            if ($insertStatus != 1) {
+            if ($insertStatus == 1) {
                 $this->load->view('front/thankyou');
             }else{
                 echo $insertStatus;
