@@ -91,4 +91,10 @@ class front_model extends CI_Model {
 		}
 	}
 
+	public function get_history($id)
+	{
+		$query = $this->db->get_where('history', array('id_mahasiswa' => $id));
+			return $query->result_array();
+	}
+
 }
