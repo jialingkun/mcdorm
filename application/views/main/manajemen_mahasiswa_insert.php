@@ -26,16 +26,23 @@
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">Password</label>
-                      <input type="password" class="form-control" name="password" required pattern="[A-Za-z0-9].{4,}"/>
+                      <input id="password" type="password" class="form-control" name="password" required pattern="[A-Za-z0-9].{4,}" onChange="isPasswordMatch();"/>
                     </div>
+                    <div class="col-sm-6">
+                      <label class="control-label">Isi Ulang Password</label>  <label id="passwordAlert" style="float:right; color:red;">   </label>
+                      <input id="txtConfirmPassword" type="password" class="form-control"  required />
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6">
+                      <label class="control-label">No Telepon</label>
+                      <input type="text" class="form-control" name="notelp" required pattern="[0-9]+"/>  
+                    </div>
+                    
                     <div class="col-sm-6">
                       <label class="control-label">Email</label>
                       <input type="email" class="form-control" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
                     </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="control-label">No Telepon</label>
-                    <input type="text" class="form-control" name="notelp" required pattern="[0-9]+"/>
                   </div>
                   <div class="form-group pull-right">
                     <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
@@ -63,7 +70,26 @@
 <!-- End Page -->
 <script>
 
+  var count = 0 ;
+
+  function isPasswordMatch(){
+    $('#txtConfirmPassword').on('keyup', function () {
+      var password = $("#password").val();
+      var confirmPassword = $("#txtConfirmPassword").val();
+
+      if (password != confirmPassword){ 
+        $("#passwordAlert").html("Password Tidak Sama!");
+        count = 0;
+      }
+      else{ 
+        $("#passwordAlert").html("Password sama.");
+        count = 1;
+      }
+    });
+  }
+
   function insertfunction(e) {
+    if (count == 1) {
     e.preventDefault(); // will stop the form submission
     var urls='main/insertMahasiswa';
     var dataString = $("#insertMahasiswa").serialize();
@@ -91,6 +117,13 @@
         $("#submitButton").prop("disabled",false);
       }
     }); 
+  }else{
+    e.preventDefault();
+    return  false;
+
+    alert('Password anda tidak sesuai');
+
   }
+}
 
 </script>
