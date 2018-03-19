@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'backendCookie',
-                   'value'  => md5($data['admin']['id_admin']),
-                   'expire' => '0',
-               );
+                 'name'   => 'backendCookie',
+                 'value'  => md5($data['admin']['id_admin']),
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -89,7 +89,7 @@ class Main extends CI_Controller {
         
     }
 
-     public function changepassword()
+    public function changepassword()
     {
         if ($this->checkCookieAdmin()) {
             $this->load->view('templates/header');
@@ -107,8 +107,8 @@ class Main extends CI_Controller {
     public function updatePasswordAdmin(){
         $oldpassword = md5($this->input->post('oldpassword'));
         $data = array(
-                'password' => md5($this->input->post('newpassword'))
-            );
+            'password' => md5($this->input->post('newpassword'))
+        );
 
         $insertStatus = $this->main_model->update_password($data,$oldpassword);
         echo $insertStatus;
@@ -207,6 +207,15 @@ class Main extends CI_Controller {
             $this->login();
         }
         
+    }
+
+    public function resetPasswordMahasiswa($id){
+        $data = array(
+            'password' => md5($id);
+        );
+
+        $insertStatus = $this->main_model->reset_password($data,$id);
+        echo $insertStatus;
     }
 
     public function getmahasiswaArray($id){
