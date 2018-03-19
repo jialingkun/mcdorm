@@ -137,16 +137,20 @@ class Front extends CI_Controller {
 
     public function getJumlahPesananKamar($idkamar){
         $data = $this->front_model->get_data_isikamar($idkamar);
-
         $count = 0;
         if ($data){
             foreach ($data as $row){
-                date_default_timezone_set('Asia/Jakarta');
-                $now = time();
-                $expire = strtotime($row['kadaluarsa']);
-                if ($now < $expire) {
+                if ($row['status'] == 'Belum Bayar') {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now < $expire) {
+                        $count = $count + 1;
+                    }
+                }else if($row['status'] == 'Belum Verifikasi'){
                     $count = $count + 1;
                 }
+                
             }
         }
         return $count;
