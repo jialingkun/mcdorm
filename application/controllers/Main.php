@@ -89,6 +89,31 @@ class Main extends CI_Controller {
         
     }
 
+     public function changepassword()
+    {
+        if ($this->checkCookieAdmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/changepassword');
+            $this->load->view('templates/JS');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+        
+    }
+
+    public function updatePasswordAdmin(){
+        $oldpassword = md5($this->input->post('oldpassword'));
+        $data = array(
+                'password' => md5($this->input->post('newpassword'))
+            );
+
+        $insertStatus = $this->main_model->update_password($data,$oldpassword);
+        echo $insertStatus;
+    }
+
     public function manajemen_mahasiswa_data(){
         if ($this->checkCookieAdmin()) {
             $this->load->view('templates/header');
@@ -528,16 +553,6 @@ class Main extends CI_Controller {
             }
             move_uploaded_file($tempFile,$targetFile.".jpg");
         }
-    }
-
-    public function updatePasswordAdmin(){
-        $oldpassword = md5($this->input->post('oldpassword'));
-        $data = array(
-                'password' => md5($this->input->post('newpassword'))
-            );
-
-        $insertStatus = $this->main_model->update_password($data,$oldpassword);
-        echo $insertStatus;
     }
 
     public function Logout(){
