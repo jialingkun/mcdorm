@@ -16,7 +16,7 @@
           </a>
         </div>
         <div class="panel-body">
-          <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable"  >
+          <table id="example" class="table table-hover dataTable table-striped width-full">
             <thead>
               <tr>
                 <th>NIM</th>
@@ -46,45 +46,57 @@
     </div>
   </div>
 
-    
+
 
 
 
   <script>
+
+    // $(document).ready(function() {
+
+    // } );
+
     window.onload = function() {
+     $('#example').DataTable( {
 
-      var urls='main/getmahasiswa';
-      
-      $.ajax({
-        url:"<?php echo base_url() ?>index.php/"+urls,
-        type: 'get',
-        dataType: "json",
-        success: function (response) {
-          var len = response.length;
-          for(var i=0; i<len; i++){
-            var id = response[i].id_mahasiswa;
-            var username = response[i].nama_mahasiswa;
-            var email = response[i].email;
-            var status = response[i].status;
+      "ajax": {
+        "deferLoading": 57,
+        "type": "GET",
+        "url": "http://localhost/mcdorm/index.php/main/getmahasiswa",
 
-            var tr_str = "<tr>" +
-            "<td  value = "+id+" >" + id + "</td>" +
-            "<td>" + username + "</td>" +
-            "<td>" + email + "</td>" +
-            "<td>" + status + "</td>" +
-            "<td>" + "<a href='manajemen_mahasiswa_edit' onclick='editDataSiswa(&quot;"+id+"&quot;)'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
-            "</tr>";
-            $('#tabelMahasiswa').append(tr_str);
-          }
-        }
-      });
-    }
+        "dataSrc": function ( json ) {
+          return json;
+        }     
+      },
+
+      "columns": [
+      { "data": "id_mahasiswa" },
+      { "data": "nama_mahasiswa" },
+      { "data": "email" },
+      { "data": "status" },
+      {
+        "targets": -1,
+        "data": null, 
+        "defaultContent": "<a href='manajemen_mahasiswa_edit' ><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
+      }
+      ]
+
+    } );
+
+     $('#example tbody').on( 'click', 'button', function () {
+      var table = $('#example').DataTable();
+      var data = table.row($(this).parents('tr')).data();
+      alert( data.id_mahasiswa);
+      editDataSiswa(data.id_mahasiswa);
+
+    } );
+   }
 
 
-    function editDataSiswa(x){
-          document.cookie = "editDataSiswa="+x+"; path=/mcdorm/index.php/main;"
-    }
-  </script>
+   function editDataSiswa(x){
+    document.cookie = "editDataSiswa="+x+"; path=/mcdorm/index.php/main;"
+  }
+</script>
 
 
 
