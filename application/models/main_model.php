@@ -15,7 +15,7 @@ class main_model extends CI_Model {
 	public function update_password($data,$oldpassword)
 	{
 		$this->db->where('password', $oldpassword);
-		$this->db->update('user_mahasiswa', $data);
+		$this->db->update('user_admin', $data);
 		//get insert status fail or not
 		if ($this->db->affected_rows() > 0 ) {
 			$return_message = '1';
