@@ -45,8 +45,12 @@ class front_model extends CI_Model {
 	{
 		$this->db->select('*');
 		$this->db->from('user_mahasiswa'); 
-		$this->db->where('status','Belum Bayar');
 		$this->db->where('id_kamar',$idkamar);
+		$this->db->group_start();
+		$this->db->where('status','Belum Bayar');
+		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->group_end();
+		
 		$query = $this->db->get();
 		if($query->num_rows() > 0)
 		{

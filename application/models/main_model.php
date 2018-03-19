@@ -111,6 +111,25 @@ class main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function get_data_isikamar($idkamar)
+	{
+		$this->db->select('*');
+		$this->db->from('user_mahasiswa'); 
+		$this->db->where('id_kamar',$idkamar);
+		$this->db->group_start();
+		$this->db->where('status','Belum Bayar');
+		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->group_end();
+		
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else{
+			return FALSE;
+		}
+	}
+	
 	public function get_data_kamar($idkos,$idkamar = NULL)
 	{
 		if ($idkamar == NULL)
@@ -128,6 +147,31 @@ class main_model extends CI_Model {
 		$this->db->where('id_kos', $idkos);
 		$this->db->where('id_kamar', $idkamar);
 		$this->db->update('kamar', $data);
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
+	public function minus_kuota_kamar($idkamar){
+		$this->db->set('kuota', 'kuota-1', false);
+		$this->db->where('id_kamar' , $idkamar);
+		$this->db->update('kamar');
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
+	public function insert_new_history($data)
+	{
+		$this->db->insert('history', $data);
 		//get insert status fail or not
 		if ($this->db->affected_rows() > 0 ) {
 			$return_message = '1';
