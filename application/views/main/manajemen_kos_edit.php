@@ -149,12 +149,13 @@
           </a>
         </div>
         <div class="panel-body">
-          <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable">
+          <table id="example" class="table table-hover dataTable table-striped width-full" >
             <thead>
               <tr>
                 <th>Tipe Kamar</th>
                 <th>Harga/Bulan</th>
-                <th>Luas (m<sup>2</sup>)</th>
+                <th>Panjang (m)</th>
+                <th>lebar (m)</th>
                 <th>Kuota</th>
                 <th>Update</th>
                 <th>Hapus</th>
@@ -164,7 +165,8 @@
               <tr>
                 <th>Tipe Kamar</th>
                 <th>Harga/Bulan</th>
-                <th>Luas (m<sup>2</sup>)</th>
+                <th>Panjang (m)</th>
+                <th>lebar (m)</th>
                 <th>Kuota</th>
                 <th>Update</th>
                 <th>Hapus</th>
@@ -238,37 +240,52 @@
         }
       });
 
+      
+      $('#example').DataTable( {
 
-      var urls='main/getkamar/'+getCookie("editDataKos")+"";
-      // alert(urls);
+        "ajax": {
+          "deferLoading": 57,
+          "type": "GET",
+          "url": "http://localhost/mcdorm/index.php/main/getkamar/"+getCookie('editDataKos')+"",
 
-      $.ajax({
-        url:"<?php echo base_url() ?>index.php/"+urls,
-        type: 'get',
-        dataType: "json",
-        success: function (response) {
-          var len = response.length;
-          for(var i=0; i<len; i++){
+          "dataSrc": function ( json ) {
+            return json;
+          }     
+        },
 
-            var id = response[i].id_kamar;
-            var nama = response[i].nama_kamar;
-            var harga = response[i].harga;
-            var panjang = response[i].panjang;
-            var lebar = response[i].lebar;
-            var kuota = response[i].kuota;
-            $("#namaKamar").html(nama);
-            var tr_str = "<tr>" +
-            "<td>" + nama + "</td>" +
-            "<td>" + harga + "</td>" +
-            "<td>" + panjang + " x "+ lebar +"</td>" +
-            "<td>" + kuota + "</td>" +
-            "<td>" + "<a href='manajemen_kos_kamar_edit'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm' onclick='editDataKamar(&quot;"+id+"&quot;)' ><span><i class='icon fa-pencil'></i>&nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
-            "<td>"+ " <a href='#'><button type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-close'></i> &nbsp<b>Hapus</b></span></button></a>"+"</td>"+
-            "</tr>";
-            $('#tabelKamar').append(tr_str);
-          }
+        "columns": [
+        { "data": "nama_kamar" },
+        { "data": "harga" },
+        { "data": "panjang" },
+        { "data": "lebar" },
+        { "data": "kuota" },
+
+        {
+          "targets": -1,
+          "data": null, 
+          "defaultContent": "<a href='manajemen_kos_kamar_edit' ><button id='perbaruiKos' type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
+        },
+        {
+          "targets": -1,
+          "data": null, 
+          "defaultContent": "<a href='#' ><button id='hapusKos' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Hapus</b></span></button></a></td>"
         }
-      });
+        ]
+
+      } );
+
+      $('#example tbody').on( 'click', '#perbaruiKos', function () {
+        var table = $('#example').DataTable();
+        var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_kos);
+      editDataKamar(data.id_kamar);
+    });
+
+      $('#example tbody').on( 'click', '#editKos', function () {
+        alert('Fungsi hapus belum dibuat');
+      } );
+
+
     }  
 
 
