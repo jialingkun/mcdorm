@@ -72,6 +72,20 @@ class main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function reset_password($data,$id)
+	{
+		$this->db->where('id_mahasiswa', $id);
+		$this->db->update('user_mahasiswa', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to change password';
+		}
+
+		return $return_message;
+	}
+
 	public function insert_new_kos($data)
 	{
 		$this->db->insert('user_kos', $data);
