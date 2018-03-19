@@ -484,12 +484,14 @@ public function updateKamar($idkos,$idkamar){
         $fasilitas = "";
     }
 
+    $kuota = $this->getJumlahPesananKamar($idkamar) + $this->input->post('kuota');
+
     $data = array(
         'nama_kamar' => $this->input->post('nama'),
         'harga' => $this->input->post('harga'),
         'panjang' => $this->input->post('panjang'),
         'lebar' => $this->input->post('lebar'),
-        'kuota' => $this->input->post('kuota'),
+        'kuota' => $kuota,
         'fasilitas_kamar' => $fasilitas
     );
     $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
