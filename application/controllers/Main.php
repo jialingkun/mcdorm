@@ -211,7 +211,7 @@ class Main extends CI_Controller {
 
     public function resetPasswordMahasiswa($id){
         $data = array(
-            'password' => md5($id);
+            'password' => md5($id)
         );
 
         $insertStatus = $this->main_model->reset_password($data,$id);
