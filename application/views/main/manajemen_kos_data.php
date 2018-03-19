@@ -17,7 +17,7 @@
           </a>
         </div>
         <div class="panel-body">
-          <table class="table table-hover dataTable table-striped width-full" data-plugin="dataTable">
+          <table id="example" class="table table-hover dataTable table-striped width-full" >
             <thead>
               <tr>
                 <th>Username</th>
@@ -97,34 +97,40 @@
 
   <script>
     window.onload = function() {
+      $('#example').DataTable( {
 
-      var urls='main/getkos';
-      
-      $.ajax({
-        url:"<?php echo base_url() ?>index.php/"+urls,
-        type: 'get',
-        dataType: "json",
-        success: function (response) {
-          var len = response.length;
-          for(var i=0; i<len; i++){
-            var id = response[i].id_kos;
-            var username = response[i].nama_kos;
-            var alamat = response[i].alamat;
+      "ajax": {
+        "deferLoading": 57,
+        "type": "GET",
+        "url": "http://localhost/mcdorm/index.php/main/getkos",
 
-            var notelp = response[i].notelp_kos;
+        "dataSrc": function ( json ) {
+          return json;
+        }     
+      },
 
-            var tr_str = "<tr>" +
-            "<td  value = "+id+" >" + id + "</td>" +
-            "<td>" + username + "</td>" +
-            "<td>" + alamat + "</td>" +
-            "<td>" + notelp + "</td>" +
-            "<td>" + "<a href='manajemen_kos_edit' onclick='editDataKos(&quot;"+id+"&quot;)'><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>" + "</td>" +
-            "</tr>";
-            $('#tabelKos').append(tr_str);
-          }
-        }
-      });
-    }
+      "columns": [
+      { "data": "id_kos" },
+      { "data": "nama_kos" },
+      { "data": "alamat" },
+      { "data": "notelp_kos" },
+      {
+        "targets": -1,
+        "data": null, 
+        "defaultContent": "<a href='manajemen_kos_edit' ><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
+      }
+      ]
+
+    } );
+
+     $('#example tbody').on( 'click', 'button', function () {
+      var table = $('#example').DataTable();
+      var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_kos);
+      editDataKos(data.id_kos);
+
+    } );
+   }
 
 
     function editDataKos(x){

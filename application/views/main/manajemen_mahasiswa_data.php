@@ -77,16 +77,16 @@
       {
         "targets": -1,
         "data": null, 
-        "defaultContent": "<a href='manajemen_mahasiswa_edit' ><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
+        "defaultContent": "<a href='manajemen_mahasiswa_edit' ><button id='perbarui' type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
       }
       ]
 
     } );
 
-     $('#example tbody').on( 'click', 'button', function () {
+     $('#example tbody').on( 'click', '#perbarui', function () {
       var table = $('#example').DataTable();
       var data = table.row($(this).parents('tr')).data();
-      alert( data.id_mahasiswa);
+      // alert( data.id_mahasiswa);
       editDataSiswa(data.id_mahasiswa);
 
     } );
