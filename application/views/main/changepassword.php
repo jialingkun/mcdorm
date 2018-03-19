@@ -17,14 +17,14 @@
                   <div class="form-group row">
                     <div class="col-sm-12">
                       <label class="control-label">Password Lama</label>
-                      <input id="passwordOld" type="password" class="form-control" name="password" required pattern="[A-Za-z0-9].{4,}" />
+                      <input id="passwordOld" type="password" class="form-control" name="oldpassword" required pattern="[A-Za-z0-9].{4,}" />
                     </div>
                     
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">Password Baru</label>
-                      <input id="password" type="password" class="form-control" name="password" required pattern="[A-Za-z0-9].{4,}" onChange="isPasswordMatch();"/>
+                      <input id="password" type="password" class="form-control" name="newpassword" required pattern="[A-Za-z0-9].{4,}" onChange="isPasswordMatch();"/>
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">ketik Ulang Password</label>  <label id="passwordAlert" style="float:right; color:red;" >   </label>
@@ -36,7 +36,7 @@
 
                   <div class="form-group pull-right">
                     <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
-                      <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
+                      <span><i class=" icon fa-exchange"></i> &nbsp<b id="submit">Ubah Password</b></span>
                     </button>
                     
                     <a href="manajemen_mahasiswa_data.php">
