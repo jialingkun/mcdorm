@@ -111,6 +111,27 @@ class Front extends CI_Controller {
         
     }
 
+    public function changepassword()
+    {
+        $this->load->view('templates/front/header');
+        //$this->load->view('templates/front/control');
+        $this->load->view('templates/front/navbar');
+        $this->load->view('front/changepassword');
+        $this->load->view('templates/front/JS');
+        $this->load->view('templates/front/footer');
+        
+    }
+
+    public function updatePassword($id){
+        $oldpassword = md5($this->input->post('oldpassword'));
+        $data = array(
+            'password' => md5($this->input->post('newpassword'))
+        );
+
+        $insertStatus = $this->main_model->update_password($data,$id,$oldpassword);
+        echo $insertStatus;
+    }
+
     public function about()
     {
         $this->load->view('templates/front/header');
@@ -258,166 +279,178 @@ class Front extends CI_Controller {
 
 
     public function order($idmahasiswa){
-     $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
-     if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
-         date_default_timezone_set('Asia/Jakarta');
-         $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
+        $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
+        if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
+            date_default_timezone_set('Asia/Jakarta');
+            $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
 
-         $data = array(
-            'status' => 'Belum Bayar',
-            'id_kos' => $this->input->post('idkos'),
-            'id_kamar' => $this->input->post('idkamar'),
-            'tanggal_masuk' => $this->input->post('tanggalmasuk'),
-            'kadaluarsa' => $kadaluarsa
-        );
+            $data = array(
+                'status' => 'Belum Bayar',
+                'id_kos' => $this->input->post('idkos'),
+                'id_kamar' => $this->input->post('idkamar'),
+                'tanggal_masuk' => $this->input->post('tanggalmasuk'),
+                'kadaluarsa' => $kadaluarsa
+            );
 
-         $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
-     }else{
-        $insertStatus = "Tidak bisa memesan, selesaikan dulu proses pemesanan yang masih berlangsung";
+            $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
+        }else{
+            $insertStatus = "Tidak bisa memesan, selesaikan dulu proses pemesanan yang masih berlangsung";
+        }
+        echo $insertStatus;
     }
 
-
-
-    echo $insertStatus;
-}
-
-public function payment(){
-    if ($this->checkCookieMahasiswa()) {
-        $this->load->view('templates/front/header');
+    public function payment(){
+        if ($this->checkCookieMahasiswa()) {
+            $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
-        $this->load->view('templates/front/navbar');
-        $this->load->view('front/payment');
-        $this->load->view('templates/front/JS');
-        $this->load->view('templates/front/footer');
-    }else{
-        $this->login();
+            $this->load->view('templates/front/navbar');
+            $this->load->view('front/payment');
+            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/footer');
+        }else{
+            $this->login();
+        }
     }
-}
 
 
-public function thankyou(){
-    if ($this->checkCookieMahasiswa()) {
-        $this->load->view('templates/front/header');
+    public function thankyou(){
+        if ($this->checkCookieMahasiswa()) {
+            $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
-        $this->load->view('templates/front/navbar');
-        $this->load->view('front/thankyou');
-        $this->load->view('templates/front/JS');
-        $this->load->view('templates/front/footer');
-        
-    }else{
-        $this->login();
-    }
-}
+            $this->load->view('templates/front/navbar');
+            $this->load->view('front/thankyou');
+            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/footer');
 
-public function uploadImagePayment($idmahasiswa){
-    $ds          = DIRECTORY_SEPARATOR;
-    $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
-    $filename = $idmahasiswa;
-
-    if (!is_dir($targetPath)) {
-        mkdir($targetPath, 0755, true);
+        }else{
+            $this->login();
+        }
     }
 
-    if (!empty($_FILES)) {
-        $tempFile = $_FILES['file']['tmp_name'];
-        $targetFile =  $targetPath. $filename;
-        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+    public function uploadImagePayment($idmahasiswa){
+        $ds          = DIRECTORY_SEPARATOR;
+        $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
+        $filename = $idmahasiswa;
+
+        if (!is_dir($targetPath)) {
+            mkdir($targetPath, 0755, true);
+        }
+
+        if (!empty($_FILES)) {
+            $tempFile = $_FILES['file']['tmp_name'];
+            $targetFile =  $targetPath. $filename;
+            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
             //image resize
-        $maxWidth = 1024;
-        list($width, $height, $type, $attr) = getimagesize($tempFile);
-        if ($width > $maxWidth) {
-            $ratio = $width/$height;
-            $new_width = $maxWidth;
-            $new_height = $maxWidth/$ratio;
-        }else{
-            $new_width = $width;
-            $new_height = $height;
-        }
-        $src = imagecreatefromstring(file_get_contents($tempFile));
-        $dst = imagecreatetruecolor($new_width,$new_height);
-        imagecopyresampled($dst,$src,0,0,0,0,$new_width,$new_height,$width,$height);
-        imagedestroy($src);
-        imagejpeg($dst, $tempFile, 100);
-        imagedestroy($dst);
+            $maxWidth = 1024;
+            list($width, $height, $type, $attr) = getimagesize($tempFile);
+            if ($width > $maxWidth) {
+                $ratio = $width/$height;
+                $new_width = $maxWidth;
+                $new_height = $maxWidth/$ratio;
+            }else{
+                $new_width = $width;
+                $new_height = $height;
+            }
+            $src = imagecreatefromstring(file_get_contents($tempFile));
+            $dst = imagecreatetruecolor($new_width,$new_height);
+            imagecopyresampled($dst,$src,0,0,0,0,$new_width,$new_height,$width,$height);
+            imagedestroy($src);
+            imagejpeg($dst, $tempFile, 100);
+            imagedestroy($dst);
 
-        move_uploaded_file($tempFile,$targetFile.".jpg");
+            move_uploaded_file($tempFile,$targetFile.".jpg");
 
         //Status Bayar
-        $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
-        if ($statusMahasiswa['status']=='Belum Bayar'){
-            $data = array(
-                'status' => 'Belum Verifikasi',
-                'kadaluarsa'=> NULL
-            );
-            $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
-            if ($insertStatus == 1) {
-                header("Location: ".base_url()."index.php/thankyou");
-                die();
+            $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
+            if ($statusMahasiswa['status']=='Belum Bayar'){
+                $data = array(
+                    'status' => 'Belum Verifikasi',
+                    'kadaluarsa'=> NULL
+                );
+                $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
+                if ($insertStatus == 1) {
+                    header("Location: ".base_url()."index.php/thankyou");
+                    die();
+                }else{
+                    echo $insertStatus;
+                }
             }else{
-                echo $insertStatus;
+                header("Location: ".base_url()."index.php/status");
+                die();
             }
+
+
         }else{
-            header("Location: ".base_url()."index.php/status");
-            die();
+            echo "Upload failed";
+        }
+    }
+
+    public function status(){
+        if ($this->checkCookieMahasiswa()) {
+            $this->load->view('templates/front/header');
+            //$this->load->view('templates/front/control');
+            $this->load->view('templates/front/navbar');
+            $this->load->view('front/status');
+            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/footer');
+        }else{
+            $this->login();
+        }
+    }
+
+    public function gethistory($id)
+    {
+        $data = $this->front_model->get_history($id);
+
+        if (empty($data))
+        {
+            show_404();
+        }else{
+            echo json_encode($data);
         }
 
 
-    }else{
-        echo "Upload failed";
     }
-}
 
-public function status(){
-    if ($this->checkCookieMahasiswa()) {
-        $this->load->view('templates/front/header');
-            //$this->load->view('templates/front/control');
-        $this->load->view('templates/front/navbar');
-        $this->load->view('front/status');
-        $this->load->view('templates/front/JS');
-        $this->load->view('templates/front/footer');
-    }else{
-        $this->login();
-    }
-}
-
-public function gethistory($id)
-{
-    $data = $this->front_model->get_history($id);
-
-    if (empty($data))
+    public function getmahasiswa($id)
     {
-        show_404();
-    }else{
+        $data = $this->front_model->get_mahasiswa($id);
+
+        if (empty($data))
+        {
+            show_404();
+        }else{
+            unset($data['password']);
+            if ($data['status']=="Belum Bayar") {
+                date_default_timezone_set('Asia/Jakarta');
+                $now = time();
+                $expire = strtotime($data['kadaluarsa']);
+                if ($now >= $expire) {
+                    $data['status'] = 'Expired';
+                }
+            }
+        }
+
         echo json_encode($data);
     }
 
-    
-}
+    public function cancelOrder($id){
+        $data = array(
+            'status' => 'Batal',
+            'kadaluarsa'=> NULL
+        );
 
-
-
-public function getmahasiswa($id)
-{
-    $data = $this->front_model->get_mahasiswa($id);
-
-    if (empty($data))
-    {
-        show_404();
-    }else{
-        unset($data['password']);
-        if ($data['status']=="Belum Bayar") {
-            date_default_timezone_set('Asia/Jakarta');
-            $now = time();
-            $expire = strtotime($data['kadaluarsa']);
-            if ($now >= $expire) {
-                $data['status'] = 'Expired';
-            }
-        }
+        $insertStatus = $this->main_model->update_mahasiswa($data,$id);
+        echo $insertStatus;
     }
 
-    echo json_encode($data);
-}
+    public function Logout(){
+        $this->load->helper('cookie');
+        delete_cookie("frontCookie");
+        header("Location: ".base_url()."index.php/login");
+        die();
+    }
 
 
     // public function getAllImagePath($idkos){
