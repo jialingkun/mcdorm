@@ -19,7 +19,7 @@
           <table id="example" class="table table-hover dataTable table-striped width-full">
             <thead>
               <tr>
-                <th>NIM</th>
+                <th>Username</th>
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Status Booking</th>
@@ -28,7 +28,7 @@
             </thead>
             <tfoot>
               <tr>
-                <th>NIM</th>
+                <th>Username</th>
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Status Booking</th>
@@ -69,20 +69,45 @@
         }     
       },
 
+
       "columns": [
       { "data": "id_mahasiswa" },
       { "data": "nama_mahasiswa" },
       { "data": "email" },
-      { "data": "status" },
-      {
-        "targets": -1,
-        "data": null, 
-        "defaultContent": "<a href='manajemen_mahasiswa_edit' ><button id='perbarui' type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
+      { "data": "status", 
+      "render": function (data, type, row) {
+
+        if (row.status === "Belum Pesan") {
+          return '<h4> <span class="label label-primary">Belum Pesan</span></h4>';
+        }
+        if (row.status === "Belum Bayar"){
+          return '<h4> <span class="label label-danger">Belum Bayar</span></h4>';
+        }
+         if (row.status === "Belum Verifikasi"){
+          return '<h4> <span class="label label-danger">Belum Verifikasi</span></h4>';
+        }
+         if (row.status === "Terpesan"){
+          return '<h4> <span class="label label-success">Terpesan</span></h4>';
+        }
+         if (row.status === "Belum Batal"){
+          return '<h4> <span class="label label-default">Belum Batal</span></h4>';
+        }
+         if (row.status === "EXPIRED"){
+          return '<h4> <span class="label label-default">EXPIRED</span></h4>';
+        }
+
+
       }
-      ]
+    },
+    {
+      "targets": -1,
+      "data": null, 
+      "defaultContent": "<a href='manajemen_mahasiswa_edit' ><button id='perbarui' type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>"
+    }
+    ]
 
-    } );
-
+  } );
+     $.fn.dataTable.ext.errMode = 'none';
      $('#example tbody').on( 'click', '#perbarui', function () {
       var table = $('#example').DataTable();
       var data = table.row($(this).parents('tr')).data();

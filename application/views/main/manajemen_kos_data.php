@@ -41,50 +41,7 @@
               </tr>
             </tfoot>
             <tbody id="tabelKos">
-             <!--  <tr>
-                <td>kosmachung1</td>
-                
-                <td>Semangka 5</td>
-                
-                <td>Jl. Semangka 5 Bareng, Kawi, Malang</td>
-                <td>089345432312</td>
-                <td>
-                  <a href="manajemen_kos_edit.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
-                      <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <a href="#">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-danger btn-sm">
-                      <span><i class="icon fa-refresh"></i> &nbsp<b>Reset</b></span>
-                    </button>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>kosmachung2</td>
-                
-                <td>Loji Rejo</td>
-                
-                <td>Villa Puncak Tidar N-05, Dau, Malang</td>
-                <td>0341655677</td>
-                <td>
-                  <a href="manajemen_kos_edit.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
-                      <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <a href="#">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-danger btn-sm">
-                      <span><i class="icon fa-refresh"></i> &nbsp<b>Reset</b></span>
-                    </button>
-                  </a>
-                </td>
-            </tr> -->
+             
           </tbody>
         </table>
       </div>
@@ -122,7 +79,7 @@
       ]
 
     } );
-
+$.fn.dataTable.ext.errMode = 'none';
      $('#example tbody').on( 'click', 'button', function () {
       var table = $('#example').DataTable();
       var data = table.row($(this).parents('tr')).data();
