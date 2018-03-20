@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <a class="logo" href="index.php">
+                    <a class="logo" href="http://localhost/mcdorm/index.php/">
                         <img src="<?php echo base_url(); ?>assets/images/logo.png"/>
                     </a>
                 </div>
@@ -12,10 +12,14 @@
                     <div class="top-user-area clearfix">
                         <ul class="top-user-area-list list list-horizontal list-border">
                             <li class="top-user-area-avatar">
-                                <a href="../adminkos2/index.html">
-                                Masuk</a>
+                                <a id="login" href="login">Masuk</a>
                             </li>
-                            <li><a href="history.php">Riwayat</a></li>
+                            <li>
+                                <a id="status" href="http://localhost/mcdorm/index.php/status">Status</a>
+                            </li>
+                            <li>
+                                <a id="changePassword" href="http://localhost/mcdorm/index.php/changepassword">Ubah Password</a>
+                            </li>
                             <li class="top-user-area-lang nav-drop">
                                 <a href="#">
                                     <img src="<?php echo base_url(); ?>assets/images/flags/32/id.png"/>IND<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
@@ -33,7 +37,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="#">Keluar</a></li>
+                            <li><a id="logout" href="http://localhost/mcdorm/index.php/logout">Keluar</a></li>
                         </ul>
                     </div>
                 </div>
@@ -43,10 +47,52 @@
     <div class="container">
         <div class="nav">
             <ul class="slimmenu" id="slimmenu">
-                <li><a href="index.php">Home</a></li>
-                <li><a href="about.php">Tentang Kami</a></li>
-                <li><a href="#">Kontak</a></li>
+                <li><a href="http://localhost/mcdorm/index.php/">Home</a></li>
+                <li><a href="about">Tentang Kami</a></li>
+                
             </ul>
         </div>
     </div>
 </header>
+
+<script >
+    window.onload = function() {
+
+
+        if (getCookie('frontCookie')  == null) {
+            $('#logout').remove();
+             $('#status').remove();
+             $('#changePassword').remove();
+        }
+        else{
+            $('#login').remove();
+           
+        } 
+
+
+
+
+    }
+
+    function getCookie(name) {
+        var dc = document.cookie;
+        var prefix = name + "=";
+        var begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        }
+        else
+        {
+            begin += 2;
+            var end = document.cookie.indexOf(";", begin);
+            if (end == -1) {
+                end = dc.length;
+            }
+        }
+    // because unescape has been deprecated, replaced with decodeURI
+    //return unescape(dc.substring(begin + prefix.length, end));
+    return decodeURI(dc.substring(begin + prefix.length, end));
+} 
+
+</script>

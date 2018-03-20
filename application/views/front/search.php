@@ -1,7 +1,7 @@
 
 <div class="container">
 
-    <h3 class="booking-title" align="center">Hasil Pencarian<small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">Ubah Pencarian</a></small></h3>
+    <h3 class="booking-title" align="center">Hasil Pencarian</h3>
     <div class="row">
         <div class="col-md-3">
             <aside class="booking-filters text-white">
@@ -99,7 +99,7 @@
                         </div>
                     </div>
 
-                    <input style="margin-top: 40px; margin-left: 15px;" id="search" class="btn btn-primary" type="submit" value="Submit">                    
+                    <input style="margin-top: 40px; margin-left: 15px;" id="search" class="btn btn-primary" type="submit" value="Search">                    
                 </ul>
                 
             </form>

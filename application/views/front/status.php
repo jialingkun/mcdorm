@@ -115,7 +115,7 @@
                     '<td><b>'+response.status+'</b></td>'+
                     '<td class="text-center">'+
                     '<a href="payment"><button type="button" class="btn btn-info btn-sm" ><i class="fa fa-upload"></i><b>Pembayaran</b></button></a>'+
-                    '<a href="#"><button type="button" class="btn btn-warning btn-sm" ><i class="fa fa-minus-circle"></i><b>Batal</b></button></a>'+
+                    '<a ><button type="button" class="btn btn-warning btn-sm" ><i class="fa fa-minus-circle" onclick="cancelBooking()"></i><b>Batal</b></button></a>'+
                     '</td>'+
                     '</tr>';
                     $('#tabelHistory').append(tr_str);
@@ -130,9 +130,9 @@
             type: 'get',
             dataType: "json",
             success: function (response) {
-             res = response;
-             var len = response.length;
-             for (var i = 0; i < len; i++) {
+               res = response;
+               var len = response.length;
+               for (var i = 0; i < len; i++) {
                 var tr_str = 
                 '<tr class="text-center" >'+
                 '<td style="background-color: white;">'+response[i].nama_kos+'</td>'+
@@ -151,34 +151,58 @@
     });
     }
 
-    function modalHistory(i){
-
-        $('#modalNamaKos').html(res[i].nama_kos);
-        $('#modalAlamatKos').html(res[i].alamat);
-        $('#modalGender').html(res[i].gender);
-        $('#modalMahasiswa').html(getCookie('frontNama'));
-        $('#modalHarga').html('Rp '+res[i].harga+',- /bulan');
-        $('#modalKamar').html(res[i].nama_kamar);
-        
-        $('#modalTotal').html('Rp '+res[i].harga+',- /bulan');
-        $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+res[i].id_kos+'/'+res[i].id_kamar+'/slot1.jpg');
-        $('#modalTanggal').html(res[i].tanggal_masuk);
+    function cancelBooking(){
+       
+       var txt;
+       if (confirm("Apakah anda yakin ingin membatalkan pesanan ini?")) {
+          txt = "Pesanan kamar berhasil dibatalkan";
+          var urls='cancelorder/'+getCookie("frontCookie"); 
+        // alert(urls);
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'get',
+          dataType: "json",
+          success: function (response) {
+            if (response == 1) {
+              alert(txt);
+              location.reload();
+          }else{
+              alert("Pembatalan pesanan gagal");
+          }
+      }
+  });
+    } else {
     }
+}
 
-    function getCookie(cname) {
-        var name = cname + "=";
-        var ca = document.cookie.split(';');
+function modalHistory(i){
 
-        for(var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+    $('#modalNamaKos').html(res[i].nama_kos);
+    $('#modalAlamatKos').html(res[i].alamat);
+    $('#modalGender').html(res[i].gender);
+    $('#modalMahasiswa').html(getCookie('frontNama'));
+    $('#modalHarga').html('Rp '+res[i].harga+',- /bulan');
+    $('#modalKamar').html(res[i].nama_kamar);
+
+    $('#modalTotal').html('Rp '+res[i].harga+',- /bulan');
+    $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+res[i].id_kos+'/'+res[i].id_kamar+'/slot1.jpg');
+    $('#modalTanggal').html(res[i].tanggal_masuk);
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+    }
+}
+return "";
 }
 
 
