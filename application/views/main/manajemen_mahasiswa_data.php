@@ -23,7 +23,8 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Status Booking</th>
-                <th>Update</th>
+                <th>Perbarui</th>
+                <th>Hapus</th>
               </tr>
             </thead>
             <tfoot>
@@ -32,7 +33,8 @@
                 <th>Nama</th>
                 <th>Email</th>
                 <th>Status Booking</th>
-                <th>Update</th>
+                <th>Perbarui</th>
+                <th>Hapus</th>
               </tr>
             </tfoot>
             <tbody id="tabelMahasiswa">
@@ -83,16 +85,16 @@
         if (row.status === "Belum Bayar"){
           return '<h4> <span class="label label-danger">Belum Bayar</span></h4>';
         }
-         if (row.status === "Belum Verifikasi"){
+        if (row.status === "Belum Verifikasi"){
           return '<h4> <span class="label label-danger">Belum Verifikasi</span></h4>';
         }
-         if (row.status === "Terpesan"){
+        if (row.status === "Terpesan"){
           return '<h4> <span class="label label-success">Terpesan</span></h4>';
         }
-         if (row.status === "Belum Batal"){
+        if (row.status === "Belum Batal"){
           return '<h4> <span class="label label-default">Belum Batal</span></h4>';
         }
-         if (row.status === "EXPIRED"){
+        if (row.status === "EXPIRED"){
           return '<h4> <span class="label label-default">EXPIRED</span></h4>';
         }
 
@@ -103,6 +105,11 @@
       "targets": -1,
       "data": null, 
       "defaultContent": "<a href='manajemen_mahasiswa_edit' ><button id='perbarui' type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a>"
+    },
+    {
+      "targets": -1,
+      "data": null, 
+      "defaultContent": "<a  ><button id='hapus' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
     }
     ]
 
@@ -115,8 +122,37 @@
       editDataSiswa(data.id_mahasiswa);
 
     } );
+
+     $('#example tbody').on( 'click', '#hapus', function () {
+      var table = $('#example').DataTable();
+      var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_kos);
+      hapusDataMahasiswa(data.id_mahasiswa);
+    } );
    }
 
+    function hapusDataMahasiswa(x){
+     var txt;
+     if (confirm("Apakah anda yakin ingin menghapus data mahasiswa ini?")) {
+      txt = "Data mahasiswa berhasil dihapus";
+      var urls = "main/securedelete/mahasiswa/"+x+"";
+        // alert(urls);
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'get',
+          dataType: "json",
+          success: function (response) {
+            if (response == 1) {
+              alert(txt);
+              location.reload();
+            }else{
+              alert(response);
+            }
+          }
+        });
+      } else {
+      }
+    }
 
    function editDataSiswa(x){
     document.cookie = "editDataSiswa="+x+"; path=/mcdorm/index.php/main;"

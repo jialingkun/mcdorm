@@ -186,12 +186,12 @@
     }
 
     window.onload = function() {
-    dataKamar();
-    dataKos();
+      dataKamar();
+      dataKos();
 
     }  
 
-function dataKamar(){
+    function dataKamar(){
   // $('#slot').attr("src","http://localhost/mcdorm/photos/9019/slot1.jpg");
 
 
@@ -244,10 +244,10 @@ function dataKamar(){
       });
 
 
-}
-function dataKos(){
-  
-      
+    }
+    function dataKos(){
+
+
       $('#example').DataTable( {
 
         "ajax": {
@@ -280,7 +280,7 @@ function dataKos(){
         {
           "targets": -1,
           "data": null, 
-          "defaultContent": "<a href='#' ><button id='hapusKos' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Hapus</b></span></button></a></td>"
+          "defaultContent": "<a  ><button id='hapus' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
         }
         ]
 
@@ -293,11 +293,37 @@ function dataKos(){
       editDataKamar(data.id_kamar);
     });
 
-      $('#example tbody').on( 'click', '#editKos', function () {
-        alert('Fungsi hapus belum dibuat');
-      } );
-}
+      $('#example tbody').on( 'click', '#hapus', function () {
+        var table = $('#example').DataTable();
+        var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_kos);
+      hapusDataKamar(data.id_kamar);
+    } );
+    }
     
+
+    function hapusDataKamar(x){
+     var txt;
+     if (confirm("Apakah anda yakin ingin menghapus data kamar ini?")) {
+      txt = "Data kamar berhasil dihapus";
+      var urls = "main/securedelete/kamar/"+x+"";
+        // alert(urls);
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'get',
+          dataType: "json",
+          success: function (response) {
+            if (response == 1) {
+              alert(txt);
+              location.reload();
+            }else{
+              alert(response);
+            }
+          }
+        });
+      } else {
+      }
+    }
 
     function getCookie(cname) {
       var name = cname + "=";
