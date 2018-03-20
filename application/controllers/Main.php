@@ -265,7 +265,7 @@ class Main extends CI_Controller {
             );
         } else if ($jenis == 'cancel') {
             $data = array(
-                'status' => 'Belum Pesan',
+                'status' => 'Batal',
                 'kadaluarsa'=> NULL
             );
         }
@@ -489,6 +489,27 @@ class Main extends CI_Controller {
         return $count;
     }
 
+    public function getJumlahPesananKos($idkos){
+        $data = $this->main_model->get_data_isikos($idkos);
+        $count = 0;
+        if ($data){
+            foreach ($data as $row){
+                if ($row['status'] == 'Belum Bayar') {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now < $expire) {
+                        $count = $count + 1;
+                    }
+                }else if($row['status'] == 'Belum Verifikasi'){
+                    $count = $count + 1;
+                }
+
+            }
+        }
+        return $count;
+    }
+
     public function getkamar($idkos,$idkamar = NULL)
     {
         $data = $this->main_model->get_data_kamar($idkos,$idkamar);
@@ -569,6 +590,25 @@ class Main extends CI_Controller {
         delete_cookie("backendCookie");
         header("Location: ".base_url()."index.php/main/login");
         die();
+    }
+
+    public function secureDelete($jenis, $id){
+        
+        if ($jenis == 'mahasiswa') {
+            $linkedCount = 0;
+        }else if ($jenis == 'kos') {
+            $linkedCount = $this->getJumlahPesananKos($id);
+        }else if ($jenis == 'kamar') {
+            $linkedCount = $this->getJumlahPesananKamar($id);
+        }
+
+        if ($linkedCount <= 0) {
+            $insertStatus = $this->main_model->delete($jenis,$id);
+        } else{
+            $insertStatus = "Tidak bisa menghapus. Kamar masih dalam proses pemesanan.";
+        }
+        
+        echo $insertStatus;
     }
 
 }

@@ -157,6 +157,25 @@ class main_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function get_data_isikos($idkos)
+	{
+		$this->db->select('*');
+		$this->db->from('user_mahasiswa'); 
+		$this->db->where('id_kos',$idkos);
+		$this->db->group_start();
+		$this->db->where('status','Belum Bayar');
+		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->group_end();
+		
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else{
+			return FALSE;
+		}
+	}
 	
 	public function get_data_kamar($idkos,$idkamar = NULL)
 	{
@@ -205,6 +224,27 @@ class main_model extends CI_Model {
 			$return_message = '1';
 		}else{
 			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
+	public function delete($jenis, $id){
+		if ($jenis == 'mahasiswa') {
+			$this->db->where('id_mahasiswa', $id);
+			$this->db->delete('user_mahasiswa'); 
+		}else if ($jenis == 'kos') {
+			$this->db->where('id_kos', $id);
+			$this->db->delete('user_kos'); 
+		}else if ($jenis == 'kamar') {
+			$this->db->where('id_kamar', $id);
+			$this->db->delete('kamar');
+		}
+
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to delete record';
 		}
 
 		return $return_message;

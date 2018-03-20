@@ -259,7 +259,7 @@ class Front extends CI_Controller {
 
     public function order($idmahasiswa){
      $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
-     if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired') {
+     if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
          date_default_timezone_set('Asia/Jakarta');
          $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
 
