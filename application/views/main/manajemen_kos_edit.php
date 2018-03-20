@@ -81,27 +81,27 @@
                   <div class="form-group">
                     <div class="col-sm-2">
 
-                     <input id="fasilitas1" type="checkbox" name="fasilitas[]" value="WiFi"/>
+                     <input id="fasilitas1" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="WiFi"/>
                      <label for="inputUnchecked">WiFi</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas2" type="checkbox" name="fasilitas[]" value="Parkir"/>
+                     <input id="fasilitas2" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Parkir"/>
                      <label for="inputUnchecked">Parkir</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas3" type="checkbox"  name="fasilitas[]" value="Nasi"/>
+                     <input id="fasilitas3" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Nasi"/>
                      <label for="inputUnchecked">Nasi</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas4" type="checkbox" name="fasilitas[]" value="Air Putih"/>
+                     <input id="fasilitas4" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Air Putih"/>
                      <label for="inputUnchecked">Air Putih</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas5" type="checkbox"  name="fasilitas[]" value="24Jam"/>
+                     <input id="fasilitas5" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="24Jam"/>
                      <label for="inputUnchecked">24 Jam</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas6" type="checkbox"  name="fasilitas[]" value="Laundry" />
+                     <input id="fasilitas6" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Laundry" />
                      <label for="inputUnchecked">Laundry</label>
                    </div>
                  </div>
@@ -115,10 +115,7 @@
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
                 <span><i class="icon fa-exchange"></i> &nbsp<b id="submit">Ubah Data</b></span>
               </button>
-              <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-              </button>
-              <a href="manajemen_kos_data.php">
+              <a href="manajemen_kos_data">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                 </button>
@@ -189,7 +186,13 @@
     }
 
     window.onload = function() {
-      // $('#slot').attr("src","http://localhost/mcdorm/photos/9019/slot1.jpg");
+      dataKamar();
+      dataKos();
+
+    }  
+
+    function dataKamar(){
+  // $('#slot').attr("src","http://localhost/mcdorm/photos/9019/slot1.jpg");
 
 
   // $('#id_mahasiswa').val("2") ;
@@ -240,7 +243,11 @@
         }
       });
 
-      
+
+    }
+    function dataKos(){
+
+
       $('#example').DataTable( {
 
         "ajax": {
@@ -249,7 +256,12 @@
           "url": "http://localhost/mcdorm/index.php/main/getkamar/"+getCookie('editDataKos')+"",
 
           "dataSrc": function ( json ) {
-            return json;
+            if (json == null) {
+              e.preventDefault();
+              return false;
+            }else{
+              return json;  
+            }            
           }     
         },
 
@@ -268,12 +280,12 @@
         {
           "targets": -1,
           "data": null, 
-          "defaultContent": "<a href='#' ><button id='hapusKos' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Hapus</b></span></button></a></td>"
+          "defaultContent": "<a  ><button id='hapus' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
         }
         ]
 
       } );
-
+      $.fn.dataTable.ext.errMode = 'none';
       $('#example tbody').on( 'click', '#perbaruiKos', function () {
         var table = $('#example').DataTable();
         var data = table.row($(this).parents('tr')).data();
@@ -281,16 +293,37 @@
       editDataKamar(data.id_kamar);
     });
 
-      $('#example tbody').on( 'click', '#editKos', function () {
-        alert('Fungsi hapus belum dibuat');
-      } );
-
-
-    }  
-
-
-
+      $('#example tbody').on( 'click', '#hapus', function () {
+        var table = $('#example').DataTable();
+        var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_kos);
+      hapusDataKamar(data.id_kamar);
+    } );
+    }
     
+
+    function hapusDataKamar(x){
+     var txt;
+     if (confirm("Apakah anda yakin ingin menghapus data kamar ini?")) {
+      txt = "Data kamar berhasil dihapus";
+      var urls = "main/securedelete/kamar/"+x+"";
+        // alert(urls);
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'get',
+          dataType: "json",
+          success: function (response) {
+            if (response == 1) {
+              alert(txt);
+              location.reload();
+            }else{
+              alert(response);
+            }
+          }
+        });
+      } else {
+      }
+    }
 
     function getCookie(cname) {
       var name = cname + "=";
@@ -322,10 +355,11 @@
         data: $("#updateData").serialize(),
         success: function(response){
           if (response == 1) {
+            alert("Berhasil mengubah data");
             window.location.href = 'manajemen_kos_data';
             $("#submit").html(buttonname);
           }else{
-            alert(response);
+            alert("Gagal mengubah data");
             $("#submit").html(buttonname);
             $("#submitButton").prop("disabled",false);
           }

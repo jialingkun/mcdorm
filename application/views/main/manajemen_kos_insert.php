@@ -77,27 +77,27 @@
                   <div class="form-group">
                     <div class="col-sm-2">
 
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="WiFi"/>
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="WiFi"/>
                      <label for="inputUnchecked">WiFi</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Parkir"/>
+                     <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Parkir"/>
                      <label for="inputUnchecked">Parkir</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Nasi"/>
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Nasi"/>
                      <label for="inputUnchecked">Nasi</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Air Putih"/>
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Air Putih"/>
                      <label for="inputUnchecked">Air Putih</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="24Jam"/>
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="24Jam"/>
                      <label for="inputUnchecked">24 Jam</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Laundry"/>
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Laundry"/>
                      <label for="inputUnchecked">Laundry</label>
                    </div>
                  </div>
@@ -111,10 +111,7 @@
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="insertDataKos()">
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
-              <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-              </button>
-              <a href="manajemen_kos_data.php">
+              <a href="manajemen_kos_data">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                 </button>
@@ -154,7 +151,7 @@
           window.location.href = 'manajemen_kos_data';
           $("#submit").html(buttonname);
         }else{
-          alert(response);
+          alert("Gagal menambah data");
           $("#submit").html(buttonname);
           $("#submitButton").prop("disabled",false);
         }
