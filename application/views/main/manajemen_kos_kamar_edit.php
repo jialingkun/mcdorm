@@ -82,7 +82,7 @@
               <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
                 <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
               </button>
-              <a href="manajemen_kos_data.php">
+              <a href="manajemen_kos_data">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                 </button>
@@ -174,10 +174,11 @@
     data: $("#updateData").serialize(),
     success: function(response){
       if (response == 1) {
+        alert("Berhasil mengubah data");
         window.location.href = 'manajemen_kos_edit';
         $("#submit").html(buttonname);
       }else{
-        alert(response);
+        alert("Gagal mengubah data");
         $("#submit").html(buttonname);
         $("#submitButton").prop("disabled",false);
       }

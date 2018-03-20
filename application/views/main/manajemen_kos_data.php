@@ -1,6 +1,6 @@
 
- <!-- Page -->
- <div class="page animsition">
+<!-- Page -->
+<div class="page animsition">
   <div class="page-header">
     <h1 class="page-title">Manajemen Kos</h1>
   </div>
@@ -26,7 +26,8 @@
                 
                 <th>Alamat</th>
                 <th>No.Telepon</th>
-                <th>Update</th>
+                <th>Perbarui</th>
+                <th>Hapus</th>
               </tr>
             </thead>
             <tfoot>
@@ -37,105 +38,97 @@
                 
                 <th>Alamat</th>
                 <th>No.Telepon</th>
-                <th>Update</th>
+                <th>Perbarui</th>
+                <th>Hapus</th>
               </tr>
             </tfoot>
             <tbody id="tabelKos">
-             <!--  <tr>
-                <td>kosmachung1</td>
-                
-                <td>Semangka 5</td>
-                
-                <td>Jl. Semangka 5 Bareng, Kawi, Malang</td>
-                <td>089345432312</td>
-                <td>
-                  <a href="manajemen_kos_edit.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
-                      <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <a href="#">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-danger btn-sm">
-                      <span><i class="icon fa-refresh"></i> &nbsp<b>Reset</b></span>
-                    </button>
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>kosmachung2</td>
-                
-                <td>Loji Rejo</td>
-                
-                <td>Villa Puncak Tidar N-05, Dau, Malang</td>
-                <td>0341655677</td>
-                <td>
-                  <a href="manajemen_kos_edit.php">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-info btn-sm">
-                      <span><i class="icon fa-pencil"></i> &nbsp<b>Perbarui</b></span>
-                    </button>
-                  </a>
-                </td>
-                <td>
-                  <a href="#">
-                    <button type="button" class="btn btn-animate btn-animate-side btn-danger btn-sm">
-                      <span><i class="icon fa-refresh"></i> &nbsp<b>Reset</b></span>
-                    </button>
-                  </a>
-                </td>
-            </tr> -->
-          </tbody>
-        </table>
+
+            </tbody>
+          </table>
+        </div>
       </div>
+      <!-- End Panel Basic -->
     </div>
-    <!-- End Panel Basic -->
   </div>
-</div>
-<!-- End Page -->
+  <!-- End Page -->
 
 
   <script>
     window.onload = function() {
       $('#example').DataTable( {
 
-      "ajax": {
-        "deferLoading": 57,
-        "type": "GET",
-        "url": "http://localhost/mcdorm/index.php/main/getkos",
+        "ajax": {
+          "deferLoading": 57,
+          "type": "GET",
+          "url": "http://localhost/mcdorm/index.php/main/getkos",
 
-        "dataSrc": function ( json ) {
-          return json;
-        }     
-      },
+          "dataSrc": function ( json ) {
+            return json;
+          }     
+        },
 
-      "columns": [
-      { "data": "id_kos" },
-      { "data": "nama_kos" },
-      { "data": "alamat" },
-      { "data": "notelp_kos" },
-      {
-        "targets": -1,
-        "data": null, 
-        "defaultContent": "<a href='manajemen_kos_edit' ><button type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
-      }
-      ]
+        "columns": [
+        { "data": "id_kos" },
+        { "data": "nama_kos" },
+        { "data": "alamat" },
+        { "data": "notelp_kos" },
+        {
+          "targets": -1,
+          "data": null, 
+          "defaultContent": "<a href='manajemen_kos_edit' ><button id='perbarui' type='button' class='btn btn-animate btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button></a></td>"
+        },
+        {
+          "targets": -1,
+          "data": null, 
+          "defaultContent": "<a  ><button id='hapus' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
+        }
+        ]
 
-    } );
-
-     $('#example tbody').on( 'click', 'button', function () {
-      var table = $('#example').DataTable();
-      var data = table.row($(this).parents('tr')).data();
+      } );
+      $.fn.dataTable.ext.errMode = 'none';
+      $('#example tbody').on( 'click', '#perbarui', function () {
+        var table = $('#example').DataTable();
+        var data = table.row($(this).parents('tr')).data();
       // alert( data.id_kos);
       editDataKos(data.id_kos);
 
     } );
-   }
 
+      $('#example tbody').on( 'click', '#hapus', function () {
+        var table = $('#example').DataTable();
+        var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_kos);
+      hapusDataKos(data.id_kos);
+    } );
+    }
+
+    function hapusDataKos(x){
+     var txt;
+     if (confirm("Apakah anda yakin ingin menghapus data kos ini?")) {
+      txt = "Data kos berhasil dihapus";
+      var urls = "main/securedelete/kos/"+x+"";
+        // alert(urls);
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'get',
+          dataType: "json",
+          success: function (response) {
+            if (response == 1) {
+              alert(txt);
+              location.reload();
+            }else{
+              alert(response);
+            }
+          }
+        });
+      } else {
+      }
+    }
 
     function editDataKos(x){
 
-          document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
+      document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
 
     }
   </script>

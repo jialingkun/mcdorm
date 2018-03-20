@@ -50,19 +50,19 @@
                   <label class="control-label"><b>Fasilitas</b></label>
                   <div class="form-group">
                     <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="AC" />
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="AC" />
                      <label>AC</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="KM Dalam" />
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="KM Dalam" />
                      <label>KM Dalam</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Lemari" />
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Lemari" />
                      <label>Lemari</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" data-plugin="iCheck" data-checkbox-class="icheckbox_flat-blue" name="fasilitas[]" value="Kipas Angin" />
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Kipas Angin" />
                      <label>Kipas Angin</label>
                    </div>
                   
@@ -79,10 +79,8 @@
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="insertDataKamar()">
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
-              <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-              </button>
-              <a href="manajemen_kos_data.php">
+              
+              <a href="manajemen_kos_data">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                 </button>
@@ -121,7 +119,7 @@
           window.location.href = 'manajemen_kos_edit';
           $("#submit").html(buttonname);
         }else{
-          alert(response);
+          alert("Gagal menambah data");
           $("#submit").html(buttonname);
           $("#submitButton").prop("disabled",false);
         }

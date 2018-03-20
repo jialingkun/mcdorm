@@ -15,7 +15,7 @@
                 <form  id="insertMahasiswa" onsubmit="insertfunction(event)">
                   <div class="form-group row">
                     <div class="col-sm-6">
-                      <label class="control-label">NIM</label>
+                      <label class="control-label">Username</label>
                       <input type="text" class="form-control" name="id" required/>
                     </div>
                     <div class="col-sm-6">
@@ -48,10 +48,7 @@
                     <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
                       <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
                     </button>
-                    <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                      <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-                    </button>
-                    <a href="manajemen_mahasiswa_data.php">
+                    <a href="manajemen_mahasiswa_data">
                       <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                         <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                       </button>
