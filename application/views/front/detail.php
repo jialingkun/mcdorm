@@ -57,22 +57,22 @@
                         <h3>Fasilitas Kos</h3>
                     </div>
                     <div class="col-md-4">
-                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+                        <ul class="booking-item-features booking-item-features-expand mb30 clearfix" >
                             <li>
-                                <i  class="im im-wi-fi"></i><span class="booking-item-feature-title" id="fasilitas1" style="text-decoration: line-through">WiFi</span>
+                                <i id="fasilitasicon1" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-wi-fi"></i><span class="booking-item-feature-title" id="fasilitas1" >WiFi</span>
                             </li>
                             <li>
-                                <i class="im im-parking"></i><span class="booking-item-feature-title" id="fasilitas2" style="text-decoration: line-through">Parkir</span>
+                                <i id="fasilitasicon2" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-parking"></i><span class="booking-item-feature-title" id="fasilitas2" >Parkir</span>
                             </li>
                             <li>
-                                <i class="im im-restaurant"></i><span class="booking-item-feature-title" id="fasilitas3" style="text-decoration: line-through">Nasi</span>
+                                <i id="fasilitasicon3" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-restaurant"></i><span class="booking-item-feature-title" id="fasilitas3" >Nasi</span>
                             </li>
                             <li>
-                                <i class="im im-air"></i><span class="booking-item-feature-title" id="fasilitas4" style="text-decoration: line-through">AC</span>
+                                <i  id="fasilitasicon4" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-air"></i><span class="booking-item-feature-title" id="fasilitas4" >AC</span>
                             </li>
 
                             <li>
-                                <i class="im im-kitchen"></i><span class="booking-item-feature-title" id="fasilitas5" style="text-decoration: line-through">Air Putih</span>
+                                <i id="fasilitasicon5" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-kitchen"></i><span class="booking-item-feature-title" id="fasilitas5" >Air Putih</span>
                             </li>
                             
                         </ul>
@@ -80,10 +80,10 @@
                     <div class="col-md-4">
                         <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
                             <li>
-                                <i class="im im-washing-machine"></i><span class="booking-item-feature-title" id="fasilitas6" style="text-decoration: line-through">Laundry</span>
+                                <i id="fasilitasicon6" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-washing-machine"></i><span class="booking-item-feature-title" id="fasilitas6">Laundry</span>
                             </li>
                             <li>
-                                <i class="im im-bathtub"></i><span class="booking-item-feature-title" id="fasilitas7" style="text-decoration: line-through">KM dalam</span>
+                                <i id="fasilitasicon7" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-bathtub"></i><span class="booking-item-feature-title" id="fasilitas7" >KM dalam</span>
                             </li>
                         </ul>
                     </div>
@@ -206,22 +206,22 @@
                 var res = fas.split(",");
                 for (var i = 0; i < res.length; i++) {
                     if ($("#fasilitas1").text()==res[i]) {
-                      $('#fasilitas1').css('text-decoration','');
+                      $('#fasilitasicon1').css('background-color','');
                   }
                   if ($("#fasilitas2").text()==res[i]) {
-                      $('#fasilitas2').css('text-decoration','');
+                      $('#fasilitasicon2').css('background-color','');
                   }
                   if ($("#fasilitas3").text()==res[i]) {
-                      $('#fasilitas3').css('text-decoration','');
+                      $('#fasilitasicon3').css('background-color','');
                   }
                   if ($("#fasilitas4").text()==res[i]) {
-                      $('#fasilitas4').css('text-decoration','');
+                      $('#fasilitasicon4').css('background-color','');
                   }
                   if ($("#fasilitas5").text()==res[i]) {
-                      $('#fasilitas5').css('text-decoration','');
+                      $('#fasilitasicon5').css('background-color','');
                   }
                   if ($("#fasilitas6").text()==res[i]) {
-                      $('#fasilitas6').css('text-decoration','');
+                      $('#fasilitasicon6').css('background-color','');
                   }
               }
           }
