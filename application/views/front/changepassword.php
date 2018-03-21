@@ -83,7 +83,7 @@
 function insertfunction(e) {
     if (count == 1) {
     e.preventDefault(); // will stop the form submission
-    var urls='main/updatepassword/'+getCookie("frontCookie")+"";
+    var urls='updatepassword/'+getCookie("frontCookie")+"";
     var dataString = $("#insertMahasiswa").serialize();
     var buttonname = $("#submit").html();
     $("#submit").html("Tunggu...");
@@ -95,7 +95,7 @@ function insertfunction(e) {
       success: function(response){
         if (response == 1) {
           alert("Berhasil mengubah password");
-          window.location.href = 'manajemen_mahasiswa_data';
+          window.location.href = 'home';
           $("#submit").html(buttonname);
       }else{
           alert(response);

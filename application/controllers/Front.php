@@ -128,7 +128,7 @@ class Front extends CI_Controller {
             'password' => md5($this->input->post('newpassword'))
         );
 
-        $insertStatus = $this->main_model->update_password($data,$id,$oldpassword);
+        $insertStatus = $this->front_model->update_password($data,$id,$oldpassword);
         echo $insertStatus;
     }
 
