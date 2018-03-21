@@ -91,11 +91,11 @@
         if (row.status === "Terpesan"){
           return '<h4> <span class="label label-success">Terpesan</span></h4>';
         }
-        if (row.status === "Belum Batal"){
-          return '<h4> <span class="label label-default">Belum Batal</span></h4>';
+        if (row.status === "Batal"){
+          return '<h4> <span class="label label-default">Batal</span></h4>';
         }
-        if (row.status === "EXPIRED"){
-          return '<h4> <span class="label label-default">EXPIRED</span></h4>';
+        if (row.status === "Expired"){
+          return '<h4> <span class="label label-default">Expired</span></h4>';
         }
 
 
