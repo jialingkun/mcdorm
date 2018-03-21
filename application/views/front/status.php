@@ -6,6 +6,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <div class="table-responsive">
+
             <table class="table table-bordered table-striped table-booking-history">
                 <thead >
                     <tr >
@@ -24,6 +26,7 @@
 
                 </tbody>
             </table>
+        </div>
         </div>
     </div>
 </div>
@@ -118,6 +121,16 @@
                     '<a ><button type="button" class="btn btn-warning btn-sm" ><i class="fa fa-minus-circle" onclick="cancelBooking()"></i><b>Batal</b></button></a>'+
                     '</td>'+
                     '</tr>';
+                    $('#tabelHistory').append(tr_str);
+                }else if(response.status == "Batal" || response.status == "Expired"){
+                    var tr_str = 
+                    '<tr class="text-center" >'+
+                    '<td>'+response.nama_kos+'</td>'+
+                    '<td>'+response.nama_kamar+'</td>'+
+                    '<td>Rp '+response.harga+',-</td>'+
+                    '<td>'+response.tanggal_masuk+'</td>'+
+                    '<td><b>'+response.status+'</b></td>'
+                    ;
                     $('#tabelHistory').append(tr_str);
                 }
             }
