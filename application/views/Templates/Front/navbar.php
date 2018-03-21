@@ -56,23 +56,23 @@
 </header>
 
 <script >
-    window.onload = function() {
+    // window.onload = function() {
 
 
-        if (getCookie('frontCookie')  == null) {
-            $('#logout').remove();
-             $('#status').remove();
-             $('#changePassword').remove();
-        }
-        else{
-            $('#login').remove();
+    //     if (getCookie('frontCookie')  == null) {
+    //         $('#logout').remove();
+    //          $('#status').remove();
+    //          $('#changePassword').remove();
+    //     }
+    //     else{
+    //         $('#login').remove();
            
-        } 
+    //     } 
 
 
 
 
-    }
+    // }
 
     function getCookie(name) {
         var dc = document.cookie;

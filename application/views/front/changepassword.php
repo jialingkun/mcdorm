@@ -42,12 +42,12 @@
 
   <div class="form-group pull-right">
     <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
-      <span><i class=" icon fa-exchange"></i> &nbsp<b id="submit">Ubah Password</b></span>
+      <span><i ></i> &nbsp<b id="submit">Ubah Password</b></span>
   </button>
 
   <a href="manajemen_mahasiswa_data.php">
       <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-        <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
+        <span><i ></i> &nbsp<b>Kembali</b></span>
     </button>
 </a>
 </div>
