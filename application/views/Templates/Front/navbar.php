@@ -7,6 +7,10 @@
     <img src="'.base_url().'assets/images/flags/32/id.png"/><span class="right">IND</span>
     </a>
     </li>';
+    $ubahpassword = 'Change Password';
+    $keluar = 'Logout';
+    $masuk = 'Login';
+    $tentang = 'About Us';
 }else{
     $langTag1 = '<img src="'.base_url().'assets/images/flags/32/id.png"/>IND<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>';
     $langTag2 = 
@@ -15,6 +19,10 @@
     <img src="'.base_url().'assets/images/flags/32/uk.png"/><span class="right">ENG</span>
     </a>
     </li>';
+    $ubahpassword = 'Ubah Password';
+    $keluar = 'Keluar';
+    $masuk = 'Masuk';
+    $tentang = 'Tentang Kami';
 }
 
 ?>
@@ -41,14 +49,14 @@
                                     <a id="status" href="http://localhost/mcdorm/index.php/status">Status</a>
                                 </li>
                                 <li>
-                                    <a id="changePassword" href="http://localhost/mcdorm/index.php/changepassword">Ubah Password</a>
+                                    <a id="changePassword" href="http://localhost/mcdorm/index.php/changepassword"><?php echo $ubahpassword ?></a>
                                 </li>
-                                <li><a id="logout" href="http://localhost/mcdorm/index.php/logout">Keluar</a></li>
+                                <li><a id="logout" href="http://localhost/mcdorm/index.php/logout"><?php echo $keluar ?></a></li>
                                 <?php
                             }else{
                                 ?>
                                 <li class="top-user-area-avatar">
-                                    <a id="login" href="login">Masuk</a>
+                                    <a id="login" href="login"><?php echo $masuk ?></a>
                                 </li>
                                 <?php
                             }
@@ -74,7 +82,7 @@
         <div class="nav">
             <ul class="slimmenu" id="slimmenu">
                 <li><a href="http://localhost/mcdorm/index.php/">Home</a></li>
-                <li><a href="about">Tentang Kami</a></li>
+                <li><a href="about"><?php echo $tentang;?></a></li>
                 
             </ul>
         </div>
@@ -122,7 +130,9 @@
     }
 
     function changeLang(lang){
-        document.cookie = "bahasa="+lang+"; path=/mcdorm/index.php;";
+        var CookieDate = new Date;
+        CookieDate.setFullYear(CookieDate.getFullYear( ) +1);
+        document.cookie = "bahasa="+lang+"; expires="+CookieDate.toGMTString()+"; path=/mcdorm/index.php;";
         window.location.reload();
         return false;
     }
