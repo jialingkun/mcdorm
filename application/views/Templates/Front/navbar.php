@@ -1,4 +1,26 @@
- <header id="main-header">
+ <?php
+ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
+    $langTag1 = '<img src="'.base_url().'assets/images/flags/32/uk.png"/>ENG<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>';
+    $langTag2 = 
+    '<li onclick="changeLang(\'IND\')">
+    <a>
+    <img src="'.base_url().'assets/images/flags/32/id.png"/><span class="right">IND</span>
+    </a>
+    </li>';
+}else{
+    $langTag1 = '<img src="'.base_url().'assets/images/flags/32/id.png"/>IND<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>';
+    $langTag2 = 
+    '<li onclick="changeLang(\'ENG\')">
+    <a>
+    <img src="'.base_url().'assets/images/flags/32/uk.png"/><span class="right">ENG</span>
+    </a>
+    </li>';
+}
+
+?>
+
+
+<header id="main-header">
     <div class="header-top"">
         <div class="container">
             <div class="row">
@@ -31,19 +53,15 @@
                                 <?php
                             }
                             ?>
-
+                            
                             <li class="top-user-area-lang nav-drop">
-                                    <a href="#">
-                                        <img src="<?php echo base_url(); ?>assets/images/flags/32/id.png"/>IND<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i>
-                                    </a>
-                                    <ul class="list nav-drop-menu">
-                                        <li>
-                                            <a href="#">
-                                                <img src="<?php echo base_url(); ?>assets/images/flags/32/uk.png"/><span class="right">ENG</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <a>
+                                    <?php echo $langTag1;?>
+                                </a>
+                                <ul class="list nav-drop-menu">
+                                    <?php echo $langTag2;?>
+                                </ul>
+                            </li>
                             
                             
                         </ul>
@@ -98,9 +116,15 @@
                 end = dc.length;
             }
         }
-    // because unescape has been deprecated, replaced with decodeURI
-    //return unescape(dc.substring(begin + prefix.length, end));
-    return decodeURI(dc.substring(begin + prefix.length, end));
-} 
+        // because unescape has been deprecated, replaced with decodeURI
+        //return unescape(dc.substring(begin + prefix.length, end));
+        return decodeURI(dc.substring(begin + prefix.length, end));
+    }
+
+    function changeLang(lang){
+        document.cookie = "bahasa="+lang+"; path=/mcdorm/index.php;";
+        window.location.reload();
+        return false;
+    }
 
 </script>
