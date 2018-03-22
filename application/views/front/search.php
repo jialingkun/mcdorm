@@ -106,43 +106,88 @@
         </aside>
     </div>
     <div class="col-md-9">
-        <div class="row row-wrap" >
-            <div id="kamar">
-                <div id="dataKamar">
+        <div class="nav-drop booking-sort">
+            <h5 class="booking-sort-title"><a href="#">Urutkan<i class="fa fa-angle-down"></i><i class="fa fa-angle-up"></i></a></h5>
+            <ul class="nav-drop-menu">
+                <li>
+                    <a href="#">Harga Tinggi ke Rendah</a>
+                </li>
+                <li>
+                    <a href="#">Harga Rendah ke Tinggi</a>
+                </li>
+            </li>
+        </ul>
+    </div>
+    <div class="row row-wrap" >
+        <div id="kamar">
+            <div id="dataKamar">
 
-                </div>    
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="pagination">
-
-                    </ul>
-                </div>
+            </div>    
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="pagination">
+                    <li class="active"><a href="#">1</a>
+                    </li>
+                    <li><a href="#">2</a>
+                    </li>
+                    <li><a href="#">3</a>
+                    </li>
+                    <li class="dots">...</li>
+                    <li><a href="#">10</a>
+                    </li>
+                    <li class="next"><a href="#">Next Page</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="gap"></div>
+</div>
+<div class="gap"></div>
 </div>
 
 
 <script>
-    var dataGlobal = '';
+
     window.onload = function() {
-        $.ajax({
-            url:"<?php echo base_url() ?>index.php/getallkamar",
-            type: 'get',
-            dataType: "json",
-            success: function (response) {
-                dataGlobal = response;
-                pagination(1);
-            }
-        });
+      $.ajax({
+        url:"<?php echo base_url() ?>index.php/getallkamar",
+        type: 'get',
+        dataType: "json",
+        success: function (response) {
+            var data = response;
+          for (var i = 0; i < response.length ; i++) {
+            
+            var div =  '<div class="col-md-4">'+
+            '<div class="thumb">'+
+            '<header class="thumb-header">'+
+            '<a class="hover-img" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+
+            '<img src="http://localhost/mcdorm/photos/'+data[i].id_kos+'/slot1.jpg" />'+
+            '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
+            '</a>'+
+            '</header>'+
+            '<div class="thumb-caption"> '+
+            '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+data[i].nama_kos+'</a></h5>'+
+            '<p class="mb0"><small>'+data[i].alamat+'</small>'+
+            '</p>'+
+            '<p class="mb0 text-darken"><span class="text-lg lh1em">'+data[i].harga+'</span><small>/bulan</small>'+
+            '</p>'+
+            '<p class="mb0" style="font-size: 15px;color: #ff023c"><b>'+data[i].kuota+' Kamar Tersisa !</b>'+
+            '</p>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
+
+            $('#dataKamar').append(div);
+        }
     }
+});
+  }
 
 
-    function insertfunction(e) {
-        $('#dataKamar').detach();
-        $('#failed').detach();
+  function insertfunction(e) {
+    $('#dataKamar').detach();
+    $('#failed').detach();
    e.preventDefault();// will stop alethe form submission
    var dataString = $("#insertData").serialize();
    $.ajax({
@@ -154,7 +199,7 @@
           $("#search").prop("disabled",true);
 
           $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="http://localhost/mcdorm/assets/images/spin.gif" />');
-          dataGlobal = JSON.parse(response);
+          var data = JSON.parse(response);
 
           $('#kamar').append('<div id="dataKamar"></div>');
 
@@ -165,7 +210,30 @@
             $('#load').detach();
 
 
-            pagination(1);
+            for (var i = 0; i < data.length; i++) {
+
+                var div =  '<div class="col-md-4">'+
+                '<div class="thumb">'+
+                '<header class="thumb-header">'+
+                '<a class="hover-img" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+
+                '<img src="http://localhost/mcdorm/photos/'+data[i].id_kos+'/slot1.jpg" />'+
+                '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
+                '</a>'+
+                '</header>'+
+                '<div class="thumb-caption"> '+
+                '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+data[i].id_kos+'&quot;)">'+data[i].nama_kos+'</a></h5>'+
+                '<p class="mb0"><small>'+data[i].alamat+'</small>'+
+                '</p>'+
+                '<p class="mb0 text-darken"><span class="text-lg lh1em">'+data[i].harga+'</span><small>/bulan</small>'+
+                '</p>'+
+                '<p class="mb0" style="font-size: 15px;color: #ff023c"><b>'+data[i].kuota+' Kamar Tersisa !</b>'+
+                '</p>'+
+                '</div>'+
+                '</div>'+
+                '</div>';
+                $('#dataKamar').append(div);
+            }
+
         }, 2000);
       }
       if(response == "null"){
@@ -175,9 +243,6 @@
             $("#search").prop("disabled",false);
             $('#load').detach();
             $('#kamar').append('<div id="failed"> <h3>Maaf Pencarian Tidak Ditemukan</h3></div>');
-
-            dataGlobal = '';
-            pagination(1);
         }, 2000);
     }
 },
@@ -189,87 +254,5 @@ error: function(){
 
 function getDetail(x){
     document.cookie = "detailKamar="+x+"; path=/mcdorm/index.php/detail;"
-
-}
-function pagination(active){
-    var div = '';
-    var totalData = dataGlobal.length;
-    var dataPerpage = 9;
-    var totalPage = Math.ceil(totalData/dataPerpage);
-    var start = 0+((active-1)*dataPerpage);
-    var end = start+dataPerpage;
-    var paginationOutput = '';
-    
-
-    if (end > totalData ) {
-        end = totalData;
-    }
-    // alert(start +'|'+ end);
-    for (var i = start; i < end ; i++) {
-         div = div + '<div class="col-md-4">'+
-        '<div class="thumb">'+
-        '<header class="thumb-header" >'+
-        '<a  class="hover-img" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+
-        '<img style="width:240px; height:240px; " src="http://localhost/mcdorm/photos/'+dataGlobal[i].id_kos+'/'+dataGlobal[i].id_kamar+'/slot1.jpg" />'+
-        '<h5 class="hover-title-center">Pesan Sekarang</h5>'+
-        '</a>'+
-        '</header>'+
-        '<div class="thumb-caption"> '+
-        '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+dataGlobal[i].nama_kos+'</a></h5>'+
-        '<p class="mb0"><small>'+dataGlobal[i].alamat+'</small>'+
-        '</p>'+
-        '<p class="mb0 text-darken"><span class="text-lg lh1em">'+dataGlobal[i].harga+'</span><small>/bulan</small>'+
-        '</p>'+
-        '<p class="mb0" style="font-size: 15px;color: #ff023c"><b>'+dataGlobal[i].kuota+' Kamar Tersisa !</b>'+
-        '</p>'+
-        '</div>'+
-        '</div>'+
-        '</div>';
-    }
-    $('.pagination').html('');
-    $('#dataKamar').html('');
-    if (totalData > 0) {
-        if (active>1) {
-            paginationOutput = paginationOutput + 
-            '<li class="next" onclick="pagination('+(active-1)+')"><a >Prev Page</a></li>';
-        }
-        if(active > 3){
-            paginationOutput = paginationOutput + 
-            '<li><a onclick="pagination(1)">1</a></li>'+
-            '<li class="dots">...</li>'+
-            '<li><a onclick="pagination('+(active-1)+')">'+(active-1)+'</a></li>'+
-            '<li class="active"><a onclick="pagination('+(active)+')">'+(active)+'</a></li>';
-        }else{
-            for (var i = 1; i <= active; i++) {
-                if (i == active){
-                    paginationOutput = paginationOutput +
-                    '<li class="active"><a onclick="pagination('+(active)+')">'+(active)+'</a></li>';
-                }
-                else{
-                    paginationOutput = paginationOutput +
-                    '<li><a onclick="pagination('+i+')">'+i+'</a></li>';
-                }
-            }
-        }
-        if(totalPage - active >= 3){
-            paginationOutput = paginationOutput + 
-            '<li><a onclick="pagination('+(active+1)+')">'+(active+1)+'</a></li>'+
-            '<li class="dots">...</li>'+
-            '<li><a onclick="pagination('+(totalPage)+')">'+(totalPage)+'</a></li>'
-            ;
-        }else{
-            for (var i = active+1 ; i <= totalPage; i++) {
-                paginationOutput = paginationOutput +
-                '<li><a onclick="pagination('+(i)+')">'+(i)+'</a></li>';
-            }
-        }
-
-        if (active < totalPage) {
-            paginationOutput = paginationOutput + 
-            '<li class="next"><a onclick="pagination('+(active+1)+')">Next Page</a></li>';
-        }
-        $('.pagination').append(paginationOutput);
-        $('#dataKamar').append(div);
-    }
 }
 </script>
