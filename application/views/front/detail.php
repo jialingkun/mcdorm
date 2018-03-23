@@ -1,4 +1,62 @@
 
+<?php 
+if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
+ $detailGender = 'Gender : ';
+ $detailOrder = 'Order Detail :';
+ $detailEnter = 'Enter Date';
+ $detailFacility = 'Facility';
+ $detailParking = 'Parking';
+ $detailRice = 'Rice';
+ $detailWater = 'Water';
+ $detailHour = '24 Hours';
+ $detailKitchen = 'Kitchen';
+ $detailBathroom = 'Bathroom';
+ $detailWardrobe = 'Wardrobe';
+ $detailFan = 'Fan';
+ $detailChoose = 'Choose Your Room';
+ $detailNamakamar = 'Name : ';
+ $detailAddress = 'Address : ';
+ $detailLeft = 'Room Left : ';
+ $detailMonth = ' month';
+ $detailOrdernow = 'Order Now';
+ $detailConfirmation = 'Booking Confirmation';
+ $detailBookedby = 'Booked by : ';
+ $detailDetail = 'Booking Details : ';
+ $detailTotal = 'Total : ';
+ $detailSubmit = 'Submit';
+ $detailCancel = 'Cancel';
+
+
+
+}else{
+  $detailGender = 'Jenis Kelamin :';    
+  $detailOrder = 'Detil Pemesanan :';
+  $detailEnter = 'Tanggal Masuk';
+  $detailFacility = 'Fasilitas Kos';
+  $detailParking = 'Parkir';
+  $detailRice = 'Nasi';
+  $detailWater = 'Air Putih';
+  $detailHour = '24 Jam';
+  $detailKitchen = 'Dapur';
+  $detailBathroom = 'KM Dalam';
+  $detailWardrobe = 'Lemari';
+  $detailFan = 'Kipas Angin';
+  $detailChoose = 'Pilih Kamarmu';
+  $detailNamakamar = 'Nama : ';
+  $detailAddress = 'Alamat : ';
+  $detailLeft = 'Sisa Kamar : ';
+  $detailMonth = ' bulan';
+  $detailOrdernow = 'Pesan Sekarang';
+  $detailConfirmation = 'Konfirmasi Booking';
+  $detailBookedby = 'Dipesan oleh : ';
+  $detailDetail = 'Detil Pemesanan : ';
+  $detailTotal = 'Total : ';
+  $detailSubmit = 'Setuju';
+ $detailCancel = 'Batal';
+}
+
+?>
+
 <div class="container">
   <div class="booking-item-details">
     <header class="booking-item-header">
@@ -6,7 +64,7 @@
         <div class="col-md-7">
           <h2 class="lh1em" id="namaKos">Kos Semangka 5</h2>
           <p class="lh1em text-small" id="alamatKos"><i class="fa fa-map-marker"></i> Jl. Semangka 5, Bareng, Kawi, Malang</p>
-          <h4>Gender : <b id="genderKos"></b></h4>
+          <h4><?php echo $detailGender ?> <b id="genderKos"></b></h4>
         </div>
 
       </div>
@@ -38,12 +96,12 @@
         <div class="booking-item-dates-change">
           <form>
             <div class="input-daterange">
-              <h3>Detail Pemesanan</h3>
+              <h3><?php echo $detailOrder ?></h3>
               <div class="row">
 
                 <div class="col-md-6">
                   <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
-                    <label>Tanggal Masuk</label>
+                    <label><?php echo $detailEnter ?></label>
                     <input class="date-pick form-control" type="text" value=""  onchange="tanggalMasuk = this.value" />
                   </div>
                 </div>
@@ -54,7 +112,7 @@
         <div class="gap gap-small"></div>
         <div class="row">
           <div class="col-md-12">
-            <h3>Fasilitas Kos</h3>
+            <h3><?php echo $detailFacility ?></h3>
           </div>
           <div class="col-md-4">
             <ul class="booking-item-features booking-item-features-expand mb30 clearfix" >
@@ -62,17 +120,17 @@
                 <i id="fasilitasicon1" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-wi-fi"></i><span class="booking-item-feature-title" id="fasilitas1" >WiFi</span>
               </li>
               <li>
-                <i id="fasilitasicon2" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-parking"></i><span class="booking-item-feature-title" id="fasilitas2" >Parkir</span>
+                <i id="fasilitasicon2" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-parking"></i><span class="booking-item-feature-title" id="fasilitas2" ><?php echo $detailParking ?></span>
               </li>
               <li>
-                <i id="fasilitasicon3" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-restaurant"></i><span class="booking-item-feature-title" id="fasilitas3" >Nasi</span>
+                <i id="fasilitasicon3" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-restaurant"></i><span class="booking-item-feature-title" id="fasilitas3" ><?php echo $detailRice ?></span>
               </li>
               <li>
                 <i  id="fasilitasicon4" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-air"></i><span class="booking-item-feature-title" id="fasilitas4" >AC</span>
               </li>
 
               <li>
-                <i id="fasilitasicon5" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-kitchen"></i><span class="booking-item-feature-title" id="fasilitas5" >Air Putih</span>
+                <i id="fasilitasicon5" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-kitchen"></i><span class="booking-item-feature-title" id="fasilitas5" ><?php echo $detailWater ?></span>
               </li>
 
             </ul>
@@ -83,7 +141,7 @@
                 <i id="fasilitasicon6" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-washing-machine"></i><span class="booking-item-feature-title" id="fasilitas6">Laundry</span>
               </li>
               <li>
-                <i id="fasilitasicon7" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-bathtub"></i><span class="booking-item-feature-title" id="fasilitas7" >KM dalam</span>
+                <i id="fasilitasicon7" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-bathtub"></i><span class="booking-item-feature-title" id="fasilitas7" ><?php echo $detailBathroom ?></span>
               </li>
             </ul>
           </div>
@@ -93,11 +151,11 @@
     <div class="gap gap-small"></div>
     <div class="row">
       <div class="col-md-12">
-        <p id="deskripsiKos">Libero sem vitae sed donec conubia integer nisi integer rhoncus imperdiet orci odio libero est integer a integer tincidunt sollicitudin blandit fusce nibh leo vulputate lobortis egestas dapibus faucibus metus conubia maecenas cras potenti cum hac arcu rhoncus nullam eros dictum torquent integer cursus bibendum sem sociis molestie tellus purus</p>
+        <p id="deskripsiKos"></p>
       </div>
     </div>
     <div class="gap gap-small"></div>
-    <h3>Pilih Kamarmu</h3>
+    <h3><?php echo $detailChoose ?></h3>
     <div class="row">
       <div class="col-md-12">
         <ul class="booking-list" id="bookList">
@@ -123,7 +181,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Konfirmasi Booking</h4>
+          <h4 class="modal-title"><?php echo $detailConfirmation ?></h4>
         </div>
         <div class="modal-body">
           <div>
@@ -132,22 +190,22 @@
                 <a class="booking-item-payment-img">
                   <img id="modalImage" src=""/>
                 </a>
-                <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
-                <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
-                <small id="modalGender" >jl. Semangka 5 Malang</small><br>
+                <h5 id="modalNamaKos" class="booking-item-payment-title"> Kos Semangka 5</h5>
+                <small id="modalAlamatKos" ><?php echo $detailAddress ?> jl. Semangka 5 Malang</small><br>
+                <small id="modalGender" ><?php echo $detailGender ?> jl. Semangka 5 Malang</small><br>
 
               </header>
               <ul class="booking-item-payment-details">
                 <li>
-                  <h5>Pemesanan Atas Nama</h5>
+                  <h5><?php echo $detailBookedby ?> </h5>
                   <p id="modalMahasiswa"><b>Joni Jono</b></p>
                 </li>
                 <li>
-                  <h5>Tanggal Masuk</h5>
+                  <h5><?php echo $detailEnter ?></h5>
                   <p id="modalTanggal"><b>32 Desember 2017</b></p>
                 </li>
                 <li>
-                  <h5>Detail Pemesanan</h5>
+                  <h5><?php echo $detailDetail ?></h5>
                   <ul class="booking-item-payment-price">
                     <li>
                       <p id="modalKamar" class="booking-item-payment-price-title"></p>
@@ -159,14 +217,14 @@
                   </ul>
                 </li>
               </ul>
-              <p  class="booking-item-payment-total">Total Pemesanan: <span id="modalTotal"></span>
+              <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"></span>
               </p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" id="submit" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()">Setuju</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+          <button type="button" id="submit" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()"><?php echo $detailSubmit ?></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $detailCancel ?></button>
         </div>
       </div>
 
@@ -193,15 +251,15 @@
 
 
         $('#namaKos').html(response.nama_kos);
-        $('#modalNamaKos').html(response.nama_kos);
+        $('#modalNamaKos').html('<?php echo $detailNamakamar ?>'+response.nama_kos);
 
         $('#alamatKos').html(response.alamat);
-        $('#modalAlamatKos').html(response.alamat);
+        $('#modalAlamatKos').html('<?php echo $detailAddress ?>'+response.alamat);
 
         $('#hargaKos').html(response.harga);
         $('#deskripsiKos').html(response.deskripsi_kos);
         $('#genderKos').html(response.gender_kos);
-        $('#modalGender').html(response.gender_kos);
+        $('#modalGender').html('<?php echo $detailGender ?>'+response.gender_kos);
         var fas = response.fasilitas_kos;
         var res = fas.split(",");
         for (var i = 0; i < res.length; i++) {
@@ -252,7 +310,7 @@
             if (res[j]== "Lemari") {
                   // $('#fasilitas_kamar1').css('background-color','');
                   var fas1= '</li>'+
-                  '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" ></i><span class="booking-item-feature-sign">Lemari</span>'+
+                  '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" ></i><span class="booking-item-feature-sign"><?php echo $detailWardrobe ?></span>'+
                   '</li>';
                 }
 
@@ -268,12 +326,12 @@
                 if (res[j] == "KM Dalam") {
                   // $('#fasilitas_kamar3').css('background-color','');
                   var fas3 = 
-                  '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" >KM</span>'+
+                  '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" ></span>'+
                   '</li>';
                 }
                 if (res[j] == "Kipas Angin") {
                   var fas4 = 
-                  '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" >Kipas</span>'+
+                  '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" ><?php echo $detailFan ?></span>'+
                   '</li>';
                 }
 
@@ -286,8 +344,8 @@
                   '<img src="http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
                   '</div>'+
                   '<div class="col-md-4">'+
-                  '<h5 class="booking-item-title" style="font-weight: 500;">'+response[i].nama_kamar+'</h5>'+
-                  '<h6 class="booking-item-title" style="font-weight: 500;">Sisa kamar : '+response[i].kuota+'</h6>'+
+                  '<h5 class="booking-item-title" style="font-weight: 500;"><?php echo $detailNamakamar ?>'+response[i].nama_kamar+'</h5>'+
+                  '<h6 class="booking-item-title" style="font-weight: 500;"><?php echo $detailLeft ?>'+response[i].kuota+'</h6>'+
                   '<ul class="booking-item-features booking-item-features-sign clearfix">'+
                   '<li rel="tooltip" data-placement="top" title="Spring Bed"><i class="im im-bed" "></i><span class="booking-item-feature-sign">x 1</span>'+
                   '</li>'+
@@ -296,10 +354,10 @@
                   '</div>'+
                   '<div class="col-md-5">'+
                   '<div class="pull-right">'+
-                  '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/bulan</span>'+
+                  '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/<?php echo $detailMonth ?></span>'+
                   '</div>'+
                   '<br><br><br><br>'+
-                  '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" onclick="namaMhs(&quot;'+response[i].harga+'&quot;,&quot;'+response[i].nama_kamar+'&quot;,&quot;'+response[i].id_kamar+'&quot;)"><b>Pesan Sekarang</b></button>'+
+                  '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" onclick="namaMhs(&quot;'+response[i].harga+'&quot;,&quot;'+response[i].nama_kamar+'&quot;,&quot;'+response[i].id_kamar+'&quot;)"><b><?php echo $detailOrdernow ?></b></button>'+
                   '</div>'+
                   '</div>'+
                   '</a>'+
@@ -318,10 +376,10 @@
 
   function namaMhs(x,y,z){
     $('#modalMahasiswa').html(getCookie('frontNama'));
-    $('#modalHarga').html('Rp '+x+',- /bulan');
+    $('#modalHarga').html('Rp '+x+',- /<?php echo $detailMonth ?>');
     $('#modalKamar').html(y);
     bookKamar = z;
-    $('#modalTotal').html('Rp '+x+',- /bulan');
+    $('#modalTotal').html('Rp '+x+',- /<?php echo $detailMonth ?>');
     $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
     $('#modalTanggal').html(tanggalMasuk);
   }
