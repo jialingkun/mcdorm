@@ -18,7 +18,7 @@
             <a class="navbar-avatar dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false"
             data-animation="slide-bottom" role="button">
             <span class="avatar avatar-online">
-              <img src="<?php echo base_url(); ?>assets/images/15.jpg" alt="...">
+              <img src="<?php echo base_url(); ?>assets/images/15.png" alt="...">
               <i></i>
             </span>
           </a>
@@ -28,7 +28,7 @@
             </li>
             <li class="divider" role="presentation"></li>
             <li role="presentation">
-              <a href="http://localhost/mcdorm/index.php/main/logout" role="menuitem"><i class="icon wb-power"></i> Logout</a>
+              <a href="<?php echo base_url(); ?>index.php/main/logout" role="menuitem"><i class="icon wb-power"></i> Logout</a>
             </li>
           </ul>
         </li>

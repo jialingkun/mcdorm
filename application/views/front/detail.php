@@ -25,7 +25,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
  $detailTotal = 'Total : ';
  $detailSubmit = 'Submit';
  $detailCancel = 'Cancel';
-
+ $detailWait = 'Wait...';
+ $detailFfailed = 'Order Failed, maybe you have another order';
 
 
 }else{
@@ -52,7 +53,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailDetail = 'Detil Pemesanan : ';
   $detailTotal = 'Total : ';
   $detailSubmit = 'Setuju';
- $detailCancel = 'Batal';
+  $detailCancel = 'Batal';
+  $detailWait = 'Tunggu...';
+  $detailFfailed = 'Pemesanan gagal, mungkin anda memiliki pesanan lain';
 }
 
 ?>
@@ -341,7 +344,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                   '<a class="booking-item">'+
                   '<div class="row">'+
                   '<div class="col-md-3">'+
-                  '<img src="http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
+                  '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
                   '</div>'+
                   '<div class="col-md-4">'+
                   '<h5 class="booking-item-title" style="font-weight: 500;"><?php echo $detailNamakamar ?>'+response[i].nama_kamar+'</h5>'+
@@ -372,24 +375,24 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 
 
 
-  }
+}
 
-  function namaMhs(x,y,z){
-    $('#modalMahasiswa').html(getCookie('frontNama'));
-    $('#modalHarga').html('Rp '+x+',- /<?php echo $detailMonth ?>');
-    $('#modalKamar').html(y);
-    bookKamar = z;
-    $('#modalTotal').html('Rp '+x+',- /<?php echo $detailMonth ?>');
-    $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
-    $('#modalTanggal').html(tanggalMasuk);
-  }
+function namaMhs(x,y,z){
+  $('#modalMahasiswa').html(getCookie('frontNama'));
+  $('#modalHarga').html('Rp '+x+',- /<?php echo $detailMonth ?>');
+  $('#modalKamar').html(y);
+  bookKamar = z;
+  $('#modalTotal').html('Rp '+x+',- /<?php echo $detailMonth ?>');
+  $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
+  $('#modalTanggal').html(tanggalMasuk);
+}
 
-  function confirmBooking(){
-    var buttonname = $("#submit").html();
-    $("#submit").html("Tunggu...");
-    $("#submitButton").prop("disabled",true);
+function confirmBooking(){
+  var buttonname = $("#submit").html();
+  $("#submit").html("<?php echo $detailWait ?>");
+  $("#submitButton").prop("disabled",true);
 
-    var urls='order/'+getCookie('frontCookie')+'';
+  var urls='order/'+getCookie('frontCookie')+'';
     // alert(urls);
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
@@ -407,7 +410,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         window.location.href = 'payment';
 
       }else{
-        alert("Pemesanan gagal, mungkin anda memiliki pesanan lain");
+        alert("<?php echo $detailFfailed ?>");
         $("#submitButton").prop("disabled",false);
       }
     }
