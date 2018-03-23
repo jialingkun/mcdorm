@@ -441,7 +441,7 @@ class Front extends CI_Controller {
             'kadaluarsa'=> NULL
         );
 
-        $insertStatus = $this->main_model->update_mahasiswa($data,$id);
+        $insertStatus = $this->front_model->update_mahasiswa($data,$id);
         echo $insertStatus;
     }
 

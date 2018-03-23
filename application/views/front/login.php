@@ -1,3 +1,16 @@
+<?php
+if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
+  $masuk = 'Login';
+  $tunggu = 'Wait...';
+
+}else{
+  $masuk = 'Masuk';
+  $tunggu = 'Tunggu...';
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html class="no-js before-run" lang="en">
 
@@ -57,7 +70,7 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="Password" required name="password">
                 </div>
-                <button type="button" class="btn btn-primary btn-block" id="submit"><b>Masuk</b></button>
+                <button type="button" class="btn btn-primary btn-block" id="submit"><b><?php echo $masuk ?></b></button>
             </form>
 
             <footer class="page-copyright">
@@ -118,7 +131,7 @@
             var urls='loginvalidation';
             var dataString = $("#form").serialize();
             var buttonname = $("#submit").html();
-            $("#submit").html("Tunggu...");
+            $("#submit").html("<?php echo $tunggu ?>");
             $("#submit").prop("disabled",true);
             $.ajax({
               url:"<?php echo base_url() ?>index.php/"+urls,
