@@ -5,6 +5,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $passwordbaru = 'New Password';
   $confirm = 'Confirm New Password';
   $kembali = 'Back';
+  $tunggu = 'Wait...';
   $passX = 'Incorrect Password!';
   $passV = 'Correct Password';
   $success = 'Successfuly Change Password';
@@ -16,6 +17,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $passwordbaru = 'Password Baru';
   $confirm = 'Ketik Ulang Password';
   $kembali = 'Kembali';
+  $tunggu = 'Tunggu...';
   $passX = 'Password Tidak Sama!';
   $passV = 'Password Sama';
   $success = 'Berhasil Mengubah Password';
@@ -97,7 +99,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     var urls='updatepassword/'+getCookie("frontCookie")+"";
     var dataString = $("#insertMahasiswa").serialize();
     var buttonname = $("#submit").html();
-    $("#submit").html("Tunggu...");
+    $("#submit").html("<?php echo $tunggu ?>");
     $("#submitButton").prop("disabled",true);
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
