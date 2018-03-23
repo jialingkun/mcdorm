@@ -1,4 +1,53 @@
 
+<?php 
+if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
+    $paymentThanks = 'Thank you for trusting Us!';
+    $paymentInfo = 'Please follow the process of transfer to the account number below. Then upload a photo proof of transfer through this page in less than <b style="font-size: 15pt;"> 24 hours</b>. You can close this page and access them again later via the menu STATUS.';
+    $paymentGender = 'Gender : ';
+    $paymentEnter = 'Enter Date';
+    $paymentNamakamar = 'Name : ';
+    $paymentAddress = 'Address : ';
+    $paymentMonth = ' month';
+    $paymentBankname = 'Bank Name : ';
+    $paymentAlias = 'Alias : ';
+    $paymentBankAccount ='Bank Account : ';
+    $paymentBookedby = 'Booked by : ';
+    $paymentDetail = 'Booking Payments : ';
+    $paymentTotal = 'Total : ';
+    $paymentSubmit = 'Submit';
+    $paymentCancel = 'Cancel';
+    $paymentTitle = 'Transfer Payments';
+    $paymentProof = 'Proof of Bank Transfer';
+    $paymentDates = 'Enter Dates';
+    
+
+
+
+}else{
+    $paymentThanks = 'Terima Kasih telah Mempercayai Kami!';
+    $paymentInfo = 'Silahkan lakukan proses transfer ke nomer rekening yang tertera. Kemudian upload foto bukti transfer melalui halaman ini dalam waktu kurang dari <b style="font-size: 15pt;"> 24 jam </b>. Anda bisa menutup halaman ini dan mengaksesnya lagi nanti melalui menu STATUS.';
+    $paymentGender = 'Jenis Kelamin :';    
+    $paymentEnter = 'Tanggal Masuk';
+    $paymentNamakamar = 'Nama : ';
+    $paymentAddress = 'Alamat : ';
+    $paymentMonth = ' bulan';
+    $paymentBankname = 'Nama Bank : ';
+    $paymentAlias = 'Atas Nama : ';
+    $paymentBankAccount ='Akun Bank : ';
+    $paymentBookedby = 'Dipesan oleh : ';
+    $aymentPayment = 'Detil Pemesanan : ';
+    $pPaymentTotal = 'Total : ';
+    $aymentSubmit = 'Setuju';
+    $pPaymentCancel = 'Batal';
+    $paymentTitle = 'Pembayaran Via Transfer';
+    $paymentProof = 'Bukti Transger Bank';
+    $paymentDates = 'Tanggal Masuk';
+    $paymentSubmit = 'Setuju';
+    $paymentDetail = 'Pembayaran Pemesanan : ';
+    $paymentTotal = 'Total : ';
+}
+?>
+
 <div class="gap"></div>
 
 
@@ -7,29 +56,29 @@
         <div id="info">
             <div id="content">
                 <div class="col-md-4">
-                    <h4 style="font-weight: 500;">Terima Kasih telah Mempercayai Kami !</h4>
+                    <h4 style="font-weight: 500;"><?php echo $paymentThanks ?></h4>
                     <div style="border:1px dashed red; padding:10px;" id="keteranganPayment">
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <h4>Pembayaran Via Transfer</h4>
+                    <h4><?php echo $paymentTitle ?></h4>
                     <ul class="card-select">
                         <li>
                             <img id="output" src="http://localhost/mcdorm/photos/payment/<?php echo $_COOKIE['frontCookie'] ?>.jpg" />
-                            <p><b>Bukti Transfer Bank</b><br></p>
+                            <p><b><?php echo $paymentProof ?></b><br></p>
                         </li>
                     </ul>
                     <div class="gap gap-small"></div>
-                    <h4>Upload Bukti</h4>
+                    <h4>Upload</h4>
                     <form class="cc-form" action="uploadimagepayment/<?php echo $_COOKIE['frontCookie'] ?>" method="post" enctype="multipart/form-data">
-                       <input name="file" type="file" id="uploadImage" accept="/*" onchange="loadFile(event)">
+                     <input name="file" type="file" id="uploadImage" accept="/*" onchange="loadFile(event)" />
 
-                       <input type="submit" class="btn btn-success" name="Submit" style="margin-top: 15px;">
-                   </form>
-               </div>
+                     <input type="submit" class="btn btn-success" name="Submit" value ="<?php echo $paymentSubmit ?>" style="margin-top: 15px;" /> 
+                 </form>
+             </div>
 
-               <div class="col-md-4">
+             <div class="col-md-4">
                 <div class="booking-item-payment">
                     <header class="clearfix">
                         <a class="booking-item-payment-img">
@@ -42,15 +91,15 @@
                     </header>
                     <ul class="booking-item-payment-details">
                         <li>
-                            <h5>Pemesanan Atas Nama</h5>
+                            <h5><?php echo $paymentBookedby ?></h5>
                             <p id="modalMahasiswa"><b>Joni Jono</b></p>
                         </li>
                         <li>
-                            <h5>Tanggal Masuk</h5>
+                            <h5><?php echo $paymentDates ?></h5>
                             <p id="modalTanggal"><b>32 Desember 2017</b></p>
                         </li>
                         <li>
-                            <h5>Detail Pemesanan</h5>
+                            <h5><?php echo $paymentDetail ?></h5>
                             <ul class="booking-item-payment-price">
                                 <li>
                                     <p id="modalKamar" class="booking-item-payment-price-title"></p>
@@ -62,7 +111,7 @@
                             </ul>
                         </li>
                     </ul>
-                    <p  class="booking-item-payment-total">Total Pemesanan: <span id="modalTotal"></span>
+                    <p  class="booking-item-payment-total"><?php echo $paymentTotal ?><span id="modalTotal"></span>
                     </p>
                 </div>
             </div>
@@ -74,61 +123,61 @@
 
 <script>
     window.onload = function() {
-     var namaKos = null;
-     var alamatKos = null;
-     var gender = null;
-     var namaMahasiswa = null;
-     var tanggalMasuk = null;
-     var namaKamar = null;
-     var harga = null;
-     var keterangan = null;
-     var info = null;
+       var namaKos = null;
+       var alamatKos = null;
+       var gender = null;
+       var namaMahasiswa = null;
+       var tanggalMasuk = null;
+       var namaKamar = null;
+       var harga = null;
+       var keterangan = null;
+       var info = null;
 
 
-     var urls='getmahasiswa/'+getCookie("frontCookie");
-     $.ajax({
+       var urls='getmahasiswa/'+getCookie("frontCookie");
+       $.ajax({
         url:"<?php echo base_url() ?>index.php/"+urls,
         type: 'get',
         dataType: "json",
         success: function (response) {
             $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
-            $("#modalNamaKos").html(response.nama_kos);
-            $("#modalAlamatKos").html(response.alamat);
-            $("#modalGender").html(response.gender_kos);
+            $("#modalNamaKos").html('<?php echo $paymentNamakamar ?>' + response.nama_kos);
+            $("#modalAlamatKos").html('<?php echo $paymentAddress ?>'+response.alamat);
+            $("#modalGender").html('<?php echo $paymentGender ?>'+response.gender_kos);
             $("#modalMahasiswa").html(response.nama_mahasiswa);
             $("#modalTanggal").html(response.tanggal_masuk);
-            $("#modalHarga").html('Rp '+response.harga+',- /bulan');
+            $("#modalHarga").html('Rp '+response.harga+',- /<?php echo $paymentMonth ?>');
             $("#modalKamar").html(response.nama_kamar);
-            $("#modalTotal").html('Rp '+response.harga+',- /bulan');
+            $("#modalTotal").html('Rp '+response.harga+',- /<?php echo $paymentMonth ?>');
             if (response.status === 'Belum Bayar') {
 
                 keterangan = 
-                '<p>Silahkan lakukan proses transfer ke nomer rekening yang tertera. Kemudian upload foto bukti transfer melalui halaman ini dalam waktu kurang dari <b style="font-size: 15pt;">24 jam</b>. Anda bisa menutup halaman ini dan mengaksesnya lagi nanti melalui menu STATUS.'+
+                '<p><?php echo $paymentInfo ?>'+
                 '</p>'+
                 '<hr>'+
-                '<h5>Nama Bank : BCA</h5>'+
-                '<h5>Atas Nama : Yayasan Harapan Bangsa Sejahtera</h5>'+
+                '<h5><?php echo $paymentBankname ?> BCA</h5>'+
+                '<h5><?php echo $paymentAlias ?> Yayasan Harapan Bangsa Sejahtera</h5>'+
                 '<h5><b>Nomor Rekening : 102938125810</b></h5>';
                 $('#keteranganPayment').append(keterangan);
 
             }else if(response.status === 'Belum Verifikasi'){
                 keterangan = 
-                '<p>Foto bukti transfer yang sudah anda upload akan diverifikasi oleh pihak kami dalam waktu kurang lebih 2 hari. Anda masih bisa mengubah foto bukti transfer jika ada kesalahan dengan mengupload ulang melalui halaman ini.';
+                '<p><?php echo $paymentInfo ?>';
                 $('#keteranganPayment').append(keterangan);
             }else{
-               $('#content').remove();
-               info = 
-               '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
-               ;
-               $('#info').append(info);
-           }
+             $('#content').remove();
+             info = 
+             '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
+             ;
+             $('#info').append(info);
+         }
 
-       }
-   });
-     
- }
+     }
+ });
 
- function getCookie(cname) {
+   }
+
+   function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
 
