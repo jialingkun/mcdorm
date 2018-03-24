@@ -20,7 +20,7 @@ class Front extends CI_Controller {
         $this->load->view('front/login');
     }
 
-    public function LoginValidation()
+    public function loginvalidation()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -68,7 +68,7 @@ class Front extends CI_Controller {
         }
     }
 
-    public function checkCookieMahasiswa()
+    public function checkcookiemahasiswa()
     {
         $this->load->helper('cookie');
         if ($this->input->cookie('frontCookie',true)!=NULL) {
@@ -78,7 +78,7 @@ class Front extends CI_Controller {
         } 
     }
 
-    public function getmahasiswaArray($id)
+    public function getmahasiswaarray($id)
     {
         $data = $this->front_model->get_mahasiswa($id);
 
@@ -106,7 +106,7 @@ class Front extends CI_Controller {
         //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/home');
-        $this->load->view('templates/front/JS');
+        $this->load->view('templates/front/js');
         $this->load->view('templates/front/footer');
         
     }
@@ -117,12 +117,12 @@ class Front extends CI_Controller {
         //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/changepassword');
-        $this->load->view('templates/front/JS');
+        $this->load->view('templates/front/js');
         $this->load->view('templates/front/footer');
         
     }
 
-    public function updatePassword($id){
+    public function updatepassword($id){
         $oldpassword = md5($this->input->post('oldpassword'));
         $data = array(
             'password' => md5($this->input->post('newpassword'))
@@ -138,25 +138,25 @@ class Front extends CI_Controller {
         //$this->load->view('templates/front/control');
         $this->load->view('templates/front/navbar');
         $this->load->view('front/about');
-        $this->load->view('templates/front/JS');
+        $this->load->view('templates/front/js');
         $this->load->view('templates/front/footer');
         
     }
 
     public function search(){
-        if ($this->checkCookieMahasiswa()) {
+        if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/search');
-            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/js');
             $this->load->view('templates/front/footer');
         }else{
             $this->login();
         }
     }
 
-    public function getJumlahPesananKamar($idkamar){
+    public function getjumlahpesananKamar($idkamar){
         $data = $this->front_model->get_data_isikamar($idkamar);
         $count = 0;
         if ($data){
@@ -177,12 +177,12 @@ class Front extends CI_Controller {
         return $count;
     }
 
-    public function getAllKamar(){
+    public function getallkamar(){
         $data = $this->front_model->get_all_kamar();
         $result = [];
         foreach ($data as &$row){ //add & to call by reference
             //kuota dikurangi jumlah pemesan
-            $row['kuota'] = $row['kuota'] - $this->getJumlahPesananKamar($row['id_kamar']);
+            $row['kuota'] = $row['kuota'] - $this->getjumlahpesananKamar($row['id_kamar']);
             if ($row['kuota']>0) {
                 $result[] = $row;
             }
@@ -193,7 +193,7 @@ class Front extends CI_Controller {
         echo json_encode($result);
     }
 
-    public function getSearch(){
+    public function getsearch(){
         if ($this->input->post('fasilitaskos')) {
             $fasilitaskos = $this->input->post('fasilitaskos');
         }else{
@@ -234,7 +234,7 @@ class Front extends CI_Controller {
                 }
             }
             //kuota dikurangi jumlah pemesan
-            $row['kuota'] = $row['kuota'] - $this->getJumlahPesananKamar($row['id_kamar']);
+            $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
             if ($fasilitasKosCocok && $fasilitasKamarCocok && $row['kuota']>0) {
                 $result[] = $row;
             }
@@ -246,26 +246,26 @@ class Front extends CI_Controller {
     }
 
     public function detail(){
-        if ($this->checkCookieMahasiswa()) {
+        if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/detail');
-            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/js');
             $this->load->view('templates/front/footer');
         }else{
             $this->login();
         }
     }
 
-    public function getDetail($idkos,$kamar = NULL){
+    public function getdetail($idkos,$kamar = NULL){
         if ($kamar == NULL) {
             $data = $this->front_model->get_data_kos($idkos,'user_kos');
         }else{
             $data = $this->front_model->get_data_kos($idkos, 'kamar');
             foreach ($data as &$row){ //add & to call by reference
                 //kuota dikurangi jumlah pemesan
-                $row['kuota'] = $row['kuota'] - $this->getJumlahPesananKamar($row['id_kamar']);
+                $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
             }
         }
 
@@ -279,7 +279,7 @@ class Front extends CI_Controller {
 
 
     public function order($idmahasiswa){
-        $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
+        $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
         if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
             date_default_timezone_set('Asia/Jakarta');
             $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
@@ -300,12 +300,12 @@ class Front extends CI_Controller {
     }
 
     public function payment(){
-        if ($this->checkCookieMahasiswa()) {
+        if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/payment');
-            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/js');
             $this->load->view('templates/front/footer');
         }else{
             $this->login();
@@ -314,12 +314,12 @@ class Front extends CI_Controller {
 
 
     public function thankyou(){
-        if ($this->checkCookieMahasiswa()) {
+        if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/thankyou');
-            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/js');
             $this->load->view('templates/front/footer');
 
         }else{
@@ -327,7 +327,7 @@ class Front extends CI_Controller {
         }
     }
 
-    public function uploadImagePayment($idmahasiswa){
+    public function uploadimagepayment($idmahasiswa){
         $ds          = DIRECTORY_SEPARATOR;
         $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
         $filename = $idmahasiswa;
@@ -362,7 +362,7 @@ class Front extends CI_Controller {
             move_uploaded_file($tempFile,$targetFile.".jpg");
 
         //Status Bayar
-            $statusMahasiswa = $this->getmahasiswaArray($idmahasiswa);
+            $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
             if ($statusMahasiswa['status']=='Belum Bayar'){
                 $data = array(
                     'status' => 'Belum Verifikasi',
@@ -387,12 +387,12 @@ class Front extends CI_Controller {
     }
 
     public function status(){
-        if ($this->checkCookieMahasiswa()) {
+        if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/status');
-            $this->load->view('templates/front/JS');
+            $this->load->view('templates/front/js');
             $this->load->view('templates/front/footer');
         }else{
             $this->login();
@@ -435,7 +435,7 @@ class Front extends CI_Controller {
         echo json_encode($data);
     }
 
-    public function cancelOrder($id){
+    public function cancelorder($id){
         $data = array(
             'status' => 'Batal',
             'kadaluarsa'=> NULL
@@ -445,7 +445,7 @@ class Front extends CI_Controller {
         echo $insertStatus;
     }
 
-    public function Logout(){
+    public function logout(){
         $this->load->helper('cookie');
         delete_cookie("frontCookie");
         header("Location: ".base_url()."index.php/login");
