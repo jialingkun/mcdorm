@@ -20,7 +20,7 @@ class Main extends CI_Controller {
         $this->load->view('main/login');
     }
 
-    public function LoginValidation()
+    public function Loginvalidation()
     {
         $this->load->helper('form');
         $this->load->library('form_validation');
@@ -64,7 +64,7 @@ class Main extends CI_Controller {
         }
     }
 
-    public function checkCookieAdmin()
+    public function checkcookieadmin()
     {
         $this->load->helper('cookie');
         if ($this->input->cookie('backendCookie',true)!=NULL) {
@@ -76,12 +76,12 @@ class Main extends CI_Controller {
 
     public function home()
     {
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/home');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -91,12 +91,12 @@ class Main extends CI_Controller {
 
     public function changepassword()
     {
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/changepassword');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -104,7 +104,7 @@ class Main extends CI_Controller {
         
     }
 
-    public function updatePasswordAdmin(){
+    public function updatepasswordadmin(){
         $oldpassword = md5($this->input->post('oldpassword'));
         $data = array(
             'password' => md5($this->input->post('newpassword'))
@@ -115,12 +115,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_data(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_mahasiswa_data');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -164,12 +164,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_insert(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_mahasiswa_insert');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -177,7 +177,7 @@ class Main extends CI_Controller {
         
     }
 
-    public function insertMahasiswa(){
+    public function insertmahasiswa(){
         $data = array(
             'id_mahasiswa' => $this->input->post('id'),
             'password' => md5($this->input->post('password')),
@@ -196,12 +196,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_edit(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_mahasiswa_edit');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -209,7 +209,7 @@ class Main extends CI_Controller {
         
     }
 
-    public function resetPasswordMahasiswa($id){
+    public function resetpasswordmahasiswa($id){
         $data = array(
             'password' => md5($id)
         );
@@ -218,7 +218,7 @@ class Main extends CI_Controller {
         echo $insertStatus;
     }
 
-    public function getmahasiswaArray($id){
+    public function getmahasiswaarray($id){
         $data = $this->main_model->get_data_mahasiswa($id);
 
         if (empty($data))
@@ -238,7 +238,7 @@ class Main extends CI_Controller {
         return $data;
     }
 
-    public function updateMahasiswa($jenis = NULL,$id = NULL){
+    public function updatemahasiswa($jenis = NULL,$id = NULL){
         if ($jenis == 'profil') {
             $data = array(
                 'nama_mahasiswa' => $this->input->post('nama'),
@@ -246,7 +246,7 @@ class Main extends CI_Controller {
                 'notelp_mahasiswa' => $this->input->post('notelp')
             );
         } else if ($jenis == 'verifikasi') {
-            $mahasiswa = $this->getmahasiswaArray($id);
+            $mahasiswa = $this->getmahasiswaarray($id);
             $this->main_model->minus_kuota_kamar($mahasiswa['id_kamar']);
             $dataHistory = array(
                 'id_mahasiswa' => $mahasiswa['id_mahasiswa'],
@@ -275,12 +275,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_data(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_kos_data');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -301,12 +301,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_edit(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_kos_edit');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -314,7 +314,7 @@ class Main extends CI_Controller {
 
     }
 
-    public function updateKos($jenis = NULL,$id = NULL){
+    public function updatekos($jenis = NULL,$id = NULL){
         if ($jenis == 'profil') {
 
             if ($this->input->post('fasilitas')) {
@@ -338,12 +338,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_insert(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_kos_insert');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -351,7 +351,7 @@ class Main extends CI_Controller {
 
     }
 
-    public function insertKos(){
+    public function insertkos(){
 
         if ($this->input->post('fasilitas')) {
             $fasilitas = implode(',', $this->input->post('fasilitas'));
@@ -397,12 +397,12 @@ class Main extends CI_Controller {
 
 
     public function manajemen_kos_kamar_insert(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_kos_kamar_insert');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -410,7 +410,7 @@ class Main extends CI_Controller {
 
     }
 
-    public function insertKamar($idkos){
+    public function insertkamar($idkos){
 
         if ($this->input->post('fasilitas')) {
             $fasilitas = implode(',', $this->input->post('fasilitas'));
@@ -455,12 +455,12 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_kamar_edit(){
-        if ($this->checkCookieAdmin()) {
+        if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
             $this->load->view('templates/sidebar');
             $this->load->view('main/manajemen_kos_kamar_edit');
-            $this->load->view('templates/JS');
+            $this->load->view('templates/js');
             $this->load->view('templates/footer');
         }else{
             $this->login();
@@ -468,7 +468,7 @@ class Main extends CI_Controller {
 
     }
 
-    public function getJumlahPesananKamar($idkamar){
+    public function getjumlahpesanankamar($idkamar){
         $data = $this->main_model->get_data_isikamar($idkamar);
         $count = 0;
         if ($data){
@@ -489,7 +489,7 @@ class Main extends CI_Controller {
         return $count;
     }
 
-    public function getJumlahPesananKos($idkos){
+    public function getjumlahpesanankos($idkos){
         $data = $this->main_model->get_data_isikos($idkos);
         $count = 0;
         if ($data){
@@ -520,16 +520,16 @@ class Main extends CI_Controller {
         } else if($idkamar == NULL){
             foreach ($data as &$row){
             //kuota dikurangi jumlah pemesan
-                $row['kuota'] = $row['kuota'] - $this->getJumlahPesananKamar($row['id_kamar']);
+                $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
             }
         } else{
-            $data['kuota'] = $data['kuota'] - $this->getJumlahPesananKamar($data['id_kamar']);
+            $data['kuota'] = $data['kuota'] - $this->getjumlahpesanankamar($data['id_kamar']);
         }
 
         echo json_encode($data);
     }
 
-    public function updateKamar($idkos,$idkamar){
+    public function updatekamar($idkos,$idkamar){
 
         if ($this->input->post('fasilitas')) {
             $fasilitas = implode(',', $this->input->post('fasilitas'));
@@ -537,7 +537,7 @@ class Main extends CI_Controller {
             $fasilitas = "";
         }
 
-        $kuota = $this->getJumlahPesananKamar($idkamar) + $this->input->post('kuota');
+        $kuota = $this->getjumlahpesanankamar($idkamar) + $this->input->post('kuota');
 
         $data = array(
             'nama_kamar' => $this->input->post('nama'),
@@ -552,7 +552,7 @@ class Main extends CI_Controller {
     }
 
 
-    public function uploadImage($filename,$idkos,$idkamar = NULL){
+    public function uploadimage($filename,$idkos,$idkamar = NULL){
         $ds          = DIRECTORY_SEPARATOR;
         $targetPath = getcwd().$ds.'photos';
         if ($idkamar == NULL) {
@@ -585,21 +585,21 @@ class Main extends CI_Controller {
         }
     }
 
-    public function Logout(){
+    public function logout(){
         $this->load->helper('cookie');
         delete_cookie("backendCookie");
         header("Location: ".base_url()."index.php/main/login");
         die();
     }
 
-    public function secureDelete($jenis, $id){
+    public function securedelete($jenis, $id){
         
         if ($jenis == 'mahasiswa') {
             $linkedCount = 0;
         }else if ($jenis == 'kos') {
-            $linkedCount = $this->getJumlahPesananKos($id);
+            $linkedCount = $this->getjumlahpesanankos($id);
         }else if ($jenis == 'kamar') {
-            $linkedCount = $this->getJumlahPesananKamar($id);
+            $linkedCount = $this->getjumlahpesanankamar($id);
         }
 
         if ($linkedCount <= 0) {

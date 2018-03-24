@@ -1,5 +1,5 @@
 <?php
-class front_model extends CI_Model {
+class Front_model extends CI_Model {
 
 	public function __construct()
 	{
