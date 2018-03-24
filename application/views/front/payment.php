@@ -67,7 +67,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                     <h4><?php echo $paymentTitle ?></h4>
                     <ul class="card-select">
                         <li>
-                            <img id="output" src="http://localhost/mcdorm/photos/payment/<?php echo $_COOKIE['frontCookie'] ?>.jpg" />
+                            <img id="output" src="<?php echo base_url(); ?>photos/payment/<?php echo $_COOKIE['frontCookie'] ?>.jpg" />
                             <p><b><?php echo $paymentProof ?></b><br></p>
                         </li>
                     </ul>
@@ -142,7 +142,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         type: 'get',
         dataType: "json",
         success: function (response) {
-            $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
+            $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
             $("#modalNamaKos").html('<?php echo $paymentNamakamar ?>' + response.nama_kos);
             $("#modalAlamatKos").html('<?php echo $paymentAddress ?>'+response.alamat);
             $("#modalGender").html('<?php echo $paymentGender ?>'+response.gender_kos);

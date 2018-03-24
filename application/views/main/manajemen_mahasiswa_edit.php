@@ -231,7 +231,7 @@
           $('#modalHarga').html('Rp '+response.harga+',- /bulan');
           $('#modalKamar').html('Jenis Kamar :  '+response.nama_kamar);
           $('#modalTotal').html('Rp '+response.harga+',- /bulan');
-          $("#modalImage").attr("src",'http://localhost/mcdorm/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
+          $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
           $('#modalTanggal').html(response.tanggal_masuk);
 
         }

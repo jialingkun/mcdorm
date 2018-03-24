@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <a class="logo" href="http://localhost/mcdorm/index.php/">
+                    <a class="logo" href="<?php echo base_url(); ?>index.php">
                         <img src="<?php echo base_url(); ?>assets/images/logo.png"/>
                     </a>
                 </div>
@@ -46,17 +46,17 @@
                             if (isset($_COOKIE['frontCookie'])) {
                                 ?>
                                 <li>
-                                    <a id="status" href="http://localhost/mcdorm/index.php/status">Status</a>
+                                    <a id="status" href="<?php echo base_url(); ?>index.php/status">Status</a>
                                 </li>
                                 <li>
-                                    <a id="changePassword" href="http://localhost/mcdorm/index.php/changepassword"><?php echo $ubahpassword ?></a>
+                                    <a id="changePassword" href="<?php echo base_url(); ?>index.php/changepassword"><?php echo $ubahpassword ?></a>
                                 </li>
-                                <li><a id="logout" href="http://localhost/mcdorm/index.php/logout"><?php echo $keluar ?></a></li>
+                                <li><a id="logout" href="<?php echo base_url(); ?>index.php/logout"><?php echo $keluar ?></a></li>
                                 <?php
                             }else{
                                 ?>
                                 <li class="top-user-area-avatar">
-                                    <a id="login" href="login"><?php echo $masuk ?></a>
+                                    <a id="login" href="<?php echo base_url(); ?>index.php/login"><?php echo $masuk ?></a>
                                 </li>
                                 <?php
                             }
@@ -81,7 +81,7 @@
     <div class="container">
         <div class="nav">
             <ul class="slimmenu" id="slimmenu">
-                <li><a href="http://localhost/mcdorm/index.php/">Home</a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/">Home</a></li>
                 <li><a href="about"><?php echo $tentang;?></a></li>
                 
             </ul>

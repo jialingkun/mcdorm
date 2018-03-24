@@ -26,6 +26,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchPrevious = 'Prev Page';
     $searchSearch = 'Search';
     $searchOrdernow = 'Order Now';
+    $searchNosearch = 'Sorry, Search not Found';
+    $searchFfailed = 'Search Failed';
 
 }else{
     $searchTitle = 'Hasil Pencarian';
@@ -53,6 +55,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchPrevious = 'Sebelumnya';
     $searchSearch = 'Mencari';
     $searchOrdernow = 'Pesan Sekarang';
+    $searchSuccess = 'Berhasil Mengubah Password';
+    $searchFfailed = 'Pencarian Gagal';
+    $searchNosearch = 'Maaf Pencarian Tidak Ditemukan';
 }
 
 ?>
@@ -62,7 +67,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     <h3 class="booking-title" align="center"><?php echo $searchTitle ?></h3>
     <div class="row">
         <div class="col-md-3">
-            <aside class="booking-filters text-white">
+            <aside class="booking-filters text-white" style="height: 60%;">
                 <form  id="insertData" onsubmit="insertfunction(event)">
                     <h3><?php echo $searchMenu ?></h3>
                     <ul class="list booking-filters-list">
@@ -84,74 +89,72 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                             </div>
                         </div>
                     </li>
-                    
-                    <h5 class="booking-filters-title" style="padding-left: 15px; padding-top: 15px;"><?php echo $searchFacility ?></h5>
-                    <div class="col-sm-5">
-                        <div class="checkbox" value="WiFi">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="WiFi"/>Wifi
-                            </label>
+                    <div class="row" style="margin-left:8px;">
+                        <h5 class="booking-filters-title" style="padding-left: 15px; padding-top: 15px;"><?php echo $searchFacility ?></h5>
+                        <div class="col-sm-5">
+                            <div class="checkbox" value="WiFi">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="WiFi"/>Wifi
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir" /><?php echo $searchParking ?>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Nasi"/><?php echo $searchRice ?>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Air Putih"/><?php echo $searchWater ?>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="24Jam"/><?php echo $searchHour ?>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Laundry"/>Laundry
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Dapur"/><?php echo $searchKitchen ?>
+                                </label>
+                            </div>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir" /><?php echo $searchParking ?>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Nasi"/><?php echo $searchRice ?>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Air Putih"/><?php echo $searchWater ?>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="24Jam"/><?php echo $searchHour ?>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Laundry"/>Laundry
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Dapur"/><?php echo $searchKitchen ?>
-                            </label>
+                        <div class="col-sm-7">
+
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="AC"/>AC
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="KM Dalam"/><?php echo $searchBathroom ?>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Lemari"/><?php echo $searchWardrobe ?>
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Kipas Angin"/><?php echo $searchFan ?>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-7">
-
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="AC"/>AC
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="KM Dalam"/><?php echo $searchBathroom ?>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Lemari"/><?php echo $searchWardrobe ?>
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Kipas Angin"/><?php echo $searchFan ?>
-                            </label>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <input style="margin-top: 40px; margin-left: 15px;" id="search" class="btn btn-primary" type="submit" value="<?php echo $searchSearch ?>">                    
+                    <input style="margin-left:65%; " id="search" class="btn btn-primary" type="submit" value="<?php echo $searchSearch ?>" />
                 </ul>
-                
+
             </form>
         </aside>
     </div>
@@ -200,7 +203,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     success: function(response){
         if (response != "null") {
           $("#search").prop("disabled",true);
-          $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="http://localhost/mcdorm/assets/images/spin.gif" />');
+          $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="<?php echo base_url(); ?>assets/images/spin.gif" />');
           dataGlobal = JSON.parse(response);
           $('#kamar').append('<div id="dataKamar"></div>');
           
@@ -212,18 +215,18 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
       }
       if(response == "null"){
         $("#search").prop("disabled",true);
-        $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="http://localhost/mcdorm/assets/images/spin.gif" />');
+        $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="<?php echo base_url(); ?>assets/images/spin.gif" />');
         setTimeout(function(){
             $("#search").prop("disabled",false);
             $('#load').detach();
-            $('#kamar').append('<div id="failed"> <h3>Maaf Pencarian Tidak Ditemukan</h3></div>');
+            $('#kamar').append('<div id="failed"> <h3><?php echo $searchNosearch ?></h3></div>');
             dataGlobal = '';
             pagination(1);
         }, 2000);
     }
 },
 error: function(){
-  alert('Gagal menambahkan data');
+  alert('<?php echo $searchFfailed ?>');
 }
 }); 
 }
@@ -244,29 +247,29 @@ function pagination(active){
     }
     // alert(start +'|'+ end);
     for (var i = start; i < end ; i++) {
-       div = div + '<div class="col-md-4">'+
-       '<div class="thumb">'+
-       '<header class="thumb-header" >'+
-       '<a  class="hover-img" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+
-       '<img style="width:240px; height:240px; " src="http://localhost/mcdorm/photos/'+dataGlobal[i].id_kos+'/'+dataGlobal[i].id_kamar+'/slot1.jpg" />'+
-       '<h5 class="hover-title-center"><?php echo $searchOrdernow ?></h5>'+
-       '</a>'+
-       '</header>'+
-       '<div class="thumb-caption"> '+
-       '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)"><?php echo $searchRoomName ?>'+dataGlobal[i].nama_kos+'</a></h5>'+
-       '<p class="mb0"><small><?php echo $searchAddress ?>'+dataGlobal[i].alamat+'</small>'+
-       '</p>'+
-       '<p class="mb0 text-darken"><span class="text-lg lh1em"><?php echo $searchPrice ?>'+dataGlobal[i].harga+'</span><small>/<?php echo $searchMonth ?></small>'+
-       '</p>'+
-       '<p class="mb0" style="padding-right:21px; float:right; font-size: 15px;color: #ff023c"><span class="label label-danger">'+dataGlobal[i].kuota+'<?php echo $searchAvailable ?></span> </b>'+
-       '</p>'+
-       '</div>'+
-       '</div><br>'+
-       '</div>';
-   }
-   $('.pagination').html('');
-   $('#dataKamar').html('');
-   if (totalData > 0) {
+     div = div + '<div class="col-md-4">'+
+     '<div class="thumb">'+
+     '<header class="thumb-header" >'+
+     '<a  class="hover-img" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+
+     '<img style="width:240px; height:240px; " src="<?php echo base_url(); ?>photos/'+dataGlobal[i].id_kos+'/'+dataGlobal[i].id_kamar+'/slot1.jpg" />'+
+     '<h5 class="hover-title-center"><?php echo $searchOrdernow ?></h5>'+
+     '</a>'+
+     '</header>'+
+     '<div class="thumb-caption"> '+
+     '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)"><?php echo $searchRoomName ?>'+dataGlobal[i].nama_kos+'</a></h5>'+
+     '<p class="mb0"><small><?php echo $searchAddress ?>'+dataGlobal[i].alamat+'</small>'+
+     '</p>'+
+     '<p class="mb0 text-darken"><span class="text-lg lh1em"><?php echo $searchPrice ?>'+dataGlobal[i].harga+'</span><small>/<?php echo $searchMonth ?></small>'+
+     '</p>'+
+     '<p class="mb0" style="padding-right:21px; float:right; font-size: 15px;color: #ff023c"><span class="label label-danger">'+dataGlobal[i].kuota+'<?php echo $searchAvailable ?></span> </b>'+
+     '</p>'+
+     '</div>'+
+     '</div><br>'+
+     '</div>';
+ }
+ $('.pagination').html('');
+ $('#dataKamar').html('');
+ if (totalData > 0) {
     if (active>1) {
         paginationOutput = paginationOutput + 
         '<li class="next" onclick="pagination('+(active-1)+')"><a href="#"><?php echo $searchPrevious ?> </a></li>';
