@@ -61,7 +61,7 @@
         "ajax": {
           "deferLoading": 57,
           "type": "GET",
-          "url": "http://localhost/mcdorm/index.php/main/getkos",
+          "url": "<?php echo base_url(); ?>index.php/main/getkos",
 
           "dataSrc": function ( json ) {
             return json;

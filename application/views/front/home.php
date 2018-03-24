@@ -48,7 +48,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 				<div class="rel full-height">
 					<?php echo $tagline ?>
 					<div style="text-align: center;   padding-top: 30%;padding-bottom: 30%;">
-						<a href="http://localhost/mcdorm/index.php/search">
+						<a href="search">
 							<button  class="btn btn-primary btn-md" type="submit" style="padding-top:1%;
 							padding-bottom:1%; min-width: 40%;   "><b style="font-size: 30px; "><?php echo $pesan ?></b></button>		
 						</a>

@@ -64,7 +64,7 @@
       "ajax": {
         "deferLoading": 57,
         "type": "GET",
-        "url": "http://localhost/mcdorm/index.php/main/getmahasiswa",
+        "url": "<?php echo base_url(); ?>index.php/main/getmahasiswa",
 
         "dataSrc": function ( json ) {
           return json;

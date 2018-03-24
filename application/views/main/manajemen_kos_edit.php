@@ -253,7 +253,7 @@
         "ajax": {
           "deferLoading": 57,
           "type": "GET",
-          "url": "http://localhost/mcdorm/index.php/main/getkamar/"+getCookie('editDataKos')+"",
+          "url": "<?php echo base_url(); ?>index.php/main/getkamar/"+getCookie('editDataKos')+"",
 
           "dataSrc": function ( json ) {
             if (json == null) {
