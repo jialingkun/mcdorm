@@ -8,7 +8,7 @@
     <script src="<?php echo base_url(); ?>assets/js/ionrangeslider.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/icheck.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/fotorama.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script> -->
     <script src="<?php echo base_url(); ?>assets/js/typeahead.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/card-payment.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/magnific.js"></script>
