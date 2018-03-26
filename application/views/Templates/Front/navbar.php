@@ -82,7 +82,7 @@
         <div class="nav">
             <ul class="slimmenu" id="slimmenu">
                 <li><a href="<?php echo base_url(); ?>index.php/">Home</a></li>
-                <li><a href="about"><?php echo $tentang;?></a></li>
+                <li><a href="<?php echo base_url(); ?>index.php/about"><?php echo $tentang;?></a></li>
                 
             </ul>
         </div>
@@ -132,7 +132,7 @@
     function changeLang(lang){
         var CookieDate = new Date;
         CookieDate.setFullYear(CookieDate.getFullYear( ) +1);
-        document.cookie = "bahasa="+lang+"; expires="+CookieDate.toGMTString()+"; path=/mcdorm/index.php;";
+        document.cookie = "bahasa="+lang+"; expires="+CookieDate.toGMTString()+"; path=<?php echo base_url(); ?>;";
         window.location.reload();
         return false;
     }
