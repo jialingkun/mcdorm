@@ -126,7 +126,7 @@
               data:dataString,
               success: function(response){
                 if (response == 1) {
-                    window.location.href = 'home'
+                    window.location.href = '<?php echo base_url() ?>index.php/main/home'
                     $("#submit").html(buttonname);
                 }else{
                     alert(response);

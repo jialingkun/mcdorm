@@ -231,7 +231,7 @@ error: function(){
 }); 
 }
 function getDetail(x){
-    document.cookie = "detailKamar="+x+"; path=/mcdorm/index.php/detail;"
+    document.cookie = "detailKamar="+x+"; path=<?php echo base_url(); ?>;"
 }
 function pagination(active){
     var div = '';

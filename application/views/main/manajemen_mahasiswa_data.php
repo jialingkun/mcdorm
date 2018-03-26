@@ -155,7 +155,7 @@
     }
 
    function editDataSiswa(x){
-    document.cookie = "editDataSiswa="+x+"; path=/mcdorm/index.php/main;"
+    document.cookie = "editDataSiswa="+x+"; path=<?php echo base_url(); ?>;"
   }
 </script>
 

@@ -128,7 +128,7 @@
 
     function editDataKos(x){
 
-      document.cookie = "editDataKos="+x+"; path=/mcdorm/index.php/main;"
+      document.cookie = "editDataKos="+x+"; path=<?php echo base_url(); ?>;"
 
     }
   </script>

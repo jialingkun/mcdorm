@@ -369,7 +369,7 @@
 
     function editDataKamar(x){
 
-      document.cookie = "editDataKamar="+x+"; path=/mcdorm/index.php/main;"
+      document.cookie = "editDataKamar="+x+"; path=<?php echo base_url(); ?>;"
     }
 
 
