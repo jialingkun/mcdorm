@@ -83,7 +83,7 @@
                   </div>
                   <div class="form-group row">
                    <div class="col-sm-6">
-                    <button data-toggle="modal" data-target="#myModal" type="button"   class="btn btn-animate btn-animate-side btn-danger btn-md" >
+                    <button id="batalPesan" data-toggle="modal" data-target="#myModal" type="button"   class="btn btn-animate btn-animate-side btn-danger btn-md" disabled="true">
                       <b>Batal Pesan</b>
                     </button>
                   </div>
@@ -95,7 +95,9 @@
                   <h4 class="control-label">Bukti Pembayaran</h4>
                   <div class="example">
                     <div class="cover height-500 height-xs-300">
-                      <div class="cover-background" style="background-image: url('<?php echo base_url(); ?>assets/images/bukti.jpg')"></div>
+                      <div class="cover-background">
+                        <img id="buktiTransfer" src="#">
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -186,7 +188,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="cancelBooking()">Batal Pesan</button>
+        <button  type="button" class="btn btn-danger" data-dismiss="modal" onclick="cancelBooking()" >Batal Pesan</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
       </div>
     </div>
@@ -219,8 +221,18 @@
           $('#harga').html(response.harga);
           $('#status').html(response.status);
 
+$("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+response.id_mahasiswa+".jpg");
+
           if (response.status.toString() != "Belum Verifikasi") {
             $('#konfirmasi').prop('disabled','true');
+          }
+
+          if (response.status.toString() == "Belum Verifikasi" || response.status.toString() == "Belum Bayar") {
+            
+           $('#batalPesan').prop('disabled','false'); 
+          }else{
+            
+            $('#batalPesan').prop('disabled','true'); 
           }
 
 
