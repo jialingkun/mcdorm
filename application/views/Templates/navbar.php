@@ -2,7 +2,7 @@
 
   <div class="navbar-header">
     <div class="navbar-brand navbar-brand-center">
-      <a href="home">
+      <a href="<?php echo base_url(); ?>index.php/main/home">
         <img class="navbar-brand-logo" src="<?php echo base_url(); ?>assets/images/logo.png" 
         style="padding-left:50px;height:180%;">
       </a>
@@ -24,7 +24,7 @@
           </a>
           <ul class="dropdown-menu" role="menu">
             <li role="presentation">
-              <a href="changepassword" role="menuitem"><i class="icon wb-refresh"></i> Reset Password</a>
+              <a href="<?php echo base_url(); ?>index.php/main/changepassword" role="menuitem"><i class="icon wb-refresh"></i> Reset Password</a>
             </li>
             <li class="divider" role="presentation"></li>
             <li role="presentation">
