@@ -15,14 +15,14 @@
 <script src="<?php echo base_url(); ?>assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendor/datatables-fixedheader/dataTables.fixedHeader.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/vendor/datatables-fixedheader/dataTables.fixedHeader.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/vendor/datatables-bootstrap/dataTables.bootstrap.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/datatables-responsive/dataTables.responsive.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/datatables-tabletools/dataTables.tableTools.js"></script>
 
-<script src="<?php echo base_url(); ?>assets/vendor/chartist-js/chartist.min.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/vendor/chartist-js/chartist.min.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/vendor/aspieprogress/jquery-asPieProgress.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/vendor/gmaps/gmaps.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/vendor/gmaps/gmaps.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/vendor/matchheight/jquery.matchHeight-min.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/vendor/jquery-ui/jquery-ui.js"></script>
@@ -57,7 +57,7 @@
 <script src="<?php echo base_url(); ?>assets/js/components/animsition.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/components/slidepanel.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/components/switchery.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/components/gmaps.js"></script>
+<!-- <script src="<?php echo base_url(); ?>assets/js/components/gmaps.js"></script> -->
 <script src="<?php echo base_url(); ?>assets/js/components/matchheight.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/components/datatables.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/components/jquery-placeholder.js"></script>
@@ -96,29 +96,29 @@
 
       // Fixed Header Example
       // --------------------
-      (function() {
-        // initialize datatable
-        var table = $('#exampleFixedHeader').DataTable({
-          responsive: true,
-          "bPaginate": false,
-          "sDom": "t" // just show table, no other controls
-        });
+      // (function() {
+      //   // initialize datatable
+      //   var table = $('#exampleFixedHeader').DataTable({
+      //     responsive: true,
+      //     "bPaginate": false,
+      //     "sDom": "t" // just show table, no other controls
+      //   });
 
-        // initialize FixedHeader
-        var offsetTop = 0;
-        if ($('.site-navbar').length > 0) {
-          offsetTop = $('.site-navbar').eq(0).innerHeight();
-        }
-        var fixedHeader = new FixedHeader(table, {
-          offsetTop: offsetTop
-        });
+      //   // initialize FixedHeader
+      //   var offsetTop = 0;
+      //   if ($('.site-navbar').length > 0) {
+      //     offsetTop = $('.site-navbar').eq(0).innerHeight();
+      //   }
+      //   var fixedHeader = new FixedHeader(table, {
+      //     offsetTop: offsetTop
+      //   });
 
-        // redraw fixedHeaders as necessary
-        $(window).resize(function() {
-          fixedHeader._fnUpdateClones(true);
-          fixedHeader._fnUpdatePositions();
-        });
-      })();
+      //   // redraw fixedHeaders as necessary
+      //   $(window).resize(function() {
+      //     fixedHeader._fnUpdateClones(true);
+      //     fixedHeader._fnUpdatePositions();
+      //   });
+      // })();
 
       // Individual column searching
       // ---------------------------
@@ -215,43 +215,43 @@
       Site.run();
 
       // widget-linearea
-      (function() {
-        var linearea = new Chartist.Line('#widgetLinearea .ct-chart', {
-          labels: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
-          series: [
-          [0, 2.5, 2, 2.8, 2.6, 3.8, 0],
-          [0, 1.4, 0.5, 2, 1.2, 0.9, 0]
-          ]
-        }, {
-          low: 0,
-          showArea: true,
-          showPoint: false,
-          showLine: false,
-          fullWidth: true,
-          chartPadding: {
-            top: 0,
-            right: 10,
-            bottom: 0,
-            left: 0
-          },
-          axisX: {
-            showGrid: false,
-            labelOffset: {
-              x: -14,
-              y: 0
-            },
-          },
-          axisY: {
-            labelOffset: {
-              x: -10,
-              y: 0
-            },
-            labelInterpolationFnc: function(num) {
-              return num % 1 === 0 ? num : false;
-            }
-          }
-        });
-      })();
+      // (function() {
+      //   var linearea = new Chartist.Line('#widgetLinearea .ct-chart', {
+      //     labels: ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'],
+      //     series: [
+      //     [0, 2.5, 2, 2.8, 2.6, 3.8, 0],
+      //     [0, 1.4, 0.5, 2, 1.2, 0.9, 0]
+      //     ]
+      //   }, {
+      //     low: 0,
+      //     showArea: true,
+      //     showPoint: false,
+      //     showLine: false,
+      //     fullWidth: true,
+      //     chartPadding: {
+      //       top: 0,
+      //       right: 10,
+      //       bottom: 0,
+      //       left: 0
+      //     },
+      //     axisX: {
+      //       showGrid: false,
+      //       labelOffset: {
+      //         x: -14,
+      //         y: 0
+      //       },
+      //     },
+      //     axisY: {
+      //       labelOffset: {
+      //         x: -10,
+      //         y: 0
+      //       },
+      //       labelInterpolationFnc: function(num) {
+      //         return num % 1 === 0 ? num : false;
+      //       }
+      //     }
+      //   });
+      // })();
 
       //widget-pie-progress
       (function() {
@@ -275,56 +275,56 @@
       })();
 
       // widget bar
-      (function() {
-        var bar = new Chartist.Bar('#widgetBar .ct-chart', {
-          labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
-          series: [
-          [160, 200, 150, 400, 460, 440, 240, 250, 50],
-          [600 - 160, 600 - 200, 600 - 150, 600 - 400, 600 -
-          460, 600 - 440, 600 - 240, 600 - 250, 600 - 50
-          ]
-          ]
-        }, {
-          stackBars: true,
-          fullWidth: true,
-          seriesBarDistance: 0,
-          axisX: {
-            showGrid: false,
-          },
-          axisY: {
-            showGrid: false,
-            labelInterpolationFnc: function(num) {
-              return num / 200 % 1 === 0 ? num : false;
-            }
-          }
-        });
-      })();
+      // (function() {
+      //   var bar = new Chartist.Bar('#widgetBar .ct-chart', {
+      //     labels: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+      //     series: [
+      //     [160, 200, 150, 400, 460, 440, 240, 250, 50],
+      //     [600 - 160, 600 - 200, 600 - 150, 600 - 400, 600 -
+      //     460, 600 - 440, 600 - 240, 600 - 250, 600 - 50
+      //     ]
+      //     ]
+      //   }, {
+      //     stackBars: true,
+      //     fullWidth: true,
+      //     seriesBarDistance: 0,
+      //     axisX: {
+      //       showGrid: false,
+      //     },
+      //     axisY: {
+      //       showGrid: false,
+      //       labelInterpolationFnc: function(num) {
+      //         return num / 200 % 1 === 0 ? num : false;
+      //       }
+      //     }
+      //   });
+      // })();
 
       // widget gmap
-      (function() {
-        var map = new GMaps({
-          el: '#gmap',
-          lat: -12.043333,
-          lng: -77.028333,
-          zoomControl: true,
-          zoomControlOpt: {
-            style: "SMALL",
-            position: "TOP_LEFT"
-          },
-          panControl: true,
-          streetViewControl: false,
-          mapTypeControl: false,
-          overviewMapControl: false
-        });
+      // (function() {
+      //   var map = new GMaps({
+      //     el: '#gmap',
+      //     lat: -12.043333,
+      //     lng: -77.028333,
+      //     zoomControl: true,
+      //     zoomControlOpt: {
+      //       style: "SMALL",
+      //       position: "TOP_LEFT"
+      //     },
+      //     panControl: true,
+      //     streetViewControl: false,
+      //     mapTypeControl: false,
+      //     overviewMapControl: false
+      //   });
 
-        map.addStyle({
-          styledMapName: "Styled Map",
-          styles: $.components.get('gmaps', 'styles'),
-          mapTypeId: "map_style"
-        });
+      //   map.addStyle({
+      //     styledMapName: "Styled Map",
+      //     styles: $.components.get('gmaps', 'styles'),
+      //     mapTypeId: "map_style"
+      //   });
 
-        map.setStyle("map_style");
-      })();
+      //   map.setStyle("map_style");
+      // })();
     });
   </script>
 
