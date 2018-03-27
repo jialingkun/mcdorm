@@ -224,15 +224,13 @@
 $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+response.id_mahasiswa+".jpg");
 
           if (response.status.toString() != "Belum Verifikasi") {
-            $('#konfirmasi').prop('disabled','true');
+            $('#konfirmasi').prop('disabled',true);
           }
 
           if (response.status.toString() == "Belum Verifikasi" || response.status.toString() == "Belum Bayar") {
-            
-           $('#batalPesan').prop('disabled','false'); 
+           $('#batalPesan').prop('disabled',false); 
           }else{
-            
-            $('#batalPesan').prop('disabled','true'); 
+            $('#batalPesan').prop('disabled',true); 
           }
 
 
@@ -342,7 +340,7 @@ $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+respon
       if (confirm("Apakah anda yakin ingin membatalkan pemesanan?")) {
         txt = "Pesanan berhasil dibatalkan";
         var urls = "main/updateMahasiswa/cancel/"+getCookie('editDataSiswa')+"";
-        // alert(urls);
+        $('#batalPesan').prop('disabled',true); 
         $.ajax({
           url:"<?php echo base_url() ?>index.php/"+urls,
           type: 'get',

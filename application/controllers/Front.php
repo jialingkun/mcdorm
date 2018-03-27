@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'frontCookie',
-                   'value'  => $username,
-                   'expire' => '0',
-               );
+                 'name'   => 'frontCookie',
+                 'value'  => $username,
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
 
                 $cookie= array(
@@ -84,7 +84,7 @@ class Front extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         }else{
             unset($data['password']);
             if ($data['status']=="Belum Bayar") {
@@ -271,7 +271,7 @@ class Front extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         }
 
         echo json_encode($data);
@@ -405,7 +405,7 @@ class Front extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         }else{
             echo json_encode($data);
         }
@@ -419,7 +419,7 @@ class Front extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         }else{
             unset($data['password']);
             if ($data['status']=="Belum Bayar") {
@@ -435,6 +435,16 @@ class Front extends CI_Controller {
         echo json_encode($data);
     }
 
+    private function deleteimagepayment($idmahasiswa){
+        $ds          = DIRECTORY_SEPARATOR;
+        $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
+        $filename = $idmahasiswa.".jpg";
+        $targetFile =  $targetPath. $filename;
+        if (file_exists($targetFile)){
+            unlink($targetFile);
+        }
+    }
+
     public function cancelorder($id){
         $data = array(
             'status' => 'Batal',
@@ -442,6 +452,10 @@ class Front extends CI_Controller {
         );
 
         $insertStatus = $this->front_model->update_mahasiswa($data,$id);
+
+        if ($insertStatus == 1) {
+            $this->deleteimagepayment($id);
+        }
         echo $insertStatus;
     }
 

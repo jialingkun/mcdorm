@@ -353,7 +353,7 @@
         var http = new XMLHttpRequest();
         http.open('HEAD', photoUrl, false);
         http.send();
-        if (http.status != 404) {
+        if (parseInt(http.status/100) == 2) {
           var mockFile = { name: "preview", size: 0, dataURL: photoUrl };
           var thisDropzone = this;
           thisDropzone.emit('addedfile', mockFile);

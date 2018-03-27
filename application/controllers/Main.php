@@ -134,7 +134,7 @@ class Main extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         } else if ($id == NULL) {
             foreach ($data as &$row){ //add & to call by reference
                 unset($row['password']);
@@ -223,7 +223,7 @@ class Main extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         }else{
             unset($data['password']);
             if ($data['status']=="Belum Bayar") {
@@ -236,6 +236,16 @@ class Main extends CI_Controller {
             }
         }
         return $data;
+    }
+
+    private function deleteimagepayment($idmahasiswa){
+        $ds          = DIRECTORY_SEPARATOR;
+        $targetPath = getcwd().$ds.'photos'.$ds.'payment'.$ds;
+        $filename = $idmahasiswa.".jpg";
+        $targetFile =  $targetPath. $filename;
+        if (file_exists($targetFile)){
+            unlink($targetFile);
+        }
     }
 
     public function updatemahasiswa($jenis = NULL,$id = NULL){
@@ -268,6 +278,8 @@ class Main extends CI_Controller {
                 'status' => 'Batal',
                 'kadaluarsa'=> NULL
             );
+
+            $this->deleteimagepayment($id);
         }
 
         $insertStatus = $this->main_model->update_mahasiswa($data,$id);
@@ -294,7 +306,7 @@ class Main extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         }
 
         echo json_encode($data);
@@ -516,7 +528,7 @@ class Main extends CI_Controller {
 
         if (empty($data))
         {
-            show_404();
+            $data = [];
         } else if($idkamar == NULL){
             foreach ($data as &$row){
             //kuota dikurangi jumlah pemesan
