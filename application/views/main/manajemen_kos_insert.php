@@ -33,7 +33,7 @@
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form id="insertData" onsubmit="insertDataKos()">
+              <form id="insertData" onsubmit="insertDataKos(event)">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Username</b></label>
@@ -105,10 +105,10 @@
              </div>
              <div class="form-group">
               <label class="control-label"><b>Deskripsi</b></label>
-              <textarea class="form-control" rows="5" name="deskripsi" required></textarea>
+              <textarea class="form-control" rows="5" name="deskripsi"></textarea>
             </div>
             <div class="form-group pull-right" style="margin-top: 25px;">
-              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="">
+              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
               <a href="manajemen_kos_data">
@@ -132,15 +132,14 @@
 
 <script>
 
-  function insertDataKos() {
+  function insertDataKos(e) {
 
     var urls='main/insertkos';
+    e.preventDefault(); // will stop the form submission
     var dataString = $("#insertData").serialize();
     var buttonname = $("#submit").html();
     $("#submit").html("Tunggu...");
     $("#submitButton").prop("disabled",true);
-
-    // alert('klik');
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
       type: 'POST',

@@ -17,7 +17,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchBathroom = 'Bathroom';
     $searchWardrobe = 'Wardrobe';
     $searchFan = 'Fan';
-    $searchRoomName = 'Name : ';
+    $searchRoomName = '';
     $searchAddress = 'Address : ';
     $searchPrice = 'Price : ';
     $searchAvailable = ' Room Remaining!';
@@ -46,7 +46,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchBathroom = 'KM Dalam';
     $searchWardrobe = 'Lemari';
     $searchFan = 'Kipas Angin';
-    $searchRoomName = 'Nama : ';
+    $searchRoomName = '';
     $searchAddress = 'Alamat : ';
     $searchPrice = 'harga : ';
     $searchAvailable = ' Kamar Tersisa!';
