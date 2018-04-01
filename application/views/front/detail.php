@@ -41,7 +41,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailKitchen = 'Dapur';
   $detailBathroom = 'KM Dalam';
   $detailWardrobe = 'Lemari';
-  $detailFan = 'Kipas Angin';
+  $detailFan = 'Kipas';
   $detailChoose = 'Pilih Kamarmu';
   $detailNamakamar = 'Nama : ';
   $detailAddress = 'Alamat : ';
@@ -334,7 +334,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 }
                 if (res[j] == "Kipas Angin") {
                   var fas4 = 
-                  '<li rel="tooltip" data-placement="top" title="Kipas Anggin"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" ><?php echo $detailFan ?></span>'+
+                  '<li rel="tooltip" data-placement="top" title="Kipas"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" ><?php echo $detailFan ?></span>'+
                   '</li>';
                 }
 
@@ -378,7 +378,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 }
 
 function namaMhs(x,y,z){
-  $('#modalMahasiswa').html(getCookie('frontNama'));
+  myString = getCookie('frontNama');
+  $('#modalMahasiswa').html(myString.replace(/\+/g, " "));
   $('#modalHarga').html('Rp '+x+',- /<?php echo $detailMonth ?>');
   $('#modalKamar').html(y);
   bookKamar = z;

@@ -33,17 +33,17 @@
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form id="insertData">
+              <form id="insertData" onsubmit="insertDataKos()">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Username</b></label>
-                    <input type="text" class="form-control" name="id" />
+                    <input type="text" class="form-control" name="id" pattern="^[0-9a-zA-Z_-]+$" required />
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label"><b>Gender Kos</b></label>
                     <div class="col-sm-12">
                       <div class="radio-inline">
-                        <label><input type="radio" name="gender" value="pria">Pria</label>
+                        <label><input type="radio" name="gender" value="pria" checked="true">Pria</label>
                       </div>
                       <div class="radio-inline">
                         <label><input type="radio" name="gender" value="wanita">Wanita</label>
@@ -58,17 +58,17 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Nama Tempat</b></label>
-                    <input type="text" class="form-control" name="nama"/>
+                    <input type="text" class="form-control" name="nama" required/>
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label"><b>No. Telpon</b></label>
-                    <input type="text" class="form-control" name="notelp"/>
+                    <input type="text" class="form-control" name="notelp" required pattern="[0-9+\s]+" />
                   </div>
                 </div>
                 <div class="form-group row">
                  <div class="col-sm-12">
                   <label class="control-label"><b>Alamat</b></label>
-                  <input type="text" class="form-control" name="alamat"/>
+                  <input type="text" class="form-control" name="alamat" required/>
                 </div>
               </div>
               <div class="form-group row">
@@ -105,10 +105,10 @@
              </div>
              <div class="form-group">
               <label class="control-label"><b>Deskripsi</b></label>
-              <textarea class="form-control" rows="5" name="deskripsi"></textarea>
+              <textarea class="form-control" rows="5" name="deskripsi" required></textarea>
             </div>
             <div class="form-group pull-right" style="margin-top: 25px;">
-              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="insertDataKos()">
+              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="">
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
               <a href="manajemen_kos_data">

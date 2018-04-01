@@ -96,7 +96,7 @@
                   <div class="example">
                     <div class="cover height-500 height-xs-300">
                       <div class="cover-background">
-                        <img id="buktiTransfer" src="#">
+                        <img id="buktiTransfer" src="#" alt="Bukti Transfer">
                       </div>
                     </div>
                   </div>
@@ -105,7 +105,7 @@
               </div>
             </div>
             <div class="form-group pull-right">
-              <button  class="btn btn-animate btn-animate-side btn-success btn-md" id="konfirmasi" onclick="verifikasi()">
+              <button type="button" class="btn btn-animate btn-animate-side btn-success btn-md" id="konfirmasi" onclick="verifikasi()">
                 <span><i class="icon fa-check"></i> &nbsp<b>Konfirmasi Pembayaran</b></span>
               </button>
               <a href="manajemen_mahasiswa_data">
@@ -145,7 +145,7 @@
               <div class="form-group row">
                 <div class="col-sm-5">
                   <a class="booking-item-payment-img">
-                    <img id="modalImage" src=""/>
+                    <img id="modalImage" src="" style="max-width: 100%;" />
                   </a>
                 </div>
                 <div class="col-sm-7">
@@ -308,7 +308,7 @@ $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+respon
           success: function(response){
             if (response == 1) {
               alert("Verifikasi Berhasil!");
-              window.location.href = 'manajemen_mahasiswa_edit'
+              window.location.href = 'manajemen_mahasiswa_edit';
             }
           }
         });

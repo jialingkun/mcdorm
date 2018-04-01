@@ -2,7 +2,7 @@
 if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $title = 'Order Status';
   $tableth= '
-  <th class="text-center">Lodge Name</th>
+  <th class="text-center">Address</th>
   <th class="text-center">Room Name</th>
   <th class="text-center">Price</th>
   <th class="text-center">Date Arrival</th>
@@ -19,10 +19,11 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $confirmBatal = 'Do you want to cancel this order?';
   $suksesBatal = 'Order Successfuly Canceled';
   $gagalBatal = 'Failed to Cancel Order';
+  $Cancel = 'Wait';
 }else{
   $title = 'Status Pemesanan';
   $tableth= '
-  <th class="text-center">Nama Kos</th>
+  <th class="text-center">Alamat</th>
   <th class="text-center">Nama Kamar</th>
   <th class="text-center">Harga</th>
   <th class="text-center">Tanggal Masuk</th>
@@ -39,7 +40,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $confirmBatal = 'Apakah anda yakin ingin membatalkan pesanan ini?';
   $suksesBatal = 'Pesanan kamar berhasil dibatalkan';
   $gagalBatal = 'Pembatalan Pesanan Gagal';
-  
+  $Cancel = 'Tunggu';
 }
 
 ?>
@@ -156,7 +157,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                     '<td><b>'+translateStatus(response.status)+'</b></td>'+
                     '<td class="text-center">'+
                     '<a href="payment"><button type="button" class="btn btn-info btn-sm" ><i class="fa fa-upload"></i><b><?php echo $pembayaran ?></b></button></a>'+
-                    '<a ><button type="button" class="btn btn-warning btn-sm" onclick="cancelBooking()"><i class="fa fa-minus-circle"></i><b><?php echo $batal ?></b></button></a>'+
+                    '<a ><button id="cancelButton" type="button" class="btn btn-warning btn-sm" onclick="cancelBooking()"><i  class="fa fa-minus-circle"></i><b id="cancel"><?php echo $batal ?></b></button></a>'+
                     '</td>'+
                     '</tr>';
                     $('#tabelHistory').append(tr_str);
@@ -187,7 +188,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                for (var i = 0; i < len; i++) {
                 var tr_str = 
                 '<tr class="text-center" >'+
-                '<td style="background-color: white;">'+response[i].nama_kos+'</td>'+
+                '<td style="background-color: white;">'+response[i].alamat+'</td>'+
                 '<td style="background-color: white;">'+response[i].nama_kamar+'</td>'+
                 '<td style="background-color: white;">Rp '+response[i].harga+',-</td>'+
                 '<td style="background-color: white;">'+response[i].tanggal_masuk+'</td>'+
@@ -204,6 +205,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     }
 
     function cancelBooking(){
+var buttonname = $("#cancel").html();
+  $("#cancel").html("<?php echo $Cancel ?>");
+  $("#cancelButton").prop("disabled",true);
+
 
        var txt;
        if (confirm("<?php echo $confirmBatal ?>")) {
@@ -216,6 +221,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           dataType: "json",
           success: function (response) {
             if (response == 1) {
+              $("#cancel").html(buttonname);
               alert(txt);
               location.reload();
           }else{
@@ -228,11 +234,11 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 }
 
 function modalHistory(i){
-
+myString = getCookie('frontNama');
     $('#modalNamaKos').html(res[i].nama_kos);
     $('#modalAlamatKos').html(res[i].alamat);
     $('#modalGender').html(res[i].gender);
-    $('#modalMahasiswa').html(getCookie('frontNama'));
+    $('#modalMahasiswa').html(gmyString.replace(/\+/g, " "));
     $('#modalHarga').html('Rp '+res[i].harga+',- /<?php echo $detailMonth ?>');
     $('#modalKamar').html(res[i].nama_kamar);
 

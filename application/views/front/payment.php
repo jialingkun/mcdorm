@@ -42,7 +42,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $aymentSubmit = 'Setuju';
     $pPaymentCancel = 'Batal';
     $paymentTitle = 'Pembayaran Via Transfer';
-    $paymentProof = 'Bukti Transger Bank';
+    $paymentProof = 'Bukti Transfer Bank';
     $paymentDates = 'Tanggal Masuk';
     $paymentSubmit = 'Setuju';
     $paymentDetail = 'Pembayaran Pemesanan : ';
@@ -74,70 +74,82 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                     <div class="gap gap-small"></div>
                     <h4>Upload</h4>
                     <form class="cc-form" action="uploadimagepayment/<?php echo $_COOKIE['frontCookie'] ?>" method="post" enctype="multipart/form-data">
-                     <input name="file" type="file" id="uploadImage" accept="/*" onchange="loadFile(event)" />
+                        <input id="uploadFrom" name="file" type="file" id="uploadImage" accept="/*" onchange="loadFile(event)"  />
 
-                     <input type="submit" class="btn btn-success" name="Submit" value ="<?php echo $paymentSubmit ?>" style="margin-top: 15px;" /> 
-                 </form>
-             </div>
-
-             <div class="col-md-4">
-                <div class="booking-item-payment">
-                    <header class="clearfix">
-                        <a class="booking-item-payment-img">
-                            <img id="modalImage" src=""/>
-                        </a>
-                        <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
-                        <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
-                        <small id="modalGender" >jl. Semangka 5 Malang</small><br>
-
-                    </header>
-                    <ul class="booking-item-payment-details">
-                        <li>
-                            <h5><?php echo $paymentBookedby ?></h5>
-                            <p id="modalMahasiswa"><b>Joni Jono</b></p>
-                        </li>
-                        <li>
-                            <h5><?php echo $paymentDates ?></h5>
-                            <p id="modalTanggal"><b>32 Desember 2017</b></p>
-                        </li>
-                        <li>
-                            <h5><?php echo $paymentDetail ?></h5>
-                            <ul class="booking-item-payment-price">
-                                <li>
-                                    <p id="modalKamar" class="booking-item-payment-price-title"></p>
-
-                                    <p id="modalHarga" class="booking-item-payment-price-amount"><small></small>
-                                    </p> 
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
-                    <p  class="booking-item-payment-total"><?php echo $paymentTotal ?><span id="modalTotal"></span>
-                    </p>
+                        <input id="submitButton" type="submit" class="btn btn-success" name="Submit" value ="<?php echo $paymentSubmit ?>" style="margin-top: 15px;" disabled="true"/> 
+                    </form>
                 </div>
+
+                <div class="col-md-4">
+                    <div class="booking-item-payment">
+                        <header class="clearfix">
+                            <a class="booking-item-payment-img">
+                                <img id="modalImage" src=""/>
+                            </a>
+                            <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
+                            <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
+                            <small id="modalGender" >jl. Semangka 5 Malang</small><br>
+
+                        </header>
+                        <ul class="booking-item-payment-details">
+                            <li>
+                                <h5><?php echo $paymentBookedby ?></h5>
+                                <p id="modalMahasiswa"><b>Joni Jono</b></p>
+                            </li>
+                            <li>
+                                <h5><?php echo $paymentDates ?></h5>
+                                <p id="modalTanggal"><b>32 Desember 2017</b></p>
+                            </li>
+                            <li>
+                                <h5><?php echo $paymentDetail ?></h5>
+                                <ul class="booking-item-payment-price">
+                                    <li>
+                                        <p id="modalKamar" class="booking-item-payment-price-title"></p>
+
+                                        <p id="modalHarga" class="booking-item-payment-price-amount"><small></small>
+                                        </p> 
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                        <p  class="booking-item-payment-total"><?php echo $paymentTotal ?><span id="modalTotal"></span>
+                        </p>
+                    </div>
+                </div>
+                <div class="gap"></div>
             </div>
-            <div class="gap"></div>
         </div>
     </div>
 </div>
-</div>
 
 <script>
-    window.onload = function() {
-       var namaKos = null;
-       var alamatKos = null;
-       var gender = null;
-       var namaMahasiswa = null;
-       var tanggalMasuk = null;
-       var namaKamar = null;
-       var harga = null;
-       var keterangan = null;
-       var info = null;
+   window.onload = function() {
+    var urls = "<?php echo base_url() ?>photos/payment/"+getCookie("frontCookie");
+    $.get(urls)
+    .done(function() { 
+        $('#submitButton').prop('disabled',false);
+    }).fail(function() { 
+        
+    })
 
 
-       var urls='getmahasiswa/'+getCookie("frontCookie");
-       $.ajax({
+
+
+
+    var namaKos = null;
+    var alamatKos = null;
+    var gender = null;
+    var namaMahasiswa = null;
+    var tanggalMasuk = null;
+    var namaKamar = null;
+    var harga = null;
+    var keterangan = null;
+    var info = null;
+
+
+    var urls='getmahasiswa/'+getCookie("frontCookie");
+    $.ajax({
         url:"<?php echo base_url() ?>index.php/"+urls,
         type: 'get',
         dataType: "json",
@@ -167,19 +179,20 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 '<p><?php echo $paymentInfo2 ?></p>';
                 $('#keteranganPayment').append(keterangan);
             }else{
-             $('#content').remove();
-             info = 
-             '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
-             ;
-             $('#info').append(info);
-         }
+               $('#content').remove();
+               info = 
+               '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
+               ;
+               $('#info').append(info);
+           }
 
-     }
- });
+       }
+   });
 
-   }
+    
+}
 
-   function getCookie(cname) {
+function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
 
@@ -199,6 +212,9 @@ return "";
 var loadFile = function(event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
+    if ( output.src != "undefined") {
+        $('#submitButton').prop('disabled',false);        
+    }
 };
 
 

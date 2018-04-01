@@ -16,7 +16,7 @@
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">Username</label>
-                      <input type="text" class="form-control" name="id" required/>
+                      <input type="text" class="form-control" name="id" required pattern="^[0-9a-zA-Z_-]+$" />
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
