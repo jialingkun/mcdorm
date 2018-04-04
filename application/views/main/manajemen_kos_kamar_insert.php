@@ -24,7 +24,7 @@
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form id="insertData" onsubmit="insertDataKamar()">
+              <form id="insertData" onsubmit="insertDataKamar(event)">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Tipe Kamar</b></label>
@@ -101,9 +101,9 @@
 
 <script>
 
-  function insertDataKamar() {
+  function insertDataKamar(e) {
     var urls='main/insertKamar/'+getCookie("editDataKos")+"";
-    
+    e.preventDefault(); // will stop the form submission
     var dataString = $("#insertData").serialize();
     var buttonname = $("#submit").html();
     $("#submit").html("Tunggu...");

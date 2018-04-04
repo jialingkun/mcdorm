@@ -16,12 +16,12 @@
                   <div class="form-group row">
                     <div class="col-sm-6">
                       <label class="control-label">Username</label>
-                      <input type="text" class="form-control" value="321410001" id="id_mahasiswa"
+                      <input type="text" class="form-control" id="id_mahasiswa"
                       name="id_mahasiswa" disabled="true" />
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Nama</label>
-                      <input type="text" class="form-control" value="Adrianus Wiraatmadja" id="nama" name="nama" />
+                      <input type="text" class="form-control" id="nama" name="nama" />
                     </div>
                   </div>
                   <div class="form-group row">
@@ -33,12 +33,12 @@
                     </div>
                     <div class="col-sm-6">
                       <label class="control-label">Email</label>
-                      <input type="email" class="form-control" value="adrian@gmail.com" id="email" name="email" />
+                      <input type="email" class="form-control" id="email" name="email" />
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="control-label">No Telepon</label>
-                    <input type="text" class="form-control" value="08125976873" id="notelp" name="notelp" />
+                    <input type="text" class="form-control" id="notelp" name="notelp" />
                   </div>
                   <div class="col-sm-12">
                    <div class="form-group pull-right">
@@ -54,7 +54,7 @@
                       <h5 class="control-label">Alamat</h5>
                     </div>
                     <div class="col-sm-9">
-                      <h5 class="control-label">: <b id="alamat">Jl. Semangka 5</b></h5>
+                      <h5 class="control-label">: <b id="alamat"></b></h5>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -62,7 +62,7 @@
                       <h5 class="control-label">Kamar</h5>
                     </div>
                     <div class="col-sm-9">
-                      <h5 class="control-label">: <b id="kamar">Deluxe</b></h5>
+                      <h5 class="control-label">: <b id="kamar"></b></h5>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -70,7 +70,7 @@
                       <h5 class="control-label">Harga</h5>
                     </div>
                     <div class="col-sm-9">
-                      <h5 class="control-label">: <b id="harga">Rp 650.000,-</b></h5>
+                      <h5 class="control-label">: <b id="harga"></b></h5>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -78,7 +78,7 @@
                       <h5 class="control-label">Status</h5>
                     </div>
                     <div class="col-sm-9">
-                      <h5 class="control-label">: <b id="status">Rp 650.000,-</b></h5>
+                      <h5 class="control-label">: <b id="status"></b></h5>
                     </div>
                   </div>
                   <div class="form-group row">
@@ -96,7 +96,7 @@
                   <div class="example">
                     <div class="cover height-500 height-xs-300">
                       <div class="cover-background">
-                        <img id="buktiTransfer" src="#" alt="Bukti Transfer">
+                        <img id="buktiTransfer" alt="Tidak ada Bukti Transfer">
                       </div>
                     </div>
                   </div>
