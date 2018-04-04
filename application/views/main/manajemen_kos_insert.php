@@ -3,6 +3,84 @@
  height: 350px;
  width: 680px;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+#target {
+  width: 345px;
+}
+
+
 </style>
 <!-- Page -->
 <div class="page animsition">
@@ -38,7 +116,7 @@
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form id="insertData" onsubmit="insertDataKos(event)">
+              <form id="insertData" onsubmit="insertDataKos()">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Username</b></label>
@@ -110,20 +188,15 @@
              </div>
              <div class="form-group">
               <label class="control-label"><b>Deskripsi</b></label>
-              <textarea class="form-control" rows="5" name="deskripsi"></textarea>
+              <textarea class="form-control" rows="5" name="deskripsi" required></textarea>
+              <br>
+              <input id="pac-input" class="controls" type="text" placeholder="Search Box" onkeypress="if ( event.which == 13 ) return false;">
+              <div id="myMap"></div><br>
+              <input type="text" class="form-control" id="latitude" placeholder="Latitude" name="latitude" />
+              <input type="text" class="form-control" id="longitude" placeholder="Longitude" name="longitude"/>
             </div>
-
-             <div id="myMap"></div><br/>
-          <div>
-            <input id="address"  type="text" style="width:600px;"/>
-            <br/>
-            <input type="text" id="latitude" placeholder="Latitude" name="latitude" />
-            <input type="text" id="longitude" placeholder="Longitude" name="longitude"/>
-
-
-          </div>
             <div class="form-group pull-right" style="margin-top: 25px;">
-              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
+              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="">
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
               <a href="manajemen_kos_data">
@@ -133,8 +206,9 @@
               </a>
             </div>
           </form>
-         
+
         </div>
+
       </div>
       <!-- End Example Basic Form -->
     </div>
@@ -145,19 +219,20 @@
 </div>
 </div>
 <!-- End Page -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8qZVw-xIAgesHbsUvhOi8zBX-TaM0cMM"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8qZVw-xIAgesHbsUvhOi8zBX-TaM0cMM&libraries=places"></script>
 
 
 <script>
 
-  function insertDataKos(e) {
+  function insertDataKos() {
 
     var urls='main/insertkos';
-    e.preventDefault(); // will stop the form submission
     var dataString = $("#insertData").serialize();
     var buttonname = $("#submit").html();
     $("#submit").html("Tunggu...");
     $("#submitButton").prop("disabled",true);
+
+    // alert('klik');
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
       type: 'POST',
@@ -182,6 +257,8 @@
   var myLatlng = new google.maps.LatLng(-7.957260,112.589052);
   var geocoder = new google.maps.Geocoder();
   var infowindow = new google.maps.InfoWindow();
+  // var input = document.getElementById('pac-input');
+  // var searchBox = new google.maps.places.SearchBox(input);
   function initialize(){
     var mapOptions = {
       zoom: 18,
@@ -225,7 +302,57 @@
       });
     });
 
-  }
+// Create the search box and link it to the UI element.
 
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+// Create the search box and link it to the UI element.
+var input = document.getElementById('pac-input');
+var searchBox = new google.maps.places.SearchBox(input);
+map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener('bounds_changed', function() {
+          searchBox.setBounds(map.getBounds());
+        });
+
+        
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener('places_changed', function() {
+          var places = searchBox.getPlaces();
+
+          if (places.length == 0) {
+            return;
+          }
+
+
+          // For each place, get the icon, name and location.
+ 
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var latitude = place.geometry.location.lat();
+            var longitude = place.geometry.location.lng();  
+
+            var newLatLng = new google.maps.LatLng(latitude, longitude);
+            marker.setPosition(newLatLng);
+            map.panTo(newLatLng);
+            geocoder.geocode({'latLng': newLatLng }, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                  $('#address').val(results[0].formatted_address);
+                  $('#latitude').val(marker.getPosition().lat());
+                  $('#longitude').val(marker.getPosition().lng());
+                  infowindow.setContent(results[0].formatted_address);
+                  infowindow.open(map, marker);
+                }
+              }
+            });
+          });
+          // map.fitBounds(bounds);
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
