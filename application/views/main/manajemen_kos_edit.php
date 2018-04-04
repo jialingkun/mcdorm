@@ -1,4 +1,9 @@
-
+<style>
+#myMap {
+ height: 350px;
+ width: 680px;
+}
+</style>
 <!-- Page -->
 <div class="page animsition">
   <div class="page-header">
@@ -111,6 +116,14 @@
               <label class="control-label"><b>Deskripsi</b></label>
               <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
             </div>
+            <div id="myMap"></div><br/>
+            <div>
+              <input id="address"  type="text" style="width:600px;"/>
+              <br/>
+              <input type="text" id="latitude" placeholder="Latitude" name="latitude" />
+              <input type="text" id="longitude" placeholder="Longitude" name="longitude"/>
+            </div>
+
             <div class="form-group pull-right" style="margin-top: 25px;">
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
                 <span><i class="icon fa-exchange"></i> &nbsp<b id="submit">Ubah Data</b></span>
@@ -180,6 +193,7 @@
   </div>
 
   <!-- End Page -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8qZVw-xIAgesHbsUvhOi8zBX-TaM0cMM"></script>
   <script>
     function berubah(){
       $("#imageslot1").attr("src","<?php echo base_url() ?>photos/<?php echo $_COOKIE['editDataKos'] ?>/slot1.jpg");
@@ -372,6 +386,57 @@
       document.cookie = "editDataKamar="+x+"; path=<?php echo base_url(); ?>;"
     }
 
+    var map;
+    var marker;
+    var myLatlng = new google.maps.LatLng(-7.957260,112.589052);
+    var geocoder = new google.maps.Geocoder();
+    var infowindow = new google.maps.InfoWindow();
+    function initialize(){
+      var mapOptions = {
+        zoom: 18,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+
+      map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+      marker = new google.maps.Marker({
+        map: map,
+        position: myLatlng,
+        draggable: true 
+      });     
+
+      geocoder.geocode({'latLng': myLatlng }, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (results[0]) {
+            $('#address').val(results[0].formatted_address);
+            $('#latitude').val(marker.getPosition().lat());
+            $('#longitude').val(marker.getPosition().lng());
+            infowindow.setContent(results[0].formatted_address);
+            infowindow.open(map, marker);
+          }
+        }
+      });
+
+
+      google.maps.event.addListener(marker, 'dragend', function() {
+
+        geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0]) {
+              $('#address').val(results[0].formatted_address);
+              $('#latitude').val(marker.getPosition().lat());
+              $('#longitude').val(marker.getPosition().lng());
+              infowindow.setContent(results[0].formatted_address);
+              infowindow.open(map, marker);
+            }
+          }
+        });
+      });
+
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
 
   </script> 
 
