@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'backendCookie',
-                 'value'  => md5($data['admin']['id_admin']),
-                 'expire' => '0',
-             );
+                   'name'   => 'backendCookie',
+                   'value'  => md5($data['admin']['id_admin']),
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -341,7 +341,9 @@ class Main extends CI_Controller {
                 'notelp_kos' => $this->input->post('notelp'),
                 'fasilitas_kos' => $fasilitas,
                 'deskripsi_kos' => $this->input->post('deskripsi'),
-                'gender_kos' => $this->input->post('gender')
+                'gender_kos' => $this->input->post('gender'),
+                'latitude' => $this->input->post('latitude'),
+                'longitude' => $this->input->post('longitude')
             );
         }
 
@@ -378,7 +380,9 @@ class Main extends CI_Controller {
             'notelp_kos' => $this->input->post('notelp'),
             'fasilitas_kos' => $fasilitas,
             'deskripsi_kos' => $this->input->post('deskripsi'),
-            'gender_kos' => $this->input->post('gender')
+            'gender_kos' => $this->input->post('gender'),
+            'latitude' => $this->input->post('latitude'),
+            'longitude' => $this->input->post('longitude')
         );
 
         $insertStatus = $this->main_model->insert_new_kos($data);
