@@ -28,6 +28,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
  $detailWait = 'Wait...';
  $detailFfailed = 'Order Failed, maybe you have another order';
 
+ $labelKosMap = "Dorm Location";
+
 
 }else{
   $detailGender = 'Jenis Kelamin :';    
@@ -56,9 +58,90 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailCancel = 'Batal';
   $detailWait = 'Tunggu...';
   $detailFfailed = 'Pemesanan gagal, mungkin anda memiliki pesanan lain';
+
+  $labelKosMap = "Lokasi Kos";
 }
 
 ?>
+
+<style>
+#myMap {
+ height: 350px;
+ width: 100%;
+}
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+#target {
+  width: 345px;
+}
+
+
+</style>
 
 <div class="container">
   <div class="booking-item-details">
@@ -157,6 +240,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         <p id="deskripsiKos"></p>
       </div>
     </div>
+    <div id="myMap"></div>
     <div class="gap gap-small"></div>
     <h3><?php echo $detailChoose ?></h3>
     <div class="row">
@@ -236,9 +320,26 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 
 </div>
 
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8qZVw-xIAgesHbsUvhOi8zBX-TaM0cMM"></script>
 
 <script>
+  var map;
+  var myLatlng = new google.maps.LatLng(-7.957260,112.589052);
+  var infowindow = new google.maps.InfoWindow();
+  var directionsService = new google.maps.DirectionsService();
+
+  function initialize(){
+    var mapOptions = {
+      zoom: 18,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById("myMap"), mapOptions); 
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
   window.onload = function() {
     var tanggalMasuk = null;
     var bookKamar = null;
@@ -285,6 +386,48 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             $('#fasilitasicon6').css('background-color','');
           }
         }
+
+        var KosLatlng = new google.maps.LatLng(response.latitude,response.longitude);
+
+        var directionsRequest = {
+          origin: response.latitude+","+response.longitude,
+          destination: "-7.957260,112.589052",
+          travelMode: google.maps.DirectionsTravelMode.DRIVING,
+          unitSystem: google.maps.UnitSystem.METRIC
+        };
+
+        directionsService.route(
+          directionsRequest,
+          function(response, status)
+          {
+            if (status == google.maps.DirectionsStatus.OK)
+            {
+              new google.maps.DirectionsRenderer({
+                map: map,
+                directions: response
+              });
+
+              var infowindowDestination = new google.maps.InfoWindow({
+                position: myLatlng,
+                content: "Ma Chung"
+              });
+              infowindowDestination.open(map);
+
+              var infowindowOrigin = new google.maps.InfoWindow({
+                position: KosLatlng,
+                content: "<?php echo $labelKosMap ?>"
+              });
+              infowindowOrigin.open(map);
+
+              
+
+            }
+            else
+              $("#error").append("Unable to retrieve your route<br />");
+          }
+          );
+
+
       }
     });
 
@@ -372,9 +515,6 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           }
 
         });
-
-
-
 }
 
 function namaMhs(x,y,z){
