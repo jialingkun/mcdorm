@@ -22,6 +22,12 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 <h4 class="text-color">0341-557191</h4>
                 <h4><a href="#" class="text-color">McDorm@gmail.com</a></h4>
             </div>
+            <div class="col-md-4">
+                <img style="max-width: 120px; padding: 10px;" src="<?php echo base_url(); ?>assets/images/machunglogo.png" alt="Image Alternative text" title="Image Title" />
+                <img style="max-width: 120px; padding: 10px;" src="<?php echo base_url(); ?>assets/images/mdc.jpg" alt="Image Alternative text" title="Image Title" />
+                
+            </div>
+
         </div>
     </div>
 </footer>

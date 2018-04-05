@@ -34,6 +34,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <a class="logo" href="<?php echo base_url(); ?>index.php">
+                        
                         <img src="<?php echo base_url(); ?>assets/images/logo.png"/>
                     </a>
                 </div>

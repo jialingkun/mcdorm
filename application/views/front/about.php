@@ -1,10 +1,10 @@
 
 <?php 
 if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
-    $aboutInfo = "Mc'Lodge is a website that provides information about the booking system and living place for Ma Chung University students. A place to live that we recommend, we prepare well so that the students who stay can live comfortably and be able to follow the processes studied at the University.";
+    $aboutInfo = "McDorm is a website that provides information about the booking system and living place for Ma Chung University students. A place to live that we recommend, we prepare well so that the students who stay can live comfortably and be able to follow the processes studied at the University.";
     $aboutUs = 'About Us';
 }else{
-    $aboutInfo = "Mc'Lodge merupakan sebuah website yang menyediakan informasi dan sistem pemesanan mengenai tempat tinggal bagi mahasiswa Ma Chung. Tempat tinggal yang kami rekomendasikan telah kami tinjau kelayakannya sehingga para mahasiswa yang menghuni dapat bertempat tinggal dengan nyaman dan dapat mengikuti proses belajar di Universitas dengan baik.";
+    $aboutInfo = "McDorm merupakan sebuah website yang menyediakan informasi dan sistem pemesanan mengenai tempat tinggal bagi mahasiswa Ma Chung. Tempat tinggal yang kami rekomendasikan telah kami tinjau kelayakannya sehingga para mahasiswa yang menghuni dapat bertempat tinggal dengan nyaman dan dapat mengikuti proses belajar di Universitas dengan baik.";
     $aboutUs = 'Tentang Kami';
 }
 ?>
