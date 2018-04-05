@@ -3,7 +3,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 	$tagline = '
 	<div class="tagline visible-lg" id="tagline"><span>Need Lodge?</span>
 	<ul>
-	<li class="active">McLodge</li>
+	<li class="active">McDorm</li>
 	<li>Ma Chung Lodge</li>
 	</ul>
 	</div>';
@@ -22,7 +22,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 	$tagline = '
 	<div class="tagline visible-lg" id="tagline"><span>Cari Kos ?</span>
 	<ul>
-	<li class="active">McLodge</li>
+	<li class="active">McDorm</li>
 	<li>di Ma Chung aja</li>
 	</ul>
 	</div>';
