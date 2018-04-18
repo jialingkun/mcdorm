@@ -17,7 +17,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
  $detailNamakamar = 'Name : ';
  $detailAddress = 'Address : ';
  $detailLeft = 'Room Left : ';
- $detailMonth = ' month';
+ $detailperMonth = ' month';
+ $detailMonth = '      ( payment for 3 months )';
  $detailOrdernow = 'Order Now';
  $detailConfirmation = 'Booking Confirmation';
  $detailBookedby = 'Booked by : ';
@@ -48,7 +49,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailNamakamar = 'Nama : ';
   $detailAddress = 'Alamat : ';
   $detailLeft = 'Sisa Kamar : ';
-  $detailMonth = ' bulan';
+  $detailperMonth = ' bulan';
+  $detailMonth = '      ( pembayaran untuk 3 bulan )';
   $detailOrdernow = 'Pesan Sekarang';
   $detailConfirmation = 'Konfirmasi Booking';
   $detailBookedby = 'Dipesan oleh : ';
@@ -188,7 +190,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 <div class="col-md-6">
                   <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
                     <label><?php echo $detailEnter ?></label>
-                    <input class="date-pick form-control" type="text" value=""  onchange="tanggalMasuk = this.value" />
+                    <input data-date-format="dd/mm/yyyy" class="datepicker form-control" type="text" onchange="tanggalMasuk = this.value" />
                   </div>
                 </div>
               </div>
@@ -304,7 +306,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                   </ul>
                 </li>
               </ul>
-              <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"></span>
+              <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"> </span> <span style="font-size: 12pt; margin-left:6px;"><?php echo $detailMonth ?></span>
+
               </p>
             </div>
           </div>
@@ -500,7 +503,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                   '</div>'+
                   '<div class="col-md-5">'+
                   '<div class="pull-right">'+
-                  '<span class="booking-item-price">Rp '+response[i].harga+',-</span><span>/<?php echo $detailMonth ?></span>'+
+                  '<span class="booking-item-price">Rp '+(response[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</span><span>/<?php echo $detailperMonth ?></span>'+
                   '</div>'+
                   '<br><br><br><br>'+
                   '<button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" onclick="namaMhs(&quot;'+response[i].harga+'&quot;,&quot;'+response[i].nama_kamar+'&quot;,&quot;'+response[i].id_kamar+'&quot;)"><b><?php echo $detailOrdernow ?></b></button>'+
@@ -520,10 +523,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 function namaMhs(x,y,z){
   myString = getCookie('frontNama');
   $('#modalMahasiswa').html(myString.replace(/\+/g, " "));
-  $('#modalHarga').html('Rp '+x+',- /<?php echo $detailMonth ?>');
+  $('#modalHarga').html('Rp '+x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $detailperMonth ?>');
   $('#modalKamar').html(y);
   bookKamar = z;
-  $('#modalTotal').html('Rp '+x+',- /<?php echo $detailMonth ?>');
+  $('#modalTotal').html('Rp '+(x*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
   $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
   $('#modalTanggal').html(tanggalMasuk);
 }
@@ -574,5 +577,6 @@ function confirmBooking(){
     }
     return "";
   }
+
 
 </script>

@@ -8,7 +8,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentEnter = 'Enter Date';
     $paymentNamakamar = 'Name : ';
     $paymentAddress = 'Address : ';
-    $paymentMonth = ' month';
+    $paymentperMonth = ' month';
+    $paymentMonth = ' ( payment for 3 months )';
+    
     $paymentBankname = 'Bank Name : ';
     $paymentAlias = 'Alias : ';
     $paymentBankAccount ='Bank Account : ';
@@ -32,7 +34,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentEnter = 'Tanggal Masuk';
     $paymentNamakamar = 'Nama : ';
     $paymentAddress = 'Alamat : ';
-    $paymentMonth = ' bulan';
+    $paymentperMonth = ' bulan';
+    $paymentMonth = ' ( Pembayaran untuk 3 bulan )';
     $paymentBankname = 'Nama Bank : ';
     $paymentAlias = 'Atas Nama : ';
     $paymentBankAccount ='Akun Bank : ';
@@ -114,6 +117,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                             </li>
                         </ul>
                         <p  class="booking-item-payment-total"><?php echo $paymentTotal ?><span id="modalTotal"></span>
+                            <span style="font-size: 12pt; margin-left:6px;"><?php echo $paymentMonth ?></span>
                         </p>
                     </div>
                 </div>
@@ -160,9 +164,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             $("#modalGender").html('<?php echo $paymentGender ?>'+response.gender_kos);
             $("#modalMahasiswa").html(response.nama_mahasiswa);
             $("#modalTanggal").html(response.tanggal_masuk);
-            $("#modalHarga").html('Rp '+response.harga+',- /<?php echo $paymentMonth ?>');
+            $("#modalHarga").html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $paymentperMonth ?>');
             $("#modalKamar").html(response.nama_kamar);
-            $("#modalTotal").html('Rp '+response.harga+',- /<?php echo $paymentMonth ?>');
+            $("#modalTotal").html('Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
             if (response.status === 'Belum Bayar') {
 
                 keterangan = 
