@@ -28,7 +28,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
  $detailCancel = 'Cancel';
  $detailWait = 'Wait...';
  $detailFfailed = 'Order Failed, maybe you have another order';
-
+$detailDate = '      ( for 3 months )';
  $labelKosMap = "Dorm Location";
 
 
@@ -51,6 +51,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailLeft = 'Sisa Kamar : ';
   $detailperMonth = ' bulan';
   $detailMonth = '      ( pembayaran untuk 3 bulan )';
+  $detailDate = '      ( untuk 3 bulan )';
   $detailOrdernow = 'Pesan Sekarang';
   $detailConfirmation = 'Konfirmasi Booking';
   $detailBookedby = 'Dipesan oleh : ';
@@ -189,11 +190,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 
                 <div class="col-md-8">
                   <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
-                    <label><b><?php echo $detailEnter ?></b></label>
-                    <input class="date-pick form-control" type="text" value="" id="mySelector"  onchange="tanggalMasuk = this.value" />
-                    <label><?php echo $detailEnter ?></label>
+                    <label><b><?php echo $detailEnter ?></b><b style="color:#E74C3C"> <?php echo $detailDate ?></b></label>
                     <input data-date-format="dd/mm/yyyy" class="datepicker form-control" type="text" onchange="tanggalMasuk = this.value" />
-
                   </div>
                 </div>
               </div>
