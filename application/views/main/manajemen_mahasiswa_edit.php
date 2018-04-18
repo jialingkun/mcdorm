@@ -218,7 +218,7 @@
           $('#email').val(response.email);
           $('#alamat').html(response.alamat);
           $('#kamar').html(response.nama_kamar);
-          $('#harga').html(response.harga);
+          $('#harga').html("Rp "+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
           $('#status').html(response.status);
 
 $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+response.id_mahasiswa+".jpg");
@@ -238,9 +238,9 @@ $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+respon
           $('#modalAlamatKos').html(response.alamat);
           $('#modalGender').html(response.gender);
           $('#modalMahasiswa').html(response.nama_mahasiswa);
-          $('#modalHarga').html('Rp '+response.harga+',- /bulan');
+          $('#modalHarga').html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /bulan');
           $('#modalKamar').html('Jenis Kamar :  '+response.nama_kamar);
-          $('#modalTotal').html('Rp '+response.harga+',- /bulan');
+          $('#modalTotal').html('Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- (pembayaran untuk 3 bulan)');
           $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
           $('#modalTanggal').html(response.tanggal_masuk);
 

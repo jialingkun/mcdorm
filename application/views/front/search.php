@@ -259,7 +259,8 @@ function pagination(active){
      '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)"><?php echo $searchRoomName ?>'+dataGlobal[i].nama_kos+'</a></h5>'+
      '<p class="mb0"><small><?php echo $searchAddress ?>'+dataGlobal[i].alamat+'</small>'+
      '</p>'+
-     '<p class="mb0 text-darken"><span class="text-lg lh1em"><?php echo $searchPrice ?>'+dataGlobal[i].harga+'</span><small>/<?php echo $searchMonth ?></small>'+
+     '<p class="mb0 text-darken"><span class="text-lg lh1em"><?php echo $searchPrice ?>'+(dataGlobal[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</span><small>/<?php echo $searchMonth ?></small>'+
+
      '</p>'+
      '<p class="mb0" style="padding-right:21px; float:right; font-size: 15px;color: #ff023c"><span class="label label-danger">'+dataGlobal[i].kuota+'<?php echo $searchAvailable ?></span> </b>'+
      '</p>'+

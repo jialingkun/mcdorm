@@ -224,13 +224,14 @@ $('.nav-drop').dropit();
 
 
 $("#price-slider").ionRangeSlider({
-    min: 500000,
-    max: 2500000,
+    min: 0,
+    max: 4000000,
     type: 'double',
     prefix: "Rp",
     // maxPostfix: "+",
     prettify: false,
-    hasGrid: true
+    hasGrid: true,
+    step:10000
 });
 
 $('.i-check, .i-radio').iCheck({

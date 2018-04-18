@@ -520,6 +520,8 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
       // alert( data.id_kos);
       hapusDataKamar(data.id_kamar);
     } );
+
+      
     }
     
 
