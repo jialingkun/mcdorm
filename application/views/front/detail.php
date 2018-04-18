@@ -187,10 +187,13 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
               <h3><?php echo $detailOrder ?></h3>
               <div class="row">
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                   <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
+                    <label><b><?php echo $detailEnter ?></b></label>
+                    <input class="date-pick form-control" type="text" value="" id="mySelector"  onchange="tanggalMasuk = this.value" />
                     <label><?php echo $detailEnter ?></label>
                     <input data-date-format="dd/mm/yyyy" class="datepicker form-control" type="text" onchange="tanggalMasuk = this.value" />
+
                   </div>
                 </div>
               </div>
