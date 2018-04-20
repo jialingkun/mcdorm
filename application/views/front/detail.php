@@ -191,7 +191,7 @@ $detailDate = '      ( for 3 months )';
                 <div class="col-md-8">
                   <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
                     <label><b><?php echo $detailEnter ?></b><b style="color:#E74C3C"> <?php echo $detailDate ?></b></label>
-                    <input data-date-format="dd/mm/yyyy" class="datepicker form-control" type="text" onchange="tanggalMasuk = this.value" />
+                    <input data-date-format="dd/mm/yyyy" class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
                   </div>
                 </div>
               </div>
