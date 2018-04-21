@@ -9,7 +9,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentNamakamar = 'Name : ';
     $paymentAddress = 'Address : ';
     $paymentperMonth = ' month';
-    $paymentMonth = ' ( payment for 3 months )';
+    $paymentMonth = ' ( 3 months payment)';
     
     $paymentBankname = 'Bank Name : ';
     $paymentAlias = 'Alias : ';
@@ -35,7 +35,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentNamakamar = 'Nama : ';
     $paymentAddress = 'Alamat : ';
     $paymentperMonth = ' bulan';
-    $paymentMonth = ' ( Pembayaran untuk 3 bulan )';
+    $paymentMonth = ' ( Pembayaran 3 bulan )';
     $paymentBankname = 'Nama Bank : ';
     $paymentAlias = 'Atas Nama : ';
     $paymentBankAccount ='Akun Bank : ';
@@ -70,7 +70,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                     <h4><?php echo $paymentTitle ?></h4>
                     <ul class="card-select">
                         <li>
-                            <img id="output" src="<?php echo base_url(); ?>photos/payment/<?php echo $_COOKIE['frontCookie'] ?>.jpg" />
+                            <img id="output" src="" />
                             <p><b><?php echo $paymentProof ?></b><br></p>
                         </li>
                     </ul>
@@ -87,7 +87,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                     <div class="booking-item-payment">
                         <header class="clearfix">
                             <a class="booking-item-payment-img">
-                                <img id="modalImage" src=""/>
+                                <img id="modalImage" />
                             </a>
                             <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
                             <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
@@ -128,13 +128,13 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 </div>
 
 <script>
-   window.onload = function() {
+ window.onload = function() {
     var urls = "<?php echo base_url() ?>photos/payment/"+getCookie("frontCookie");
     $.get(urls)
     .done(function() { 
         $('#submitButton').prop('disabled',false);
     }).fail(function() { 
-        
+
     })
 
 
@@ -169,6 +169,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             $("#modalTotal").html('Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
             if (response.status === 'Belum Bayar') {
 
+                document.getElementById('output').src = "about:blank";
+
                 keterangan = 
                 '<p><?php echo $paymentInfo ?>'+
                 '</p>'+
@@ -179,19 +181,22 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 $('#keteranganPayment').append(keterangan);
 
             }else if(response.status === 'Belum Verifikasi'){
+
+                document.getElementById('output').src = "<?php echo base_url(); ?>photos/payment/<?php echo $_COOKIE['frontCookie'] ?>.jpg";
+
                 keterangan = 
                 '<p><?php echo $paymentInfo2 ?></p>';
                 $('#keteranganPayment').append(keterangan);
             }else{
-               $('#content').remove();
-               info = 
-               '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
-               ;
-               $('#info').append(info);
-           }
+             $('#content').remove();
+             info = 
+             '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
+             ;
+             $('#info').append(info);
+         }
 
-       }
-   });
+     }
+ });
 
     
 }

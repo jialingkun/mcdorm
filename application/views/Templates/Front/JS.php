@@ -21,9 +21,9 @@
 <script src="<?php echo base_url(); ?>assets/js/switcher.js"></script>
 
 
-<script>
+<!-- <script>
     $('.datepicker').datepicker({
         startDate: '+4d',
         endDate: '+4m'
     });
-</script>
+</script> -->

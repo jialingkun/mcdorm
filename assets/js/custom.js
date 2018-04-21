@@ -74,14 +74,13 @@ $('.typeahead').typeahead({
 });
 
 
-$('input.date-pick, .input-daterange, .date-pick-inline').datepicker({
-    todayHighlight: true
+
+$('input.date-pick').datepicker({
+    startDate: '+4d',
+    endDate: '+4m',
 });
 
-
-
-$('input.date-pick, .input-daterange input[name="start"]').datepicker('setDate', 'today');
-$('.input-daterange input[name="end"]').datepicker('setDate', '+7d');
+$('input.date-pick').datepicker('setDate','+6d');
 
 $('input.time-pick').timepicker({
     minuteStep: 15,
