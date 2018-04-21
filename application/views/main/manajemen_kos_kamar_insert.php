@@ -65,6 +65,18 @@
                      <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Kipas Angin" />
                      <label>Kipas Angin</label>
                    </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Meja" />
+                     <label>Meja</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Kursi" />
+                     <label>Kursi</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Twin Bed" />
+                     <label>Twin Bed</label>
+                   </div>
                   
                  </div>
                </div>

@@ -108,9 +108,7 @@ html, body {
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot7/temp" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot8/temp" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot9/temp" class="dropzone" id="my-awesome-dropzone"></form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot10/temp" class="dropzone" id="my-awesome-dropzone"></form>
-          
-          
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot10/temp" class="dropzone" id="my-awesome-dropzone"></form>h
         </div>
         <div class="col-md-12">
           <!-- Example Basic Form -->
@@ -135,7 +133,6 @@ html, body {
                         <label><input type="radio" name="gender" value="campuran">Campuran</label>
                       </div>
                     </div>
-                    
                   </div>
                 </div>
                 <div class="form-group row">
@@ -159,16 +156,19 @@ html, body {
                   <label class="control-label"><b>Fasilitas</b></label>
                   <div class="form-group">
                     <div class="col-sm-2">
-
                      <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="WiFi"/>
                      <label for="inputUnchecked">WiFi</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Parkir"/>
-                     <label for="inputUnchecked">Parkir</label>
+                     <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Parkir Motor"/>
+                     <label for="inputUnchecked">Parkir Motor</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Nasi"/>
+                     <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Parkir Mobil"/>
+                     <label for="inputUnchecked">Parkir Mobil</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Nasi Putih"/>
                      <label for="inputUnchecked">Nasi</label>
                    </div>
                    <div class="col-sm-2">
@@ -176,43 +176,90 @@ html, body {
                      <label for="inputUnchecked">Air Putih</label>
                    </div>
                    <div class="col-sm-2">
-                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="24Jam"/>
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Kunci 24 Jam"/>
                      <label for="inputUnchecked">24 Jam</label>
                    </div>
                    <div class="col-sm-2">
                      <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Laundry"/>
                      <label for="inputUnchecked">Laundry</label>
                    </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Kulkas"/>
+                     <label for="inputUnchecked">Kulkas</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Air Panas"/>
+                     <label for="inputUnchecked">Air Panas</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Dapur"/>
+                     <label for="inputUnchecked">Dapur</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Ruang Tamu"/>
+                     <label for="inputUnchecked">Ruang Tamu</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Ruang Makan"/>
+                     <label for="inputUnchecked">Ruang Makan</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Ruang Jemur"/>
+                     <label for="inputUnchecked">Ruang Jemur</label>
+                   </div>
                  </div>
                </div>
              </div>
-             <div class="form-group">
-              <label class="control-label"><b>Deskripsi</b></label>
-              <textarea class="form-control" rows="5" name="deskripsi" required></textarea>
-              <br>
-              <input id="pac-input" class="controls" type="text" placeholder="Search Box" onkeypress="if ( event.which == 13 ) return false;">
-              <div id="myMap"></div><br>
-              <input type="text" class="form-control" id="latitude" placeholder="Latitude" name="latitude" />
-              <input type="text" class="form-control" id="longitude" placeholder="Longitude" name="longitude"/>
-            </div>
-            <div class="form-group pull-right" style="margin-top: 25px;">
-              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="">
-                <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
+             <div class="form-group row">
+              <div class="col-sm-12">
+                <label class="control-label"><b>Akses Lingkungan</b></label>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                   <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="ATM/Bank"/>
+                   <label for="inputUnchecked">ATM/Bank</label>
+                 </div>
+                 <div class="col-sm-2">
+                   <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Warung Makan"/>
+                   <label for="inputUnchecked">Warung Makan</label>
+                 </div>
+                 <div class="col-sm-2">
+                   <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Mini Market"/>
+                   <label for="inputUnchecked">Mini Market</label>
+                 </div>
+                 <div class="col-sm-2">
+                   <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Apotek"/>
+                   <label for="inputUnchecked">Apotek</label>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="form-group">
+            <label class="control-label"><b>Deskripsi</b></label>
+            <textarea class="form-control" rows="5" name="deskripsi" required></textarea>
+            <br>
+            <label class="control-label"><b>Peta Lokasi Kos</b></label>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box" onkeypress="if ( event.which == 13 ) return false;">
+            <div id="myMap"></div><br>
+            <input type="hidden" class="form-control" id="latitude" placeholder="Latitude" name="latitude" />
+            <input type="hidden" class="form-control" id="longitude" placeholder="Longitude" name="longitude"/>
+            <input type="hidden" class="form-control" id="distance" placeholder="Distance" name="distance"/>
+          </div>
+          <div class="form-group pull-right" style="margin-top: 25px;">
+            <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" onclick="">
+              <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
+            </button>
+            <a href="manajemen_kos_data">
+              <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+                <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
               </button>
-              <a href="manajemen_kos_data">
-                <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-                  <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
-                </button>
-              </a>
-            </div>
-          </form>
-
-        </div>
-
+            </a>
+          </div>
+        </form>
       </div>
-      <!-- End Example Basic Form -->
     </div>
+    <!-- End Example Basic Form -->
   </div>
+</div>
 
 </div>
 </div>
@@ -255,6 +302,7 @@ html, body {
   var map;
   var marker;
   var myLatlng = new google.maps.LatLng(-7.957260,112.589052);
+  var machungLatlng = new google.maps.LatLng(-7.957260,112.589052);
   var geocoder = new google.maps.Geocoder();
   var infowindow = new google.maps.InfoWindow();
   // var input = document.getElementById('pac-input');
@@ -280,6 +328,7 @@ html, body {
           $('#address').val(results[0].formatted_address);
           $('#latitude').val(marker.getPosition().lat());
           $('#longitude').val(marker.getPosition().lng());
+          $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
           infowindow.setContent(results[0].formatted_address);
           infowindow.open(map, marker);
         }
@@ -295,6 +344,7 @@ html, body {
             $('#address').val(results[0].formatted_address);
             $('#latitude').val(marker.getPosition().lat());
             $('#longitude').val(marker.getPosition().lng());
+            $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
             infowindow.setContent(results[0].formatted_address);
             infowindow.open(map, marker);
           }
@@ -323,10 +373,8 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
           if (places.length == 0) {
             return;
           }
-
-
           // For each place, get the icon, name and location.
- 
+
           places.forEach(function(place) {
             if (!place.geometry) {
               console.log("Returned place contains no geometry");
@@ -344,6 +392,7 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                   $('#address').val(results[0].formatted_address);
                   $('#latitude').val(marker.getPosition().lat());
                   $('#longitude').val(marker.getPosition().lng());
+                  $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
                   infowindow.setContent(results[0].formatted_address);
                   infowindow.open(map, marker);
                 }
@@ -355,4 +404,21 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
       }
 
       google.maps.event.addDomListener(window, 'load', initialize);
+
+      var rad = function(x) {
+        return x * Math.PI / 180;
+      };
+
+      var getDistance = function(p1, p2) {
+        var R = 6378137; 
+        var dLat = rad(p2.lat() - p1.lat());
+        var dLong = rad(p2.lng() - p1.lng());
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+        Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c;
+        var e = Math.round(d);
+        return e;
+      };
     </script>

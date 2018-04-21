@@ -343,7 +343,8 @@ class Main extends CI_Controller {
                 'deskripsi_kos' => $this->input->post('deskripsi'),
                 'gender_kos' => $this->input->post('gender'),
                 'latitude' => $this->input->post('latitude'),
-                'longitude' => $this->input->post('longitude')
+                'longitude' => $this->input->post('longitude'),
+                'distance' => $this->input->post('distance')
             );
         }
 
@@ -382,7 +383,8 @@ class Main extends CI_Controller {
             'deskripsi_kos' => $this->input->post('deskripsi'),
             'gender_kos' => $this->input->post('gender'),
             'latitude' => $this->input->post('latitude'),
-            'longitude' => $this->input->post('longitude')
+            'longitude' => $this->input->post('longitude'),
+            'distance' => $this->input->post('distance')
         );
 
         $insertStatus = $this->main_model->insert_new_kos($data);

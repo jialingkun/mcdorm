@@ -65,7 +65,18 @@
                      <input type="checkbox" class="icheckbox-primary" name="fasilitas[]" id="fasilitas4" value="Kipas Angin"/>
                      <label>Kipas Angin</label>
                    </div>
-                   
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" id="fasilitas5" value="Meja" />
+                     <label>Meja</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" id="fasilitas6" value="Kursi" />
+                     <label>Kursi</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input type="checkbox" class="icheckbox-primary"  name="fasilitas[]" id="fasilitas7" value="Twin Bed" />
+                     <label>Twin Bed</label>
+                   </div>
                  </div>
                </div>
              </div>
@@ -79,9 +90,7 @@
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" >
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
-              <button type="reset" class="btn btn-animate btn-animate-side btn-warning btn-md">
-                <span><i class="icon fa-refresh"></i> &nbsp<b>Refresh</b></span>
-              </button>
+              
               <a href="manajemen_kos_data">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
@@ -136,7 +145,15 @@
             else if ($("#fasilitas4").val()==res[i]) {
               $("#fasilitas4").attr('checked', true);
             }
-            
+            else if ($("#fasilitas5").val()==res[i]) {
+              $("#fasilitas5").attr('checked', true);
+            }
+            else if ($("#fasilitas6").val()==res[i]) {
+              $("#fasilitas6").attr('checked', true);
+            }
+            else if ($("#fasilitas7").val()==res[i]) {
+              $("#fasilitas7").attr('checked', true);
+            }
           }
           
         }

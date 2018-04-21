@@ -1,10 +1,10 @@
 <?php
 if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 	$tagline = '
-	<div class="tagline visible-lg" id="tagline"><span>Need Lodge?</span>
+	<div class="tagline visible-lg" id="tagline"><span>Need Dorm?</span>
 	<ul>
 	<li class="active">McDorm</li>
-	<li>Ma Chung Lodge</li>
+	<li>Ma Chung Dorm</li>
 	</ul>
 	</div>';
 	$pesan = 'Order Now';

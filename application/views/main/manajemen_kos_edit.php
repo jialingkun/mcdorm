@@ -167,56 +167,109 @@ html, body {
                      <label for="inputUnchecked">WiFi</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas2" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Parkir"/>
-                     <label for="inputUnchecked">Parkir</label>
+                     <input id="fasilitas2" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Parkir Motor"/>
+                     <label for="inputUnchecked">Parkir Motor</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas3" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Nasi"/>
-                     <label for="inputUnchecked">Nasi</label>
+                     <input id="fasilitas3" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Parkir Mobil"/>
+                     <label for="inputUnchecked">Parkir Mobil</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas4" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Air Putih"/>
+                     <input id="fasilitas4" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Nasi Putih"/>
+                     <label for="inputUnchecked">Nasi Putih</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas5" class="icheckbox-primary" type="checkbox" name="fasilitas[]" value="Air Putih"/>
                      <label for="inputUnchecked">Air Putih</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas5" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="24Jam"/>
-                     <label for="inputUnchecked">24 Jam</label>
+                     <input id="fasilitas6" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Kunci 24 Jam"/>
+                     <label for="inputUnchecked">Kunci 24 Jam</label>
                    </div>
                    <div class="col-sm-2">
-                     <input id="fasilitas6" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Laundry" />
+                     <input id="fasilitas7" class="icheckbox-primary" type="checkbox"  name="fasilitas[]" value="Laundry" />
                      <label for="inputUnchecked">Laundry</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas8" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Kulkas"/>
+                     <label for="inputUnchecked">Kulkas</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas9" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Air Panas"/>
+                     <label for="inputUnchecked">Air Panas</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input id="fasilitas10" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Dapur"/>
+                     <label for="inputUnchecked">Dapur</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input  id="fasilitas11" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Ruang Tamu"/>
+                     <label for="inputUnchecked">Ruang Tamu</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input  id="fasilitas12" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Ruang Makan"/>
+                     <label for="inputUnchecked">Ruang Makan</label>
+                   </div>
+                   <div class="col-sm-2">
+                     <input  id="fasilitas13" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Ruang Jemur"/>
+                     <label for="inputUnchecked">Ruang Jemur</label>
                    </div>
                  </div>
                </div>
              </div>
-             <div class="form-group">
-              <label class="control-label"><b>Deskripsi</b></label>
-              <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
-              <input id="pac-input" class="controls" type="text" placeholder="Search Box" onkeypress="if ( event.which == 13 ) return false;">
+             <div class="form-group row">
+              <div class="col-sm-12">
+                <label class="control-label"><b>Akses Lingkungan</b></label>
+                <div class="form-group">
+                  <div class="col-sm-2">
+                   <input id="fasilitas14" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="ATM/Bank"/>
+                   <label for="inputUnchecked">ATM/Bank</label>
+                 </div>
+                 <div class="col-sm-2">
+                   <input id="fasilitas15" type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Warung Makan"/>
+                   <label for="inputUnchecked">Warung Makan</label>
+                 </div>
+                 <div class="col-sm-2">
+                   <input id="fasilitas16" type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Mini Market"/>
+                   <label for="inputUnchecked">Mini Market</label>
+                 </div>
+                 <div class="col-sm-2">
+                   <input id="fasilitas17" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Apotek"/>
+                   <label for="inputUnchecked">Apotek</label>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="form-group">
+            <label class="control-label"><b>Deskripsi</b></label>
+            <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
+            <input id="pac-input" class="controls" type="text" placeholder="Search Box" onkeypress="if ( event.which == 13 ) return false;">
 
-              <br>
-              <div id="myMap"></div><br/>
-              <input type="text" class="form-control" id="latitude" placeholder="Latitude" name="latitude" />
-              <input type="text" class="form-control" id="longitude" placeholder="Longitude" name="longitude"/>
-            </div>
+            <br>
+            <div id="myMap"></div><br/>
+            <input type="hidden" class="form-control" id="latitude" placeholder="Latitude" name="latitude" />
+            <input type="hidden" class="form-control" id="longitude" placeholder="Longitude" name="longitude"/>
+            <input type="hidden" class="form-control" id="distance" placeholder="Distance" name="distance"/>
+
+          </div>
 
 
-            <div class="form-group pull-right" style="margin-top: 25px;">
-              <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
-                <span><i class="icon fa-exchange"></i> &nbsp<b id="submit">Ubah Data</b></span>
+          <div class="form-group pull-right" style="margin-top: 25px;">
+            <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
+              <span><i class="icon fa-exchange"></i> &nbsp<b id="submit">Ubah Data</b></span>
+            </button>
+            <a href="manajemen_kos_data">
+              <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
+                <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
               </button>
-              <a href="manajemen_kos_data">
-                <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
-                  <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
-                </button>
-              </a>
-            </div>
-          </form>
-        </div>
+            </a>
+          </div>
+        </form>
       </div>
-      <!-- End Example Basic Form -->
     </div>
+    <!-- End Example Basic Form -->
   </div>
+</div>
 
 </div>
 </div>
@@ -281,8 +334,10 @@ html, body {
     var map;
     var marker;
     var myLatlng = new google.maps.LatLng(-1.2159058047717985,113.55818729451255);
+    var machungLatlng = new google.maps.LatLng(-7.957260,112.589052);
     var geocoder = new google.maps.Geocoder();
     var infowindow = new google.maps.InfoWindow();
+
     function initialize(){
       var mapOptions = {
         zoom: 18,
@@ -304,6 +359,8 @@ html, body {
             $('#address').val(results[0].formatted_address);
             $('#latitude').val(marker.getPosition().lat());
             $('#longitude').val(marker.getPosition().lng());
+            $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
+
             infowindow.setContent(results[0].formatted_address);
             infowindow.open(map, marker);
           }
@@ -319,6 +376,8 @@ html, body {
               $('#address').val(results[0].formatted_address);
               $('#latitude').val(marker.getPosition().lat());
               $('#longitude').val(marker.getPosition().lng());
+                                $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
+
               infowindow.setContent(results[0].formatted_address);
               infowindow.open(map, marker);
             }
@@ -366,6 +425,8 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                   $('#address').val(results[0].formatted_address);
                   $('#latitude').val(marker.getPosition().lat());
                   $('#longitude').val(marker.getPosition().lng());
+                  $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
+
                   infowindow.setContent(results[0].formatted_address);
                   infowindow.open(map, marker);
                 }
@@ -374,24 +435,24 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
           });
           // map.fitBounds(bounds);
         });
-    }
+      }
 
-    google.maps.event.addDomListener(window, 'load', initialize);
-
-
+      google.maps.event.addDomListener(window, 'load', initialize);
 
 
 
-        function berubah(){
-          $("#imageslot1").attr("src","<?php echo base_url() ?>photos/<?php echo $_COOKIE['editDataKos'] ?>/slot1.jpg");
-        }
 
-        window.onload = function() {
-          dataKamar();
-          dataKos();
-        }  
 
-        function dataKamar(){
+      function berubah(){
+        $("#imageslot1").attr("src","<?php echo base_url() ?>photos/<?php echo $_COOKIE['editDataKos'] ?>/slot1.jpg");
+      }
+
+      window.onload = function() {
+        dataKamar();
+        dataKos();
+      }  
+
+      function dataKamar(){
   // $('#slot').attr("src","http://localhost/mcdorm/photos/9019/slot1.jpg");
 
 
@@ -426,6 +487,7 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
                 $('#address').val(results[0].formatted_address);
                 $('#latitude').val(marker.getPosition().lat());
                 $('#longitude').val(marker.getPosition().lng());
+                $('#distance').val(getDistance(marker.getPosition(),machungLatlng));
                 infowindow.setContent(results[0].formatted_address);
                 infowindow.open(map, marker);
               }
@@ -459,6 +521,39 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
             }
             else if ($("#fasilitas6").val()==res[i]) {
               $("#fasilitas6").attr('checked', true);
+            }
+            else if ($("#fasilitas7").val()==res[i]) {
+              $("#fasilitas7").attr('checked', true);
+            }
+            else if ($("#fasilitas8").val()==res[i]) {
+              $("#fasilitas8").attr('checked', true);
+            }
+            else if ($("#fasilitas9").val()==res[i]) {
+              $("#fasilitas9").attr('checked', true);
+            }
+            else if ($("#fasilitas10").val()==res[i]) {
+              $("#fasilitas10").attr('checked', true);
+            }
+            else if ($("#fasilitas11").val()==res[i]) {
+              $("#fasilitas11").attr('checked', true);
+            }
+            else if ($("#fasilitas12").val()==res[i]) {
+              $("#fasilitas12").attr('checked', true);
+            }
+            else if ($("#fasilitas13").val()==res[i]) {
+              $("#fasilitas13").attr('checked', true);
+            }
+            else if ($("#fasilitas14").val()==res[i]) {
+              $("#fasilitas14").attr('checked', true);
+            }
+            else if ($("#fasilitas15").val()==res[i]) {
+              $("#fasilitas15").attr('checked', true);
+            }
+            else if ($("#fasilitas16").val()==res[i]) {
+              $("#fasilitas16").attr('checked', true);
+            }
+            else if ($("#fasilitas17").val()==res[i]) {
+              $("#fasilitas17").attr('checked', true);
             }
           }
         }
@@ -579,7 +674,9 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         success: function(response){
           if (response == 1) {
             alert("Berhasil mengubah data");
-            window.location.href = 'manajemen_kos_data';
+            // window.location.href = 'manajemen_kos_data';
+            location.reload();
+
             $("#submit").html(buttonname);
           }else{
             alert("Gagal mengubah data");
@@ -596,6 +693,22 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
     }
 
 
+    var rad = function(x) {
+      return x * Math.PI / 180;
+    };
+
+    var getDistance = function(p1, p2) {
+      var R = 6378137; 
+      var dLat = rad(p2.lat() - p1.lat());
+      var dLong = rad(p2.lng() - p1.lng());
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(rad(p1.lat())) * Math.cos(rad(p2.lat())) *
+      Math.sin(dLong / 2) * Math.sin(dLong / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c;
+      var e = Math.round(d);
+      return e;
+    };
     // alert(lat);
   </script> 
 
