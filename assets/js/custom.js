@@ -77,7 +77,7 @@ $('.typeahead').typeahead({
 
 $('input.date-pick').datepicker({
     startDate: '+4d',
-    endDate: '+4m',
+    endDate: '+7m',
 });
 
 $('input.date-pick').datepicker('setDate','+6d');
@@ -226,11 +226,22 @@ $("#price-slider").ionRangeSlider({
     min: 0,
     max: 4000000,
     type: 'double',
-    prefix: "Rp",
+    prefix: "Rp ",
     // maxPostfix: "+",
     prettify: false,
     hasGrid: true,
     step:10000
+});
+
+$("#distance-slider").ionRangeSlider({
+    min: 0,
+    max: 20,
+    type: 'double',
+    postfix: " km",
+    // maxPostfix: "+",
+    prettify: false,
+    hasGrid: true,
+    step:0.1
 });
 
 $('.i-check, .i-radio').iCheck({
