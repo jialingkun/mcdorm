@@ -85,15 +85,22 @@ class Front_model extends CI_Model {
 		return $query->result_array();
 	}
 
-	public function get_search_kamar($gender,$hargamin,$hargamax)
+	public function get_search_kamar($hargamin,$hargamax,$jarakmin,$jarakmax,$sort,$gender)
 	{
+		if ($sort == 'harga') {
+			$sortcolumn = 'harga';
+		}else{
+			$sortcolumn = 'distance';
+		}
 		$this->db->select('*');
 		$this->db->from('kamar');
 		$this->db->join('user_kos', 'kamar.id_kos = user_kos.id_kos', 'left'); 
 		$this->db->where('gender_kos',$gender);
 		$this->db->where('harga >',$hargamin);
 		$this->db->where('harga <',$hargamax);
-		$this->db->order_by("harga", "asc");
+		$this->db->where('distance >=',$jarakmin);
+		$this->db->where('distance <',$jarakmax);
+		$this->db->order_by($sortcolumn, "asc");
 		$query = $this->db->get();
 		return $query->result_array();
 	}

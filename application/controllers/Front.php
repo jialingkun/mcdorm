@@ -205,12 +205,16 @@ class Front extends CI_Controller {
             $fasilitaskamar = NULL;
         }
         $harga = explode(';',$this->input->post('harga'));
+        $jarak = explode(';',$this->input->post('jarak'));
+        $jarak[0] = $jarak[0]*1000;
+        $jarak[1] = $jarak[1]*1000;
+        $sort = $this->input->post('sort');
         $gender = $this->input->post('gender');
 
         // echo $gender."<br>".$harga[0]."<br>".$harga[1]."<br>";
         // var_dump($fasilitaskos);
 
-        $data = $this->front_model->get_search_kamar($gender,(int)$harga[0],(int)$harga[1]);
+        $data = $this->front_model->get_search_kamar((int)$harga[0],(int)$harga[1],(int)$jarak[0],(int)$jarak[1],$sort,$gender);
 
         $result = [];
         foreach ($data as &$row){ //add & to call by reference
