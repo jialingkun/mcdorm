@@ -266,7 +266,9 @@ class Main extends CI_Controller {
                 'alamat' => $mahasiswa['alamat'],
                 'harga' => $mahasiswa['harga'],
                 'gender' => $mahasiswa['gender_kos'],
-                'tanggal_masuk' => $mahasiswa['tanggal_masuk']
+                'tanggal_masuk' => $mahasiswa['tanggal_masuk'],
+                'vakum' =>$mahasiswa['vakum'],
+                'lama_pemesanan' =>$mahasiswa['lama_pemesanan']
             );
             $this->main_model->insert_new_history($dataHistory);
             $data = array(

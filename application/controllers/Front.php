@@ -178,6 +178,7 @@ class Front extends CI_Controller {
     }
 
     public function getallkamar(){
+        $dataHistory = $this->front_model->get_all_kamar();
         $data = $this->front_model->get_all_kamar();
         $result = [];
         foreach ($data as &$row){ //add & to call by reference
@@ -293,7 +294,9 @@ class Front extends CI_Controller {
                 'id_kos' => $this->input->post('idkos'),
                 'id_kamar' => $this->input->post('idkamar'),
                 'tanggal_masuk' => $this->input->post('tanggalmasuk'),
-                'kadaluarsa' => $kadaluarsa
+                'kadaluarsa' => $kadaluarsa,
+                'vakum' => $this->input->post('vakum'),
+                'lama_pemesanan' => $this->input->post('lamapemesanan')
             );
 
             $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
@@ -403,7 +406,7 @@ class Front extends CI_Controller {
         }
     }
 
-    public function gethistory($id)
+    public function gethistory($id = NULL)
     {
         $data = $this->front_model->get_history($id);
 
