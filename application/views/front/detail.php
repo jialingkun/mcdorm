@@ -5,12 +5,12 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
  $detailOrder = 'Order Detail :';
  $detailEnter = 'Enter Date';
  $detailFacility = 'Facility';
- $detailParking = 'Parking';
+ $detailParkingMotor = 'Bike Parking';
  $detailRice = 'Rice';
- $detailWater = 'Water';
+ $detailWater = 'Drinks';
  $detailHour = '24 Hours';
  $detailKitchen = 'Kitchen';
- $detailBathroom = 'Bathroom';
+ $detailFridge = 'Fridge';
  $detailWardrobe = 'Wardrobe';
  $detailFan = 'Fan';
  $detailChoose = 'Choose Your Room';
@@ -28,21 +28,31 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
  $detailCancel = 'Cancel';
  $detailWait = 'Wait...';
  $detailFfailed = 'Order Failed, maybe you have another order';
-$detailDate = '      ( for 3 months )';
+ $detailDate = '      ( for 3 months )';
  $labelKosMap = "Dorm Location";
-
+ $detailJarak = "to MaChung";
+ $detailParkingCar = "Car Parking";
+ $detail24Hour = "24 Hours ";
+ $detailHotWater = 'Hot Water';
+ $detailLivingRoom = "Living Room";
+ $detailDiningRoom = "Dining Room";
+ $detailDryRoom = "Dry Room";
+ $detailTable = "Table";
+  $detailChair = "Chair";
+  $detailTwinBed = "Twin Bed";
+  $detailToilet = "Toilet";
 
 }else{
   $detailGender = 'Jenis Kelamin :';    
   $detailOrder = 'Detil Pemesanan :';
   $detailEnter = 'Tanggal Masuk';
   $detailFacility = 'Fasilitas Kos';
-  $detailParking = 'Parkir';
+  $detailParking = 'Parkir Motor';
   $detailRice = 'Nasi';
   $detailWater = 'Air Putih';
   $detailHour = '24 Jam';
   $detailKitchen = 'Dapur';
-  $detailBathroom = 'KM Dalam';
+  $detailFridge = 'Kulkas';
   $detailWardrobe = 'Lemari';
   $detailFan = 'Kipas';
   $detailChoose = 'Pilih Kamarmu';
@@ -61,8 +71,18 @@ $detailDate = '      ( for 3 months )';
   $detailCancel = 'Batal';
   $detailWait = 'Tunggu...';
   $detailFfailed = 'Pemesanan gagal, mungkin anda memiliki pesanan lain';
-
   $labelKosMap = "Lokasi Kos";
+  $detailJarak = "ke MaChung";
+  $detailParkingCar = "Parkir Mobil";
+  $detail24Hour = "Kunci 24 Jam";
+  $detailHotWater = 'Air Panas';
+  $detailLivingRoom = "Ruang Tamu";
+  $detailDiningRoom = "Ruang Makan";
+ $detailDryRoom = "Ruang Jemur";
+ $detailTable = "Meja";
+ $detailChair = "Kursi";
+ $detailTwinBed = "Twin Bed";
+ $detailToilet = "KM Mandi";
 }
 
 ?>
@@ -151,8 +171,9 @@ $detailDate = '      ( for 3 months )';
     <header class="booking-item-header">
       <div class="row">
         <div class="col-md-7">
-          <h2 class="lh1em" id="namaKos">Kos Semangka 5</h2>
-          <p class="lh1em text-small" id="alamatKos"><i class="fa fa-map-marker"></i> Jl. Semangka 5, Bareng, Kawi, Malang</p>
+          <h2 class="lh1em" id="namaKos"></h2>
+          <p class="lh1em text-small" id="alamatKos"> </p>
+          <p class="lh1em text-small" ><span id="jarakKos"></span><span><?php echo $detailJarak ?></span></p>
           <h4><?php echo $detailGender ?> <b id="genderKos"></b></h4>
         </div>
 
@@ -206,31 +227,67 @@ $detailDate = '      ( for 3 months )';
           <div class="col-md-4">
             <ul class="booking-item-features booking-item-features-expand mb30 clearfix" >
               <li>
-                <i id="fasilitasicon1" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-wi-fi"></i><span class="booking-item-feature-title" id="fasilitas1" >WiFi</span>
+                <i id="fasilitasicon1" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-wi-fi"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas1" >WiFi</span>
               </li>
               <li>
-                <i id="fasilitasicon2" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-parking"></i><span class="booking-item-feature-title" id="fasilitas2" ><?php echo $detailParking ?></span>
+                <i id="fasilitasicon2" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-parking"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas2" ><?php echo $detailParkingMotor ?></span>
               </li>
               <li>
-                <i id="fasilitasicon3" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-restaurant"></i><span class="booking-item-feature-title" id="fasilitas3" ><?php echo $detailRice ?></span>
+                <i id="fasilitasicon8" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-parking"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas8" ><?php echo $detailParkingCar ?></span>
               </li>
               <li>
-                <i  id="fasilitasicon4" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-air"></i><span class="booking-item-feature-title" id="fasilitas4" >AC</span>
+                <i id="fasilitasicon3" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-restaurant"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas3" ><?php echo $detailRice ?></span>
               </li>
+              
 
-              <li>
-                <i id="fasilitasicon5" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-kitchen"></i><span class="booking-item-feature-title" id="fasilitas5" ><?php echo $detailWater ?></span>
-              </li>
-
+              
+              
             </ul>
           </div>
           <div class="col-md-4">
+
             <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
               <li>
-                <i id="fasilitasicon6" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-washing-machine"></i><span class="booking-item-feature-title" id="fasilitas6">Laundry</span>
+                <i id="fasilitasicon5" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-bar"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas5" ><?php echo $detailWater ?></span>
               </li>
               <li>
-                <i id="fasilitasicon7" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-bathtub"></i><span class="booking-item-feature-title" id="fasilitas7" ><?php echo $detailBathroom ?></span>
+                <i id="fasilitasicon7" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-snowflake"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas7" ><?php echo $detailFridge ?></span>
+              </li>
+              <li>
+                <i id="fasilitasicon6" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-washing-machine"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas6">Laundry</span>
+              </li>
+              <li>
+                <i id="fasilitasicon9" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-shower"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas9" ><?php echo $detailHotWater ?></span>
+              </li>
+              
+              
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+
+            <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+              <li>
+                <i id="fasilitasicon10" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-kitchen"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas10" ><?php echo $detailKitchen ?></span>
+              </li>
+              <li>
+                <i id="fasilitasicon11" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-meet"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas11"><?php echo $detailLivingRoom ?></span>
+              </li>
+              
+              <li>
+                <i id="fasilitasicon13" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-sun"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas13"><?php echo $detailDryRoom ?></span>
+              </li>
+              
+              <li>
+                <i  id="fasilitasicon4" style="background-color: rgba(0, 0, 0, 0.3);" class="fa fa-key"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas4" ><?php echo $detail24Hour ?></span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-6">  
+            <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
+
+              <li>
+                <i id="fasilitasicon12" style="background-color: rgba(0, 0, 0, 0.3);" class="fa fa-spoon"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas12" ><?php echo $detailDiningRoom ?></span>
               </li>
             </ul>
           </div>
@@ -367,27 +424,63 @@ $detailDate = '      ( for 3 months )';
         $('#hargaKos').html(response.harga);
         $('#deskripsiKos').html(response.deskripsi_kos);
         $('#genderKos').html(response.gender_kos);
+        $('#jarakKos').html((Math.round(response.distance/ 100)/10)+" km ");
+        // alert(response.distance);
         $('#modalGender').html('<?php echo $detailGender ?>'+response.gender_kos);
         var fas = response.fasilitas_kos;
         var res = fas.split(",");
         for (var i = 0; i < res.length; i++) {
-          if ($("#fasilitas1").text()==res[i]) {
+          if ("WiFi"==res[i]) {
             $('#fasilitasicon1').removeAttr('style');
+            $('#fasilitas1').css('text-decoration','none');
           }
-          if ($("#fasilitas2").text()==res[i]) {
+          if ("Parkir Motor"==res[i]) {
             $('#fasilitasicon2').css('background-color','');
+            $('#fasilitas2').css('text-decoration','none');
           }
-          if ($("#fasilitas3").text()==res[i]) {
+          if ("Nasi Putih"==res[i]) {
             $('#fasilitasicon3').css('background-color','');
+            $('#fasilitas3').css('text-decoration','none');
           }
-          if ($("#fasilitas4").text()==res[i]) {
+          if ("Kunci 24 Jam"==res[i]) {
             $('#fasilitasicon4').css('background-color','');
+            $('#fasilitas4').css('text-decoration','none');
           }
-          if ($("#fasilitas5").text()==res[i]) {
+          if ("Air Panas"==res[i]) {
             $('#fasilitasicon5').css('background-color','');
+            $('#fasilitas5').css('text-decoration','none');
           }
-          if ($("#fasilitas6").text()==res[i]) {
+          if ("Laundry"==res[i]) {
             $('#fasilitasicon6').css('background-color','');
+            $('#fasilitas6').css('text-decoration','none');
+          }
+          if ("Kulkas"==res[i]) {
+            $('#fasilitasicon7').css('background-color','');
+            $('#fasilitas7').css('text-decoration','none');
+          }
+          if ("Parkir Mobil"==res[i]) {
+            $('#fasilitasicon8').css('background-color','');
+            $('#fasilitas8').css('text-decoration','none');
+          }
+          if ("Air Panas"==res[i]) {
+            $('#fasilitasicon9').css('background-color','');
+            $('#fasilitas9').css('text-decoration','none');
+          }
+          if ("Dapur"==res[i]) {
+            $('#fasilitasicon10').css('background-color','');
+            $('#fasilitas10').css('text-decoration','none');
+          }
+          if ("Ruang Tamu"==res[i]) {
+            $('#fasilitasicon11').css('background-color','');
+            $('#fasilitas11').css('text-decoration','none');
+          }
+          if ("Ruang Makan"==res[i]) {
+            $('#fasilitasicon12').css('background-color','');
+            $('#fasilitas12').css('text-decoration','none');
+          }
+          if ("Ruang Jemur"==res[i]) {
+            $('#fasilitasicon13').css('background-color','');
+            $('#fasilitas13').css('text-decoration','none');
           }
         }
 
@@ -450,6 +543,10 @@ $detailDate = '      ( for 3 months )';
           var fas2 = '';
           var fas3 = '';
           var fas4 = '';
+          var fas5 = '';
+          var fas6 = '';
+          var fas7 = '';
+          
           var kamar = '';
 
 
@@ -476,12 +573,27 @@ $detailDate = '      ( for 3 months )';
                 if (res[j] == "KM Dalam") {
                   // $('#fasilitas_kamar3').css('background-color','');
                   var fas3 = 
-                  '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" ></span>'+
+                  '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" style="top:37px;"><?php echo $detailToilet ?></span>'+
                   '</li>';
                 }
                 if (res[j] == "Kipas Angin") {
                   var fas4 = 
                   '<li rel="tooltip" data-placement="top" title="Kipas"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" ><?php echo $detailFan ?></span>'+
+                  '</li>';
+                }
+                if (res[j] == "Meja") {
+                  var fas5 = 
+                  '<li rel="tooltip" data-placement="top" title="Meja"><i id="fasilitas_kamar5" class="fa fa-archive" ></i><span class="booking-item-feature-sign" ><?php echo $detailTable ?></span>'+
+                  '</li>';
+                }
+                if (res[j] == "Kursi") {
+                  var fas6 = 
+                  '<li rel="tooltip" bookmark-placement="top" title="Kursi"><i id="fasilitas_kamar6" class="fa fa-bookmark" ></i><span class="booking-item-feature-sign" ><?php echo $detailChair ?></span>'+
+                  '</li>';
+                }
+                if (res[j] == "Twin Bed") {
+                  var fas7 = 
+                  '<li rel="tooltip" data-placement="top" title="Twin Bed"><i id="fasilitas_kamar7" class="im im-bed" ></i><span class="booking-item-feature-sign" style="top:37px;"><?php echo $detailTwinBed ?></span>'+
                   '</li>';
                 }
 
@@ -499,7 +611,7 @@ $detailDate = '      ( for 3 months )';
                   '<ul class="booking-item-features booking-item-features-sign clearfix">'+
                   '<li rel="tooltip" data-placement="top" title="Spring Bed"><i class="im im-bed" "></i><span class="booking-item-feature-sign">x 1</span>'+
                   '</li>'+
-                  '<li rel="tooltip" data-placement="top" title="Luas Kamar"><i class="im im-width" ></i><span class="booking-item-feature-sign">'+response[i].panjang+'x'+response[i].lebar+'</span>'+fas1+fas2+fas3+fas4+
+                  '<li rel="tooltip" data-placement="top" title="Luas Kamar"><i class="im im-width" ></i><span class="booking-item-feature-sign">'+response[i].panjang+'x'+response[i].lebar+'</span>'+fas1+fas2+fas3+fas4+fas5+fas6+fas7+
                   '</ul>'+
                   '</div>'+
                   '<div class="col-md-5">'+

@@ -217,29 +217,7 @@ html, body {
                  </div>
                </div>
              </div>
-             <div class="form-group row">
-              <div class="col-sm-12">
-                <label class="control-label"><b>Akses Lingkungan</b></label>
-                <div class="form-group">
-                  <div class="col-sm-2">
-                   <input id="fasilitas14" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="ATM/Bank"/>
-                   <label for="inputUnchecked">ATM/Bank</label>
-                 </div>
-                 <div class="col-sm-2">
-                   <input id="fasilitas15" type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Warung Makan"/>
-                   <label for="inputUnchecked">Warung Makan</label>
-                 </div>
-                 <div class="col-sm-2">
-                   <input id="fasilitas16" type="checkbox" class="icheckbox-primary" name="fasilitas[]" value="Mini Market"/>
-                   <label for="inputUnchecked">Mini Market</label>
-                 </div>
-                 <div class="col-sm-2">
-                   <input id="fasilitas17" type="checkbox" class="icheckbox-primary"  name="fasilitas[]" value="Apotek"/>
-                   <label for="inputUnchecked">Apotek</label>
-                 </div>
-               </div>
-             </div>
-           </div>
+            
            <div class="form-group">
             <label class="control-label"><b>Deskripsi</b></label>
             <textarea id="deskripsi" class="form-control" rows="5" name="deskripsi"></textarea>
@@ -543,18 +521,7 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
             else if ($("#fasilitas13").val()==res[i]) {
               $("#fasilitas13").attr('checked', true);
             }
-            else if ($("#fasilitas14").val()==res[i]) {
-              $("#fasilitas14").attr('checked', true);
-            }
-            else if ($("#fasilitas15").val()==res[i]) {
-              $("#fasilitas15").attr('checked', true);
-            }
-            else if ($("#fasilitas16").val()==res[i]) {
-              $("#fasilitas16").attr('checked', true);
-            }
-            else if ($("#fasilitas17").val()==res[i]) {
-              $("#fasilitas17").attr('checked', true);
-            }
+            
           }
         }
       });

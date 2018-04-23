@@ -12,8 +12,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchMale = 'Male';
     $searchFemale = 'Female';
     $searchMix = 'Mix';
-    $searchFacility = 'Facility';
-    $searchParking = 'Parking';
+    $searchFacility = 'Dorm Facility';
+    $searchParkingMotor = 'Bike Parking';
+    $searchParkingCar = 'Car Parking';
     $searchRice = 'Rice';
     $searchWater = 'Water';
     $searchHour = '24 Hours';
@@ -31,6 +32,15 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchOrdernow = 'Order Now';
     $searchNosearch = 'Sorry, Search not Found';
     $searchFfailed = 'Search Failed';
+    $searchFacilityKamar = "Room Facility";
+    $searchChair = "Chair";
+    $searchTable = "Table";
+    $searchTwinBed = "Twin Bed";
+    $searchFridge = "Fridge";
+    $searchHotWater = "Hot Water";
+    $searchLivingRoom = "Living Room";
+    $searchDiningRoom = "Dining Room";
+    $searchDryRoom = "Dry Room";
 
 }else{
     $searchTitle = 'Hasil Pencarian';
@@ -44,8 +54,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchMale = 'Pria';
     $searchFemale = 'Wanita';
     $searchMix = 'Campuran';
-    $searchFacility = 'Fasilitas';
-    $searchParking = 'Parkir';
+    $searchFacility = 'Fasilitas Kos';
+    $searchParkingMotor = 'Parkir Motor';
+    $searchParkingCar = 'Parkir Mobil';
     $searchRice = 'Nasi';
     $searchWater = 'Air Putih';
     $searchHour = '24 Jam';
@@ -64,7 +75,17 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchSuccess = 'Berhasil Mengubah Password';
     $searchFfailed = 'Pencarian Gagal';
     $searchNosearch = 'Maaf Pencarian Tidak Ditemukan';
+    $searchFacilityKamar = "Fasilitas Kamar";
+    $searchChair = "Kursi";
+    $searchTable = "Meja";
+    $searchTwinBed = "Twin Bed";
+    $searchFridge = "Kulkas";
+    $searchHotWater = "Air Panas";
+    $searchLivingRoom = "Ruang Tamu";
+    $searchDiningRoom = "Ruang Makan";
+    $searchDryRoom = "Ruang Jemur";
 }
+
 
 ?>
 
@@ -120,12 +141,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir" /><?php echo $searchParking ?>
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Nasi"/><?php echo $searchRice ?>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Nasi Putih"/><?php echo $searchRice ?>
                                     </label>
                                 </div>
                                 <div class="checkbox">
@@ -135,10 +151,23 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                 </div>
                                 <div class="checkbox">
                                     <label>
-                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="24Jam"/><?php echo $searchHour ?>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Kunci 24 Jam"/><?php echo $searchHour ?>
+                                    </label>
+                                </div>
+                                
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="checkbox" value="WiFi">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Kulkas"/><?php echo $searchFridge ?>
                                     </label>
                                 </div>
                                 <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Air Panas" /><?php echo $searchHotWater ?>
+                                    </label>
+                                </div>
+                               <div class="checkbox">
                                     <label>
                                         <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Laundry"/>Laundry
                                     </label>
@@ -149,8 +178,39 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-sm-7">
+                            <div class="col-sm-8">
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir Motor" /><?php echo $searchParkingMotor ?>
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir Mobil" /><?php echo $searchParkingCar ?>
+                                    </label>
+                                </div>
+                                 <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Ruang Tamu "/><?php echo $searchLivingRoom ?>
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Ruang Makan"/><?php echo $searchDiningRoom ?>
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Ruang Jemur"/><?php echo $searchDryRoom ?>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="row" style="margin-left:8px;">
+                            <h5 class="booking-filters-title" style="padding-left: 15px; padding-top: 15px;"><?php echo $searchFacilityKamar ?></h5>
+                            
+                            <div class="col-sm-6">
                                 <div class="checkbox">
                                     <label>
                                         <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="AC"/>AC
@@ -171,8 +231,24 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                         <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Kipas Angin"/><?php echo $searchFan ?>
                                     </label>
                                 </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Meja"/><?php echo $searchTable ?>
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Kursi"/><?php echo $searchChair ?>
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input class="i-check" type="checkbox" name="fasilitaskamar[]" value="Twin Bed"/><?php echo $searchTwinBed ?>
+                                    </label>
+                                </div>
                             </div>
                         </div>
+
                         <input style="margin-left:65%; " id="search" class="btn btn-primary" type="submit" value="<?php echo $searchSearch ?>" />
                     </ul>
 
@@ -222,6 +298,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 type: 'POST',
                 data:dataString,
                 success: function(response){
+                    alert(response);
                     if (response != "null") {
                       $("#search").prop("disabled",true);
                       $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="<?php echo base_url(); ?>assets/images/spin.gif" />');
