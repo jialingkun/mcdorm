@@ -78,6 +78,9 @@ $('.typeahead').typeahead({
 $('input.date-pick').datepicker({
     startDate: '+4d',
     endDate: '+7m',
+    format: "mm/yyyy",
+    startView: "months", 
+    minViewMode: "months"
 });
 
 $('input.date-pick').datepicker('setDate','+6d');

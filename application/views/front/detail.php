@@ -47,7 +47,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailOrder = 'Detil Pemesanan :';
   $detailEnter = 'Tanggal Masuk';
   $detailFacility = 'Fasilitas Kos';
-  $detailParking = 'Parkir Motor';
+  $detailParkingMotor = 'Parkir Motor';
   $detailRice = 'Nasi';
   $detailWater = 'Air Putih';
   $detailHour = '24 Jam';
@@ -212,7 +212,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 <div class="col-md-8">
                   <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
                     <label><b><?php echo $detailEnter ?></b><b style="color:#E74C3C"> <?php echo $detailDate ?></b></label>
-                    <input data-date-format="dd/mm/yyyy" class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
+                    <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
                   </div>
                 </div>
               </div>
@@ -657,8 +657,10 @@ function confirmBooking(){
       data:
       {
        'idkos':getCookie('detailKamar') ,
-       'idkamar': bookKamar ,
-       'tanggalmasuk': tanggalMasuk ,
+       'idkamar': bookKamar,
+       'tanggalmasuk': tanggalMasuk,
+       'vakum': vakum,
+       'lamapemesanan': lamapemesanan
      }
      ,
      success: function(response){
