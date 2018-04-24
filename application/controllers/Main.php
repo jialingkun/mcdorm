@@ -188,7 +188,10 @@ class Main extends CI_Controller {
             'id_kos' => NULL,
             'id_kamar' => NULL,
             'tanggal_masuk' => NULL,
-            'kadaluarsa' => NULL
+            'kadaluarsa' => NULL,
+            'vakum' => 0,
+            'lama_pemesanan' => NULL,
+            'id_kamardetail' => NULL
         );
 
         $insertStatus = $this->main_model->insert_new_mahasiswa($data);
@@ -268,9 +271,23 @@ class Main extends CI_Controller {
                 'gender' => $mahasiswa['gender_kos'],
                 'tanggal_masuk' => $mahasiswa['tanggal_masuk'],
                 'vakum' =>$mahasiswa['vakum'],
-                'lama_pemesanan' =>$mahasiswa['lama_pemesanan']
+                'lama_pemesanan' =>$mahasiswa['lama_pemesanan'],
+                'id_kamardetail' =>$mahasiswa['id_kamardetail']
             );
             $this->main_model->insert_new_history($dataHistory);
+
+            if ($mahasiswa['vakum'] == 0) {
+                $statusKamarDetail = 'Vakum';
+            }else{
+                $statusKamarDetail = 'Close';
+            }
+            $dataKamarDetail = array(
+                'status_lama' => $statusKamarDetail,
+                'status_baru' => NULL
+            );
+            $this->main_model->update_kamardetail($dataKamarDetail,$mahasiswa['id_kamardetail']);
+
+
             $data = array(
                 'status' => 'Terpesan',
                 'kadaluarsa'=> NULL
@@ -280,6 +297,11 @@ class Main extends CI_Controller {
                 'status' => 'Batal',
                 'kadaluarsa'=> NULL
             );
+
+            $dataKamarDetail = array(
+                'disabled' => 0
+            );
+            $this->main_model->update_kamardetail($dataKamarDetail,$mahasiswa['id_kamardetail']);
 
             $this->deleteimagepayment($id);
         }
@@ -444,7 +466,6 @@ class Main extends CI_Controller {
             'harga' => $this->input->post('harga'),
             'panjang' => $this->input->post('panjang'),
             'lebar' => $this->input->post('lebar'),
-            'kuota' => $this->input->post('kuota'),
             'fasilitas_kamar' => $fasilitas
         );
 
@@ -537,14 +558,15 @@ class Main extends CI_Controller {
         if (empty($data))
         {
             $data = [];
-        } else if($idkamar == NULL){
-            foreach ($data as &$row){
-            //kuota dikurangi jumlah pemesan
-                $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
-            }
-        } else{
-            $data['kuota'] = $data['kuota'] - $this->getjumlahpesanankamar($data['id_kamar']);
-        }
+        } 
+        // else if($idkamar == NULL){
+        //     foreach ($data as &$row){
+        //     //kuota dikurangi jumlah pemesan
+        //         $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
+        //     }
+        // } else{
+        //     $data['kuota'] = $data['kuota'] - $this->getjumlahpesanankamar($data['id_kamar']);
+        // }
 
         echo json_encode($data);
     }
@@ -564,7 +586,6 @@ class Main extends CI_Controller {
             'harga' => $this->input->post('harga'),
             'panjang' => $this->input->post('panjang'),
             'lebar' => $this->input->post('lebar'),
-            'kuota' => $kuota,
             'fasilitas_kamar' => $fasilitas
         );
         $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);

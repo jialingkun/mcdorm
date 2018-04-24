@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 $cookie= array(
@@ -410,12 +410,18 @@ class Front extends CI_Controller {
     {
         $data = $this->front_model->get_history($id);
 
-        if (empty($data))
-        {
-            $data = [];
-        }else{
-            echo json_encode($data);
+        if ($id == NULL) {
+            //Data history di atas tanggal hari ini untuk data vakum
+            
         }
+
+        if (empty($data))
+            {
+                $data = [];
+            }else{
+                echo json_encode($data);
+            }
+        
 
 
     }

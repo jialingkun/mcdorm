@@ -2,12 +2,12 @@
 <!-- Page -->
 <div class="page animsition">
   <div class="page-header">
-    <h1 class="page-title">Manajemen Kamar</h1>
+    <h1 class="page-title">Manajemen Jenis Kamar</h1>
   </div>
   <div class="page-content">
     <div class="panel">
      <div class="panel-heading">
-      <h3 class="panel-title"><b>Data Kamar Kos</b> Semangka 5</h3>
+      <h3 class="panel-title"><b>Data Kamar Kos</b></h3>
     </div>
     <div class="panel-body container-fluid">
       <div class="row row-lg">
@@ -81,12 +81,6 @@
                  </div>
                </div>
              </div>
-             <div class="form-group row">
-              <div class="col-sm-6">
-                <label class="control-label"><b>Jumlah Kamar</b></label>
-                <input type="number" class="form-control" name="kuota" required/>
-              </div>
-            </div>
             <div class="form-group pull-right" style="margin-top: 25px;">
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md">
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>

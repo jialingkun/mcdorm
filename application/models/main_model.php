@@ -250,4 +250,18 @@ class Main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function update_kamardetail($data,$id)
+	{
+		$this->db->where('id_kamardetail', $id);
+		$this->db->update('kamar_detail', $data);
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = '1';
+		}else{
+			$return_message = 'Failed to insert record';
+		}
+
+		return $return_message;
+	}
+
 }
