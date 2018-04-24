@@ -652,4 +652,62 @@ class Main extends CI_Controller {
         echo $insertStatus;
     }
 
+    public function insertkamardetail($idkamar){
+        $status = $this->input->post('status_kamardetail');
+        if ($status == "buka") {
+            $disabled = 0;
+        } else if($status == "tutup"){
+            $disabled = 1;
+        }
+
+
+        $data = array(
+            'id_kamar' => $idkamar,
+            'nama_kamardetail' => $this->input->post('nama_kamardetail'),
+            'status_lama' => "buka",
+            'disabled' => $disabled
+        );
+
+        $insertStatus = $this->main_model->insert_new_kamardetail($data);
+
+        if ($insertStatus == 0) {
+            $insertStatus = "Failed to insert Record";
+        }
+
+        echo $insertStatus;
+    }
+
+    public function getkamardetail($idkamar,$idkamardetail = NULL)
+    {
+        $data = $this->main_model->get_data_kamardetail($idkamar,$idkamardetail);
+
+        if (empty($data))
+        {
+            $data = [];
+        }
+
+        echo json_encode($data);
+    }
+
+    //belum selesai
+    public function updatekamardetail($idkamardetail){
+        $status = $this->input->post('status_kamardetail_update');
+        if ($status == "buka") {
+            $bulanBuka = $this->input->post('bulan_buka');
+            $disabled = 0;
+        } else if($status == "tutup"){
+            $disabled = 1;
+        }
+
+        $data = array(
+            'nama_kamardetail' => $this->input->post('nama_kamardetail_update'),
+            'harga' => $this->input->post('harga'),
+            'panjang' => $this->input->post('panjang'),
+            'lebar' => $this->input->post('lebar'),
+            'fasilitas_kamar' => $fasilitas
+        );
+        $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
+        echo $insertStatus;
+    }
+
 }

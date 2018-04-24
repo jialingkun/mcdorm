@@ -229,6 +229,17 @@ class Main_model extends CI_Model {
 		return $return_message;
 	}
 
+	public function get_all_history($id=NULL)
+	{
+		if ($id == NULL){
+			$query = $this->db->get('history');
+		}else{
+			$query = $this->db->get_where('history', array('id_kamardetail' => $id));
+		}
+		
+		return $query->result_array();
+	}
+
 	public function delete($jenis, $id){
 		if ($jenis == 'mahasiswa') {
 			$this->db->where('id_mahasiswa', $id);
@@ -248,6 +259,32 @@ class Main_model extends CI_Model {
 		}
 
 		return $return_message;
+	}
+
+	public function insert_new_kamardetail($data)
+	{
+		$this->db->insert('kamar_detail', $data);
+		$insert_id = $this->db->insert_id();
+		//get insert status fail or not
+		if ($this->db->affected_rows() > 0 ) {
+			$return_message = $insert_id;
+		}else{
+			$return_message = 0;
+		}
+
+		return $return_message;
+	}
+
+	public function get_data_kamardetail($idkamar,$idkamardetail = NULL)
+	{
+		if ($idkamardetail == NULL)
+		{
+			$query = $this->db->get_where('kamar_detail', array('id_kamar' => $idkamar));
+			return $query->result_array();
+		}else{
+			$query = $this->db->get_where('kamar_detail', array('id_kamar' => $idkamar, 'id_kamardetail' => $idkamardetail));
+			return $query->row_array();
+		}
 	}
 
 	public function update_kamardetail($data,$id)
