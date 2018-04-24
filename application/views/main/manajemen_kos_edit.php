@@ -258,7 +258,7 @@ html, body {
     <!-- Panel Basic -->
     <div class="panel">
       <header class="panel-heading">
-        <h3 class="panel-title"><b>Data Kamar </b><b id="namaKamar"></b > </h3>
+        <h3 class="panel-title"><b>Jenis Kamar </b><b id="namaKamar"></b > </h3>
         <div id="exampleTableAddToolbar">
           <a href="manajemen_kos_kamar_insert">
             <button class="btn btn-info" type="button">

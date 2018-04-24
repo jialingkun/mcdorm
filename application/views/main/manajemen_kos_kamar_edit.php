@@ -7,7 +7,7 @@
   <div class="page-content">
     <div class="panel">
      <div class="panel-heading">
-      <h3 class="panel-title"><b>Data Kamar Kos</b></h3>
+      <h3 class="panel-title"><b>Data Jenis Kamar </b></h3>
     </div>
     <div class="panel-body container-fluid">
       <div class="row row-lg">
@@ -80,7 +80,7 @@
                  </div>
                </div>
              </div>
-            <div class="form-group pull-right" style="margin-top: 25px;">
+             <div class="form-group pull-right" style="margin-top: 25px;">
               <button type="submit" id="submitButton" class="btn btn-animate btn-animate-side btn-info btn-md" >
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
@@ -97,18 +97,134 @@
       <!-- End Example Basic Form -->
     </div>
   </div>
-  
 </div>
 </div>
 </div>
 </div>
 
+<div class="page animsition" style="margin-top: -50px;">
+  <div class="page-content">
+    <!-- Panel Basic -->
+    <button data-toggle='modal' data-target='#myModal' id='perbarui' type='button' class='btn btn-primary btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i><b>Perbarui</b></span></button>
+
+    <div class="panel">
+      <header class="panel-heading">
+        <h3 class="panel-title"><b>Data Kamar </b><b id="namaKamar"></b > </h3>
+        
+
+
+        <div class="panel-body">
+          <form id="insertData" onsubmit="insertData()">
+            <div class="form-group row">
+
+              <div class="col-sm-3">
+                <label class="control-label"><b>Nama Kamar</b></label>
+                <input type="text" class="form-control" name="nama_kamardetail" placeholder="Nama Kos" />
+              </div>
+              <div class="col-sm-3">
+                <label class="control-label"><b>Status Kamar</b></label>
+                <div class="col-sm-12">
+                  <div class="radio-inline">
+                    <label><input type="radio" name="status_kamardetail" value="buka" checked="true">Buka</label>
+                  </div>
+                  <div class="radio-inline">
+                    <label><input type="radio" name="status_kamardetail" value="tutup">Tutup</label>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <label class="control-label"><b></b></label>
+                <button type="submit" id="submitButton" class="btn btn-md btn-info"><i class="icon fa-plus"></i> <b>Tambah Kamar</b></button> 
+              </div>
+
+            </div>
+            <hr>
+          </form>
+
+          <table id="example" class="table table-hover dataTable table-striped width-full" >
+            <thead>
+              <tr>
+                <th>Nama Kamar</th>
+                <th>Status Kamar</th>
+                <th>Update</th>
+                <th>Hapus</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Nama Kamar</th>
+                <th>Status Kamar</th>
+                <th>Update</th>
+                <th>Hapus</th>
+              </tr>
+            </tfoot>
+            <tbody id="tabelKamar">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- End Panel Basic -->
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Data Detail Kamar</h4>
+        </div>
+        <div class="modal-body">
+          <form id="editData" onsubmit="editDetailKamar()">
+            <div class="form-group row">
+              <div class="col-sm-4">
+                <label class="control-label"><b>Nama Kamar</b></label>
+                <input type="text" class="form-control" name="edit_namakamardetail" placeholder="Nama Kos" />
+              </div>
+              <div class="col-sm-6">
+                <label class="control-label"><b>Status Kamar</b></label>
+              <div class="col-sm-12">
+                <div class="radio-inline">
+                  <label><input type="radio" name="edit_statuskamardetail" value="buka" checked="true">Buka</label>
+                </div>
+                <div class="radio-inline">
+                  <label><input type="radio" name="edit_statuskamardetail" value="tutup">Tutup</label>
+                </div>
+              </div>
+            </div>
+            <div class="input-daterange">
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
+                    <label>Tanggal Buka</label>
+                    <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="submitButton" class="btn btn-primary" data-submit="modal" onclick="editData()">Ubah Data</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 <script>
   window.onload = function() {
 
     var urls='main/getkamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
-    
+
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
       type: 'get',
@@ -195,6 +311,9 @@
     }
   });   
 }
+
+
+
 
 </script>
 <!-- End Page -->
