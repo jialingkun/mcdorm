@@ -684,6 +684,18 @@ class Main extends CI_Controller {
         if (empty($data))
         {
             $data = [];
+        }else{
+            foreach ($data as &$row){
+                if ($row['disabled']==1) {
+                    $row['status']='tutup';
+                }else{
+                    if ($row['status_baru']==NULL) {
+                        $row['status']=$row['status_lama'];
+                    }else{
+                        $row['status']=$row['status_baru'];
+                    }
+                }
+            }
         }
 
         echo json_encode($data);
