@@ -106,20 +106,15 @@
   <div class="page-content">
     <!-- Panel Basic -->
     <button data-toggle='modal' data-target='#myModal' id='perbarui' type='button' class='btn btn-primary btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i><b>Perbarui</b></span></button>
-
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title"><b>Data Kamar </b><b id="namaKamar"></b > </h3>
-        
-
-
         <div class="panel-body">
-          <form id="insertData" onsubmit="insertData()">
+          <form id="insertKamarDetail" onsubmit="insertKamarDetail(event)">
             <div class="form-group row">
-
               <div class="col-sm-3">
                 <label class="control-label"><b>Nama Kamar</b></label>
-                <input type="text" class="form-control" name="nama_kamardetail" placeholder="Nama Kos" />
+                <input type="text" class="form-control" name="nama_kamardetail" placeholder="" />
               </div>
               <div class="col-sm-3">
                 <label class="control-label"><b>Status Kamar</b></label>
@@ -134,18 +129,18 @@
               </div>
               <div class="col-sm-2">
                 <label class="control-label"><b></b></label>
-                <button type="submit" id="submitButton" class="btn btn-md btn-info"><i class="icon fa-plus"></i> <b>Tambah Kamar</b></button> 
+                <button type="submit" id="insertDetailButton" class="btn btn-md btn-info" onclick="insertKamarDetail(event)"><i class="icon fa-plus"></i> <b>Tambah Kamar</b></button> 
               </div>
-
             </div>
             <hr>
           </form>
-
           <table id="example" class="table table-hover dataTable table-striped width-full" >
             <thead>
               <tr>
                 <th>Nama Kamar</th>
-                <th>Status Kamar</th>
+                <th>Status Lama</th>
+                <th>Status Baru</th>
+                <th>Bulan Buka</th>
                 <th>Update</th>
                 <th>Hapus</th>
               </tr>
@@ -153,7 +148,9 @@
             <tfoot>
               <tr>
                 <th>Nama Kamar</th>
-                <th>Status Kamar</th>
+                <th>Status lamar</th>
+                <th>Status Baru</th>
+                <th>Bulan Buka</th>
                 <th>Update</th>
                 <th>Hapus</th>
               </tr>
@@ -180,7 +177,7 @@
           <h4 class="modal-title">Edit Data Detail Kamar</h4>
         </div>
         <div class="modal-body">
-          <form id="editData" onsubmit="editDetailKamar()">
+          <form id="editDetailKamar" onsubmit="editDetailKamar(event)">
             <div class="form-group row">
               <div class="col-sm-4">
                 <label class="control-label"><b>Nama Kamar</b></label>
@@ -188,25 +185,25 @@
               </div>
               <div class="col-sm-6">
                 <label class="control-label"><b>Status Kamar</b></label>
-              <div class="col-sm-12">
-                <div class="radio-inline">
-                  <label><input type="radio" name="edit_statuskamardetail" value="buka" checked="true">Buka</label>
-                </div>
-                <div class="radio-inline">
-                  <label><input type="radio" name="edit_statuskamardetail" value="tutup">Tutup</label>
-                </div>
-              </div>
-            </div>
-            <div class="input-daterange">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
-                    <label>Tanggal Buka</label>
-                    <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
+                <div class="col-sm-12">
+                  <div class="radio-inline">
+                    <label><input type="radio" name="edit_statuskamardetail" value="buka" checked="true">Buka</label>
+                  </div>
+                  <div class="radio-inline">
+                    <label><input type="radio" name="edit_statuskamardetail" value="tutup">Tutup</label>
                   </div>
                 </div>
               </div>
-            </div>
+              <div class="input-daterange">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
+                      <label>Tanggal Buka</label>
+                      <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </form>
         </div>
@@ -222,6 +219,50 @@
 
 <script>
   window.onload = function() {
+
+
+      $('#example').DataTable( {
+
+    "ajax": {
+      "deferLoading": 57,
+      "type": "GET",
+      "url": "<?php echo base_url(); ?>index.php/main/getkamardetail/"+getCookie("editDataKamar")+"",
+
+      "dataSrc": function ( json ) {
+        return json;
+
+      }     
+    },
+    "columns": [
+    { "data": "nama_kamardetail" },
+    { "data": "status_lama" },
+    { "data": "status_baru" },
+    { "data": "bulan_buka" },
+  {
+    "targets": -1,
+    "data": null, 
+    "defaultContent": "<button data-toggle='modal' data-target='#myModal' id='perbarui' type='button' class='btn btn-primary btn-animate-side btn-warning btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button>"
+  },
+  {
+      "targets": -1,
+      "data": null, 
+      "defaultContent": "<a  ><button id='hapusKamarDetail' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
+    }
+  ]
+
+} 
+
+);
+  $.fn.dataTable.ext.errMode = 'none';
+  $('#example tbody').on( 'click', '#perbarui', function () {
+    var table = $('#example').DataTable();
+    var data = table.row($(this).parents('tr')).data();
+      // alert( data.id_mahasiswa);
+      modalData(data.id_data,data.tanggal,data.no_tabung,data.nama_pelanggan,data.alamat_pelanggan,data.tanggal_terjual,data.tanggal_kembali,data.tanggal_kepabrik);
+
+  } );
+
+
 
     var urls='main/getkamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
 
@@ -312,6 +353,30 @@
   });   
 }
 
+
+
+function insertKamarDetail(e) {
+  var urls='main/insertkamardetail/'+getCookie("editDataKamar")+'';
+  e.preventDefault();// will stop the form submission
+  $("#insertDetailButton").prop("disabled",true);
+
+  
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data: $("#insertKamarDetail").serialize(),
+    success: function(response){
+      if (response != 0) {
+        alert("Berhasil mengubah data");
+        location.reload();
+        $("#insertDetailButton").prop("disabled",false);
+      }else{
+        alert("Gagal mengubah data");
+        $("#insertDetailButton").prop("disabled",false);
+      }
+    }
+  });   
+}
 
 
 
