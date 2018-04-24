@@ -78,7 +78,7 @@ $('.typeahead').typeahead({
 $('input.date-pick').datepicker({
     startDate: '+4d',
     endDate: '+7m',
-    format: "mm/yyyy",
+    format: "MM yyyy",
     startView: "months", 
     minViewMode: "months"
 });
