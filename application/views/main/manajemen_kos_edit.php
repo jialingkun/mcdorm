@@ -274,7 +274,6 @@ html, body {
                 <th>Harga/Bulan</th>
                 <th>Panjang (m)</th>
                 <th>lebar (m)</th>
-                <th>Kuota</th>
                 <th>Update</th>
                 <th>Hapus</th>
               </tr>
@@ -285,7 +284,6 @@ html, body {
                 <th>Harga/Bulan</th>
                 <th>Panjang (m)</th>
                 <th>lebar (m)</th>
-                <th>Kuota</th>
                 <th>Update</th>
                 <th>Hapus</th>
               </tr>
@@ -553,7 +551,6 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         { "data": "harga" },
         { "data": "panjang" },
         { "data": "lebar" },
-        { "data": "kuota" },
 
         {
           "targets": -1,

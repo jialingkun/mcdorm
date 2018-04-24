@@ -120,15 +120,15 @@ class Front_model extends CI_Model {
 	public function get_history($id=NULL)
 	{
 		if ($id == NULL){
-			date_default_timezone_set('Asia/Jakarta');
-            $now = date("m/d");
-            echo "$now";
-			//$query = $this->db->get_where('history', array('id_mahasiswa' => $id));
+			$this->db->select('*');
+		$this->db->from('kamar'); 
+		$this->db->join('history', 'history.id_kamar = kamar.id_kamar', 'left');
+		$query = $this->db->get();
 		}else{
-			//$query = $this->db->get_where('history', array('id_mahasiswa' => $id));
+			$query = $this->db->get_where('history', array('id_mahasiswa' => $id));
 		}
 		
-		//return $query->result_array();
+		return $query->result_array();
 	}
 
 }
