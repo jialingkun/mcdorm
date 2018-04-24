@@ -6,7 +6,8 @@
 <script src="<?php echo base_url(); ?>assets/vendor/mousewheel/jquery.mousewheel.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/asscrollable/jquery.asScrollable.all.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
-
+<script src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap-timepicker.js"></script>
 <!-- Plugins -->
 <script src="<?php echo base_url(); ?>assets/vendor/switchery/switchery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/intro-js/intro.js"></script>
@@ -74,6 +75,28 @@
 </script>
 
 <script>
+
+
+$('input.date-pick').datepicker({
+    startDate: '+4d',
+    endDate: '+7m',
+    format: "MM yyyy",
+    startView: "months", 
+    minViewMode: "months"
+});
+
+$('input.date-pick').datepicker('setDate','+6d');
+
+$('input.time-pick').timepicker({
+    minuteStep: 15,
+    showInpunts: false
+})
+
+$('input.date-pick-years').datepicker({
+    startView: 2
+});
+
+
   (function(document, window, $) {
     'use strict';
 
