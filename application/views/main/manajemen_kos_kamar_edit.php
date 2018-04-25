@@ -177,34 +177,34 @@
             <div class="form-group row">
               <div class="col-sm-4">
                 <label class="control-label"><b>Nama Kamar</b></label>
-                <input type="text" class="form-control" name="edit_namakamardetail" id="edit_namakamardetail" placeholder="Nama Kos" />
+                <input type="text" class="form-control" name="nama_kamardetail_update" id="edit_namakamardetail" placeholder="Nama Kos" />
               </div>
-            
+
 
               <div class="col-sm-6">
                 <label class="control-label"><b>Status Kamar</b></label>
                 <div class="col-sm-12">
                   <div class="radio-inline">
-                    <label><input type="radio" name="edit_statuskamardetail"  value="buka" checked="true">Buka</label>
+                    <label><input type="radio" name="status_kamardetail_update"  value="buka" checked="true" onclick="$('#tanggal_masuk').show();">Buka</label>
                   </div>
                   <div class="radio-inline">
-                    <label><input type="radio" name="edit_statuskamardetail" value="tutup">Tutup</label>
+                    <label><input type="radio" name="status_kamardetail_update" value="tutup" onclick="$('#tanggal_masuk').hide();">Tutup</label>
                   </div>
                 </div>
               </div>
             </div>
             <div class="form-group row">
-              <div class="col-md-6">
+              <div class="col-md-6" id="tanggal_masuk">
                 <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
                   <label class="control-label"><b>Bulan Buka</b></label>
-                  <input id="edit_tanggalMasuk" class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
+                  <input id="edit_tanggalMasuk" class="date-pick form-control" name="bulan_buka" type="text" onchange="tanggalMasuk = this.value" />
                 </div>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" id="editDetailButton" class="btn btn-primary" data-submit="modal" onclick="editKamarDetail()">Ubah Data</button>
+          <button type="button" id="editDetailButton" class="btn btn-primary" data-submit="modal" onclick="editKamarDetail(event)">Ubah Data</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -213,6 +213,8 @@
 </div>
 
 <script>
+
+  var id_kamar = null;
   window.onload = function() {
     $('#example').DataTable( {
       "ajax": {
@@ -246,7 +248,7 @@
       var table = $('#example').DataTable();
       var data = table.row($(this).parents('tr')).data();
       // alert(data.nama_kamardetail+data.status+data.bulan_buka);
-      dataModal(data.nama_kamardetail,data.status,data.bulan_buka);
+      dataModal(data.id_kamardetail,data.nama_kamardetail,data.status,data.bulan_buka);
     } );
 
 // $('#example tbody').on( 'click', '#hapusKamarDetail', function () {
@@ -367,26 +369,26 @@ function insertKamarDetail(e) {
   });   
 }
 
-// function editKamarDetail(e) {
-//   var urls='main/insertkamardetail/'+getCookie("editDataKamar")+'';
-//   e.preventDefault();// will stop the form submission
-//   $("#editDetailButton").prop("disabled",true);
-//   $.ajax({
-//     url:"<?php echo base_url() ?>index.php/"+urls,
-//     type: 'POST',
-//     data: $("#editKamarDetail").serialize(),
-//     success: function(response){
-//       if (response != 0) {
-//         alert("Berhasil mengubah data");
-//         location.reload();
-//         $("#editDetailButton").prop("disabled",false);
-//       }else{
-//         alert("Gagal mengubah data");
-//         $("#editDetailButton").prop("disabled",false);
-//       }
-//     }
-//   });   
-// }
+function editKamarDetail(e) {
+  var urls='main/updatekamardetail/'+id_kamar;
+  e.preventDefault();// will stop the form submission
+  $("#editDetailButton").prop("disabled",true);
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data: $("#editKamarDetail").serialize(),
+    success: function(response){
+      if (response == 1) {
+        alert("Berhasil mengubah data");
+        location.reload();
+        $("#editDetailButton").prop("disabled",false);
+      }else{
+        alert(response);
+        $("#editDetailButton").prop("disabled",false);
+      }
+    }
+  });   
+}
 
 
     // function hapusDatakamar(x){
@@ -412,12 +414,29 @@ function insertKamarDetail(e) {
     //   }
     // }
 
-    function dataModal(nama,status,bulan_buka){
+    function dataModal(id,nama,status,bulan_buka){
   // alert(nama+status+bulan_buka);
   $('#edit_namakamardetail').val(nama);
-  $("input[type=radio][name=edit_statuskamardetail][value="+status+"]").prop("checked",true);
-  $('#edit_tanggalMasuk').val(bulan_buka);
-  $('#edit_tanggalMasuk').datepicker('setDate', bulan_buka); 
+
+  if (status == "tutup") {
+    $('#tanggal_masuk').hide();
+    $("input[type=radio][name=status_kamardetail_update][value='tutup']").prop("checked",true);
+  }else{
+    $('#tanggal_masuk').show();
+    $("input[type=radio][name=status_kamardetail_update][value='buka']").prop("checked",true);
+  }
+  
+
+  
+  // $('#edit_tanggalMasuk').val(bulan_buka);
+  
+  // $('#edit_tanggalMasuk').datepicker('setDate', 'today' ); 
+  id_kamar= id;
+  // alert(id_kamar);
+}
+
+function hideDate(){
+
 }
 
 </script>

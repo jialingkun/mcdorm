@@ -79,14 +79,14 @@
 
 
 $('input.date-pick').datepicker({
-    startDate: '+4d',
-    endDate: '+7m',
+    startDate: 'today',
+    endDate: '+24m',
     format: "MM yyyy",
     startView: "months", 
     minViewMode: "months",
 });
 
-$('input.date-pick').datepicker('setDate','+6d');
+$('input.date-pick').datepicker('setDate','today');
 
 // $('input.time-pick').timepicker({
 //     minuteStep: 15,

@@ -726,6 +726,7 @@ class Main extends CI_Controller {
 
         $insertStatus = NULL;
         if ($status == "buka") {
+            $disabled = 0;
             //rule 1: Tidak boleh open bila ada proses transaksi yang masih berlangsung
             //rule 2: Tidak boleh open bila belum mencapai bulan masuk pemesanan
             if ($this->cekprosestransaksi($idkamardetail) == true) {
@@ -753,14 +754,17 @@ class Main extends CI_Controller {
             }
         } else if($status == "tutup"){
             $disabled = 1;
+            $statusbaru = NULL;
+            $bulanbuka = NULL;
+
         }
 
-        if ($insertstatus == NULL) {
+        if ($insertStatus == NULL) {
             $data = array(
                 'nama_kamardetail' => $nama,
                 'status_baru' =>$statusbaru,
                 'bulan_buka' => $bulanbuka,
-                'disabled' => 0
+                'disabled' => $disabled
             );
 
             $insertStatus = $this->main_model->update_kamardetail($data,$idkamardetail);
