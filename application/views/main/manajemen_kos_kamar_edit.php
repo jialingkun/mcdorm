@@ -251,26 +251,26 @@
       dataModal(data.id_kamardetail,data.nama_kamardetail,data.status,data.bulan_buka);
     } );
 
-// $('#example tbody').on( 'click', '#hapusKamarDetail', function () {
-//       var table = $('#example').DataTable();
-//       var data = table.row($(this).parents('tr')).data();
+    $('#example tbody').on( 'click', '#hapusKamarDetail', function () {
+      var table = $('#example').DataTable();
+      var data = table.row($(this).parents('tr')).data();
 
-//       // hapusDataKamar(data.id_kamardetail);
-//     } );
-//    }
+      hapusDatakamar(data.id_kamardetail);
+    } );
 
 
-var urls='main/getkamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
 
-$.ajax({
-  url:"<?php echo base_url() ?>index.php/"+urls,
-  type: 'get',
-  dataType: "json",
-  success: function (response) {
-    $('#nama').val(response.nama_kamar);
-    $('#harga').val(response.harga);
-    $('#panjang').val(response.panjang);
-    $('#lebar').val(response.lebar);
+    var urls='main/getkamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
+
+    $.ajax({
+      url:"<?php echo base_url() ?>index.php/"+urls,
+      type: 'get',
+      dataType: "json",
+      success: function (response) {
+        $('#nama').val(response.nama_kamar);
+        $('#harga').val(response.harga);
+        $('#panjang').val(response.panjang);
+        $('#lebar').val(response.lebar);
           // $('#fasilitas').html(response.fasilitas_kos);
           var fas = response.fasilitas_kamar;
           var res = fas.split(",");
@@ -301,29 +301,29 @@ $.ajax({
           
         }
       });
-}
-
-
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split(';');
-
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
   }
-  return "";
-}
+
+
+  function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
 
 
-function insertfunction(e) {
-  var urls='main/updatekamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
+  function insertfunction(e) {
+    var urls='main/updatekamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
   e.preventDefault();// will stop the form submission
   var buttonname = $("#submit").html();
   $("#submit").html("Tunggu...");
@@ -391,30 +391,34 @@ function editKamarDetail(e) {
 }
 
 
-    // function hapusDatakamar(x){
-    //  var txt;
-    //  if (confirm("Apakah anda yakin ingin menghapus data kamar ini?")) {
-    //   txt = "Data kamar berhasil dihapus";
-    //   var urls = "main/securedelete/mahasiswa/"+x+"";
-    //     // alert(urls);
-    //     $.ajax({
-    //       url:"<?php echo base_url() ?>index.php/"+urls,
-    //       type: 'get',
-    //       dataType: "json",
-    //       success: function (response) {
-    //         if (response == 1) {
-    //           alert(txt);
-    //           location.reload();
-    //         }else{
-    //           alert(response);
-    //         }
-    //       }
-    //     });
-    //   } else {
-    //   }
-    // }
+function hapusDatakamar(x){
+ var txt;
+ if (confirm("Apakah anda yakin ingin menghapus data kamar ini?")) {
+  txt = "Data kamar berhasil dihapus";
+  var urls = "main/securedelete/kamardetail/"+x+"";
 
-    function dataModal(id,nama,status,bulan_buka){
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'get',
+    dataType: "json",
+    success: function (response) {
+
+      if (response == '1') {
+        alert(txt);
+        location.reload();
+      }else{
+        alert(response);
+      }
+    },
+    error: function (jqXHR, exception) {
+         alert("Tidak bisa menghapus. Kamar masih dalam proses pemesanan.");
+    }
+  });
+} else {
+}
+}
+
+function dataModal(id,nama,status,bulan_buka){
   // alert(nama+status+bulan_buka);
   $('#edit_namakamardetail').val(nama);
 
@@ -433,10 +437,6 @@ function editKamarDetail(e) {
   // $('#edit_tanggalMasuk').datepicker('setDate', 'today' ); 
   id_kamar= id;
   // alert(id_kamar);
-}
-
-function hideDate(){
-
 }
 
 </script>
