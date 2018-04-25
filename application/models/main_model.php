@@ -176,6 +176,25 @@ class Main_model extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	public function get_data_isikamardetail($idkamardetail)
+	{
+		$this->db->select('*');
+		$this->db->from('user_mahasiswa'); 
+		$this->db->where('id_kamardetail',$idkamardetail);
+		$this->db->group_start();
+		$this->db->where('status','Belum Bayar');
+		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->group_end();
+		
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		{
+			return $query->result_array();
+		}else{
+			return FALSE;
+		}
+	}
 	
 	public function get_data_kamar($idkos,$idkamar = NULL)
 	{
@@ -250,6 +269,9 @@ class Main_model extends CI_Model {
 		}else if ($jenis == 'kamar') {
 			$this->db->where('id_kamar', $id);
 			$this->db->delete('kamar');
+		}else if ($jenis == 'kamardetail') {
+			$this->db->where('id_kamardetail', $id);
+			$this->db->delete('kamar_detail');
 		}
 
 		if ($this->db->affected_rows() > 0 ) {

@@ -648,6 +648,8 @@ class Main extends CI_Controller {
             $linkedCount = $this->getjumlahpesanankos($id);
         }else if ($jenis == 'kamar') {
             $linkedCount = $this->getjumlahpesanankamar($id);
+        }else if ($jenis == 'kamardetail') {
+            $linkedCount = $this->getjumlahpesanankamardetail($id);
         }
 
         if ($linkedCount <= 0) {
@@ -657,6 +659,27 @@ class Main extends CI_Controller {
         }
         
         echo $insertStatus;
+    }
+
+    public function getjumlahpesanankamardetail($idkamardetail){
+        $data = $this->main_model->get_data_isikamardetail($idkamardetail);
+        $count = 0;
+        if ($data){
+            foreach ($data as $row){
+                if ($row['status'] == 'Belum Bayar') {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now < $expire) {
+                        $count = $count + 1;
+                    }
+                }else if($row['status'] == 'Belum Verifikasi'){
+                    $count = $count + 1;
+                }
+
+            }
+        }
+        return $count;
     }
 
     public function insertkamardetail($idkamar){
