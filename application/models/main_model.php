@@ -229,12 +229,12 @@ class Main_model extends CI_Model {
 		return $return_message;
 	}
 
-	public function get_all_history($id=NULL)
+	public function get_history($idkamardetail=NULL)
 	{
-		if ($id == NULL){
+		if ($idkamardetail == NULL){
 			$query = $this->db->get('history');
 		}else{
-			$query = $this->db->get_where('history', array('id_kamardetail' => $id));
+			$query = $this->db->get_where('history', array('id_kamardetail' => $idkamardetail));
 		}
 		
 		return $query->result_array();
@@ -275,15 +275,15 @@ class Main_model extends CI_Model {
 		return $return_message;
 	}
 
-	public function get_data_kamardetail($idkamar,$idkamardetail = NULL)
+	public function get_data_kamardetail($id, $jenis)
 	{
-		if ($idkamardetail == NULL)
+		if ($jenis == "kamardetail")
 		{
-			$query = $this->db->get_where('kamar_detail', array('id_kamar' => $idkamar));
-			return $query->result_array();
-		}else{
-			$query = $this->db->get_where('kamar_detail', array('id_kamar' => $idkamar, 'id_kamardetail' => $idkamardetail));
+			$query = $this->db->get_where('kamar_detail', array('id_kamardetail' => $id));
 			return $query->row_array();
+		}else{
+			$query = $this->db->get_where('kamar_detail', array('id_kamar' => $id));
+			return $query->result_array();
 		}
 	}
 
@@ -299,6 +299,14 @@ class Main_model extends CI_Model {
 		}
 
 		return $return_message;
+	}
+
+	public function get_mahasiswa_by_kamardetail($idkamardetail){
+		$this->db->select('*');
+		$this->db->from('user_mahasiswa'); 
+		$this->db->where('id_kamardetail',$idkamardetail);
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 
 }

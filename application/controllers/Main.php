@@ -260,7 +260,6 @@ class Main extends CI_Controller {
             );
         } else if ($jenis == 'verifikasi') {
             $mahasiswa = $this->getmahasiswaarray($id);
-            $this->main_model->minus_kuota_kamar($mahasiswa['id_kamar']);
             $dataHistory = array(
                 'id_mahasiswa' => $mahasiswa['id_mahasiswa'],
                 'id_kamar' => $mahasiswa['id_kamar'],
@@ -276,14 +275,22 @@ class Main extends CI_Controller {
             );
             $this->main_model->insert_new_history($dataHistory);
 
+            $dataKamarDetailLama = $this->main_model->get_data_kamardetail($mahasiswa['id_kamardetail'],"kamardetail");
+            $disabled = 0;
             if ($mahasiswa['vakum'] == 0) {
-                $statusKamarDetail = 'Vakum';
-            }else{
-                $statusKamarDetail = 'Close';
+                //pesan kamar kosong
+                $statusKamarDetail = 'buka terbatas';
+            }else if(($dataKamarDetailLama['status_baru'] != NULL && $dataKamarDetailLama['status_lama'] == 'buka terbatas') || $dataKamarDetailLama['status_baru'] == 'buka terbatas' ){
+                //pesan vakum pertama
+                $statusKamarDetail = 'tutup terbatas';
+            }else if(($dataKamarDetailLama['status_baru'] != NULL && $dataKamarDetailLama['status_lama'] == 'tutup terbatas') || $dataKamarDetailLama['status_baru'] == 'tutup terbatas' ){
+                //pesan vakum kedua
+                $statusKamarDetail = 'tutup';
             }
             $dataKamarDetail = array(
                 'status_lama' => $statusKamarDetail,
-                'status_baru' => NULL
+                'status_baru' => NULL,
+                'disabled' => $disabled
             );
             $this->main_model->update_kamardetail($dataKamarDetail,$mahasiswa['id_kamardetail']);
 
@@ -634,7 +641,7 @@ class Main extends CI_Controller {
     }
 
     public function securedelete($jenis, $id){
-        
+
         if ($jenis == 'mahasiswa') {
             $linkedCount = 0;
         }else if ($jenis == 'kos') {
@@ -677,9 +684,9 @@ class Main extends CI_Controller {
         echo $insertStatus;
     }
 
-    public function getkamardetail($idkamar,$idkamardetail = NULL)
+    public function getkamardetail($idkamar)
     {
-        $data = $this->main_model->get_data_kamardetail($idkamar,$idkamardetail);
+        $data = $this->main_model->get_data_kamardetail($idkamar,"kamar");
 
         if (empty($data))
         {
@@ -690,6 +697,14 @@ class Main extends CI_Controller {
                     $row['status']='tutup';
                 }else{
                     if ($row['status_baru']==NULL) {
+                        $history = $this->gethistory($row['id_kamardetail']);
+
+                        if (empty($history)) {
+                            if ($row['status_lama'] == 'buka terbatas' || $row['status_lama'] == 'tutup terbatas') {
+                                $row['status_lama'] = 'tutup';
+                            }
+                        }
+
                         $row['status']=$row['status_lama'];
                     }else{
                         $row['status']=$row['status_baru'];
@@ -701,25 +716,124 @@ class Main extends CI_Controller {
         echo json_encode($data);
     }
 
-    //belum selesai
+    
     public function updatekamardetail($idkamardetail){
+        $nama = $this->input->post('nama_kamardetail_update');
         $status = $this->input->post('status_kamardetail_update');
+        $bulanbuka = $this->input->post('bulan_buka');
+
+        $history = $this->gethistory($idkamardetail);
+
+        $insertStatus = NULL;
         if ($status == "buka") {
-            $bulanBuka = $this->input->post('bulan_buka');
-            $disabled = 0;
+            //rule 1: Tidak boleh open bila ada proses transaksi yang masih berlangsung
+            //rule 2: Tidak boleh open bila belum mencapai bulan masuk pemesanan
+            if ($this->cekprosestransaksi($idkamardetail) == true) {
+                //rule 1
+                $insertStatus = 'Tidak dapat membuka kamar. Masih ada proses transaksi yang belum selesai.';
+            }else if (empty($history)) {
+                $statusbaru = 'buka';
+            }else {
+                $terdekat = $this->gethistoryterdekat($history);
+                if ($terdekat['vakum']==0) {
+                    if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                        $statusbaru = 'buka terbatas';
+                    }else{
+                        //rule 2
+                        $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
+                    }
+                }else if ($terdekat['vakum']==1) {
+                    if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                        $statusbaru = 'tutup terbatas';
+                    }else{
+                        //rule 2
+                        $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
+                    }
+                }
+            }
         } else if($status == "tutup"){
             $disabled = 1;
         }
 
-        $data = array(
-            'nama_kamardetail' => $this->input->post('nama_kamardetail_update'),
-            'harga' => $this->input->post('harga'),
-            'panjang' => $this->input->post('panjang'),
-            'lebar' => $this->input->post('lebar'),
-            'fasilitas_kamar' => $fasilitas
-        );
-        $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
+        if ($insertstatus == NULL) {
+            $data = array(
+                'nama_kamardetail' => $nama,
+                'status_baru' =>$statusbaru,
+                'bulan_buka' => $bulanbuka,
+                'disabled' => 0
+            );
+
+            $insertStatus = $this->main_model->update_kamardetail($data,$idkamardetail);
+
+            if ($insertStatus == 0) {
+                $insertStatus = "Gagal mengubah data";
+            }
+        }
+
         echo $insertStatus;
+    }
+
+    private function gethistory($idkamardetail=NULL){
+        $data = $this->main_model->get_history($idkamardetail);
+        $result = [];
+        date_default_timezone_set('Asia/Jakarta');
+        $now = time();
+        foreach ($data as $row){
+            if ($this->monthformattotime($row['tanggal_masuk'])>$now) {
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
+
+    private function gethistoryterdekat($datahistory){
+        $empty = true;
+        $terdekat = NULL;
+        foreach ($datahistory as $row){
+            if ($empty == true) {
+                $terdekat = $row;
+                $empty = false;
+            }else if ($this->monthformattotime($row['tanggal_masuk'])<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                $terdekat = $row;
+            }
+        }
+
+        return $terdekat;
+    }
+
+    private function monthformattotime($bulanmasuk){
+        return strtotime(DateTime::createFromFormat('M Y', $bulanmasuk)->format('Y-m-d'));
+    }
+
+
+    private function cekprosestransaksi($idkamardetail)
+    {
+        $data = $this->main_model->get_mahasiswa_by_kamardetail($idkamardetail);
+
+        if (empty($data))
+        {
+            $masihproses = false;
+        } else {
+            $masihproses = false;
+            foreach ($data as &$row){ //add & to call by reference
+                unset($row['password']);
+                if ($row['status']=="Belum Bayar") {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now >= $expire) {
+                        $row['status'] = 'Expired';
+                    }
+                }
+
+                if ($row['status']=="Belum Bayar" || $row['status']=="Belum Verifikasi") {
+                    $masihproses = true;
+                }
+                
+            }
+        }
+
+        return $masihproses;
     }
 
 }
