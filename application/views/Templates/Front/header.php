@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/icomoon.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/styles.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/mystyles.css">
+    
     <script src="<?php echo base_url(); ?>assets/js/modernizr.js"></script>
 
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/switcher.css" />

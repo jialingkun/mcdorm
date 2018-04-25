@@ -138,8 +138,7 @@
             <thead>
               <tr>
                 <th>Nama Kamar</th>
-                <th>Status Lama</th>
-                <th>Status Baru</th>
+                <th>Status </th>
                 <th>Bulan Buka</th>
                 <th>Update</th>
                 <th>Hapus</th>
@@ -148,15 +147,13 @@
             <tfoot>
               <tr>
                 <th>Nama Kamar</th>
-                <th>Status lamar</th>
-                <th>Status Baru</th>
+                <th>Status</th>
                 <th>Bulan Buka</th>
                 <th>Update</th>
                 <th>Hapus</th>
               </tr>
             </tfoot>
             <tbody id="tabelKamar">
-
             </tbody>
           </table>
         </div>
@@ -169,7 +166,6 @@
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
-
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -177,112 +173,109 @@
           <h4 class="modal-title">Edit Data Detail Kamar</h4>
         </div>
         <div class="modal-body">
-          <form id="editDetailKamar" onsubmit="editDetailKamar(event)">
+          <form id="editKamarDetail" onsubmit="editKamarDetail(event)">
             <div class="form-group row">
               <div class="col-sm-4">
                 <label class="control-label"><b>Nama Kamar</b></label>
-                <input type="text" class="form-control" name="edit_namakamardetail" placeholder="Nama Kos" />
+                <input type="text" class="form-control" name="nama_kamardetail_update" id="edit_namakamardetail" placeholder="Nama Kos" />
               </div>
+
+
               <div class="col-sm-6">
                 <label class="control-label"><b>Status Kamar</b></label>
                 <div class="col-sm-12">
                   <div class="radio-inline">
-                    <label><input type="radio" name="edit_statuskamardetail" value="buka" checked="true">Buka</label>
+                    <label><input type="radio" name="status_kamardetail_update"  value="buka" checked="true" onclick="$('#tanggal_masuk').show();">Buka</label>
                   </div>
                   <div class="radio-inline">
-                    <label><input type="radio" name="edit_statuskamardetail" value="tutup">Tutup</label>
+                    <label><input type="radio" name="status_kamardetail_update" value="tutup" onclick="$('#tanggal_masuk').hide();">Tutup</label>
                   </div>
                 </div>
               </div>
-              <div class="input-daterange">
-                <div class="row">
-                  <div class="col-md-8">
-                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
-                      <label>Tanggal Buka</label>
-                      <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
-                    </div>
-                  </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-6" id="tanggal_masuk">
+                <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
+                  <label class="control-label"><b>Bulan Buka</b></label>
+                  <input id="edit_tanggalMasuk" class="date-pick form-control" name="bulan_buka" type="text" onchange="tanggalMasuk = this.value" />
                 </div>
               </div>
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" id="submitButton" class="btn btn-primary" data-submit="modal" onclick="editData()">Ubah Data</button>
+          <button type="button" id="editDetailButton" class="btn btn-primary" data-submit="modal" onclick="editKamarDetail(event)">Ubah Data</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
 <script>
+
+  var id_kamar = null;
   window.onload = function() {
+    $('#example').DataTable( {
+      "ajax": {
+        "deferLoading": 57,
+        "type": "GET",
+        "url": "<?php echo base_url(); ?>index.php/main/getkamardetail/"+getCookie("editDataKamar")+"",
+
+        "dataSrc": function ( json ) {
+          return json;
+        }     
+      },
+      "columns": [
+      { "data": "nama_kamardetail" },
+      { "data": "status" },
+      { "data": "bulan_buka" },
+      {
+        "targets": -1,
+        "data": null, 
+        "defaultContent": "<button data-toggle='modal' data-target='#myModal' id='perbarui' type='button' class='btn btn-primary btn-animate-side btn-warning btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button>"
+      },
+      {
+        "targets": -1,
+        "data": null, 
+        "defaultContent": "<a  ><button id='hapusKamarDetail' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
+      }
+      ]
+    } 
+    );
+    $.fn.dataTable.ext.errMode = 'none';
+    $('#example tbody').on( 'click', '#perbarui', function () {
+      var table = $('#example').DataTable();
+      var data = table.row($(this).parents('tr')).data();
+      // alert(data.nama_kamardetail+data.status+data.bulan_buka);
+      dataModal(data.id_kamardetail,data.nama_kamardetail,data.status,data.bulan_buka);
+    } );
+
+// $('#example tbody').on( 'click', '#hapusKamarDetail', function () {
+//       var table = $('#example').DataTable();
+//       var data = table.row($(this).parents('tr')).data();
+
+//       // hapusDataKamar(data.id_kamardetail);
+//     } );
+//    }
 
 
-      $('#example').DataTable( {
+var urls='main/getkamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
 
-    "ajax": {
-      "deferLoading": 57,
-      "type": "GET",
-      "url": "<?php echo base_url(); ?>index.php/main/getkamardetail/"+getCookie("editDataKamar")+"",
-
-      "dataSrc": function ( json ) {
-        return json;
-
-      }     
-    },
-    "columns": [
-    { "data": "nama_kamardetail" },
-    { "data": "status_lama" },
-    { "data": "status_baru" },
-    { "data": "bulan_buka" },
-  {
-    "targets": -1,
-    "data": null, 
-    "defaultContent": "<button data-toggle='modal' data-target='#myModal' id='perbarui' type='button' class='btn btn-primary btn-animate-side btn-warning btn-sm'><span><i class='icon fa-pencil'></i> &nbsp<b>Perbarui</b></span></button>"
-  },
-  {
-      "targets": -1,
-      "data": null, 
-      "defaultContent": "<a  ><button id='hapusKamarDetail' type='button' class='btn btn-animate btn-animate-side btn-danger btn-sm'><span><i class='icon fa-trash'></i> &nbsp<b>Hapus</b></span></button></a></td>"
-    }
-  ]
-
-} 
-
-);
-  $.fn.dataTable.ext.errMode = 'none';
-  $('#example tbody').on( 'click', '#perbarui', function () {
-    var table = $('#example').DataTable();
-    var data = table.row($(this).parents('tr')).data();
-      // alert( data.id_mahasiswa);
-      modalData(data.id_data,data.tanggal,data.no_tabung,data.nama_pelanggan,data.alamat_pelanggan,data.tanggal_terjual,data.tanggal_kembali,data.tanggal_kepabrik);
-
-  } );
-
-
-
-    var urls='main/getkamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
-
-    $.ajax({
-      url:"<?php echo base_url() ?>index.php/"+urls,
-      type: 'get',
-      dataType: "json",
-      success: function (response) {
-        $('#nama').val(response.nama_kamar);
-        $('#harga').val(response.harga);
-        $('#panjang').val(response.panjang);
-        $('#lebar').val(response.lebar);
-
+$.ajax({
+  url:"<?php echo base_url() ?>index.php/"+urls,
+  type: 'get',
+  dataType: "json",
+  success: function (response) {
+    $('#nama').val(response.nama_kamar);
+    $('#harga').val(response.harga);
+    $('#panjang').val(response.panjang);
+    $('#lebar').val(response.lebar);
           // $('#fasilitas').html(response.fasilitas_kos);
           var fas = response.fasilitas_kamar;
           var res = fas.split(",");
-
           for (var i = 0; i < res.length; i++) {
             // alert( res[i].replace(/\s/g, ''));
-            
             if ($("#fasilitas1").val()==res[i]) {
               $("#fasilitas1").attr('checked', true);
             }
@@ -308,29 +301,29 @@
           
         }
       });
-  }
+}
 
 
-  function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
 
-    for(var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
   }
+  return "";
+}
 
 
 
-  function insertfunction(e) {
-    var urls='main/updatekamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
+function insertfunction(e) {
+  var urls='main/updatekamar/'+getCookie("editDataKos")+'/'+getCookie("editDataKamar")+'';
   e.preventDefault();// will stop the form submission
   var buttonname = $("#submit").html();
   $("#submit").html("Tunggu...");
@@ -358,16 +351,14 @@
 function insertKamarDetail(e) {
   var urls='main/insertkamardetail/'+getCookie("editDataKamar")+'';
   e.preventDefault();// will stop the form submission
-  $("#insertDetailButton").prop("disabled",true);
-
-  
+  $("#insertDetailButton").prop("disabled",true);  
   $.ajax({
     url:"<?php echo base_url() ?>index.php/"+urls,
     type: 'POST',
     data: $("#insertKamarDetail").serialize(),
     success: function(response){
       if (response != 0) {
-        alert("Berhasil mengubah data");
+        alert("Berhasil menambah data");
         location.reload();
         $("#insertDetailButton").prop("disabled",false);
       }else{
@@ -378,7 +369,75 @@ function insertKamarDetail(e) {
   });   
 }
 
+function editKamarDetail(e) {
+  var urls='main/updatekamardetail/'+id_kamar;
+  e.preventDefault();// will stop the form submission
+  $("#editDetailButton").prop("disabled",true);
+  $.ajax({
+    url:"<?php echo base_url() ?>index.php/"+urls,
+    type: 'POST',
+    data: $("#editKamarDetail").serialize(),
+    success: function(response){
+      if (response == 1) {
+        alert("Berhasil mengubah data");
+        location.reload();
+        $("#editDetailButton").prop("disabled",false);
+      }else{
+        alert(response);
+        $("#editDetailButton").prop("disabled",false);
+      }
+    }
+  });   
+}
 
+
+    // function hapusDatakamar(x){
+    //  var txt;
+    //  if (confirm("Apakah anda yakin ingin menghapus data kamar ini?")) {
+    //   txt = "Data kamar berhasil dihapus";
+    //   var urls = "main/securedelete/mahasiswa/"+x+"";
+    //     // alert(urls);
+    //     $.ajax({
+    //       url:"<?php echo base_url() ?>index.php/"+urls,
+    //       type: 'get',
+    //       dataType: "json",
+    //       success: function (response) {
+    //         if (response == 1) {
+    //           alert(txt);
+    //           location.reload();
+    //         }else{
+    //           alert(response);
+    //         }
+    //       }
+    //     });
+    //   } else {
+    //   }
+    // }
+
+    function dataModal(id,nama,status,bulan_buka){
+  // alert(nama+status+bulan_buka);
+  $('#edit_namakamardetail').val(nama);
+
+  if (status == "tutup") {
+    $('#tanggal_masuk').hide();
+    $("input[type=radio][name=status_kamardetail_update][value='tutup']").prop("checked",true);
+  }else{
+    $('#tanggal_masuk').show();
+    $("input[type=radio][name=status_kamardetail_update][value='buka']").prop("checked",true);
+  }
+  
+
+  
+  // $('#edit_tanggalMasuk').val(bulan_buka);
+  
+  // $('#edit_tanggalMasuk').datepicker('setDate', 'today' ); 
+  id_kamar= id;
+  // alert(id_kamar);
+}
+
+function hideDate(){
+
+}
 
 </script>
 <!-- End Page -->

@@ -13,9 +13,12 @@
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/images/favicon.ico">
 
   <!-- Stylesheets -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/mystyles.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
+  
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-extend.min.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/site.min.css">
+
 
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/animsition/animsition.css">
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets/vendor/asscrollable/asScrollable.css">
