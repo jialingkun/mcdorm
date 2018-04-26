@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'backendCookie',
-                   'value'  => md5($data['admin']['id_admin']),
-                   'expire' => '0',
-               );
+                 'name'   => 'backendCookie',
+                 'value'  => md5($data['admin']['id_admin']),
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -702,7 +702,7 @@ class Main extends CI_Controller {
             $data = [];
         }else{
             foreach ($data as &$row){
-                if ($this->cekprosestransaksi($data['id_kamardetail']) == true) {
+                if ($this->cekprosestransaksi($row['id_kamardetail']) == true) {
                     //jika ada transaksi
                     $row['status']='tutup';
                 }else{
@@ -713,9 +713,8 @@ class Main extends CI_Controller {
                             $row['status_kamardetail'] = 'tutup';
                         }
                     }
+                    $row['status']=$row['status_kamardetail'];
                 }
-                $row['status']=$row['status_kamardetail'];
-
             }
         }
 
@@ -766,7 +765,8 @@ class Main extends CI_Controller {
         if ($insertStatus == NULL) {
             $data = array(
                 'nama_kamardetail' => $nama,
-                'status_kamardetail' =>$status_kamardetail
+                'status_kamardetail' =>$status_kamardetail,
+                'bulan_buka' => $bulanbuka
             );
 
             $insertStatus = $this->main_model->update_kamardetail($data,$idkamardetail);
