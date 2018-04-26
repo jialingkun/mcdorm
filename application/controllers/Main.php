@@ -704,7 +704,7 @@ class Main extends CI_Controller {
             foreach ($data as &$row){
                 if ($this->cekprosestransaksi($row['id_kamardetail']) == true) {
                     //jika ada transaksi
-                    $row['status']='tutup';
+                    $row['status']='sedang dipesan';
                 }else{
 
                     $history = $this->gethistory($row['id_kamardetail']);
