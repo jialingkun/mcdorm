@@ -276,21 +276,18 @@ class Main extends CI_Controller {
             $this->main_model->insert_new_history($dataHistory);
 
             $dataKamarDetailLama = $this->main_model->get_data_kamardetail($mahasiswa['id_kamardetail'],"kamardetail");
-            $disabled = 0;
             if ($mahasiswa['vakum'] == 0) {
                 //pesan kamar kosong
                 $statusKamarDetail = 'buka terbatas';
-            }else if(($dataKamarDetailLama['status_baru'] != NULL && $dataKamarDetailLama['status_lama'] == 'buka terbatas') || $dataKamarDetailLama['status_baru'] == 'buka terbatas' ){
+            }else if($dataKamarDetailLama['status_kamardetail'] == 'buka terbatas'){
                 //pesan vakum pertama
                 $statusKamarDetail = 'tutup terbatas';
-            }else if(($dataKamarDetailLama['status_baru'] != NULL && $dataKamarDetailLama['status_lama'] == 'tutup terbatas') || $dataKamarDetailLama['status_baru'] == 'tutup terbatas' ){
+            }else if($dataKamarDetailLama['status_kamardetail'] == 'tutup terbatas'){
                 //pesan vakum kedua
                 $statusKamarDetail = 'tutup';
             }
             $dataKamarDetail = array(
-                'status_lama' => $statusKamarDetail,
-                'status_baru' => NULL,
-                'disabled' => $disabled
+                'status_kamardetail' => $statusKamarDetail,
             );
             $this->main_model->update_kamardetail($dataKamarDetail,$mahasiswa['id_kamardetail']);
 
@@ -304,11 +301,6 @@ class Main extends CI_Controller {
                 'status' => 'Batal',
                 'kadaluarsa'=> NULL
             );
-
-            $dataKamarDetail = array(
-                'disabled' => 0
-            );
-            $this->main_model->update_kamardetail($dataKamarDetail,$mahasiswa['id_kamardetail']);
 
             $this->deleteimagepayment($id);
         }
@@ -684,18 +676,12 @@ class Main extends CI_Controller {
 
     public function insertkamardetail($idkamar){
         $status = $this->input->post('status_kamardetail');
-        if ($status == "buka") {
-            $disabled = 0;
-        } else if($status == "tutup"){
-            $disabled = 1;
-        }
 
 
         $data = array(
             'id_kamar' => $idkamar,
             'nama_kamardetail' => $this->input->post('nama_kamardetail'),
-            'status_lama' => "buka",
-            'disabled' => $disabled
+            'status_kamardetail' => $status,
         );
 
         $insertStatus = $this->main_model->insert_new_kamardetail($data);
@@ -716,23 +702,20 @@ class Main extends CI_Controller {
             $data = [];
         }else{
             foreach ($data as &$row){
-                if ($row['disabled']==1) {
+                if ($this->cekprosestransaksi($data['id_kamardetail']) == true) {
+                    //jika ada transaksi
                     $row['status']='tutup';
                 }else{
-                    if ($row['status_baru']==NULL) {
-                        $history = $this->gethistory($row['id_kamardetail']);
 
-                        if (empty($history)) {
-                            if ($row['status_lama'] == 'buka terbatas' || $row['status_lama'] == 'tutup terbatas') {
-                                $row['status_lama'] = 'tutup';
-                            }
+                    $history = $this->gethistory($row['id_kamardetail']);
+                    if (empty($history)) {
+                        if ($row['status_kamardetail'] == 'buka terbatas' || $row['status_kamardetail'] == 'tutup terbatas') {
+                            $row['status_kamardetail'] = 'tutup';
                         }
-
-                        $row['status']=$row['status_lama'];
-                    }else{
-                        $row['status']=$row['status_baru'];
                     }
                 }
+                $row['status']=$row['status_kamardetail'];
+
             }
         }
 
@@ -749,26 +732,25 @@ class Main extends CI_Controller {
 
         $insertStatus = NULL;
         if ($status == "buka") {
-            $disabled = 0;
             //rule 1: Tidak boleh open bila ada proses transaksi yang masih berlangsung
             //rule 2: Tidak boleh open bila belum mencapai bulan masuk pemesanan
             if ($this->cekprosestransaksi($idkamardetail) == true) {
                 //rule 1
                 $insertStatus = 'Tidak dapat membuka kamar. Masih ada proses transaksi yang belum selesai.';
             }else if (empty($history)) {
-                $statusbaru = 'buka';
+                $status_kamardetail = 'buka';
             }else {
                 $terdekat = $this->gethistoryterdekat($history);
                 if ($terdekat['vakum']==0) {
                     if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
-                        $statusbaru = 'buka terbatas';
+                        $status_kamardetail = 'buka terbatas';
                     }else{
                         //rule 2
                         $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
                     }
                 }else if ($terdekat['vakum']==1) {
                     if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
-                        $statusbaru = 'tutup terbatas';
+                        $status_kamardetail = 'tutup terbatas';
                     }else{
                         //rule 2
                         $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
@@ -776,8 +758,7 @@ class Main extends CI_Controller {
                 }
             }
         } else if($status == "tutup"){
-            $disabled = 1;
-            $statusbaru = NULL;
+            $status_kamardetail = 'tutup';
             $bulanbuka = NULL;
 
         }
@@ -785,9 +766,7 @@ class Main extends CI_Controller {
         if ($insertStatus == NULL) {
             $data = array(
                 'nama_kamardetail' => $nama,
-                'status_baru' =>$statusbaru,
-                'bulan_buka' => $bulanbuka,
-                'disabled' => $disabled
+                'status_kamardetail' =>$status_kamardetail
             );
 
             $insertStatus = $this->main_model->update_kamardetail($data,$idkamardetail);
