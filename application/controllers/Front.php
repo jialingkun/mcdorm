@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'frontCookie',
-                   'value'  => $username,
-                   'expire' => '0',
-               );
+                 'name'   => 'frontCookie',
+                 'value'  => $username,
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
 
                 $cookie= array(
@@ -259,6 +259,8 @@ class Front extends CI_Controller {
         $data = $this->front_model->get_search_kamar((int)$harga[0],(int)$harga[1],(int)$jarak[0],(int)$jarak[1],$sort,$gender);
 
         $result = [];
+        date_default_timezone_set('Asia/Jakarta');
+        $now = time();
         foreach ($data as &$row){ //add & to call by reference
             $dataFasilitasKos = explode(',',$row['fasilitas_kos']);
             $dataFasilitasKamar = explode(',',$row['fasilitas_kamar']);
@@ -279,10 +281,58 @@ class Front extends CI_Controller {
                     }
                 }
             }
-            //kuota dikurangi jumlah pemesan
-            $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
-            if ($fasilitasKosCocok && $fasilitasKamarCocok && $row['kuota']>0) {
-                $result[] = $row;
+
+
+
+
+
+            // cek kuota dan vakum
+            $datakamardetail = $this->front_model->get_data_kamardetail($row['id_kamar'],'kamar');
+            $countKuotaKosong = 0;
+            $adaVakum = false;
+            foreach ($datakamardetail as $row2) {
+                if ($this->cekprosestransaksi($row2['id_kamardetail']) == false) {
+                    $history = $this->gethistory($row2['id_kamardetail']);
+                    if (empty($history)){
+                        //kamar kosong
+                        if ($row2['status_kamardetail']=='buka') {
+                            $countKuotaKosong = $countKuotaKosong + 1;
+                        }
+                    }else{
+                        if ($row2['status_kamardetail']!='tutup') {
+
+
+                            //bulan buka
+                            $bulanbuka = $now;
+                            if ($row2['bulan_buka']!=NULL) {
+                                if ($this->monthformattotime($row2['bulan_buka'])>$now) {
+                                    $bulanbuka = $this->monthformattotime($row2['bulan_buka']);
+                                }
+                            }
+
+                            $terdekat = $this->gethistoryterdekat($history);
+                            if ($row2['status_kamardetail']=='buka terbatas') {
+                                if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
+                                    $adaVakum = true;
+                                }
+                            }else if ($row2['status_kamardetail']=='tutup terbatas') {
+                                if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
+                                    if ($terdekat['vakum']==1) {
+                                        $adaVakum = true;
+                                    }
+                                }
+                                
+                            }
+                        }
+                    } 
+                }
+            }
+
+            if ($fasilitasKosCocok && $fasilitasKamarCocok) {
+                if ($countKuotaKosong>0 || $adaVakum == true) {
+                    $row['kuota'] = $countKuotaKosong;
+                    $result[] = $row;
+                }
             }
         }
         if (empty($result)) {
