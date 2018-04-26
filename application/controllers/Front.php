@@ -178,13 +178,54 @@ class Front extends CI_Controller {
     }
 
     public function getallkamar(){
-        $dataHistory = $this->front_model->get_all_kamar();
         $data = $this->front_model->get_all_kamar();
         $result = [];
+        date_default_timezone_set('Asia/Jakarta');
+        $now = time();
         foreach ($data as &$row){ //add & to call by reference
-            //kuota dikurangi jumlah pemesan
-            $row['kuota'] = $row['kuota'] - $this->getjumlahpesananKamar($row['id_kamar']);
-            if ($row['kuota']>0) {
+            $datakamardetail = $this->front_model->get_data_kamardetail($row['id_kamar'],'kamar');
+            $countKuotaKosong = 0;
+            $adaVakum = false;
+            foreach ($datakamardetail as $row2) {
+                if ($this->cekprosestransaksi($row2['id_kamardetail']) == false) {
+                    $history = $this->gethistory($row2['id_kamardetail']);
+                    if (empty($history)){
+                        //kamar kosong
+                        if ($row2['status_kamardetail']=='buka') {
+                            $countKuotaKosong = $countKuotaKosong + 1;
+                        }
+                    }else{
+                        if ($row2['status_kamardetail']!='tutup') {
+
+
+                            //bulan buka
+                            $bulanbuka = $now;
+                            if ($row2['bulan_buka']!=NULL) {
+                                if ($this->monthformattotime($row2['bulan_buka'])>$now) {
+                                    $bulanbuka = $this->monthformattotime($row2['bulan_buka']);
+                                }
+                            }
+
+                            $terdekat = $this->gethistoryterdekat($history);
+                            if ($row2['status_kamardetail']=='buka terbatas') {
+                                if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
+                                    $adaVakum = true;
+                                }
+                            }else if ($row2['status_kamardetail']=='tutup terbatas') {
+                                if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
+                                    if ($terdekat['vakum']==1) {
+                                        $adaVakum = true;
+                                    }
+                                }
+                                
+                            }
+                        }
+                    } 
+                }
+            }
+
+            if ($countKuotaKosong>0 || $adaVakum == true) {
+                $row['kuota'] = $countKuotaKosong;
                 $result[] = $row;
             }
         }
@@ -406,24 +447,17 @@ class Front extends CI_Controller {
         }
     }
 
-    public function gethistory($id = NULL)
-    {
-        $data = $this->front_model->get_history($id);
-
-        if ($id == NULL) {
-            //Data history di atas tanggal hari ini untuk data vakum
-            
-        }
-
-        if (empty($data))
-            {
-                $data = [];
-            }else{
-                echo json_encode($data);
+    private function gethistory($idkamardetail=NULL){
+        $data = $this->front_model->get_history($idkamardetail);
+        $result = [];
+        date_default_timezone_set('Asia/Jakarta');
+        $now = time();
+        foreach ($data as $row){
+            if ($this->monthformattotime($row['tanggal_masuk'])>$now) {
+                $result[] = $row;
             }
-        
-
-
+        }
+        return $result;
     }
 
     public function getmahasiswa($id)
@@ -480,18 +514,53 @@ class Front extends CI_Controller {
     }
 
 
-    // public function getAllImagePath($idkos){
-    //     $targetPath = base_url().'photos';
-    //     $targetPath = $targetPath.'/'.$idkos.'/';
-    //     $maxslot = 10;
-    //     $data = [];
-    //     for ($i=1; $i <= $maxslot; $i++) { 
-    //         $filepath = $targetPath."slot".$i.".jpg";
-    //         if (@getimagesize($filepath)) {
-    //             $data[] = $filepath;
-    //         }
-    //     } 
-    //     echo json_encode($data);
-    // }
+    private function cekprosestransaksi($idkamardetail)
+    {
+        $data = $this->front_model->get_mahasiswa_by_kamardetail($idkamardetail);
+
+        if (empty($data))
+        {
+            $masihproses = false;
+        } else {
+            $masihproses = false;
+            foreach ($data as &$row){ //add & to call by reference
+                unset($row['password']);
+                if ($row['status']=="Belum Bayar") {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now >= $expire) {
+                        $row['status'] = 'Expired';
+                    }
+                }
+
+                if ($row['status']=="Belum Bayar" || $row['status']=="Belum Verifikasi") {
+                    $masihproses = true;
+                }
+                
+            }
+        }
+
+        return $masihproses;
+    }
+
+    private function monthformattotime($bulanmasuk){
+        return strtotime(DateTime::createFromFormat('M Y', $bulanmasuk)->format('Y-m-d'));
+    }
+
+    private function gethistoryterdekat($datahistory){
+        $empty = true;
+        $terdekat = NULL;
+        foreach ($datahistory as $row){
+            if ($empty == true) {
+                $terdekat = $row;
+                $empty = false;
+            }else if ($this->monthformattotime($row['tanggal_masuk'])<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                $terdekat = $row;
+            }
+        }
+
+        return $terdekat;
+    }
 
 }

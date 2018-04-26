@@ -117,15 +117,32 @@ class Front_model extends CI_Model {
 		}
 	}
 
-	public function get_history($id=NULL)
+	public function get_data_kamardetail($id, $jenis)
 	{
-		if ($id == NULL){
-			$this->db->select('*');
-		$this->db->from('kamar'); 
-		$this->db->join('history', 'history.id_kamar = kamar.id_kamar', 'left');
-		$query = $this->db->get();
+		if ($jenis == "kamardetail")
+		{
+			$query = $this->db->get_where('kamar_detail', array('id_kamardetail' => $id));
+			return $query->row_array();
 		}else{
-			$query = $this->db->get_where('history', array('id_mahasiswa' => $id));
+			$query = $this->db->get_where('kamar_detail', array('id_kamar' => $id));
+			return $query->result_array();
+		}
+	}
+
+	public function get_mahasiswa_by_kamardetail($idkamardetail){
+		$this->db->select('*');
+		$this->db->from('user_mahasiswa'); 
+		$this->db->where('id_kamardetail',$idkamardetail);
+		$query = $this->db->get();
+		return $query->result_array();
+	}
+
+	public function get_history($idkamardetail=NULL)
+	{
+		if ($idkamardetail == NULL){
+			$query = $this->db->get('history');
+		}else{
+			$query = $this->db->get_where('history', array('id_kamardetail' => $idkamardetail));
 		}
 		
 		return $query->result_array();
