@@ -689,8 +689,6 @@ function namaMhs(x,y,z){
   bookKamar = z;
   $('#modalTotal').html('Rp '+(x*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
   $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
-  
-
 }
 
 function confirmBooking(){

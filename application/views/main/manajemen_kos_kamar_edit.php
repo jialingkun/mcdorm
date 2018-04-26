@@ -105,7 +105,6 @@
 <div class="page animsition" style="margin-top: -50px;">
   <div class="page-content">
     <!-- Panel Basic -->
-    <button data-toggle='modal' data-target='#myModal' id='perbarui' type='button' class='btn btn-primary btn-animate-side btn-info btn-sm'><span><i class='icon fa-pencil'></i><b>Perbarui</b></span></button>
     <div class="panel">
       <header class="panel-heading">
         <h3 class="panel-title"><b>Data Kamar </b><b id="namaKamar"></b > </h3>
