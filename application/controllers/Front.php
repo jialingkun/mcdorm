@@ -359,9 +359,82 @@ class Front extends CI_Controller {
             $data = $this->front_model->get_data_kos($idkos,'user_kos');
         }else{
             $data = $this->front_model->get_data_kos($idkos, 'kamar');
+
+            $result = [];
+            date_default_timezone_set('Asia/Jakarta');
+            $now = time();
             foreach ($data as &$row){ //add & to call by reference
-                //kuota dikurangi jumlah pemesan
-                $row['kuota'] = $row['kuota'] - $this->getjumlahpesanankamar($row['id_kamar']);
+                $datakamardetail = $this->front_model->get_data_kamardetail($row['id_kamar'],'kamar');
+                $countKuotaKosong = 0;
+                $adaVakum = false;
+                $resultkamardetail = [];
+                foreach ($datakamardetail as &$row2) {
+                    if ($this->cekprosestransaksi($row2['id_kamardetail']) == false) {
+                        $history = $this->gethistory($row2['id_kamardetail']);
+                        if (empty($history)){
+                        //kamar kosong
+                            if ($row2['status_kamardetail']=='buka') {
+                                $countKuotaKosong = $countKuotaKosong + 1;
+
+
+                                //bulan buka
+                                $bulanbuka = $now;
+                                if ($row2['bulan_buka']!=NULL) {
+                                    if ($this->monthformattotime($row2['bulan_buka'])>$now) {
+                                        $bulanbuka = $this->monthformattotime($row2['bulan_buka']);
+                                    }
+                                }
+
+                                $row2['bulan_buka'] = $bulanbuka;
+                                $row2['bulan_tutup'] = NULL;
+                                $resultkamardetail[] = $row2;
+                            }
+                        }else{
+                            if ($row2['status_kamardetail']!='tutup') {
+
+
+                                //bulan buka
+                                $bulanbuka = $now;
+                                if ($row2['bulan_buka']!=NULL) {
+                                    if ($this->monthformattotime($row2['bulan_buka'])>$now) {
+                                        $bulanbuka = $this->monthformattotime($row2['bulan_buka']);
+                                    }
+                                }
+
+                                $terdekat = $this->gethistoryterdekat($history);
+                                if ($row2['status_kamardetail']=='buka terbatas') {
+                                    if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
+                                        $adaVakum = true;
+
+                                        $row2['bulan_buka'] = $bulanbuka;
+                                        $row2['bulan_tutup'] = $terdekat['tanggal_masuk'];
+                                        $resultkamardetail[] = $row2;
+
+
+                                    }
+                                }else if ($row2['status_kamardetail']=='tutup terbatas') {
+                                    if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
+                                        if ($terdekat['vakum']==1) {
+                                            $adaVakum = true;
+
+                                            $row2['bulan_buka'] = $bulanbuka;
+                                            $row2['bulan_tutup'] = $terdekat['tanggal_masuk'];
+                                            $resultkamardetail[] = $row2;
+                                        }
+                                    }
+
+                                }
+                            }
+                        } 
+                    }
+                }
+
+                if ($countKuotaKosong>0 || $adaVakum == true) {
+                    $row['kuota'] = $countKuotaKosong;
+                    $row['kamardetail'] = $resultkamardetail;
+                    $result[] = $row;
+
+                }
             }
         }
 

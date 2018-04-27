@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'backendCookie',
-                 'value'  => md5($data['admin']['id_admin']),
-                 'expire' => '0',
-             );
+                   'name'   => 'backendCookie',
+                   'value'  => md5($data['admin']['id_admin']),
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -757,8 +757,14 @@ class Main extends CI_Controller {
                 }
             }
         } else if($status == "tutup"){
-            $status_kamardetail = 'tutup';
-            $bulanbuka = NULL;
+            if ($this->cekprosestransaksi($idkamardetail) == true){
+                //rule 1
+                $insertStatus = 'Tidak dapat menutup kamar. Masih ada proses transaksi yang belum selesai.';
+            }else{
+                $status_kamardetail = 'tutup';
+                $bulanbuka = NULL;
+            }
+            
 
         }
 
