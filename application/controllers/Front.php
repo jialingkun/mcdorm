@@ -363,7 +363,7 @@ class Front extends CI_Controller {
             $result = [];
             date_default_timezone_set('Asia/Jakarta');
             $now = time();
-            $nowMonthString = date("M Y");
+            $nowMonthString = date("F Y");
             foreach ($data as &$row){ //add & to call by reference
                 $datakamardetail = $this->front_model->get_data_kamardetail($row['id_kamar'],'kamar');
                 $countKuotaKosong = 0;
