@@ -363,6 +363,7 @@ class Front extends CI_Controller {
             $result = [];
             date_default_timezone_set('Asia/Jakarta');
             $now = time();
+            $nowMonthString = date("M Y");
             foreach ($data as &$row){ //add & to call by reference
                 $datakamardetail = $this->front_model->get_data_kamardetail($row['id_kamar'],'kamar');
                 $countKuotaKosong = 0;
@@ -378,14 +379,14 @@ class Front extends CI_Controller {
 
 
                                 //bulan buka
-                                $bulanbuka = $now;
+                                $bulanbukaString = $nowMonthString;
                                 if ($row2['bulan_buka']!=NULL) {
                                     if ($this->monthformattotime($row2['bulan_buka'])>$now) {
-                                        $bulanbuka = $this->monthformattotime($row2['bulan_buka']);
+                                        $bulanbukaString = $row2['bulan_buka'];
                                     }
                                 }
 
-                                $row2['bulan_buka'] = $bulanbuka;
+                                $row2['bulan_buka'] = $bulanbukaString;
                                 $row2['bulan_tutup'] = NULL;
                                 $resultkamardetail[] = $row2;
                             }
@@ -395,9 +396,11 @@ class Front extends CI_Controller {
 
                                 //bulan buka
                                 $bulanbuka = $now;
+                                $bulanbukaString = $nowMonthString;
                                 if ($row2['bulan_buka']!=NULL) {
                                     if ($this->monthformattotime($row2['bulan_buka'])>$now) {
                                         $bulanbuka = $this->monthformattotime($row2['bulan_buka']);
+                                        $bulanbukaString = $row2['bulan_buka'];
                                     }
                                 }
 
@@ -406,7 +409,7 @@ class Front extends CI_Controller {
                                     if (strtotime('+2 month',$bulanbuka) < $this->monthformattotime($terdekat['tanggal_masuk'])) {
                                         $adaVakum = true;
 
-                                        $row2['bulan_buka'] = $bulanbuka;
+                                        $row2['bulan_buka'] = $bulanbukaString;
                                         $row2['bulan_tutup'] = $terdekat['tanggal_masuk'];
                                         $resultkamardetail[] = $row2;
 
@@ -417,7 +420,7 @@ class Front extends CI_Controller {
                                         if ($terdekat['vakum']==1) {
                                             $adaVakum = true;
 
-                                            $row2['bulan_buka'] = $bulanbuka;
+                                            $row2['bulan_buka'] = $bulanbukaString;
                                             $row2['bulan_tutup'] = $terdekat['tanggal_masuk'];
                                             $resultkamardetail[] = $row2;
                                         }
