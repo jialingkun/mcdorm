@@ -41,6 +41,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchLivingRoom = "Living Room";
     $searchDiningRoom = "Dining Room";
     $searchDryRoom = "Dry Room";
+    $searchUnavailable = " Available for Particular Months";
 
 }else{
     $searchTitle = 'Hasil Pencarian';
@@ -84,6 +85,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchLivingRoom = "Ruang Tamu";
     $searchDiningRoom = "Ruang Makan";
     $searchDryRoom = "Ruang Jemur";
+    $searchUnavailable = " Terbatas Bulan Tertentu!";
 }
 
 
@@ -167,7 +169,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                         <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Air Panas" /><?php echo $searchHotWater ?>
                                     </label>
                                 </div>
-                               <div class="checkbox">
+                                <div class="checkbox">
                                     <label>
                                         <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Laundry"/>Laundry
                                     </label>
@@ -189,7 +191,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                         <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Parkir Mobil" /><?php echo $searchParkingCar ?>
                                     </label>
                                 </div>
-                                 <div class="checkbox">
+                                <div class="checkbox">
                                     <label>
                                         <input class="i-check" type="checkbox" name="fasilitaskos[]" value="Ruang Tamu "/><?php echo $searchLivingRoom ?>
                                     </label>
@@ -298,7 +300,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 type: 'POST',
                 data:dataString,
                 success: function(response){
-                    alert(response);
+                    
                     if (response != "null") {
                       $("#search").prop("disabled",true);
                       $('#kamar').append(' <img id="load" style="width:100px; margin: auto;"  id="theImg" src="<?php echo base_url(); ?>assets/images/spin.gif" />');
@@ -339,77 +341,85 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             var start = 0+((active-1)*dataPerpage);
             var end = start+dataPerpage;
             var paginationOutput = '';
+            var availabilityStatus = '';
 
             if (end > totalData ) {
                 end = totalData;
             }
             for (var i = start; i < end ; i++) {
-               div = div + '<div class="col-md-4">'+
-               '<div class="thumb">'+
-               '<header class="thumb-header" >'+
-               '<a  class="hover-img" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+
-               '<img style="width:240px; height:240px; " src="<?php echo base_url(); ?>photos/'+dataGlobal[i].id_kos+'/'+dataGlobal[i].id_kamar+'/slot1.jpg" />'+
-               '<h5 class="hover-title-center"><?php echo $searchOrdernow ?></h5>'+
-               '</a>'+
-               '</header>'+
-               '<div class="thumb-caption"> '+
-               '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)"><?php echo $searchRoomName ?>'+dataGlobal[i].nama_kos+'</a></h5>'+
-               '<p class="mb0"><small><?php echo $searchAddress ?>'+dataGlobal[i].alamat+'</small>'+
-               '</p>'+
-               '<p class="mb0"><small><?php echo $searchDistance ?> '+(Math.round(dataGlobal[i].distance / 100)/10)+' km</small>'+
-               '</p>'+
-               '<p class="mb0 text-darken"><span class="text-lg lh1em"><?php echo $searchPrice ?>'+(dataGlobal[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</span><small>/<?php echo $searchMonth ?></small>'+
 
-               '</p>'+
-               '<p class="mb0" style="padding-right:21px; float:right; font-size: 15px;color: #ff023c"><span class="label label-danger">'+dataGlobal[i].kuota+'<?php echo $searchAvailable ?></span> </b>'+
-               '</p>'+
-               '</div>'+
-               '</div><br>'+
-               '</div>';
-           }
-           $('.pagination').html('');
-           $('#dataKamar').html('');
-           if (totalData > 0) {
-            if (active>1) {
-                paginationOutput = paginationOutput + 
-                '<li class="next" onclick="pagination('+(active-1)+')"><a href="#"><?php echo $searchPrevious ?> </a></li>';
+                if (dataGlobal[i].kuota == 0) {
+                    dataGlobal[i].kuota = "";
+                    availabilityStatus="<?php echo $searchUnavailable ?></span> </b>";
+                }else{
+                    availabilityStatus="<?php echo $searchAvailable ?></span> </b>";
+                }
+                div = div + '<div class="col-md-4">'+
+                '<div class="thumb">'+
+                '<header class="thumb-header" >'+
+                '<a  class="hover-img" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+
+                '<img style="width:240px; height:240px; " src="<?php echo base_url(); ?>photos/'+dataGlobal[i].id_kos+'/'+dataGlobal[i].id_kamar+'/slot1.jpg" />'+
+                '<h5 class="hover-title-center"><?php echo $searchOrdernow ?></h5>'+
+                '</a>'+
+                '</header>'+
+                '<div class="thumb-caption"> '+
+                '<h5 class="thumb-title"><a class="text-darken" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)"><?php echo $searchRoomName ?>'+dataGlobal[i].nama_kos+'</a></h5>'+
+                '<p class="mb0"><small><?php echo $searchAddress ?>'+dataGlobal[i].alamat+'</small>'+
+                '</p>'+
+                '<p class="mb0"><small><?php echo $searchDistance ?> '+(Math.round(dataGlobal[i].distance / 100)/10)+' km</small>'+
+                '</p>'+
+                '<p class="mb0 text-darken"><span class="text-lg lh1em"><?php echo $searchPrice ?>'+(dataGlobal[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+'</span><small>/<?php echo $searchMonth ?></small>'+
+
+                '</p>'+
+                '<p class="mb0" style="padding-right:21px; float:right; font-size: 15px;color: #ff023c"><span class="label label-danger">'+dataGlobal[i].kuota+availabilityStatus+
+                '</p>'+
+                '</div>'+
+                '</div><br>'+
+                '</div>';
             }
-            if(active > 3){
-                paginationOutput = paginationOutput + 
-                '<li><a href="#" onclick="pagination(1)">1</a></li>'+
-                '<li class="dots">...</li>'+
-                '<li><a href="#" onclick="pagination('+(active-1)+')">'+(active-1)+'</a></li>'+
-                '<li class="active"><a onclick="pagination('+(active)+')">'+(active)+'</a></li>';
-            }else{
-                for (var i = 1; i <= active; i++) {
-                    if (i == active){
-                        paginationOutput = paginationOutput +
-                        '<li class="active"><a href="#" onclick="pagination('+(active)+')">'+(active)+'</a></li>';
-                    }
-                    else{
-                        paginationOutput = paginationOutput +
-                        '<li><a href="#" onclick="pagination('+i+')">'+i+'</a></li>';
+            $('.pagination').html('');
+            $('#dataKamar').html('');
+            if (totalData > 0) {
+                if (active>1) {
+                    paginationOutput = paginationOutput + 
+                    '<li class="next" onclick="pagination('+(active-1)+')"><a href="#"><?php echo $searchPrevious ?> </a></li>';
+                }
+                if(active > 3){
+                    paginationOutput = paginationOutput + 
+                    '<li><a href="#" onclick="pagination(1)">1</a></li>'+
+                    '<li class="dots">...</li>'+
+                    '<li><a href="#" onclick="pagination('+(active-1)+')">'+(active-1)+'</a></li>'+
+                    '<li class="active"><a onclick="pagination('+(active)+')">'+(active)+'</a></li>';
+                }else{
+                    for (var i = 1; i <= active; i++) {
+                        if (i == active){
+                            paginationOutput = paginationOutput +
+                            '<li class="active"><a href="#" onclick="pagination('+(active)+')">'+(active)+'</a></li>';
+                        }
+                        else{
+                            paginationOutput = paginationOutput +
+                            '<li><a href="#" onclick="pagination('+i+')">'+i+'</a></li>';
+                        }
                     }
                 }
-            }
-            if(totalPage - active >= 3){
-                paginationOutput = paginationOutput + 
-                '<li><a href="#" onclick="pagination('+(active+1)+')">'+(active+1)+'</a></li>'+
-                '<li class="dots">...</li>'+
-                '<li><a href="#" onclick="pagination('+(totalPage)+')">'+(totalPage)+'</a></li>'
-                ;
-            }else{
-                for (var i = active+1 ; i <= totalPage; i++) {
-                    paginationOutput = paginationOutput +
-                    '<li><a href="#" onclick="pagination('+(i)+')">'+(i)+'</a></li>';
+                if(totalPage - active >= 3){
+                    paginationOutput = paginationOutput + 
+                    '<li><a href="#" onclick="pagination('+(active+1)+')">'+(active+1)+'</a></li>'+
+                    '<li class="dots">...</li>'+
+                    '<li><a href="#" onclick="pagination('+(totalPage)+')">'+(totalPage)+'</a></li>'
+                    ;
+                }else{
+                    for (var i = active+1 ; i <= totalPage; i++) {
+                        paginationOutput = paginationOutput +
+                        '<li><a href="#" onclick="pagination('+(i)+')">'+(i)+'</a></li>';
+                    }
                 }
+                if (active < totalPage) {
+                    paginationOutput = paginationOutput + 
+                    '<li class="next"><a href="#" onclick="pagination('+(active+1)+')"><?php echo $searchNext ?></a></li>';
+                }
+                $('.pagination').append(paginationOutput);
+                $('#dataKamar').append(div);
             }
-            if (active < totalPage) {
-                paginationOutput = paginationOutput + 
-                '<li class="next"><a href="#" onclick="pagination('+(active+1)+')"><?php echo $searchNext ?></a></li>';
-            }
-            $('.pagination').append(paginationOutput);
-            $('#dataKamar').append(div);
         }
-    }
-</script>
+    </script>
