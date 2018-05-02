@@ -463,7 +463,8 @@ class Front extends CI_Controller {
                 'tanggal_masuk' => $this->input->post('tanggalmasuk'),
                 'kadaluarsa' => $kadaluarsa,
                 'vakum' => $this->input->post('vakum'),
-                'lama_pemesanan' => $this->input->post('lamapemesanan')
+                'lama_pemesanan' => $this->input->post('lamapemesanan'),
+                'id_kamardetail' => $this->input->post('idkamardetail')
             );
 
             $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
