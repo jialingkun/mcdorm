@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js before-run" lang="en">
 <head>
+  
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -91,9 +92,13 @@
 <!-- Scripts -->
 <script src="<?php echo base_url(); ?>assets/vendor/modernizr/modernizr.js"></script>
 <script src="<?php echo base_url(); ?>assets/vendor/breakpoints/breakpoints.js"></script>
+
+
 <script>
   Breakpoints();
 </script>
+
+
 </head>
 
 <body>
