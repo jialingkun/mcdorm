@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'frontCookie',
-                   'value'  => $username,
-                   'expire' => '0',
-               );
+                 'name'   => 'frontCookie',
+                 'value'  => $username,
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
 
                 $cookie= array(
@@ -473,7 +473,7 @@ class Front extends CI_Controller {
                 $insertStatus = "Tidak bisa memesan, selesaikan dulu proses pemesanan yang masih berlangsung";
             }
         }else{
-            $insertStatus = "Tidak bisa memesan, kamar sudah dipesan.;
+            $insertStatus = "Tidak bisa memesan, kamar sudah dipesan.";
         }
         
         echo $insertStatus;
