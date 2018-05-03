@@ -169,7 +169,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           '<tr class="text-center" >'+
           '<td>'+response.nama_kos+'</td>'+
           '<td>'+response.nama_kamar+'</td>'+
-          '<td>Rp '+response.harga+',-</td>'+
+          '<td>Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
           '<td>'+response.tanggal_masuk+'</td>'+
           '<td><b>'+ translateStatus(response.status)+'</b></td>'+
           '<td></td>'

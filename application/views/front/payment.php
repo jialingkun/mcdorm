@@ -22,7 +22,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentTitle = 'Transfer Payments';
     $paymentProof = 'Proof of Bank Transfer';
     $paymentDates = 'Enter Dates';
-    
+    $paymentKamarDetail = 'Room Name : ';
 
 
 
@@ -50,6 +50,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentSubmit = 'Setuju';
     $paymentDetail = 'Pembayaran Pemesanan : ';
     $paymentTotal = 'Total : ';
+    $paymentKamarDetail = 'Nama Kamar : ';
 }
 ?>
 
@@ -90,6 +91,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                 <img id="modalImage" />
                             </a>
                             <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
+                            <p id="modalNamaKamarDetail" class="booking-item-payment-title"></p>
                             <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
                             <small id="modalGender" >jl. Semangka 5 Malang</small><br>
 
@@ -160,6 +162,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         success: function (response) {
             $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
             $("#modalNamaKos").html('<?php echo $paymentNamakamar ?>' + response.nama_kos);
+              $('#modalNamaKamarDetail').html("<?php echo $paymentKamarDetail ?>"+);
+
             $("#modalAlamatKos").html('<?php echo $paymentAddress ?>'+response.alamat);
             $("#modalGender").html('<?php echo $paymentGender ?>'+response.gender_kos);
             $("#modalMahasiswa").html(response.nama_mahasiswa);
