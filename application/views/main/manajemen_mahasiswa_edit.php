@@ -59,7 +59,7 @@
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-3">
-                      <h5 class="control-label">Kamar</h5>
+                      <h5 class="control-la bel">Kamar</h5>
                     </div>
                     <div class="col-sm-9">
                       <h5 class="control-label">: <b id="kamar"></b></h5>
@@ -150,6 +150,7 @@
                 </div>
                 <div class="col-sm-7">
                   <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
+                  <h5 id="modalKamarDetail" class="booking-item-payment-title">Kos Semangka 5</h5>
                   <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
                   <small id="modalGender" >jl. Semangka 5 Malang</small><br>
                 </div>
@@ -179,7 +180,10 @@
 
                 </ul>
               </li>
-              
+              <li>
+                <h5>Lama Pemesanan</h5>
+                <p ><span id="modalLamaPemesanan"></span><span> bulan</span></p>
+              </li>
             </ul>
             <hr>
             <h4  class="booking-item-payment-total">Total Pemesanan: <b><span id="modalTotal"></span></b>
@@ -218,7 +222,7 @@
           $('#email').val(response.email);
           $('#alamat').html(response.alamat);
           $('#kamar').html(response.nama_kamar);
-          $('#harga').html("Rp "+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+          $('#harga').html("Rp "+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
           $('#status').html(response.status);
 
 $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+response.id_mahasiswa+".jpg");
@@ -235,12 +239,15 @@ $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+respon
 
 
           $('#modalNamaKos').html(response.nama_kos);
+          $('#modalKamarDetail').html(response.nama_kamardetail);
+          
           $('#modalAlamatKos').html(response.alamat);
           $('#modalGender').html(response.gender);
           $('#modalMahasiswa').html(response.nama_mahasiswa);
+          $('#modalLamaPemesanan').html(response.lama_pemesanan);
           $('#modalHarga').html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /bulan');
           $('#modalKamar').html('Jenis Kamar :  '+response.nama_kamar);
-          $('#modalTotal').html('Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- (pembayaran untuk 3 bulan)');
+          $('#modalTotal').html('Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- (pembayaran untuk '+ response.lama_pemesanan +' bulan)');
           $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
           $('#modalTanggal').html(response.tanggal_masuk);
 
