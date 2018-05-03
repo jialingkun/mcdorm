@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 $cookie= array(
@@ -451,26 +451,31 @@ class Front extends CI_Controller {
 
 
     public function order($idmahasiswa){
-        $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
-        if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
-            date_default_timezone_set('Asia/Jakarta');
-            $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
+        if ($this->cekprosestransaksi($this->input->post('idkamardetail')) == false){
+            $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
+            if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
+                date_default_timezone_set('Asia/Jakarta');
+                $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
 
-            $data = array(
-                'status' => 'Belum Bayar',
-                'id_kos' => $this->input->post('idkos'),
-                'id_kamar' => $this->input->post('idkamar'),
-                'tanggal_masuk' => $this->input->post('tanggalmasuk'),
-                'kadaluarsa' => $kadaluarsa,
-                'vakum' => $this->input->post('vakum'),
-                'lama_pemesanan' => $this->input->post('lamapemesanan'),
-                'id_kamardetail' => $this->input->post('idkamardetail')
-            );
+                $data = array(
+                    'status' => 'Belum Bayar',
+                    'id_kos' => $this->input->post('idkos'),
+                    'id_kamar' => $this->input->post('idkamar'),
+                    'tanggal_masuk' => $this->input->post('tanggalmasuk'),
+                    'kadaluarsa' => $kadaluarsa,
+                    'vakum' => $this->input->post('vakum'),
+                    'lama_pemesanan' => $this->input->post('lamapemesanan'),
+                    'id_kamardetail' => $this->input->post('idkamardetail')
+                );
 
-            $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
+                $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
+            }else{
+                $insertStatus = "Tidak bisa memesan, selesaikan dulu proses pemesanan yang masih berlangsung";
+            }
         }else{
-            $insertStatus = "Tidak bisa memesan, selesaikan dulu proses pemesanan yang masih berlangsung";
+            $insertStatus = "Tidak bisa memesan, kamar sudah dipesan.;
         }
+        
         echo $insertStatus;
     }
 
