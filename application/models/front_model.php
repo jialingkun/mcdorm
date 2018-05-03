@@ -152,8 +152,12 @@ class Front_model extends CI_Model {
 
 	public function get_history_mahasiswa($id)
 	{
-		$query = $this->db->get_where('history', array('id_mahasiswa' => $id));
-			return $query->result_array();
+		$this->db->select('*');
+		$this->db->from('history');
+		$this->db->join('kamar_detail', 'history.id_kamardetail = kamar_detail.id_kamardetail', 'left');
+		$this->db->where('id_mahasiswa',$id);
+		$query = $this->db->get();
+		return $query->result_array();
 	}
 
 }
