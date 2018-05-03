@@ -17,7 +17,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailAddress = 'Address : ';
   $detailLeft = 'Room Left : ';
   $detailperMonth = ' month';
-  $detailMonth = '      ( payment for 3 months )';
+  $detailMonth1 = '( payment for ';
+  $detailMonth2 = ' months )';
   $detailOrdernow = 'Order Now';
   $detailConfirmation = 'Booking Confirmation';
   $detailBookedby = 'Booked by : ';
@@ -41,6 +42,12 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailTwinBed = "Twin Bed";
   $detailToilet = "Toilet";
   $detailDuration = "Order Duration";
+  $detailKamarDetail = 'Room Name : ';
+  $detailModalBulan = ' months';
+  $detailSuccess = 'Successfully Book';
+  $detailAvailableFrom = 'Available from: ';
+  $detailAvailableUntil = 'Available until: ';
+  $detailDalamBulan = 'Order Duration: (in months)';
 }else{
   $detailGender = 'Jenis Kelamin :';
   $detailOrder = 'Detil Pemesanan :';
@@ -59,7 +66,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailAddress = 'Alamat : ';
   $detailLeft = 'Sisa Kamar : ';
   $detailperMonth = ' bulan';
-  $detailMonth = '      ( pembayaran untuk 3 bulan )';
+  $detailMonth2 = 'bulan )';
+  $detailMonth1 = '( pembayaran untuk ';
   $detailDate = '      ( untuk 3 bulan )';
   $detailOrdernow = 'Pesan Sekarang';
   $detailConfirmation = 'Konfirmasi Booking';
@@ -83,6 +91,14 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailTwinBed = "Twin Bed";
   $detailToilet = "KM Mandi";
   $detailDuration = "Lama Pemesanan";
+  $detailKamarDetail = 'Nama Kamar : ';
+  $detailModalBulan = ' bulan';
+  $detailSuccess = 'Berhasil Memesan';
+  $detailAvailableFrom = 'Tersedia mulai: ';
+  $detailAvailableUntil = 'Tersedia hingga: ';
+  $detailDalamBulan = 'Lama Pemesanan: (dalam bulan)';
+
+  
 }
 ?>
 <style>
@@ -283,7 +299,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
               </div>
               <div id="modalLamaPesan">
                 <div class="col-sm-8">
-                  <label class="control-label"><b>Lama Pemesanan: (dalam bulan)</b></label>
+                  <label class="control-label"><b><?php echo $detailDalamBulan ?> </b></label>
                   <input value="3" type="number" min="3" max="9" class="form-control" name="pesan" id="pesan" required placeholder="jumlah bulan" onchange="lamapemesanan = this.value"/>
                   
                 </div>
@@ -304,7 +320,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             </form>
           </div>
           <div class="modal-footer">
-            <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" ><?php echo $detailSubmit ?></button> 
+            <button data-toggle="modal" id="modalSubmitKamar" data-target="#myModal" type="button" class="btn btn-primary pull-right" onclick="updateNota()"><?php echo $detailSubmit ?></button> 
             <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $detailCancel ?></button>
           </div>
         </div>
@@ -328,6 +344,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                   <img id="modalImage" src=""/>
                 </a>
                 <h5 id="modalNamaKos" class="booking-item-payment-title"> Kos Semangka 5</h5>
+                <p id="modalNamaKamarDetail" class="booking-item-payment-title"></p>
                 <small id="modalAlamatKos" ><?php echo $detailAddress ?> jl. Semangka 5 Malang</small><br>
                 <small id="modalGender" ><?php echo $detailGender ?> jl. Semangka 5 Malang</small><br>
               </header>
@@ -355,7 +372,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                   </ul>
                 </li>
               </ul>
-              <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"> </span> <span style="font-size: 12pt; margin-left:6px;"><?php echo $detailMonth ?></span>
+              <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"> </span> <span style="font-size: 12pt; margin-left:6px;" id="detailmonth"><?php echo $detailMonth1 ?></span>
               </p>
             </div>
           </div>
@@ -373,8 +390,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   var tanggalMasuk = null;
   var tanggalAkhir = null;
   var bookKamar = null;
-  var lamapemesanan = null;
+  var lamapemesanan = 3;
   var responseGetKamar= null;
+  var hargaKamar = null;
   var vakum = '';
   var map;
   var myLatlng = new google.maps.LatLng(-7.957260,112.589052);
@@ -589,6 +607,7 @@ $.ajax({
 }
 function modalNota(index,jumlah,harga,namaKamar,idKamar){
   $('#modalLamaPesan').hide();
+  $('#modalSubmitKamar').hide();
   var blnTutup = null;
   $('#modalNotaBody').html('');
   for (var i = 0; i < jumlah; i++) {
@@ -602,10 +621,10 @@ function modalNota(index,jumlah,harga,namaKamar,idKamar){
 
 
     eachRoom =
-    '<li ><input type="hidden" id="hid" value="'+idKamar+'"><a style="cursor: pointer" onclick="namaMhs(&quot;'+harga+'&quot;,&quot;'+namaKamar+'&quot;,&quot;'+idKamar+'&quot;,&quot;'+tanggalMasuk+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].id_kamardetail+'&quot;,&quot;'+vakum+'&quot;); setdate(&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;); tanggalAkhir=&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;;   $(&quot;#modalLamaPesan&quot;).show(); changeDurasi(&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;)">'+responseGetKamar[index].kamardetail[i].nama_kamardetail+'</a></li></ul>'+
+    '<li ><input type="hidden" id="hid" value="'+idKamar+'"><a style="cursor: pointer" onclick="namaMhs(&quot;'+harga+'&quot;,&quot;'+namaKamar+'&quot;,&quot;'+idKamar+'&quot;,&quot;'+tanggalMasuk+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].id_kamardetail+'&quot;,&quot;'+vakum+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].nama_kamardetail+'&quot;); setdate(&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;); tanggalAkhir=&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;;   $(&quot;#modalLamaPesan&quot;).show(); $(&quot;#modalSubmitKamar&quot;).show(); changeDurasi(&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;)">'+responseGetKamar[index].kamardetail[i].nama_kamardetail+'</a></li></ul>'+
     
-    '<p><span>Tersedia Mulai : <span><span>'+responseGetKamar[index].kamardetail[i].bulan_buka+'</span></p>'+
-    '<p><span>Tersedia Hingga : <span><span>'+blnTutup+'</span></p>';
+    '<p><span><?php echo $detailAvailableFrom ?><span><span>'+responseGetKamar[index].kamardetail[i].bulan_buka+'</span></p>'+
+    '<p><span><?php echo $detailAvailableUntil ?><span><span>'+blnTutup+'</span></p>';
 
     $('#modalNotaBody').append(eachRoom);
   }
@@ -628,6 +647,8 @@ function changeDurasi(masuk){
   }else{
     $('#pesan').prop('max',9);
   }
+  lamapemesanan = $('#pesan').val();
+
 }
 
 function setdate(BulanTutup,BulanBuka){
@@ -643,21 +664,31 @@ function setdate(BulanTutup,BulanBuka){
   
   
   $('input.date-pick').datepicker('setStartDate', start);
+  $('input.date-pick').datepicker('setDate', start);
 
   $('input.date-pick').datepicker('setEndDate', d);
 
 }
 
-function namaMhs(harga,namaKamar,idKamar,tglMasuk,idKamarDetail,vakum){
+function namaMhs(harga,namaKamar,idKamar,tglMasuk,idKamarDetail,vakums,namaKamarDetail){
   myString = getCookie('frontNama');
   $('#modalMahasiswa').html(myString.replace(/\+/g, " "));
   $('#modalHarga').html('Rp '+harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $detailperMonth ?>');
-  $('#modalKamar').html(namaKamar);
+  $('#modalKamar').html("<?php echo $detailKamarDetail ?>"+namaKamarDetail);
+  $('#modalNamaKamarDetail').html("<?php echo $detailKamarDetail ?>"+namaKamarDetail);
   bookKamar = idKamar;
   id_kDetail = idKamarDetail;
-  var vak = vakum;
-  $('#modalTotal').html('Rp '+(harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+  vakum = vakums;
+  hargaKamar = harga;
+  
+  
   $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+idKamar+'/slot1.jpg');
+}
+function updateNota(){
+  $('#modalDuration').html($('#pesan').val()+"<?php echo $detailModalBulan ?>");
+  $('#modalTanggal').html(tanggalMasuk);
+  $('#detailmonth').html("<?php echo $detailMonth1 ?>"+$('#pesan').val()+"<?php echo $detailMonth2 ?>");
+  $('#modalTotal').html('Rp '+(hargaKamar*lamapemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
 }
 function confirmBooking(){
   var buttonname = $("#submit").html();
@@ -672,16 +703,19 @@ $.ajax({
   {
     'idkos':getCookie('detailKamar') ,
     'idkamar': bookKamar,
-    'id_kamarDetail' : id_kDetail,
+    'idkamardetail' : id_kDetail,
     'tanggalmasuk': tanggalMasuk,
-    'vakum': vak,
+    'vakum': vakum,
     'lamapemesanan': lamapemesanan
   }
   ,
   success: function(response){
     if (response == 1) {
+      alert("<?php echo $detailSuccess ?>");
       $("#submit").html(buttonname);
       window.location.href = 'payment';
+      
+      
     }else{
       alert("<?php echo $detailFfailed ?>");
       $("#submitButton").prop("disabled",false);

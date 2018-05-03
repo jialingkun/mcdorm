@@ -37,6 +37,7 @@ class Front_model extends CI_Model {
 		$this->db->from('user_mahasiswa'); 
 		$this->db->join('user_kos', 'user_mahasiswa.id_kos = user_kos.id_kos', 'left');
 		$this->db->join('kamar', 'user_mahasiswa.id_kamar = kamar.id_kamar', 'left');
+		$this->db->join('kamar_detail', 'user_mahasiswa.id_kamardetail = kamar_detail.id_kamardetail', 'left');
 		$this->db->where('id_mahasiswa',$id);
 		$query = $this->db->get();
 		return $query->row_array();
