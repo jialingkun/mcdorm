@@ -1,49 +1,48 @@
-
-<?php 
+<?php
 if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
- $detailGender = 'Gender : ';
- $detailOrder = 'Order Detail :';
- $detailEnter = 'Enter Month';
- $detailFacility = 'Facility';
- $detailParkingMotor = 'Bike Parking';
- $detailRice = 'Rice';
- $detailWater = 'Drinks';
- $detailHour = '24 Hours';
- $detailKitchen = 'Kitchen';
- $detailFridge = 'Fridge';
- $detailWardrobe = 'Wardrobe';
- $detailFan = 'Fan';
- $detailChoose = 'Choose Your Room';
- $detailNamakamar = 'Name : ';
- $detailAddress = 'Address : ';
- $detailLeft = 'Room Left : ';
- $detailperMonth = ' month';
- $detailMonth = '      ( payment for 3 months )';
- $detailOrdernow = 'Order Now';
- $detailConfirmation = 'Booking Confirmation';
- $detailBookedby = 'Booked by : ';
- $detailDetail = 'Booking Details : ';
- $detailTotal = 'Total : ';
- $detailSubmit = 'Submit';
- $detailCancel = 'Cancel';
- $detailWait = 'Wait...';
- $detailFfailed = 'Order Failed, maybe you have another order';
- $detailDate = '      ( for 3 months )';
- $labelKosMap = "Dorm Location";
- $detailJarak = "to MaChung";
- $detailParkingCar = "Car Parking";
- $detail24Hour = "24 Hours ";
- $detailHotWater = 'Hot Water';
- $detailLivingRoom = "Living Room";
- $detailDiningRoom = "Dining Room";
- $detailDryRoom = "Dry Room";
- $detailTable = "Table";
- $detailChair = "Chair";
- $detailTwinBed = "Twin Bed";
- $detailToilet = "Toilet";
- $detailDuration = "Order Duration";
+  $detailGender = 'Gender : ';
+  $detailOrder = 'Order Detail :';
+  $detailEnter = 'Enter Month';
+  $detailFacility = 'Facility';
+  $detailParkingMotor = 'Bike Parking';
+  $detailRice = 'Rice';
+  $detailWater = 'Drinks';
+  $detailHour = '24 Hours';
+  $detailKitchen = 'Kitchen';
+  $detailFridge = 'Fridge';
+  $detailWardrobe = 'Wardrobe';
+  $detailFan = 'Fan';
+  $detailChoose = 'Choose Your Room';
+  $detailNamakamar = 'Name : ';
+  $detailAddress = 'Address : ';
+  $detailLeft = 'Room Left : ';
+  $detailperMonth = ' month';
+  $detailMonth = '      ( payment for 3 months )';
+  $detailOrdernow = 'Order Now';
+  $detailConfirmation = 'Booking Confirmation';
+  $detailBookedby = 'Booked by : ';
+  $detailDetail = 'Booking Details : ';
+  $detailTotal = 'Total : ';
+  $detailSubmit = 'Submit';
+  $detailCancel = 'Cancel';
+  $detailWait = 'Wait...';
+  $detailFfailed = 'Order Failed, maybe you have another order';
+  $detailDate = '      ( for 3 months )';
+  $labelKosMap = "Dorm Location";
+  $detailJarak = "to MaChung";
+  $detailParkingCar = "Car Parking";
+  $detail24Hour = "24 Hours ";
+  $detailHotWater = 'Hot Water';
+  $detailLivingRoom = "Living Room";
+  $detailDiningRoom = "Dining Room";
+  $detailDryRoom = "Dry Room";
+  $detailTable = "Table";
+  $detailChair = "Chair";
+  $detailTwinBed = "Twin Bed";
+  $detailToilet = "Toilet";
+  $detailDuration = "Order Duration";
 }else{
-  $detailGender = 'Jenis Kelamin :';    
+  $detailGender = 'Jenis Kelamin :';
   $detailOrder = 'Detil Pemesanan :';
   $detailEnter = 'Tanggal Masuk';
   $detailFacility = 'Fasilitas Kos';
@@ -85,32 +84,26 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailToilet = "KM Mandi";
   $detailDuration = "Lama Pemesanan";
 }
-
 ?>
-
 <style>
 #myMap {
- height: 350px;
- width: 100%;
+  height: 350px;
+  width: 100%;
 }
 #description {
   font-family: Roboto;
   font-size: 15px;
   font-weight: 300;
 }
-
 #infowindow-content .title {
   font-weight: bold;
 }
-
 #infowindow-content {
   display: none;
 }
-
 #map #infowindow-content {
   display: inline;
 }
-
 .pac-card {
   margin: 10px 10px 0 0;
   border-radius: 2px 0 0 2px;
@@ -121,23 +114,19 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   background-color: #fff;
   font-family: Roboto;
 }
-
 #pac-container {
   padding-bottom: 12px;
   margin-right: 12px;
 }
-
 .pac-controls {
   display: inline-block;
   padding: 5px 11px;
 }
-
 .pac-controls label {
   font-family: Roboto;
   font-size: 13px;
   font-weight: 300;
 }
-
 #pac-input {
   background-color: #fff;
   font-family: Roboto;
@@ -148,11 +137,9 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   text-overflow: ellipsis;
   width: 400px;
 }
-
 #pac-input:focus {
   border-color: #4d90fe;
 }
-
 #title {
   color: #fff;
   background-color: #4d90fe;
@@ -163,8 +150,6 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 #target {
   width: 345px;
 }
-
-
 </style>
 
 <div class="container">
@@ -177,7 +162,6 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           <p class="lh1em text-small" ><span id="jarakKos"></span><span><?php echo $detailJarak ?></span></p>
           <h4><?php echo $detailGender ?> <b id="genderKos"></b></h4>
         </div>
-
       </div>
     </header>
     <div class="row">
@@ -186,11 +170,11 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           <div class="tab-content">
             <div class="tab-pane fade in active" id="tab-1" >
               <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" id="gambarKos">
-                <?php  
+                <?php
                 $targetPath = base_url().'photos';
                 $targetPath = $targetPath.'/'.$_COOKIE['detailKamar'].'/';
                 $maxslot = 10;
-                for ($i=1; $i <= $maxslot; $i++) { 
+                for ($i=1; $i <= $maxslot; $i++) {
                   $filepath = $targetPath."slot".$i.".jpg";
                   if (@getimagesize($filepath)) {
                     echo "<img src='".$filepath."'>";
@@ -198,34 +182,17 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 }
                 ?>
               </div>
-
             </div>
           </div>
         </div>
       </div>
       <div class="col-md-5">
-        <div class="booking-item-dates-change">
-          <form>
-            <div class="input-daterange">
-              <h3><?php echo $detailOrder ?></h3>
-              <div class="row">
-
-                <div class="col-md-8">
-                  <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
-                    <label><b><?php echo $detailEnter ?></b><b style="color:#E74C3C"> <?php echo $detailDate ?></b></label>
-                    <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
         <div class="gap gap-small"></div>
         <div class="row">
           <div class="col-md-12">
             <h3><?php echo $detailFacility ?></h3>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <ul class="booking-item-features booking-item-features-expand mb30 clearfix" >
               <li>
                 <i id="fasilitasicon1" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-wi-fi"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas1" >WiFi</span>
@@ -239,14 +206,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
               <li>
                 <i id="fasilitasicon3" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-restaurant"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas3" ><?php echo $detailRice ?></span>
               </li>
-              
-
-              
-              
             </ul>
-          </div>
-          <div class="col-md-4">
-
             <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
               <li>
                 <i id="fasilitasicon5" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-bar"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas5" ><?php echo $detailWater ?></span>
@@ -257,16 +217,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
               <li>
                 <i id="fasilitasicon6" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-washing-machine"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas6">Laundry</span>
               </li>
-              <li>
-                <i id="fasilitasicon9" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-shower"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas9" ><?php echo $detailHotWater ?></span>
-              </li>
-              
-              
             </li>
           </ul>
         </div>
-        <div class="col-md-4">
-
+        <div class="col-md-6">
           <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
             <li>
               <i id="fasilitasicon10" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-kitchen"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas10" ><?php echo $detailKitchen ?></span>
@@ -274,19 +228,17 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             <li>
               <i id="fasilitasicon11" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-meet"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas11"><?php echo $detailLivingRoom ?></span>
             </li>
-
             <li>
               <i id="fasilitasicon13" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-sun"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas13"><?php echo $detailDryRoom ?></span>
             </li>
-
             <li>
               <i  id="fasilitasicon4" style="background-color: rgba(0, 0, 0, 0.3);" class="fa fa-key"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas4" ><?php echo $detail24Hour ?></span>
             </li>
           </ul>
-        </div>
-        <div class="col-sm-6">  
           <ul class="booking-item-features booking-item-features-expand mb30 clearfix">
-
+            <li>
+              <i id="fasilitasicon9" style="background-color: rgba(0, 0, 0, 0.3);" class="im im-shower"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas9" ><?php echo $detailHotWater ?></span>
+            </li>
             <li>
               <i id="fasilitasicon12" style="background-color: rgba(0, 0, 0, 0.3);" class="fa fa-spoon"></i><span class="booking-item-feature-title" style="text-decoration: line-through;" id="fasilitas12" ><?php echo $detailDiningRoom ?></span>
             </li>
@@ -295,6 +247,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
       </div>
     </div>
   </div>
+  
   <div class="gap gap-small"></div>
   <div class="row">
     <div class="col-md-12">
@@ -307,20 +260,14 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   <div class="row">
     <div class="col-md-12">
       <ul class="booking-list" id="bookList">
-
       </ul>
     </div>
   </div>
 </div>
 <div class="gap gap-small"></div>
 </div>
-
-
 <div class="container">
-
   <!-- Trigger the modal with a button -->
-  
-
   <div class="modal fade" id="myModalNota" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
@@ -330,146 +277,136 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           <h4 class="modal-title"><?php echo $detailConfirmation ?></h4>
         </div>
         <div class="modal-body">
-          <div class="booking-item-dates-change">
-            <div class="form-group row">
-              <form>
+          <form action="">
+            <div>
+              <ul id="modalNotaBody" class="nav nav-pills">
+              </div>
+              <div id="modalLamaPesan">
                 <div class="col-sm-8">
+                  <label class="control-label"><b>Lama Pemesanan: (dalam bulan)</b></label>
+                  <input value="3" type="number" min="3" max="9" class="form-control" name="pesan" id="pesan" required placeholder="jumlah bulan" onchange="lamapemesanan = this.value"/>
+                  
+                </div>
+
+                <div class="booking-item-dates-change">
                   <div class="input-daterange">
-                    <h3><?php echo $detailOrder ?></h3>
-                    <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight" ></i>
-                      <label><b><?php echo $detailEnter ?></b><b style="color:#E74C3C"> <?php echo $detailDate ?></b></label>
-                      <input class="date-pick form-control" type="text" onchange="tanggalMasuk = this.value" />
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="form-group form-group-lg form-group-icon-left"><i class="fa fa-calendar input-icon input-icon-highlight"></i>
+                          <label><b><?php echo $detailEnter ?></b><b style="color:#E74C3C"> <?php echo $detailDate ?></b></label>
+                          <input class="date-pick form-control" type="text" onchange=" changeDurasi(this.value)" />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-8">
-                  <label class="control-label"><b>Lama Pemesanan:</b></label>
-                  <input type="number" min="3" class="form-control" name="pesan" id="pesan" required placeholder="jumlah bulan" onchange="durasi = this.value"/> 
-                </div>
-              </form>
-            </div>
-            
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" ><?php echo $detailSubmit ?></button> 
+            <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $detailCancel ?></button>
           </div>
         </div>
-
+      </div>
+    </div>
+  </div>
+  <!-- Modal Nota-->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><?php echo $detailConfirmation ?></h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <div class="booking-item-payment">
+              <header class="clearfix">
+                <a class="booking-item-payment-img">
+                  <img id="modalImage" src=""/>
+                </a>
+                <h5 id="modalNamaKos" class="booking-item-payment-title"> Kos Semangka 5</h5>
+                <small id="modalAlamatKos" ><?php echo $detailAddress ?> jl. Semangka 5 Malang</small><br>
+                <small id="modalGender" ><?php echo $detailGender ?> jl. Semangka 5 Malang</small><br>
+              </header>
+              <ul class="booking-item-payment-details">
+                <li>
+                  <h5><?php echo $detailBookedby ?> </h5>
+                  <p id="modalMahasiswa"><b>Joni Jono</b></p>
+                </li>
+                <li>
+                  <h5><?php echo $detailEnter ?></h5>
+                  <p id="modalTanggal"><b>32 Desember 2017</b></p>
+                </li>
+                <li>
+                  <h5><?php echo $detailDuration ?></h5>
+                  <p id="modalDuration"><b></b></p>
+                </li>
+                <li>
+                  <h5><?php echo $detailDetail ?></h5>
+                  <ul class="booking-item-payment-price">
+                    <li>
+                      <p id="modalKamar" class="booking-item-payment-price-title"></p>
+                      <p id="modalHarga" class="booking-item-payment-price-amount"><small></small>
+                      </p>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+              <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"> </span> <span style="font-size: 12pt; margin-left:6px;"><?php echo $detailMonth ?></span>
+              </p>
+            </div>
+          </div>
+        </div>
         <div class="modal-footer">
-          <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary pull-right" onclick="modalNota()"><?php echo $detailSubmit ?></button>
+          <button type="button" id="submit" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()"><?php echo $detailSubmit ?></button>
           <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $detailCancel ?></button>
         </div>
       </div>
-
     </div>
   </div>
-
 </div>
-
-<!-- Modal Nota-->
-<div class="modal fade" id="myModal" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><?php echo $detailConfirmation ?></h4>
-      </div>
-      <div class="modal-body">
-        <div>
-          <div class="booking-item-payment">
-            <header class="clearfix">
-              <a class="booking-item-payment-img">
-                <img id="modalImage" src=""/>
-              </a>
-              <h5 id="modalNamaKos" class="booking-item-payment-title"> Kos Semangka 5</h5>
-              <small id="modalAlamatKos" ><?php echo $detailAddress ?> jl. Semangka 5 Malang</small><br>
-              <small id="modalGender" ><?php echo $detailGender ?> jl. Semangka 5 Malang</small><br>
-
-            </header>
-            <ul class="booking-item-payment-details">
-              <li>
-                <h5><?php echo $detailBookedby ?> </h5>
-                <p id="modalMahasiswa"><b>Joni Jono</b></p>
-              </li>
-              <li>
-                <h5><?php echo $detailEnter ?></h5>
-                <p id="modalTanggal"><b>32 Desember 2017</b></p>
-              </li>
-              <li>
-                <h5><?php echo $detailDuration ?></h5>
-                <p id="modalDuration"><b></b></p>
-              </li>
-              <li>
-                <h5><?php echo $detailDetail ?></h5>
-                <ul class="booking-item-payment-price">
-                  <li>
-                    <p id="modalKamar" class="booking-item-payment-price-title"></p>
-                    <p id="modalHarga" class="booking-item-payment-price-amount"><small></small>
-                    </p>    
-                  </li>
-                </ul>
-              </li>
-            </ul>
-            <p  class="booking-item-payment-total"><?php echo $detailTotal ?><span id="modalTotal"> </span> <span style="font-size: 12pt; margin-left:6px;"><?php echo $detailMonth ?></span>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="submit" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()"><?php echo $detailSubmit ?></button>
-        <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $detailCancel ?></button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-</div>
-
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8qZVw-xIAgesHbsUvhOi8zBX-TaM0cMM"></script>
-
 <script>
+  var tanggalMasuk = null;
+  var tanggalAkhir = null;
+  var bookKamar = null;
+  var lamapemesanan = null;
+  var responseGetKamar= null;
+  var vakum = '';
   var map;
   var myLatlng = new google.maps.LatLng(-7.957260,112.589052);
   var infowindow = new google.maps.InfoWindow();
   var directionsService = new google.maps.DirectionsService();
-
   function initialize(){
     var mapOptions = {
       zoom: 18,
       center: myLatlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
-    map = new google.maps.Map(document.getElementById("myMap"), mapOptions); 
+    map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
   }
-
   google.maps.event.addDomListener(window, 'load', initialize);
-
   window.onload = function() {
-    var tanggalMasuk = null;
-    var bookKamar = null;
-    var durasi = null;
 
 
     var urls='getdetail/'+getCookie("detailKamar");
-
     $.ajax({
       url:"<?php echo base_url() ?>index.php/"+urls,
       type: 'get',
       dataType: "json",
       success: function (response) {
-
-
+        responseGetKamar = response;
         $('#namaKos').html(response.nama_kos);
         $('#modalNamaKos').html('<?php echo $detailNamakamar ?>'+response.nama_kos);
-
         $('#alamatKos').html(response.alamat);
         $('#modalAlamatKos').html('<?php echo $detailAddress ?>'+response.alamat);
-
         $('#hargaKos').html(response.harga);
         $('#deskripsiKos').html(response.deskripsi_kos);
         $('#genderKos').html(response.gender_kos);
         $('#jarakKos').html((Math.round(response.distance/ 100)/10)+" km ");
-        // alert(response.distance);
         $('#modalGender').html('<?php echo $detailGender ?>'+response.gender_kos);
         var fas = response.fasilitas_kos;
         var res = fas.split(",");
@@ -527,16 +464,13 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             $('#fasilitas13').css('text-decoration','none');
           }
         }
-
         var KosLatlng = new google.maps.LatLng(response.latitude,response.longitude);
-
         var directionsRequest = {
           origin: response.latitude+","+response.longitude,
           destination: "-7.957260,112.589052",
           travelMode: google.maps.DirectionsTravelMode.DRIVING,
           unitSystem: google.maps.UnitSystem.METRIC
         };
-
         directionsService.route(
           directionsRequest,
           function(response, status)
@@ -547,42 +481,31 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 map: map,
                 directions: response
               });
-
               var infowindowDestination = new google.maps.InfoWindow({
                 position: myLatlng,
                 content: "Ma Chung"
               });
               infowindowDestination.open(map);
-
               var infowindowOrigin = new google.maps.InfoWindow({
                 position: KosLatlng,
                 content: "<?php echo $labelKosMap ?>"
               });
               infowindowOrigin.open(map);
-
-              
-
             }
             else
               $("#error").append("Unable to retrieve your route<br />");
           }
           );
-
-
       }
     });
-
-
-
 $.ajax({
   url:"<?php echo base_url() ?>index.php/"+urls+"/kamar",
   type: 'get',
   dataType: "json",
   success: function (response) {
-
+    responseGetKamar = response;
     for (var i = 0; i < response.length; i++) {
-
-
+      var a = i;
       var fas1 = '';
       var fas2 = '';
       var fas3 = '';
@@ -590,155 +513,194 @@ $.ajax({
       var fas5 = '';
       var fas6 = '';
       var fas7 = '';
-
       var kamar = '';
-
-
+      var jumlahKamar = response[i].kamardetail.length;
       var fas = response[i].fasilitas_kamar;
       var res = fas.split(",");
       for (var j = 0; j < res.length; j++) {
-
         if (res[j]== "Lemari") {
-                  // $('#fasilitas_kamar1').css('background-color','');
-                  var fas1= '</li>'+
-                  '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" ></i><span class="booking-item-feature-sign"><?php echo $detailWardrobe ?></span>'+
-                  '</li>';
-                }
+          var fas1= '</li>'+
+          '<li rel="tooltip" data-placement="top" title="Lemari Kayu"><i id="fasilitas_kamar1" class="fa fa-archive" ></i><span class="booking-item-feature-sign"><?php echo $detailWardrobe ?></span>'+
+          '</li>';
+        }
+        if (res[j]== "AC") {
+          var fas2 =
+          '<li rel="tooltip" data-placement="top" title="AC"><i id="fasilitas_kamar2" class="im im-air" ></i><span class="booking-item-feature-sign" >AC</span>'+
+          '</li>';
+        }
+        if (res[j] == "KM Dalam") {
+          var fas3 =
+          '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" style="top:37px;"><?php echo $detailToilet ?></span>'+
+          '</li>';
+        }
+        if (res[j] == "Kipas Angin") {
+          var fas4 =
+          '<li rel="tooltip" data-placement="top" title="Kipas"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" ><?php echo $detailFan ?></span>'+
+          '</li>';
+        }
+        if (res[j] == "Meja") {
+          var fas5 =
+          '<li rel="tooltip" data-placement="top" title="Meja"><i id="fasilitas_kamar5" class="fa fa-archive" ></i><span class="booking-item-feature-sign" ><?php echo $detailTable ?></span>'+
+          '</li>';
+        }
+        if (res[j] == "Kursi") {
+          var fas6 =
+          '<li rel="tooltip" bookmark-placement="top" title="Kursi"><i id="fasilitas_kamar6" class="fa fa-bookmark" ></i><span class="booking-item-feature-sign" ><?php echo $detailChair ?></span>'+
+          '</li>';
+        }
+        if (res[j] == "Twin Bed") {
+          var fas7 =
+          '<li rel="tooltip" data-placement="top" title="Twin Bed"><i id="fasilitas_kamar7" class="im im-bed" ></i><span class="booking-item-feature-sign" style="top:37px;"><?php echo $detailTwinBed ?></span>'+
+          '</li>';
+        }
+        if (response[i].kuota > 0) {
+          kamar =
+          '<li>'+
+          '<a class="booking-item">'+
+          '<div class="row">'+
+          '<div class="col-md-3">'+
+          '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
+          '</div>'+
+          '<div class="col-md-4">'+
+          '<h5 class="booking-item-title" style="font-weight: 500;"><?php echo $detailNamakamar ?>'+response[i].nama_kamar+'</h5>'+
+          '<h6 class="booking-item-title" style="font-weight: 500;"><?php echo $detailLeft ?>'+response[i].kuota+'</h6>'+
+          '<ul class="booking-item-features booking-item-features-sign clearfix">'+
+          '<li rel="tooltip" data-placement="top" title="Spring Bed"><i class="im im-bed" "></i><span class="booking-item-feature-sign">x 1</span>'+
+          '</li>'+
+          '<li rel="tooltip" data-placement="top" title="Luas Kamar"><i class="im im-width" ></i><span class="booking-item-feature-sign">'+response[i].panjang+'x'+response[i].lebar+'</span>'+fas1+fas2+fas3+fas4+fas5+fas6+fas7+
+          '</ul>'+
+          '</div>'+
+          '<div class="col-md-5">'+
+          '<div class="pull-right">'+
+          '<span class="booking-item-price">Rp '+(response[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</span><span>/<?php echo $detailperMonth ?></span>'+
+          '</div>'+
+          '<br><br><br><br>'+
+          '<button data-toggle="modal" data-target="#myModalNota" type="button" class="btn btn-primary pull-right" onclick="modalNota(&quot;'+a+'&quot;,&quot;'+jumlahKamar+'&quot;,&quot;'+response[i].harga+'&quot;,&quot;'+response[i].nama_kamardetail+'&quot;,&quot;'+response[i].id_kamar+'&quot;)"><b><?php echo $detailOrdernow ?></b></button>'+
+          '</div>'+
+          '</div>'+
+          '</a>'+
+          '</li>';
+        }
+      }
+      $('#bookList').append(kamar);
+    }
+  }
+});
+}
+function modalNota(index,jumlah,harga,namaKamar,idKamar){
+  $('#modalLamaPesan').hide();
+  var blnTutup = null;
+  $('#modalNotaBody').html('');
+  for (var i = 0; i < jumlah; i++) {
+    if (responseGetKamar[index].kamardetail[i].bulan_tutup == null) {
+      vakum = 0;
+      blnTutup = "Seterusnya";
+    }else{
+      vakum = 1;
+      blnTutup = responseGetKamar[index].kamardetail[i].bulan_tutup;
+    }
 
 
-                if (res[j]== "AC") {
-                  // $('#fasilitas_kamar2').css('background-color','');
-                  var fas2 = 
-                  '<li rel="tooltip" data-placement="top" title="AC"><i id="fasilitas_kamar2" class="im im-air" ></i><span class="booking-item-feature-sign" >AC</span>'+
-                  '</li>';
+    eachRoom =
+    '<li ><input type="hidden" id="hid" value="'+idKamar+'"><a style="cursor: pointer" onclick="namaMhs(&quot;'+harga+'&quot;,&quot;'+namaKamar+'&quot;,&quot;'+idKamar+'&quot;,&quot;'+tanggalMasuk+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].id_kamardetail+'&quot;,&quot;'+vakum+'&quot;); setdate(&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;); tanggalAkhir=&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;;   $(&quot;#modalLamaPesan&quot;).show(); changeDurasi(&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;)">'+responseGetKamar[index].kamardetail[i].nama_kamardetail+'</a></li></ul>'+
+    
+    '<p><span>Tersedia Mulai : <span><span>'+responseGetKamar[index].kamardetail[i].bulan_buka+'</span></p>'+
+    '<p><span>Tersedia Hingga : <span><span>'+blnTutup+'</span></p>';
 
-                }
-
-                if (res[j] == "KM Dalam") {
-                  // $('#fasilitas_kamar3').css('background-color','');
-                  var fas3 = 
-                  '<li rel="tooltip" data-placement="top" title="KM Dalam"><i id="fasilitas_kamar3" class="im im-bathtub" ></i><span class="booking-item-feature-sign" style="top:37px;"><?php echo $detailToilet ?></span>'+
-                  '</li>';
-                }
-                if (res[j] == "Kipas Angin") {
-                  var fas4 = 
-                  '<li rel="tooltip" data-placement="top" title="Kipas"><i id="fasilitas_kamar4" class="im im-air" ></i><span class="booking-item-feature-sign" ><?php echo $detailFan ?></span>'+
-                  '</li>';
-                }
-                if (res[j] == "Meja") {
-                  var fas5 = 
-                  '<li rel="tooltip" data-placement="top" title="Meja"><i id="fasilitas_kamar5" class="fa fa-archive" ></i><span class="booking-item-feature-sign" ><?php echo $detailTable ?></span>'+
-                  '</li>';
-                }
-                if (res[j] == "Kursi") {
-                  var fas6 = 
-                  '<li rel="tooltip" bookmark-placement="top" title="Kursi"><i id="fasilitas_kamar6" class="fa fa-bookmark" ></i><span class="booking-item-feature-sign" ><?php echo $detailChair ?></span>'+
-                  '</li>';
-                }
-                if (res[j] == "Twin Bed") {
-                  var fas7 = 
-                  '<li rel="tooltip" data-placement="top" title="Twin Bed"><i id="fasilitas_kamar7" class="im im-bed" ></i><span class="booking-item-feature-sign" style="top:37px;"><?php echo $detailTwinBed ?></span>'+
-                  '</li>';
-                }
-
-                if (response[i].kuota != 0) {
-                  kamar = 
-                  '<li>'+
-                  '<a class="booking-item">'+
-                  '<div class="row">'+
-                  '<div class="col-md-3">'+
-                  '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
-                  '</div>'+
-                  '<div class="col-md-4">'+
-                  '<h5 class="booking-item-title" style="font-weight: 500;"><?php echo $detailNamakamar ?>'+response[i].nama_kamar+'</h5>'+
-                  '<h6 class="booking-item-title" style="font-weight: 500;"><?php echo $detailLeft ?>'+response[i].kuota+'</h6>'+
-                  '<ul class="booking-item-features booking-item-features-sign clearfix">'+
-                  '<li rel="tooltip" data-placement="top" title="Spring Bed"><i class="im im-bed" "></i><span class="booking-item-feature-sign">x 1</span>'+
-                  '</li>'+
-                  '<li rel="tooltip" data-placement="top" title="Luas Kamar"><i class="im im-width" ></i><span class="booking-item-feature-sign">'+response[i].panjang+'x'+response[i].lebar+'</span>'+fas1+fas2+fas3+fas4+fas5+fas6+fas7+
-                  '</ul>'+
-                  '</div>'+
-                  '<div class="col-md-5">'+
-                  '<div class="pull-right">'+
-                  '<span class="booking-item-price">Rp '+(response[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</span><span>/<?php echo $detailperMonth ?></span>'+
-                  '</div>'+
-                  '<br><br><br><br>'+
-                  '<button data-toggle="modal" data-target="#myModalNota" type="button" class="btn btn-primary pull-right" onclick="namaMhs(&quot;'+response[i].harga+'&quot;,&quot;'+response[i].nama_kamar+'&quot;,&quot;'+response[i].id_kamar+'&quot;)"><b><?php echo $detailOrdernow ?></b></button>'+
-                  '</div>'+
-                  '</div>'+
-                  '</a>'+
-                  '</li>';
-                }
-              }
-              $('#bookList').append(kamar);
-            }
-          }
-
-        });
+    $('#modalNotaBody').append(eachRoom);
+  }
 }
 
-function modalNota(){
-  $('#modalDuration').html(durasi+" bulan");
+function changeDurasi(masuk){
+  tanggalMasuk = masuk;
+  if (tanggalAkhir != null && tanggalAkhir != "null" ) {
+
+    var date1 = new Date(tanggalMasuk);
+    var date2 = new Date(tanggalAkhir);
+
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var diffMonth = Math.ceil(timeDiff / (1000 * 3600 * 24 * 30 ))-1;
+    if ($('#pesan').val() > diffMonth) {
+      $('#pesan').val(diffMonth);
+    }
+    $('#pesan').prop('max',diffMonth);
+    // alert(diffMonth);
+  }else{
+    $('#pesan').prop('max',9);
+  }
 }
 
-function namaMhs(x,y,z){
+function setdate(BulanTutup,BulanBuka){
+  var start = new Date(BulanBuka);
+  if (BulanTutup == "null") {
+    var d = new Date(BulanBuka);
+    d.setMonth(d.getMonth() + 9);
+    
+  }else{
+    var d = new Date(BulanTutup);
+    d.setMonth(d.getMonth() - 3);  
+  }
+  
+  
+  $('input.date-pick').datepicker('setStartDate', start);
+
+  $('input.date-pick').datepicker('setEndDate', d);
+
+}
+
+function namaMhs(harga,namaKamar,idKamar,tglMasuk,idKamarDetail,vakum){
   myString = getCookie('frontNama');
   $('#modalMahasiswa').html(myString.replace(/\+/g, " "));
-  $('#modalHarga').html('Rp '+x.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $detailperMonth ?>');
-  $('#modalKamar').html(y);
-  bookKamar = z;
-  $('#modalTotal').html('Rp '+(x*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
-  $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+z+'/slot1.jpg');
+  $('#modalHarga').html('Rp '+harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $detailperMonth ?>');
+  $('#modalKamar').html(namaKamar);
+  bookKamar = idKamar;
+  id_kDetail = idKamarDetail;
+  var vak = vakum;
+  $('#modalTotal').html('Rp '+(harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+  $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+idKamar+'/slot1.jpg');
 }
-
 function confirmBooking(){
   var buttonname = $("#submit").html();
   $("#submit").html("<?php echo $detailWait ?>");
   $("#submitButton").prop("disabled",true);
-
   var urls='order/'+getCookie('frontCookie')+'';
-    // alert(urls);
-    $.ajax({
-      url:"<?php echo base_url() ?>index.php/"+urls,
-      type: 'POST',
-      data:
-      {
-       'idkos':getCookie('detailKamar') ,
-       'idkamar': bookKamar,
-       'tanggalmasuk': tanggalMasuk,
-       'vakum': vakum,
-       'lamapemesanan': lamapemesanan
-     }
-     ,
-     success: function(response){
-      if (response == 1) {
-        $("#submit").html(buttonname);
-        window.location.href = 'payment';
-
-      }else{
-        alert("<?php echo $detailFfailed ?>");
-        $("#submitButton").prop("disabled",false);
-      }
-    }
-  }); 
-
+// alert(urls);
+$.ajax({
+  url:"<?php echo base_url() ?>index.php/"+urls,
+  type: 'POST',
+  data:
+  {
+    'idkos':getCookie('detailKamar') ,
+    'idkamar': bookKamar,
+    'id_kamarDetail' : id_kDetail,
+    'tanggalmasuk': tanggalMasuk,
+    'vakum': vak,
+    'lamapemesanan': lamapemesanan
   }
-
-  function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-
-    for(var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
+  ,
+  success: function(response){
+    if (response == 1) {
+      $("#submit").html(buttonname);
+      window.location.href = 'payment';
+    }else{
+      alert("<?php echo $detailFfailed ?>");
+      $("#submitButton").prop("disabled",false);
     }
-    return "";
   }
-
-
+});
+}
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 </script>
