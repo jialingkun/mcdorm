@@ -592,6 +592,19 @@ class Front extends CI_Controller {
         return $result;
     }
 
+    public function gethistorymahasiswa($id)
+    {
+        $data = $this->front_model->get_history_mahasiswa($id);
+        if (empty($data))
+        {
+            $data = [];
+        }else{
+            echo json_encode($data);
+        }
+    }
+
+
+
     public function getmahasiswa($id)
     {
         $data = $this->front_model->get_mahasiswa($id);
