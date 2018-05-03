@@ -9,7 +9,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentNamakamar = 'Name : ';
     $paymentAddress = 'Address : ';
     $paymentperMonth = ' month';
-    $paymentMonth = ' ( 3 months payment)';
+    $paymentMonth1 = ' ( payment  ';
+    $paymentMonth2 = ' months )';
     
     $paymentBankname = 'Bank Name : ';
     $paymentAlias = 'Alias : ';
@@ -23,8 +24,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentProof = 'Proof of Bank Transfer';
     $paymentDates = 'Enter Dates';
     $paymentKamarDetail = 'Room Name : ';
-
-
+    $paymentDuration = 'Order Duration';
+    $paymentModalMonth = ' months';
 
 }else{
     $paymentThanks = 'Terima Kasih telah Mempercayai Kami!';
@@ -35,7 +36,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentNamakamar = 'Nama : ';
     $paymentAddress = 'Alamat : ';
     $paymentperMonth = ' bulan';
-    $paymentMonth = ' ( Pembayaran 3 bulan )';
+    $paymentMonth1 = ' ( Pembayaran  ';
+    $paymentMonth2 = ' bulan )';
     $paymentBankname = 'Nama Bank : ';
     $paymentAlias = 'Atas Nama : ';
     $paymentBankAccount ='Akun Bank : ';
@@ -51,6 +53,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentDetail = 'Pembayaran Pemesanan : ';
     $paymentTotal = 'Total : ';
     $paymentKamarDetail = 'Nama Kamar : ';
+    $paymentDuration = 'Lama Pemesanan';
+    $paymentModalMonth = ' bulan';
 }
 ?>
 
@@ -106,6 +110,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                                 <p id="modalTanggal"><b>32 Desember 2017</b></p>
                             </li>
                             <li>
+                                <h5><?php echo $paymentDuration ?></h5>
+                                <p id="modalDuration"><b></b></p>
+                            </li>
+                            <li>
                                 <h5><?php echo $paymentDetail ?></h5>
                                 <ul class="booking-item-payment-price">
                                     <li>
@@ -119,7 +127,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                             </li>
                         </ul>
                         <p  class="booking-item-payment-total"><?php echo $paymentTotal ?><span id="modalTotal"></span>
-                            <span style="font-size: 12pt; margin-left:6px;"><?php echo $paymentMonth ?></span>
+                            <span style="font-size: 12pt; margin-left:6px;" id="modalPaymentMonths"></span>
                         </p>
                     </div>
                 </div>
@@ -130,7 +138,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 </div>
 
 <script>
- window.onload = function() {
+   window.onload = function() {
     var urls = "<?php echo base_url() ?>photos/payment/"+getCookie("frontCookie");
     $.get(urls)
     .done(function() { 
@@ -162,7 +170,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         success: function (response) {
             $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
             $("#modalNamaKos").html('<?php echo $paymentNamakamar ?>' + response.nama_kos);
-              $('#modalNamaKamarDetail').html("<?php echo $paymentKamarDetail ?>"+);
+            $('#modalNamaKamarDetail').html("<?php echo $paymentKamarDetail ?>"+response.nama_kamardetail);
 
             $("#modalAlamatKos").html('<?php echo $paymentAddress ?>'+response.alamat);
             $("#modalGender").html('<?php echo $paymentGender ?>'+response.gender_kos);
@@ -170,7 +178,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             $("#modalTanggal").html(response.tanggal_masuk);
             $("#modalHarga").html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $paymentperMonth ?>');
             $("#modalKamar").html(response.nama_kamar);
-            $("#modalTotal").html('Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+            $("#modalTotal").html('Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+            $("#modalDuration").html(response.lama_pemesanan + "<?php echo $paymentModalMonth ?>" );
+            $("#modalPaymentMonths").html("<?php echo $paymentMonth1 ?>"+response.lama_pemesanan + "<?php echo $paymentMonth2 ?>" );
+            
             if (response.status === 'Belum Bayar') {
 
                 document.getElementById('output').src = "about:blank";
@@ -192,15 +203,15 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 '<p><?php echo $paymentInfo2 ?></p>';
                 $('#keteranganPayment').append(keterangan);
             }else{
-             $('#content').remove();
-             info = 
-             '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
-             ;
-             $('#info').append(info);
-         }
+               $('#content').remove();
+               info = 
+               '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
+               ;
+               $('#info').append(info);
+           }
 
-     }
- });
+       }
+   });
 
     
 }
