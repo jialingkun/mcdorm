@@ -83,8 +83,8 @@
                   </div>
                   <div class="form-group row">
                    <div class="col-sm-6">
-                    <button id="batalPesan" data-toggle="modal" data-target="#myModal" type="button"   class="btn btn-animate btn-animate-side btn-danger btn-md" disabled="true">
-                      <b>Batal Pesan</b>
+                    <button id="batalPesan" data-toggle="modal" data-target="#myModal" type="button"   class="btn btn-animate btn-animate-side btn-primary btn-md" disabled="true">
+                      <b>Lihat Nota / Batal Pesan</b>
                     </button>
                   </div>
                 </div>

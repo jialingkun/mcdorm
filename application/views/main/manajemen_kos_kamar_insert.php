@@ -32,17 +32,17 @@
                   </div>
                   <div class="col-sm-6">
                     <label class="control-label"><b>Harga/Bulan</b></label>
-                    <input type="text" class="form-control" name="harga" required pattern="[0-9]+" placeholder="Example : 1000000"  />
+                    <input type="text" class="form-control" name="harga" required pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="Example : 1000000"  />
                   </div>
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Panjang (m<sup>2</sup>)</b></label>
-                    <input type="text" class="form-control" name="panjang" required pattern="[0-9]+" placeholder="Example : 2"/>
+                    <input type="text" class="form-control" name="panjang" required pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="Example : 2"/>
                   </div>
                   <div class="col-sm-6">
                    <label class="control-label"><b>Lebar (m<sup>2</sup>)</b></label>
-                   <input type="text" class="form-control" name="lebar" required pattern="[0-9]+" placeholder="Example : 3"/>
+                   <input type="text" class="form-control" name="lebar" required pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="Example : 3"/>
                  </div>
                </div>
                <div class="form-group row">
