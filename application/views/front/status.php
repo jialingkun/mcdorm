@@ -21,6 +21,12 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $suksesBatal = 'Order Successfuly Canceled';
   $gagalBatal = 'Failed to Cancel Order';
   $Cancel = 'Wait';
+  $StatusDuration = 'Order Duration';
+
+  $StatusKamarDetail = 'Room Name: ';
+  $StatusModalMonth = ' months';
+  $StatusMonth1 = ' ( payment  ';
+    $StatusMonth2 = ' months )';
 }else{
   $title = 'Status Pemesanan';
   $tableth= '
@@ -43,6 +49,11 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $suksesBatal = 'Pesanan kamar berhasil dibatalkan';
   $gagalBatal = 'Pembatalan Pesanan Gagal';
   $Cancel = 'Tunggu';
+  $StatusKamarDetail = 'Nama Kamar: ';
+  $StatusModalMonth = ' bulan';
+  $StatusDuration = 'Durasi Pemesanan';
+  $StatusMonth1 = ' ( pemesanan  ';
+    $StatusMonth2 = ' bulan )';
 }
 
 ?>
@@ -95,6 +106,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
             <div class="booking-item-payment">
               <header class="clearfix">
                 <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
+                <p id="modalNamaKamarDetail" class="booking-item-payment-title"></p>
                 <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
                 <small id="modalGender" >jl. Semangka 5 Malang</small><br>
                 
@@ -107,6 +119,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 <li>
                   <h5><?php echo $tglmasuk ?></h5>
                   <p id="modalTanggal"><b>32 Desember 2017</b></p>
+                </li>
+                <li>
+                  <h5><?php echo $StatusDuration ?></h5>
+                  <p id="modalDuration"><b></b></p>
                 </li>
                 <li>
                   <h5><?php echo $detail ?></h5>
@@ -122,7 +138,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 </li>
               </ul>
               <p  class="booking-item-payment-total">Total: <span id="modalTotal"></span>
-                <span style="font-size: 12pt; margin-left:6px;"><?php echo $detailMonth ?></span>
+                <span style="font-size: 12pt; margin-left:6px;" id="modalPaymentMonths"></span>
               </p>
             </div>
           </div>
@@ -155,7 +171,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           '<tr class="text-center" >'+
           '<td>'+response.nama_kos+'</td>'+
           '<td>'+response.nama_kamar+'</td>'+
-          '<td>Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
+          '<td>Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
           '<td>'+response.tanggal_masuk+'</td>'+
           '<td><b>'+translateStatus(response.status)+'</b></td>'+
           '<td class="text-center">'+
@@ -169,7 +185,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           '<tr class="text-center" >'+
           '<td>'+response.nama_kos+'</td>'+
           '<td>'+response.nama_kamar+'</td>'+
-          '<td>Rp '+(response.harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
+          '<td>Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
           '<td>'+response.tanggal_masuk+'</td>'+
           '<td><b>'+ translateStatus(response.status)+'</b></td>'+
           '<td></td>'
@@ -193,7 +209,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         '<tr class="text-center" >'+
         '<td style="background-color: white;">'+response[i].alamat+'</td>'+
         '<td style="background-color: white;">'+response[i].nama_kamar+'</td>'+
-        '<td style="background-color: white;">Rp '+(response[i].harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
+        '<td style="background-color: white;">Rp '+(response[i].harga*response[i].lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
         '<td style="background-color: white;">'+response[i].tanggal_masuk+'</td>'+
         '<td style="background-color: white;"><b>'+translateStatus('Terpesan')+'</b></td>'+
         '<td style="background-color: white;" class="text-center">'+
@@ -239,14 +255,17 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     function modalHistory(i){
       myString = getCookie('frontNama');
       $('#modalNamaKos').html(res[i].nama_kos);
+      $('#modalNamaKamarDetail').html("<?php echo $StatusKamarDetail ?>"+res[i].nama_kamardetail);
+
       $('#modalAlamatKos').html(res[i].alamat);
       $('#modalGender').html(res[i].gender);
       $('#modalMahasiswa').html(myString.replace(/\+/g, " "));
       $('#modalHarga').html('Rp '+(res[i].harga).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /<?php echo $detailperMonth ?>');
       $('#modalKamar').html(res[i].nama_kamar);
-
-      $('#modalTotal').html('Rp '+(res[i].harga*3).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
+      $("#modalDuration").html(res[i].lama_pemesanan + "<?php echo $StatusModalMonth ?>" );
+      $('#modalTotal').html('Rp '+(res[i].harga*res[i].lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
       $('#modalTanggal').html(res[i].tanggal_masuk);
+      $("#modalPaymentMonths").html("<?php echo $StatusMonth1 ?>"+res[i].lama_pemesanan + "<?php echo $StatusMonth2 ?>" );
     }
 
     function getCookie(cname) {
