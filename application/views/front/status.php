@@ -180,13 +180,24 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           '</td>'+
           '</tr>';
           $('#tabelHistory').append(tr_str);
-        }else if(response.status == "Batal" || response.status == "Expired" || response.status == "Belum Pesan"){
+        }else if(response.status == "Batal" || response.status == "Expired" ){
           var tr_str = 
           '<tr class="text-center" >'+
           '<td>'+response.nama_kos+'</td>'+
           '<td>'+response.nama_kamar+'</td>'+
           '<td>Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
           '<td>'+response.tanggal_masuk+'</td>'+
+          '<td><b>'+ translateStatus(response.status)+'</b></td>'+
+          '<td></td>'
+          ;
+          $('#tabelHistory').append(tr_str);
+        }else if(response.status == "Belum Pesan"){
+          var tr_str = 
+          '<tr class="text-center" >'+
+          '<td>-</td>'+
+          '<td>-</td>'+
+          '<td>-</td>'+
+          '<td>-</td>'+
           '<td><b>'+ translateStatus(response.status)+'</b></td>'+
           '<td></td>'
           ;

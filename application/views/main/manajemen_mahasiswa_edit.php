@@ -94,9 +94,9 @@
                 <div class="example-wrap">
                   <h4 class="control-label">Bukti Pembayaran</h4>
                   <div class="example">
-                    <div class="cover height-500 height-xs-300">
+                    <div class="cover ">
                       <div class="cover-background">
-                        <img id="buktiTransfer" alt="Tidak ada Bukti Transfer">
+                        <img id="buktiTransfer" alt="Tidak ada Bukti Transfer" style="max-width: 400px">
                       </div>
                     </div>
                   </div>
