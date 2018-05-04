@@ -38,11 +38,11 @@
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Panjang (m<sup>2</sup>)</b></label>
-                    <input type="text" class="form-control"  name="panjang" id="panjang"/>
+                    <input type="text" class="form-control"  name="panjang" id="panjang" pattern="[0-9]+(\.[0-9][0-9]?)?"/>
                   </div>
                   <div class="col-sm-6">
                    <label class="control-label"><b>Lebar (m<sup>2</sup>)</b></label>
-                   <input type="text" class="form-control" name="lebar" id="lebar"/>
+                   <input type="text" class="form-control" name="lebar" id="lebar" pattern="[0-9]+(\.[0-9][0-9]?)?"/>
                  </div>
                </div>
                <div class="form-group row">
@@ -85,7 +85,7 @@
                 <span><i class="icon fa-plus"></i> &nbsp<b id="submit">Tambahkan Data</b></span>
               </button>
               
-              <a href="manajemen_kos_data">
+              <a href="manajemen_kos_edit">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
                 </button>

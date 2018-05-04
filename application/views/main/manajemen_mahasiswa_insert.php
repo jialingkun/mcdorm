@@ -86,8 +86,8 @@
   }
 
   function insertfunction(e) {
-    if (count == 1) {
     e.preventDefault(); // will stop the form submission
+    if (count == 1) {
     var urls='main/insertMahasiswa';
     var dataString = $("#insertMahasiswa").serialize();
     var buttonname = $("#submit").html();
@@ -115,10 +115,8 @@
       }
     }); 
   }else{
-    return  false;
-
     alert('Password anda tidak sesuai');
-
+    return  false;
   }
 }
 

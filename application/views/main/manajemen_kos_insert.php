@@ -114,7 +114,7 @@ html, body {
           <!-- Example Basic Form -->
           <div class="example-wrap">
             <div class="example">
-              <form id="insertData" onsubmit="insertDataKos()">
+              <form id="insertData" onsubmit="insertDataKos(event)">
                 <div class="form-group row">
                   <div class="col-sm-6">
                     <label class="control-label"><b>Username</b></label>
@@ -249,8 +249,8 @@ html, body {
 
 <script>
 
-  function insertDataKos() {
-
+  function insertDataKos(e) {
+    e.preventDefault();
     var urls='main/insertkos';
     var dataString = $("#insertData").serialize();
     var buttonname = $("#submit").html();

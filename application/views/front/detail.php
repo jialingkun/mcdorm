@@ -318,7 +318,7 @@ li.selected{
                       </div>
                     </div>
                     <label class="control-label"><b><?php echo $detailDalamBulan ?> </b></label>
-                    <input value="3" type="number" min="3" max="9" class="form-control" name="pesan" id="pesan" required placeholder="jumlah bulan" onchange="lamapemesanan = this.value"/>
+                    <input value="3" type="number" min="3" max="12" class="form-control" name="pesan" id="pesan" required placeholder="jumlah bulan" onchange="lamapemesanan = this.value"/>
 
                   </div>
                 </div>
@@ -657,8 +657,8 @@ function modalNota(index,jumlah,harga,namaKamar,idKamar){
     eachRoom =
     '<li class="booking-item col-sm-5 lists" onclick="setActive(this); namaMhs(&quot;'+harga+'&quot;,&quot;'+namaKamar+'&quot;,&quot;'+idKamar+'&quot;,&quot;'+tanggalMasuk+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].id_kamardetail+'&quot;,&quot;'+vakum+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].nama_kamardetail+'&quot;); setdate(&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;,&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;); tanggalAkhir=&quot;'+responseGetKamar[index].kamardetail[i].bulan_tutup+'&quot;;   $(&quot;#modalLamaPesan&quot;).show(); $(&quot;#modalSubmitKamar&quot;).show(); changeDurasi(&quot;'+responseGetKamar[index].kamardetail[i].bulan_buka+'&quot;)"><input type="hidden" id="hid" value="'+idKamar+'"><h5><?php echo $detailKamarDetail ?>'+responseGetKamar[index].kamardetail[i].nama_kamardetail+'</h5>'+
     
-    '<p><span><?php echo $detailAvailableFrom ?><span><span>'+responseGetKamar[index].kamardetail[i].bulan_buka+'</span></p>'+
-    '<p><span><?php echo $detailAvailableUntil ?><span><span>'+blnTutup+'</span></p></li>'+
+    '<h6><span><?php echo $detailAvailableFrom ?><span><span>'+responseGetKamar[index].kamardetail[i].bulan_buka+'</span></h6>'+
+    '<h6><span><?php echo $detailAvailableUntil ?><span><span>'+blnTutup+'</span></h6></li>'+
     '</ul>';
 
     $('#modalNotaBody').append(eachRoom);
@@ -686,7 +686,7 @@ function changeDurasi(masuk){
     $('#pesan').prop('max',diffMonth);
     // alert(diffMonth);
   }else{
-    $('#pesan').prop('max',9);
+    $('#pesan').prop('max',12);
   }
   lamapemesanan = $('#pesan').val();
 
@@ -728,7 +728,7 @@ function namaMhs(harga,namaKamar,idKamar,tglMasuk,idKamarDetail,vakums,namaKamar
 function updateNota(){
   $('#modalDuration').html($('#pesan').val()+"<?php echo $detailModalBulan ?>");
   $('#modalTanggal').html(tanggalMasuk);
-  $('#detailmonth').html("<?php echo $detailMonth1 ?>"+$('#pesan').val()+"<?php echo $detailMonth2 ?>");
+  $('#detailmonth').html("<?php echo $detailMonth1 ?> "+$('#pesan').val()+" <?php echo $detailMonth2 ?>");
   $('#modalTotal').html('Rp '+(hargaKamar*lamapemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
 }
 function confirmBooking(){
