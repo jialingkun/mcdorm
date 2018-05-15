@@ -9,7 +9,7 @@
         alt="">
         <div class="overlay-panel text-center vertical-align">
           <div class="widget-metas vertical-align-middle blue-grey-800">
-            <div class="animation-scale-up animation-delay-400 widget-title font-size-50 margin-bottom-10 blue-grey-800">Selamat Datang di McDLodge</div>
+            <div class="animation-scale-up animation-delay-400 widget-title font-size-50 margin-bottom-10 blue-grey-800">Selamat Datang di McDorm</div>
           </div>
         </div>
       </div>

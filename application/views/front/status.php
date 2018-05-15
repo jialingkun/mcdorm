@@ -15,18 +15,16 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailperMonth = ' month';
   $tutup = 'Close';
   $pembayaran = 'Payment';
-  $detailMonth = ' ( payment for 3 months )';
   $batal = 'Cancel';
   $confirmBatal = 'Do you want to cancel this order?';
   $suksesBatal = 'Order Successfuly Canceled';
   $gagalBatal = 'Failed to Cancel Order';
   $Cancel = 'Wait';
   $StatusDuration = 'Order Duration';
-
   $StatusKamarDetail = 'Room Name: ';
   $StatusModalMonth = ' months';
-  $StatusMonth1 = ' ( payment  ';
-    $StatusMonth2 = ' months )';
+  $StatusMonth1 = ' ( payment for  ';
+  $StatusMonth2 = ' months )';
 }else{
   $title = 'Status Pemesanan';
   $tableth= '
@@ -41,7 +39,6 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $tglmasuk = 'Tanggal Masuk';
   $detail = 'Detail Pesanan';
   $detailperMonth = ' bulan';
-  $detailMonth = ' ( pembayaran untuk 3 bulan )';
   $tutup = 'Tutup';
   $pembayaran = 'Pembayaran';
   $batal = 'Batal';
@@ -53,7 +50,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $StatusModalMonth = ' bulan';
   $StatusDuration = 'Durasi Pemesanan';
   $StatusMonth1 = ' ( pemesanan  ';
-    $StatusMonth2 = ' bulan )';
+  $StatusMonth2 = ' bulan )';
 }
 
 ?>

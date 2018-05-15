@@ -31,7 +31,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentThanks = 'Terima Kasih telah Mempercayai Kami!';
     $paymentInfo = 'Silahkan lakukan proses transfer ke nomer rekening yang tertera. Kemudian upload foto bukti transfer melalui halaman ini dalam waktu kurang dari <b style="font-size: 15pt;"> 24 jam </b>. Anda bisa menutup halaman ini dan mengaksesnya lagi nanti melalui menu STATUS.';
     $paymentInfo2 = 'Foto bukti transfer yang sudah anda upload akan diverifikasi oleh pihak kami dalam waktu kurang lebih 2 hari. Anda masih bisa mengubah foto bukti transfer jika ada kesalahan dengan mengupload ulang melalui halaman ini.';
-    $paymentGender = 'Jenis Kelamin :';    
+    $paymentGender = 'Gender Kos :';    
     $paymentEnter = 'Tanggal Masuk';
     $paymentNamakamar = 'Nama : ';
     $paymentAddress = 'Alamat : ';

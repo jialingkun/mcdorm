@@ -50,9 +50,10 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailDalamBulan = 'Order Duration: (in months)';
   $detailPilihKamar = 'Choose the Room';
   $detailAvailable = 'Available for Particular Months';
+  $alwaysAvailable = 'None';
 
 }else{
-  $detailGender = 'Jenis Kelamin :';
+  $detailGender = 'Gender Kos :';
   $detailOrder = 'Detil Pemesanan :';
   $detailEnter = 'Tanggal Masuk';
   $detailFacility = 'Fasilitas Kos';
@@ -102,6 +103,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailDalamBulan = 'Lama Pemesanan: (dalam bulan)';
   $detailPilihKamar = 'Pilih Kamar';
   $detailAvailable = 'Tersedia Bulan Tertentu';
+  $alwaysAvailable = 'Seterusnya';
 }
 ?>
 <style>
@@ -647,7 +649,7 @@ function modalNota(index,jumlah,harga,namaKamar,idKamar){
   for (var i = 0; i < jumlah; i++) {
     if (responseGetKamar[index].kamardetail[i].bulan_tutup == null) {
       vakum = 0;
-      blnTutup = "Seterusnya";
+      blnTutup = "<?php echo $alwaysAvailable ?>";
     }else{
       vakum = 1;
       blnTutup = responseGetKamar[index].kamardetail[i].bulan_tutup;

@@ -45,10 +45,10 @@ class Front extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'frontCookie',
-                 'value'  => $username,
-                 'expire' => '0',
-             );
+                   'name'   => 'frontCookie',
+                   'value'  => $username,
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
 
                 $cookie= array(
@@ -521,48 +521,51 @@ class Front extends CI_Controller {
             $targetFile =  $targetPath. $filename;
             $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-            //image resize
-            $maxWidth = 1024;
-            list($width, $height, $type, $attr) = getimagesize($tempFile);
-            if ($width > $maxWidth) {
-                $ratio = $width/$height;
-                $new_width = $maxWidth;
-                $new_height = $maxWidth/$ratio;
-            }else{
-                $new_width = $width;
-                $new_height = $height;
-            }
-            $src = imagecreatefromstring(file_get_contents($tempFile));
-            $dst = imagecreatetruecolor($new_width,$new_height);
-            imagecopyresampled($dst,$src,0,0,0,0,$new_width,$new_height,$width,$height);
-            imagedestroy($src);
-            imagejpeg($dst, $tempFile, 100);
-            imagedestroy($dst);
-
-            move_uploaded_file($tempFile,$targetFile.".jpg");
-
-        //Status Bayar
-            $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
-            if ($statusMahasiswa['status']=='Belum Bayar'){
-                $data = array(
-                    'status' => 'Belum Verifikasi',
-                    'kadaluarsa'=> NULL
-                );
-                $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
-                if ($insertStatus == 1) {
-                    header("Location: ".base_url()."index.php/thankyou");
-                    die();
+            if ($ext == "png" || $ext == "PNG" || $ext == "jpg" || $ext == "JPG" || $ext == "jpeg" || $ext == "JPEG"){
+                //image resize
+                $maxWidth = 1024;
+                list($width, $height, $type, $attr) = getimagesize($tempFile);
+                if ($width > $maxWidth) {
+                    $ratio = $width/$height;
+                    $new_width = $maxWidth;
+                    $new_height = $maxWidth/$ratio;
                 }else{
-                    echo $insertStatus;
+                    $new_width = $width;
+                    $new_height = $height;
+                }
+                $src = imagecreatefromstring(file_get_contents($tempFile));
+                $dst = imagecreatetruecolor($new_width,$new_height);
+                imagecopyresampled($dst,$src,0,0,0,0,$new_width,$new_height,$width,$height);
+                imagedestroy($src);
+                imagejpeg($dst, $tempFile, 100);
+                imagedestroy($dst);
+
+                move_uploaded_file($tempFile,$targetFile.".jpg");
+
+                //Status Bayar
+                $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
+                if ($statusMahasiswa['status']=='Belum Bayar'){
+                    $data = array(
+                        'status' => 'Belum Verifikasi',
+                        'kadaluarsa'=> NULL
+                    );
+                    $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
+                    if ($insertStatus == 1) {
+                        header("Location: ".base_url()."index.php/thankyou");
+                        die();
+                    }else{
+                        echo $insertStatus;
+                    }
+                }else{
+                    header("Location: ".base_url()."index.php/status");
+                    die();
                 }
             }else{
-                header("Location: ".base_url()."index.php/status");
-                die();
+                echo "Upload gagal, pastikan foto yang anda upload berekstensi JPG atau PNG <br> <a href='".base_url()."index.php/payment'> Kembali </a>";
             }
-
-
+            
         }else{
-            echo "Upload failed";
+            echo "Upload gagal <br> <a href='".base_url()."index.php/payment'> Kembali </a>";
         }
     }
 

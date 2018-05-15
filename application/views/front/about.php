@@ -17,7 +17,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 <div class="gap gap-big text-white">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2 align="center">Ma Chung Lodge</h2>
+                            <h2 align="center">Ma Chung Dorm</h2>
                         </div>
                     </div>
                 </div>

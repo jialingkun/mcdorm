@@ -51,7 +51,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $searchSort = 'Urutkan berdasarkan';
     $searchSortPrice = 'Harga';
     $searchSortDistance = 'Jarak';
-    $searchGender = 'Jenis Kelamin';
+    $searchGender = 'Gender kos';
     $searchMale = 'Pria';
     $searchFemale = 'Wanita';
     $searchMix = 'Campuran';
