@@ -225,34 +225,36 @@
           $('#harga').html("Rp "+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1."));
           $('#status').html(response.status);
 
-$("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+response.id_mahasiswa+".jpg");
-
+          if (response.status.toString() == "Belum Verifikasi") {
+            $("#buktiTransfer").attr("src","<?php echo base_url(); ?>photos/payment/"+response.id_mahasiswa+".jpg");
+          }
+          
           if (response.status.toString() != "Belum Verifikasi") {
             $('#konfirmasi').prop('disabled',true);
           }
 
-          if (response.status.toString() == "Belum Verifikasi" || response.status.toString() == "Belum Bayar") {
+          if (response.status.toString() == "Belum Verifikasi" || response.status.toString() == "Belum Bayar" || response.status.toString() == "Cek Ketersediaan") {
            $('#batalPesan').prop('disabled',false); 
-          }else{
-            $('#batalPesan').prop('disabled',true); 
-          }
-
-
-          $('#modalNamaKos').html(response.nama_kos);
-          $('#modalKamarDetail').html(response.nama_kamardetail);
-          
-          $('#modalAlamatKos').html(response.alamat);
-          $('#modalGender').html(response.gender);
-          $('#modalMahasiswa').html(response.nama_mahasiswa);
-          $('#modalLamaPemesanan').html(response.lama_pemesanan);
-          $('#modalHarga').html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /bulan');
-          $('#modalKamar').html('Jenis Kamar :  '+response.nama_kamar);
-          $('#modalTotal').html('Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- (pembayaran untuk '+ response.lama_pemesanan +' bulan)');
-          $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
-          $('#modalTanggal').html(response.tanggal_masuk);
-
+         }else{
+          $('#batalPesan').prop('disabled',true); 
         }
-      });
+
+
+        $('#modalNamaKos').html(response.nama_kos);
+        $('#modalKamarDetail').html(response.nama_kamardetail);
+
+        $('#modalAlamatKos').html(response.alamat);
+        $('#modalGender').html(response.gender);
+        $('#modalMahasiswa').html(response.nama_mahasiswa);
+        $('#modalLamaPemesanan').html(response.lama_pemesanan);
+        $('#modalHarga').html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /bulan');
+        $('#modalKamar').html('Jenis Kamar :  '+response.nama_kamar);
+        $('#modalTotal').html('Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- (pembayaran untuk '+ response.lama_pemesanan +' bulan)');
+        $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
+        $('#modalTanggal').html(response.tanggal_masuk);
+
+      }
+    });
 
     }  
     

@@ -148,6 +148,7 @@ class Main_model extends CI_Model {
 		$this->db->group_start();
 		$this->db->where('status','Belum Bayar');
 		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->or_where('status','Cek Ketersediaan');
 		$this->db->group_end();
 		
 		$query = $this->db->get();
@@ -167,6 +168,7 @@ class Main_model extends CI_Model {
 		$this->db->group_start();
 		$this->db->where('status','Belum Bayar');
 		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->or_where('status','Cek Ketersediaan');
 		$this->db->group_end();
 		
 		$query = $this->db->get();
@@ -186,6 +188,7 @@ class Main_model extends CI_Model {
 		$this->db->group_start();
 		$this->db->where('status','Belum Bayar');
 		$this->db->or_where('status','Belum Verifikasi');
+		$this->db->or_where('status','Cek Ketersediaan');
 		$this->db->group_end();
 		
 		$query = $this->db->get();

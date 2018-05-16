@@ -520,7 +520,7 @@ class Main extends CI_Controller {
                     if ($now < $expire) {
                         $count = $count + 1;
                     }
-                }else if($row['status'] == 'Belum Verifikasi'){
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
 
@@ -541,7 +541,7 @@ class Main extends CI_Controller {
                     if ($now < $expire) {
                         $count = $count + 1;
                     }
-                }else if($row['status'] == 'Belum Verifikasi'){
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
 
@@ -665,7 +665,7 @@ class Main extends CI_Controller {
                     if ($now < $expire) {
                         $count = $count + 1;
                     }
-                }else if($row['status'] == 'Belum Verifikasi'){
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
 

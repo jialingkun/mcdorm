@@ -177,6 +177,20 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           '</td>'+
           '</tr>';
           $('#tabelHistory').append(tr_str);
+        }else if(response.status == "Cek Ketersediaan"){
+          var tr_str = 
+          '<tr class="text-center" >'+
+          '<td>'+response.nama_kos+'</td>'+
+          '<td>'+response.nama_kamar+'</td>'+
+          '<td>Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',-</td>'+
+          '<td>'+response.tanggal_masuk+'</td>'+
+          '<td><b>'+ translateStatus(response.status)+'</b></td>'+
+          '<td class="text-center">'+
+          '<a ><button id="cancelButton" type="button" class="btn btn-warning btn-sm" onclick="cancelBooking()"><i  class="fa fa-minus-circle"></i><b id="cancel"><?php echo $batal ?></b></button></a>'+
+          '</td>'+
+          '</tr>';
+          ;
+          $('#tabelHistory').append(tr_str);
         }else if(response.status == "Batal" || response.status == "Expired" ){
           var tr_str = 
           '<tr class="text-center" >'+
@@ -196,7 +210,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           '<td>-</td>'+
           '<td>-</td>'+
           '<td><b>'+ translateStatus(response.status)+'</b></td>'+
-          '<td></td>'
+          '<td></td>'+
+          '</tr>';
           ;
           $('#tabelHistory').append(tr_str);
         }
@@ -304,6 +319,8 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
           return 'Free';
         } else if (status == 'Terpesan') {
           return 'Booked';
+        } else if (status == 'Cek Ketersediaan') {
+          return 'Checking Availability';
         } else {
           return status;
         }

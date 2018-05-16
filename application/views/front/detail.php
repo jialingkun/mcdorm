@@ -44,18 +44,19 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailDuration = "Order Duration";
   $detailKamarDetail = 'Room Name : ';
   $detailModalBulan = ' months';
-  $detailSuccess = 'Successfully Book';
+  $detailSuccess = 'Successfully Booked';
   $detailAvailableFrom = 'Available from: ';
-  $detailAvailableUntil = 'Available until: ';
-  $detailDalamBulan = 'Order Duration: (in months)';
+  $detailAvailableUntil = 'Status: ';
+  $detailDalamBulan = 'Order duration by months: (minimum 3 months)';
   $detailPilihKamar = 'Choose the Room';
   $detailAvailable = 'Available for Particular Months';
-  $alwaysAvailable = 'None';
+  $alwaysAvailable = 'Available';
+  $warningVakum = "Warning! This room was already booked on certain months. You may not be able to extend your reservation in case you need to stay for a long time.";
 
 }else{
   $detailGender = 'Gender Kos :';
   $detailOrder = 'Detil Pemesanan :';
-  $detailEnter = 'Tanggal Masuk';
+  $detailEnter = 'Bulan Masuk';
   $detailFacility = 'Fasilitas Kos';
   $detailParkingMotor = 'Parkir Motor';
   $detailRice = 'Nasi';
@@ -99,11 +100,12 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
   $detailModalBulan = ' bulan';
   $detailSuccess = 'Berhasil Memesan';
   $detailAvailableFrom = 'Tersedia mulai: ';
-  $detailAvailableUntil = 'Tersedia hingga: ';
-  $detailDalamBulan = 'Lama Pemesanan: (dalam bulan)';
+  $detailAvailableUntil = 'Status: ';
+  $detailDalamBulan = 'Lama Pemesanan dalam bulan: (minimal 3 bulan)';
   $detailPilihKamar = 'Pilih Kamar';
   $detailAvailable = 'Tersedia Bulan Tertentu';
-  $alwaysAvailable = 'Seterusnya';
+  $alwaysAvailable = 'Tersedia';
+  $warningVakum = "Peringatan! Kamar ini sudah dipesan di bulan tertentu. Anda mungkin tidak dapat melakukan perpanjangan bila ingin tinggal dalam jangka waktu yang lama.";
 }
 ?>
 <style>
@@ -387,8 +389,8 @@ li.selected{
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" id="submit" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()"><?php echo $detailSubmit ?></button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $detailCancel ?></button>
+        <button type="button" id="submit" class="btn btn-primary" data-submit="modal" onclick="confirmBooking()"><?php echo $detailSubmit ?></button>
       </div>
     </div>
   </div>
@@ -649,10 +651,10 @@ function modalNota(index,jumlah,harga,namaKamar,idKamar){
   for (var i = 0; i < jumlah; i++) {
     if (responseGetKamar[index].kamardetail[i].bulan_tutup == null) {
       vakum = 0;
-      blnTutup = "<?php echo $alwaysAvailable ?>";
+      blnTutup = "<b style='color:#03A678;'><?php echo $alwaysAvailable ?></b>";
     }else{
       vakum = 1;
-      blnTutup = responseGetKamar[index].kamardetail[i].bulan_tutup;
+      blnTutup = "<b style='color:#D35400;'> Dipesan "+ responseGetKamar[index].kamardetail[i].bulan_tutup + "</b>";
     }
 
 
@@ -728,6 +730,9 @@ function namaMhs(harga,namaKamar,idKamar,tglMasuk,idKamarDetail,vakums,namaKamar
   $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+idKamar+'/slot1.jpg');
 }
 function updateNota(){
+  if (vakum=="1") {
+    alert("<?php echo $warningVakum ?>");
+  }
   $('#modalDuration').html($('#pesan').val()+"<?php echo $detailModalBulan ?>");
   $('#modalTanggal').html(tanggalMasuk);
   $('#detailmonth').html("<?php echo $detailMonth1 ?> "+$('#pesan').val()+" <?php echo $detailMonth2 ?>");
@@ -756,7 +761,7 @@ $.ajax({
     if (response == 1) {
       alert("<?php echo $detailSuccess ?>");
       $("#submit").html(buttonname);
-      window.location.href = 'payment';
+      window.location.href = 'waitconfirmation';
       
       
     }else{

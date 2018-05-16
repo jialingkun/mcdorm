@@ -168,7 +168,7 @@ class Front extends CI_Controller {
                     if ($now < $expire) {
                         $count = $count + 1;
                     }
-                }else if($row['status'] == 'Belum Verifikasi'){
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
                 
@@ -454,15 +454,15 @@ class Front extends CI_Controller {
         if ($this->cekprosestransaksi($this->input->post('idkamardetail')) == false){
             $statusMahasiswa = $this->getmahasiswaarray($idmahasiswa);
             if ($statusMahasiswa['status']=='Belum Pesan' || $statusMahasiswa['status']=='Terpesan' || $statusMahasiswa['status']=='Expired' || $statusMahasiswa['status']=='Batal') {
-                date_default_timezone_set('Asia/Jakarta');
-                $kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
+                //date_default_timezone_set('Asia/Jakarta');
+                //$kadaluarsa = date("Y-m-d H:i:s", strtotime('+24 hours'));
 
                 $data = array(
-                    'status' => 'Belum Bayar',
+                    'status' => 'Cek Ketersediaan',
                     'id_kos' => $this->input->post('idkos'),
                     'id_kamar' => $this->input->post('idkamar'),
                     'tanggal_masuk' => $this->input->post('tanggalmasuk'),
-                    'kadaluarsa' => $kadaluarsa,
+                    //'kadaluarsa' => $kadaluarsa,
                     'vakum' => $this->input->post('vakum'),
                     'lama_pemesanan' => $this->input->post('lamapemesanan'),
                     'id_kamardetail' => $this->input->post('idkamardetail')
@@ -499,6 +499,20 @@ class Front extends CI_Controller {
             //$this->load->view('templates/front/control');
             $this->load->view('templates/front/navbar');
             $this->load->view('front/thankyou');
+            $this->load->view('templates/front/js');
+            $this->load->view('templates/front/footer');
+
+        }else{
+            $this->login();
+        }
+    }
+
+    public function waitconfirmation(){
+        if ($this->checkcookiemahasiswa()) {
+            $this->load->view('templates/front/header');
+            //$this->load->view('templates/front/control');
+            $this->load->view('templates/front/navbar');
+            $this->load->view('front/waitconfirmation');
             $this->load->view('templates/front/js');
             $this->load->view('templates/front/footer');
 
@@ -682,7 +696,7 @@ class Front extends CI_Controller {
                     }
                 }
 
-                if ($row['status']=="Belum Bayar" || $row['status']=="Belum Verifikasi") {
+                if ($row['status']=="Belum Bayar" || $row['status']=="Belum Verifikasi" || $row['status'] == 'Cek Ketersediaan') {
                     $masihproses = true;
                 }
                 

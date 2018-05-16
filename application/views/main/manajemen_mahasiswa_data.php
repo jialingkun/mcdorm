@@ -83,7 +83,10 @@
           return '<h4> <span class="label label-primary">Belum Pesan</span></h4>';
         }
         if (row.status === "Belum Bayar"){
-          return '<h4> <span class="label label-danger">Belum Bayar</span></h4>';
+          return '<h4> <span class="label label-warning">Belum Bayar</span></h4>';
+        }
+        if (row.status === "Cek Ketersediaan"){
+          return '<h4> <span class="label label-danger">Cek Ketersediaan</span></h4>';
         }
         if (row.status === "Belum Verifikasi"){
           return '<h4> <span class="label label-danger">Belum Verifikasi</span></h4>';
