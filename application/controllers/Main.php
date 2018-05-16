@@ -46,10 +46,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'backendCookie',
-                   'value'  => md5($data['admin']['id_admin']),
-                   'expire' => '0',
-               );
+                 'name'   => 'backendCookie',
+                 'value'  => md5($data['admin']['id_admin']),
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -296,6 +296,33 @@ class Main extends CI_Controller {
                 'status' => 'Terpesan',
                 'kadaluarsa'=> NULL
             );
+        } else if ($jenis == 'konfirmasiketersediaan') {
+
+            date_default_timezone_set('Asia/Jakarta');
+            $kadaluarsa = date("Y-m-d H:i:s", strtotime('+48 hours'));
+
+            $data = array(
+                'status' => 'Belum Bayar',
+                'kadaluarsa'=> $kadaluarsa
+            );
+
+            //email
+            $datamahasiswa = $this->main_model->get_data_mahasiswa($id);
+            $invoice = $this->input->post('invoice');
+            $to = $datamahasiswa['email'];
+            $subject = "Konfirmasi Ketersediaan Kamar McDorm";
+            $txt = "Hai ".$datamahasiswa['nama_mahasiswa']."! <br>
+            Kamar yang anda pesan melalui McDorm sudah kami pastikan tersedia untuk anda. Untuk langkah berikutnya, silahkan upload bukti pembayaran anda dalam waktu kurang dari 2 hari ke rekening berikut. <br>
+            <h5>Nama bank: BCA</h5>
+            <h5>Atas Nama: Yayasan Harapan Bangsa Sejahtera</h5>
+            <h5><b>Nomor Rekening : 102938125810</b></h5>
+            Detail pemesanan anda dapat dilihat pada invoice berikut:".$invoice;
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+            mail($to,$subject,$txt,$headers);
+
         } else if ($jenis == 'cancel') {
             $data = array(
                 'status' => 'Batal',
@@ -303,10 +330,30 @@ class Main extends CI_Controller {
             );
 
             $this->deleteimagepayment($id);
+
+            //email
+            $datamahasiswa = $this->main_model->get_data_mahasiswa($id);
+            $to = $datamahasiswa['email'];
+            $subject = "Pembatalan pemesanan kamar McDorm";
+            $txt = "Hai ".$datamahasiswa['nama_mahasiswa']."! <br>
+            Mohon maaf, kamar yang anda pesan melalui McDorm sudah kami batalkan. Pembatalan pemesanan anda bisa jadi karena beberapa faktor, antara lain: <br>
+            1. Kamar tidak tersedia <br>
+            2. Foto bukti pembayaran tidak valid <br>
+            3. Kesalahan pada sistem <br>
+            Silahkan lakukan pemesanan ulang. Terima kasih.";
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+            mail($to,$subject,$txt,$headers);
         }
 
         $insertStatus = $this->main_model->update_mahasiswa($data,$id);
         echo $insertStatus;
+    }
+
+    public function retrieveEmail(){
+
     }
 
     public function manajemen_kos_data(){

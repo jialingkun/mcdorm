@@ -2,7 +2,7 @@
 <?php 
 if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
     $paymentThanks = 'Thank you for trusting Us!';
-    $paymentInfo = 'Please follow the process of transfer to the account number below. Then upload a photo proof of transfer through this page in less than <b style="font-size: 15pt;"> 24 hours</b>. You can close this page and access them again later via the menu STATUS.';
+    $paymentInfo = 'Please follow the process of transfer to the account number below. Then upload a photo proof of transfer through this page in less than <b style="font-size: 15pt;"> 2 days</b>. You can close this page and access them again later via the menu STATUS.';
     $paymentInfo2 = 'Your proof of transfer will be verified by our admin in less than 2 days. If there is a mistake, you can reupload the photo from this page.';
     $paymentGender = 'Gender : ';
     $paymentEnter = 'Enter Date';
@@ -29,7 +29,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 
 }else{
     $paymentThanks = 'Terima Kasih telah Mempercayai Kami!';
-    $paymentInfo = 'Silahkan lakukan proses transfer ke nomer rekening yang tertera. Kemudian upload foto bukti transfer melalui halaman ini dalam waktu kurang dari <b style="font-size: 15pt;"> 24 jam </b>. Anda bisa menutup halaman ini dan mengaksesnya lagi nanti melalui menu STATUS.';
+    $paymentInfo = 'Silahkan lakukan proses transfer ke nomer rekening yang tertera. Kemudian upload foto bukti transfer melalui halaman ini dalam waktu kurang dari <b style="font-size: 15pt;"> 2 hari </b>. Anda bisa menutup halaman ini dan mengaksesnya lagi nanti melalui menu STATUS.';
     $paymentInfo2 = 'Foto bukti transfer yang sudah anda upload akan diverifikasi oleh pihak kami dalam waktu kurang lebih 2 hari. Anda masih bisa mengubah foto bukti transfer jika ada kesalahan dengan mengupload ulang melalui halaman ini.';
     $paymentGender = 'Gender Kos :';    
     $paymentEnter = 'Tanggal Masuk';

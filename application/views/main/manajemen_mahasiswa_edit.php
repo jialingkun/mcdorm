@@ -108,6 +108,9 @@
               <button type="button" class="btn btn-animate btn-animate-side btn-success btn-md" id="konfirmasi" onclick="verifikasi()">
                 <span><i class="icon fa-check"></i> &nbsp<b>Konfirmasi Pembayaran</b></span>
               </button>
+              <button type="button" class="btn btn-animate btn-animate-side btn-success btn-md" id="cekketersediaan" onclick="konfirmasiKetersediaan()">
+                <span><i class="icon fa-check"></i> &nbsp<b>Konfirmasi Ketersediaan</b></span>
+              </button>
               <a href="manajemen_mahasiswa_data">
                 <button type="button" class="btn btn-animate btn-animate-side btn-primary btn-md">
                   <span><i class="icon fa-mail-reply"></i> &nbsp<b>Kembali</b></span>
@@ -152,7 +155,6 @@
                   <h5 id="modalNamaKos" class="booking-item-payment-title">Kos Semangka 5</h5>
                   <h5 id="modalKamarDetail" class="booking-item-payment-title">Kos Semangka 5</h5>
                   <small id="modalAlamatKos" >jl. Semangka 5 Malang</small><br>
-                  <small id="modalGender" >jl. Semangka 5 Malang</small><br>
                 </div>
               </div>
               
@@ -231,6 +233,12 @@
           
           if (response.status.toString() != "Belum Verifikasi") {
             $('#konfirmasi').prop('disabled',true);
+            $('#konfirmasi').hide();
+          }
+
+          if (response.status.toString() != "Cek Ketersediaan") {
+            $('#cekketersediaan').prop('disabled',true);
+            $('#cekketersediaan').hide();
           }
 
           if (response.status.toString() == "Belum Verifikasi" || response.status.toString() == "Belum Bayar" || response.status.toString() == "Cek Ketersediaan") {
@@ -317,6 +325,25 @@
           success: function(response){
             if (response == 1) {
               alert("Verifikasi Berhasil!");
+              window.location.href = 'manajemen_mahasiswa_edit';
+            }
+          }
+        });
+      } 
+    }
+
+    function konfirmasiKetersediaan(){
+      var invoice = "<div style='max-width:600px; border:1px solid black; padding:10px;'>"+$('.modal-body').html()+"</div>";
+      var r = confirm("Apakah anda ingin konfirmasi ketersediaan kamar?");
+      if (r == true) {
+        var urls='main/updateMahasiswa/konfirmasiketersediaan/'+getCookie("editDataSiswa")+"";
+        $.ajax({
+          url:"<?php echo base_url() ?>index.php/"+urls,
+          type: 'POST',
+          data:{'invoice': invoice},
+          success: function(response){
+            if (response == 1) {
+              alert("Konfirmasi Ketersediaan Berhasil!");
               window.location.href = 'manajemen_mahasiswa_edit';
             }
           }
