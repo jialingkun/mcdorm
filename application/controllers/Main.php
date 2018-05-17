@@ -296,6 +296,22 @@ class Main extends CI_Controller {
                 'status' => 'Terpesan',
                 'kadaluarsa'=> NULL
             );
+
+            //email
+            $datamahasiswa = $this->main_model->get_data_mahasiswa($id);
+            $invoice = $this->input->post('invoice');
+            $to = $datamahasiswa['email'];
+            $subject = "Verifikasi Pembayaran Kamar McDorm";
+            $txt = "Hai ".$datamahasiswa['nama_mahasiswa']."! <br>
+            Pembayaran untuk kamar yang anda pesan melalui McDorm sudah kami verifikasi. Proses pemesanan anda sudah selesai. Terima kasih telah menggunakan jasa McDorm. <br> 
+            Untuk langkah berikutnya, anda bisa menunjukan email ini kepada pemilik ataupun penjaga kos ketika anda tiba di tempat.
+            Detail pemesanan anda dapat dilihat pada invoice berikut:".$invoice."<br>
+            *Email ini tidak untuk dibalas*";
+
+            $headers = "MIME-Version: 1.0" . "\r\n";
+            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+
         } else if ($jenis == 'konfirmasiketersediaan') {
 
             date_default_timezone_set('Asia/Jakarta');
@@ -312,16 +328,18 @@ class Main extends CI_Controller {
             $to = $datamahasiswa['email'];
             $subject = "Konfirmasi Ketersediaan Kamar McDorm";
             $txt = "Hai ".$datamahasiswa['nama_mahasiswa']."! <br>
-            Kamar yang anda pesan melalui McDorm sudah kami pastikan tersedia untuk anda. Untuk langkah berikutnya, silahkan upload bukti pembayaran anda dalam waktu kurang dari 2 hari ke rekening berikut. <br>
+            Kamar yang anda pesan melalui McDorm sudah kami pastikan tersedia untuk anda. Untuk langkah berikutnya, silahkan lakukan pembayaran ke rekening berikut. <br>
             <h5>Nama bank: BCA</h5>
             <h5>Atas Nama: Yayasan Harapan Bangsa Sejahtera</h5>
             <h5><b>Nomor Rekening : 102938125810</b></h5>
-            Detail pemesanan anda dapat dilihat pada invoice berikut:".$invoice;
+            Kemudian segera <b>Upload Bukti Pembayaran</b> anda dalam waktu kurang dari 2 hari dengan login ke McDorm dan mengakses menu status. <br>
+            Detail pemesanan anda dapat dilihat pada invoice berikut:".$invoice."<br>
+            Jika anda terlambat mengirim bukti pembayaran dalam waktu 48 jam semenjak email ini terkirim, pemesanan anda akan kadaluarsa. Silahkan lakukan pemesanan ulang atau hubungi kami untuk langkah lebih lanjut. Terima kasih. <br>
+            *Email ini tidak untuk dibalas*";
 
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
-            mail($to,$subject,$txt,$headers);
 
         } else if ($jenis == 'cancel') {
             $data = array(
@@ -336,19 +354,25 @@ class Main extends CI_Controller {
             $to = $datamahasiswa['email'];
             $subject = "Pembatalan pemesanan kamar McDorm";
             $txt = "Hai ".$datamahasiswa['nama_mahasiswa']."! <br>
-            Mohon maaf, kamar yang anda pesan melalui McDorm sudah kami batalkan. Pembatalan pemesanan anda bisa jadi karena beberapa faktor, antara lain: <br>
+            Mohon maaf, proses pemesanan kamar anda melalui McDorm harus kami batalkan. Pembatalan pemesanan anda bisa jadi karena beberapa faktor, antara lain: <br>
             1. Kamar tidak tersedia <br>
             2. Foto bukti pembayaran tidak valid <br>
             3. Kesalahan pada sistem <br>
-            Silahkan lakukan pemesanan ulang. Terima kasih.";
+            Silahkan lakukan pemesanan ulang atau hubungi kami untuk langkah lebih lanjut. Terima kasih. <br>
+            *Email ini tidak untuk dibalas*";
 
             $headers = "MIME-Version: 1.0" . "\r\n";
             $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
             $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
-            mail($to,$subject,$txt,$headers);
+            
         }
 
         $insertStatus = $this->main_model->update_mahasiswa($data,$id);
+
+        if ($insertStatus == '1' && $jenis != 'profil') {
+            //send email
+            mail($to,$subject,$txt,$headers);
+        }
         echo $insertStatus;
     }
 
