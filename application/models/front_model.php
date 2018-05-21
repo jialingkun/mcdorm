@@ -6,6 +6,38 @@ class Front_model extends CI_Model {
 		$this->load->database();
 	}
 
+	public function duplikat_data_mahasiswa($data)
+	{
+		$this->db->where('id_mahasiswa', $data["id_mahasiswa"]);
+		$q = $this->db->get('user_mahasiswa');
+		$this->db->reset_query();
+
+		if ( $q->num_rows() > 0 ) 
+		{
+			$this->db->where('id_mahasiswa', $data["id_mahasiswa"]);
+			unset($data['id_mahasiswa']);
+			unset($data['status']);
+			unset($data['id_kos']);
+			unset($data['id_kamar']);
+			unset($data['tanggal_masuk']);
+			unset($data['kadaluarsa']);
+			unset($data['vakum']);
+			unset($data['lama_pemesanan']);
+			unset($data['id_kamardetail']);
+			$this->db->update('user_mahasiswa', $data);
+			$return_message = '1';
+		} else {
+			$this->db->insert('user_mahasiswa', $data);
+			//get insert status fail or not
+			if ($this->db->affected_rows() > 0 ) {
+				$return_message = '1';
+			}else{
+				$return_message = 'Failed to insert record';
+			}
+		}
+		return $return_message;
+	}
+
 	public function get_mahasiswa_login($id,$password)
 	{
 		$this->db->select('*');

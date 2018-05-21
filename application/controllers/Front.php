@@ -37,34 +37,84 @@ class Front extends CI_Controller {
             $username=$this->input->post('username');
             $password=$this->input->post('password');
 
-            $row = $this->front_model->get_mahasiswa_login($username,md5($password));
+            //login via data pendaftaran
+            $url = 'http://mcis-pmb.machung.ac.id/login_json.php';
+            $data = file_get_contents($url);
+            $characters = json_decode($data);
+            
+            $isloggedIn = false;
+            $namaMahasiswa = "bunny";
+            foreach ($characters->data as $row) {
+                if ($username==$row->username && $password==$row->password) {
+                    $isloggedIn = true;
+                    //$namaMahasiswa = $row->nama;
 
-            if (!empty($row)) {
-                //echo "login admin success! ";
-
-                $this->load->helper('cookie');
-
-                $cookie= array(
-                   'name'   => 'frontCookie',
-                   'value'  => $username,
-                   'expire' => '0',
-               );
-                $this->input->set_cookie($cookie);
-
-                $cookie= array(
-                    'name'   => 'frontNama',
-                    'value'  => $row['nama_mahasiswa'],
-                    'expire' => '0',
-                );
-                $this->input->set_cookie($cookie);
-
-                echo "1";
-            }else{
-                echo "login failed";
+                }
             }
 
-            //echo "<br>username: ".$data['username']."<br>";
-            //echo "password: ".$data['password']."<br>";
+            if ($isloggedIn) {
+                $data = array(
+                    'id_mahasiswa' => $username,
+                    'password' => md5($password),
+                    'nama_mahasiswa' => $namaMahasiswa,
+                    'email' => "djaka.tingkir2@gmail.com",
+                    'notelp_mahasiswa' => "08888888888888",
+                    'status' => "Belum Pesan",
+                    'id_kos' => NULL,
+                    'id_kamar' => NULL,
+                    'tanggal_masuk' => NULL,
+                    'kadaluarsa' => NULL,
+                    'vakum' => 0,
+                    'lama_pemesanan' => NULL,
+                    'id_kamardetail' => NULL
+                );
+                $insertStatus = $this->front_model->duplikat_data_mahasiswa($data);
+                if ($insertStatus == "1") {
+                    $this->load->helper('cookie');
+
+                    $cookie= array(
+                     'name'   => 'frontCookie',
+                     'value'  => $username,
+                     'expire' => '0',
+                 );
+                    $this->input->set_cookie($cookie);
+
+                    $cookie= array(
+                        'name'   => 'frontNama',
+                        'value'  => $namaMahasiswa,
+                        'expire' => '0',
+                    );
+                    $this->input->set_cookie($cookie);
+                }
+                echo $insertStatus;
+            }else{
+                //login via database
+                $row = $this->front_model->get_mahasiswa_login($username,md5($password));
+
+                if (!empty($row)) {
+                    //login sukses
+                    $this->load->helper('cookie');
+
+                    $cookie= array(
+                     'name'   => 'frontCookie',
+                     'value'  => $username,
+                     'expire' => '0',
+                 );
+                    $this->input->set_cookie($cookie);
+
+                    $cookie= array(
+                        'name'   => 'frontNama',
+                        'value'  => $row['nama_mahasiswa'],
+                        'expire' => '0',
+                    );
+                    $this->input->set_cookie($cookie);
+
+                    echo "1";
+                }else{
+                    echo "login failed";
+                }
+
+            }
         }
     }
 
