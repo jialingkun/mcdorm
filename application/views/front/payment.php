@@ -81,7 +81,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                     </ul>
                     <div class="gap gap-small"></div>
                     <h4>Upload</h4>
-                    <form class="cc-form" action="uploadimagepayment/<?php echo $_COOKIE['frontCookie'] ?>" method="post" enctype="multipart/form-data">
+                    <form class="cc-form" id="payment" onsubmit="payment(event)" enctype="multipart/form-data">
                         <input id="uploadFrom" name="file" type="file" id="uploadImage" accept="/*" onchange="loadFile(event)"  />
 
                         <input id="submitButton" type="submit" class="btn btn-success" name="Submit" value ="<?php echo $paymentSubmit ?>" style="margin-top: 15px;" disabled="true"/> 
@@ -138,7 +138,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
 </div>
 
 <script>
-   window.onload = function() {
+ window.onload = function() {
     var urls = "<?php echo base_url() ?>photos/payment/"+getCookie("frontCookie");
     $.get(urls)
     .done(function() { 
@@ -203,17 +203,52 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 '<p><?php echo $paymentInfo2 ?></p>';
                 $('#keteranganPayment').append(keterangan);
             }else{
-               $('#content').remove();
-               info = 
-               '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
-               ;
-               $('#info').append(info);
-           }
+             $('#content').remove();
+             info = 
+             '<h2 style="margin:auto; display:block; text-align:center; padding:15% 0 15% 0;">Pembayaran Anda Telah Kami Verifikasi</h2>'
+             ;
+             $('#info').append(info);
+         }
 
-       }
-   });
+     }
+ });
 
     
+}
+
+
+function payment(e) {
+    e.preventDefault();
+    var urls='uploadimagepayment/'+getCookie("frontCookie")+"";
+
+    var form = $('#payment')[0];
+    var data = new FormData(form);
+
+    //var dataString = $("#payment").serialize();
+    $("#submitButton").prop("disabled",true);
+    $.ajax({
+      url:"<?php echo base_url() ?>index.php/"+urls,
+      type: 'POST',
+      enctype: 'multipart/form-data',
+      processData: false,
+      contentType: false,
+      cache: false,
+      data:data,
+      success: function(response){
+        if (response == "1") {
+            window.location.href = 'thankyou';
+        }else if (response == "2") {
+            window.location.href = 'status';
+        }else{
+          alert(response);
+          $("#submitButton").prop("disabled",false);
+      }
+  },
+  error: function(){
+    alert("Gagal mengupload bukti pembayaran")
+    $("#submitButton").prop("disabled",false);
+}
+});
 }
 
 function getCookie(cname) {

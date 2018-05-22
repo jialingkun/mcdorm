@@ -43,11 +43,15 @@ class Front extends CI_Controller {
             $characters = json_decode($data);
             
             $isloggedIn = false;
-            $namaMahasiswa = "bunny";
+            $namaMahasiswa = "";
+            $email = "";
+            $no_telp = "";
             foreach ($characters->data as $row) {
                 if ($username==$row->username && $password==$row->password) {
                     $isloggedIn = true;
-                    //$namaMahasiswa = $row->nama;
+                    $namaMahasiswa = $row->nama;
+                    $email = $row->email;
+                    $no_telp = $row->no_telp;
 
                 }
             }
@@ -57,8 +61,8 @@ class Front extends CI_Controller {
                     'id_mahasiswa' => $username,
                     'password' => md5($password),
                     'nama_mahasiswa' => $namaMahasiswa,
-                    'email' => "djaka.tingkir2@gmail.com",
-                    'notelp_mahasiswa' => "08888888888888",
+                    'email' => $email,
+                    'notelp_mahasiswa' => $no_telp,
                     'status' => "Belum Pesan",
                     'id_kos' => NULL,
                     'id_kamar' => NULL,
@@ -614,22 +618,16 @@ class Front extends CI_Controller {
                         'kadaluarsa'=> NULL
                     );
                     $insertStatus = $this->front_model->update_mahasiswa($data,$idmahasiswa);
-                    if ($insertStatus == 1) {
-                        header("Location: ".base_url()."index.php/thankyou");
-                        die();
-                    }else{
-                        echo $insertStatus;
-                    }
+                    echo $insertStatus;
                 }else{
-                    header("Location: ".base_url()."index.php/status");
-                    die();
+                    echo "2";
                 }
             }else{
-                echo "Upload gagal, pastikan foto yang anda upload berekstensi JPG atau PNG <br> <a href='".base_url()."index.php/payment'> Kembali </a>";
+                echo "Upload gagal, pastikan foto yang anda upload berekstensi JPG atau PNG.";
             }
             
         }else{
-            echo "Upload gagal <br> <a href='".base_url()."index.php/payment'> Kembali </a>";
+            echo "Upload gagal";
         }
     }
 
