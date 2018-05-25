@@ -13,7 +13,12 @@ class Front extends CI_Controller {
         $this->home();
     }
 
-
+    public function nocache(){
+        $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+    }
 
     public function login()
     {
@@ -198,6 +203,7 @@ class Front extends CI_Controller {
     }
 
     public function search(){
+        $this->nocache();
         if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
@@ -396,6 +402,7 @@ class Front extends CI_Controller {
     }
 
     public function detail(){
+        $this->nocache();
         if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
@@ -534,6 +541,7 @@ class Front extends CI_Controller {
     }
 
     public function payment(){
+        $this->nocache();
         if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
@@ -548,6 +556,7 @@ class Front extends CI_Controller {
 
 
     public function thankyou(){
+        $this->nocache();
         if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
@@ -562,6 +571,7 @@ class Front extends CI_Controller {
     }
 
     public function waitconfirmation(){
+        $this->nocache();
         if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');
@@ -632,6 +642,7 @@ class Front extends CI_Controller {
     }
 
     public function status(){
+        $this->nocache();
         if ($this->checkcookiemahasiswa()) {
             $this->load->view('templates/front/header');
             //$this->load->view('templates/front/control');

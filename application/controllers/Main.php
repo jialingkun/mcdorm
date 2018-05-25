@@ -14,6 +14,14 @@ class Main extends CI_Controller {
     }
 
 
+    public function nocache(){
+        $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
+        $this->output->set_header('Pragma: no-cache');
+        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+    }
+
+
 
     public function login()
     {
@@ -76,6 +84,7 @@ class Main extends CI_Controller {
 
     public function home()
     {
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -91,6 +100,7 @@ class Main extends CI_Controller {
 
     public function changepassword()
     {
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -115,6 +125,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_data(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -164,6 +175,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_insert(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -199,6 +211,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_mahasiswa_edit(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -381,6 +394,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_data(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -407,6 +421,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_edit(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -447,6 +462,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_insert(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -509,6 +525,7 @@ class Main extends CI_Controller {
 
 
     public function manajemen_kos_kamar_insert(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -566,6 +583,7 @@ class Main extends CI_Controller {
     }
 
     public function manajemen_kos_kamar_edit(){
+        $this->nocache();
         if ($this->checkcookieadmin()) {
             $this->load->view('templates/header');
             $this->load->view('templates/navbar');
@@ -699,8 +717,7 @@ class Main extends CI_Controller {
     public function logout(){
         $this->load->helper('cookie');
         delete_cookie("backendCookie");
-        header("Location: ".base_url()."index.php/main/login");
-        die();
+        $this->load->view('main/login');
     }
 
     public function securedelete($jenis, $id){
@@ -720,7 +737,7 @@ class Main extends CI_Controller {
         } else{
             $insertStatus = "Tidak bisa menghapus. Kamar masih dalam proses pemesanan.";
         }
-        
+
         echo $insertStatus;
     }
 
@@ -792,7 +809,7 @@ class Main extends CI_Controller {
         echo json_encode($data);
     }
 
-    
+
     public function updatekamardetail($idkamardetail){
         $nama = $this->input->post('nama_kamardetail_update');
         $status = $this->input->post('status_kamardetail_update');
@@ -835,7 +852,7 @@ class Main extends CI_Controller {
                 $status_kamardetail = 'tutup';
                 $bulanbuka = NULL;
             }
-            
+
 
         }
 
