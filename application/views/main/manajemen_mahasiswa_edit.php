@@ -258,7 +258,7 @@
         $('#modalHarga').html('Rp '+response.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- /bulan');
         $('#modalKamar').html('Jenis Kamar :  '+response.nama_kamar);
         $('#modalTotal').html('Rp '+(response.harga*response.lama_pemesanan).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")+',- (pembayaran untuk '+ response.lama_pemesanan +' bulan)');
-        $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
+        $("#modalImage").attr("src",'<?php echo base_url(); ?>/photos/'+response.id_kos+'_'+response.id_kamar+'_slot1.jpg');
         $('#modalTanggal').html(response.tanggal_masuk);
 
       }

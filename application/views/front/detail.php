@@ -199,7 +199,7 @@ li.selected{
               <div class="fotorama" data-allowfullscreen="true" data-nav="thumbs" id="gambarKos">
                 <?php
                 $targetPath = base_url().'photos';
-                $targetPath = $targetPath.'/'.$_COOKIE['detailKamar'].'/';
+                $targetPath = $targetPath.'/'.$_COOKIE['detailKamar'].'_';
                 $maxslot = 10;
                 for ($i=1; $i <= $maxslot; $i++) {
                   $filepath = $targetPath."slot".$i.".jpg";
@@ -588,7 +588,7 @@ $.ajax({
           '<a class="booking-item">'+
           '<div class="row">'+
           '<div class="col-md-3">'+
-          '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
+          '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'_'+response[i].id_kamar+'_slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
           '</div>'+
           '<div class="col-md-4">'+
           '<h5 class="booking-item-title" style="font-weight: 500;"><?php echo $detailNamakamar ?>'+response[i].nama_kamar+'</h5>'+
@@ -615,7 +615,7 @@ $.ajax({
           '<a class="booking-item">'+
           '<div class="row">'+
           '<div class="col-md-3">'+
-          '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+response[i].id_kamar+'/slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
+          '<img src="<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'_'+response[i].id_kamar+'_slot1.jpg" alt="Image Alternative text" title="Gambar Kamar" />'+
           '</div>'+
           '<div class="col-md-4">'+
           '<h5 class="booking-item-title" style="font-weight: 500;"><?php echo $detailNamakamar ?>'+response[i].nama_kamar+'</h5>'+
@@ -727,7 +727,7 @@ function namaMhs(harga,namaKamar,idKamar,tglMasuk,idKamarDetail,vakums,namaKamar
   hargaKamar = harga;
   
   
-  $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'/'+idKamar+'/slot1.jpg');
+  $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+getCookie("detailKamar")+'_'+idKamar+'_slot1.jpg');
 }
 function updateNota(){
   if (vakum=="1") {

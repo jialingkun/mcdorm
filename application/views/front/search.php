@@ -358,7 +358,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
                 '<div class="thumb">'+
                 '<header class="thumb-header" >'+
                 '<a  class="hover-img" href="detail" onclick="getDetail(&quot;'+dataGlobal[i].id_kos+'&quot;)">'+
-                '<img style="width:240px; height:240px; " src="<?php echo base_url(); ?>photos/'+dataGlobal[i].id_kos+'/'+dataGlobal[i].id_kamar+'/slot1.jpg" />'+
+                '<img style="width:240px; height:240px; " src="<?php echo base_url(); ?>photos/'+dataGlobal[i].id_kos+'_'+dataGlobal[i].id_kamar+'_slot1.jpg" />'+
                 '<h5 class="hover-title-center"><?php echo $searchOrdernow ?></h5>'+
                 '</a>'+
                 '</header>'+

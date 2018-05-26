@@ -168,7 +168,7 @@ if (isset($_COOKIE['bahasa']) && $_COOKIE['bahasa']=='ENG') {
         type: 'get',
         dataType: "json",
         success: function (response) {
-            $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+response.id_kos+'/'+response.id_kamar+'/slot1.jpg');
+            $("#modalImage").attr("src",'<?php echo base_url(); ?>photos/'+response.id_kos+'_'+response.id_kamar+'_slot1.jpg');
             $("#modalNamaKos").html('<?php echo $paymentNamakamar ?>' + response.nama_kos);
             $('#modalNamaKamarDetail').html("<?php echo $paymentKamarDetail ?>"+response.nama_kamardetail);
 

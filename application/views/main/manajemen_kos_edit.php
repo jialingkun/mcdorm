@@ -420,7 +420,7 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
 
       function berubah(){
-        $("#imageslot1").attr("src","<?php echo base_url() ?>photos/<?php echo $_COOKIE['editDataKos'] ?>/slot1.jpg");
+        $("#imageslot1").attr("src","<?php echo base_url() ?>photos_<?php echo $_COOKIE['editDataKos'] ?>_slot1.jpg");
       }
 
       window.onload = function() {
@@ -429,13 +429,6 @@ map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
       }  
 
       function dataKamar(){
-  // $('#slot').attr("src","http://localhost/mcdorm/photos/9019/slot1.jpg");
-
-
-  // $('#id_mahasiswa').val("2") ;
-//   document.getElementById("id_mahasiswa").value = '999999';
-// alert($('#id_mahasiswa').val());
-    // alert( getCookie('editDataKos'));
     var urls='main/getkos/'+getCookie("editDataKos")+"";
       // alert(urls);
 

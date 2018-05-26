@@ -363,10 +363,10 @@ $('input.date-pick').datepicker('setDate','today');
         var baseUrl = "";
         if (parts[parts.length-3].toLowerCase()=="uploadimage") {
           var filenamePosition = 2;
-          var folderPath = parts[parts.length-1]+"/";
+          var folderPath = parts[parts.length-1]+"_";
         }else{
           var filenamePosition = 3;
-          var folderPath = parts[parts.length-2]+"/"+parts[parts.length-1]+"/";
+          var folderPath = parts[parts.length-2]+"_"+parts[parts.length-1]+"_";
         }
         for (var i = 0; i < parts.length-filenamePosition-3; i++) {
           baseUrl = baseUrl + parts[i] + "/";

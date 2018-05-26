@@ -108,7 +108,7 @@ html, body {
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot7/temp" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot8/temp" class="dropzone" id="my-awesome-dropzone"></form>
           <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot9/temp" class="dropzone" id="my-awesome-dropzone"></form>
-          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot10/temp" class="dropzone" id="my-awesome-dropzone"></form>h
+          <form action="<?php echo base_url() ?>index.php/main/uploadimage/slot10/temp" class="dropzone" id="my-awesome-dropzone"></form>
         </div>
         <div class="col-md-12">
           <!-- Example Basic Form -->
