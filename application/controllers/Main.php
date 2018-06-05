@@ -15,10 +15,10 @@ class Main extends CI_Controller {
 
 
     public function nocache(){
-        $this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
+        //$this->output->set_header('Last-Modified: ' . gmdate("D, d M Y H:i:s") . ' GMT');
         $this->output->set_header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
         $this->output->set_header('Pragma: no-cache');
-        $this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
+        //$this->output->set_header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
     }
 
 
@@ -54,10 +54,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                 'name'   => 'backendCookie',
-                 'value'  => md5($data['admin']['id_admin']),
-                 'expire' => '0',
-             );
+                   'name'   => 'backendCookie',
+                   'value'  => md5($data['admin']['id_admin']),
+                   'expire' => '0',
+               );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -389,10 +389,6 @@ class Main extends CI_Controller {
         echo $insertStatus;
     }
 
-    public function retrieveEmail(){
-
-    }
-
     public function manajemen_kos_data(){
         $this->nocache();
         if ($this->checkcookieadmin()) {
@@ -538,64 +534,64 @@ class Main extends CI_Controller {
             for ($i=1; $i <= 10; $i++) {
                 $filenametemp = $tempDir."slot".$i.".jpg"; 
                 if (file_exists($filenametemp)) {
-                   unlink($filenametemp);
-               }
-           }
-       }else{
-        $tempDir = getcwd().$ds.'photos'.$ds.$idkos."_".'temp'."_";
-        $filenametemp = $tempDir."slot1.jpg";
-        if (file_exists($filenametemp)) {
-           unlink($filenametemp);
-       }
-   }
-
-
-}
-
-
-
-
-public function manajemen_kos_kamar_insert(){
-    $this->nocache();
-    $this->deletetemp($this->input->cookie('editDataKos',true));
-    if ($this->checkcookieadmin()) {
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_kamar_insert');
-        $this->load->view('templates/js');
-        $this->load->view('templates/footer');
-    }else{
-        $this->login();
-    }
-
-}
-
-public function insertkamar($idkos){
-
-    if ($this->input->post('fasilitas')) {
-        $fasilitas = implode(',', $this->input->post('fasilitas'));
-    }else{
-        $fasilitas = "";
-    }
-
-    $data = array(
-        'id_kos' => $idkos,
-        'nama_kamar' => $this->input->post('nama'),
-        'harga' => $this->input->post('harga'),
-        'panjang' => $this->input->post('panjang'),
-        'lebar' => $this->input->post('lebar'),
-        'fasilitas_kamar' => $fasilitas
-    );
-
-    $insertStatus = $this->main_model->insert_new_kamar($data);
-
-    if ($insertStatus != 0) {
-            //insertstatus = insertID
-        try {
-            $ds          = DIRECTORY_SEPARATOR;
+                    unlink($filenametemp);
+                }
+            }
+        }else{
             $tempDir = getcwd().$ds.'photos'.$ds.$idkos."_".'temp'."_";
-            $permanentDir = getcwd().$ds.'photos'.$ds.$idkos."_".$insertStatus."_";
+            $filenametemp = $tempDir."slot1.jpg";
+            if (file_exists($filenametemp)) {
+                unlink($filenametemp);
+            }
+        }
+
+
+    }
+
+
+
+
+    public function manajemen_kos_kamar_insert(){
+        $this->nocache();
+        $this->deletetemp($this->input->cookie('editDataKos',true));
+        if ($this->checkcookieadmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_kamar_insert');
+            $this->load->view('templates/js');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
+
+    }
+
+    public function insertkamar($idkos){
+
+        if ($this->input->post('fasilitas')) {
+            $fasilitas = implode(',', $this->input->post('fasilitas'));
+        }else{
+            $fasilitas = "";
+        }
+
+        $data = array(
+            'id_kos' => $idkos,
+            'nama_kamar' => $this->input->post('nama'),
+            'harga' => $this->input->post('harga'),
+            'panjang' => $this->input->post('panjang'),
+            'lebar' => $this->input->post('lebar'),
+            'fasilitas_kamar' => $fasilitas
+        );
+
+        $insertStatus = $this->main_model->insert_new_kamar($data);
+
+        if ($insertStatus != 0) {
+            //insertstatus = insertID
+            try {
+                $ds          = DIRECTORY_SEPARATOR;
+                $tempDir = getcwd().$ds.'photos'.$ds.$idkos."_".'temp'."_";
+                $permanentDir = getcwd().$ds.'photos'.$ds.$idkos."_".$insertStatus."_";
             // if (is_dir($tempDir)) {
             //     if (is_dir($permanentDir)) {
             //         rmdir($permanentDir);
@@ -603,89 +599,89 @@ public function insertkamar($idkos){
             //     rename($tempDir, $permanentDir);
             // }
 
-            $filenametemp = $tempDir."slot1.jpg"; 
-            if (file_exists($filenametemp)) {
-                $filenamepermanent = $permanentDir."slot1.jpg";
-                rename($filenametemp, $filenamepermanent);       
+                $filenametemp = $tempDir."slot1.jpg"; 
+                if (file_exists($filenametemp)) {
+                    $filenamepermanent = $permanentDir."slot1.jpg";
+                    rename($filenametemp, $filenamepermanent);       
+                }
+
+                $insertStatus = 1;
+            } catch (Exception $e) {
+                $insertStatus = $e;
             }
-
-            $insertStatus = 1;
-        } catch (Exception $e) {
-            $insertStatus = $e;
+        }else{
+            $insertStatus = "Failed to insert Record";
         }
-    }else{
-        $insertStatus = "Failed to insert Record";
+
+
+        echo $insertStatus;
     }
 
+    public function manajemen_kos_kamar_edit(){
+        $this->nocache();
+        if ($this->checkcookieadmin()) {
+            $this->load->view('templates/header');
+            $this->load->view('templates/navbar');
+            $this->load->view('templates/sidebar');
+            $this->load->view('main/manajemen_kos_kamar_edit');
+            $this->load->view('templates/js');
+            $this->load->view('templates/footer');
+        }else{
+            $this->login();
+        }
 
-    echo $insertStatus;
-}
-
-public function manajemen_kos_kamar_edit(){
-    $this->nocache();
-    if ($this->checkcookieadmin()) {
-        $this->load->view('templates/header');
-        $this->load->view('templates/navbar');
-        $this->load->view('templates/sidebar');
-        $this->load->view('main/manajemen_kos_kamar_edit');
-        $this->load->view('templates/js');
-        $this->load->view('templates/footer');
-    }else{
-        $this->login();
     }
 
-}
-
-public function getjumlahpesanankamar($idkamar){
-    $data = $this->main_model->get_data_isikamar($idkamar);
-    $count = 0;
-    if ($data){
-        foreach ($data as $row){
-            if ($row['status'] == 'Belum Bayar') {
-                date_default_timezone_set('Asia/Jakarta');
-                $now = time();
-                $expire = strtotime($row['kadaluarsa']);
-                if ($now < $expire) {
+    public function getjumlahpesanankamar($idkamar){
+        $data = $this->main_model->get_data_isikamar($idkamar);
+        $count = 0;
+        if ($data){
+            foreach ($data as $row){
+                if ($row['status'] == 'Belum Bayar') {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now < $expire) {
+                        $count = $count + 1;
+                    }
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
-            }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
-                $count = $count + 1;
+
             }
-
         }
+        return $count;
     }
-    return $count;
-}
 
-public function getjumlahpesanankos($idkos){
-    $data = $this->main_model->get_data_isikos($idkos);
-    $count = 0;
-    if ($data){
-        foreach ($data as $row){
-            if ($row['status'] == 'Belum Bayar') {
-                date_default_timezone_set('Asia/Jakarta');
-                $now = time();
-                $expire = strtotime($row['kadaluarsa']);
-                if ($now < $expire) {
+    public function getjumlahpesanankos($idkos){
+        $data = $this->main_model->get_data_isikos($idkos);
+        $count = 0;
+        if ($data){
+            foreach ($data as $row){
+                if ($row['status'] == 'Belum Bayar') {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now < $expire) {
+                        $count = $count + 1;
+                    }
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
-            }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
-                $count = $count + 1;
+
             }
-
         }
+        return $count;
     }
-    return $count;
-}
 
-public function getkamar($idkos,$idkamar = NULL)
-{
-    $data = $this->main_model->get_data_kamar($idkos,$idkamar);
-
-    if (empty($data))
+    public function getkamar($idkos,$idkamar = NULL)
     {
-        $data = [];
-    } 
+        $data = $this->main_model->get_data_kamar($idkos,$idkamar);
+
+        if (empty($data))
+        {
+            $data = [];
+        } 
         // else if($idkamar == NULL){
         //     foreach ($data as &$row){
         //     //kuota dikurangi jumlah pemesan
@@ -695,266 +691,265 @@ public function getkamar($idkos,$idkamar = NULL)
         //     $data['kuota'] = $data['kuota'] - $this->getjumlahpesanankamar($data['id_kamar']);
         // }
 
-    echo json_encode($data);
-}
-
-public function updatekamar($idkos,$idkamar){
-
-    if ($this->input->post('fasilitas')) {
-        $fasilitas = implode(',', $this->input->post('fasilitas'));
-    }else{
-        $fasilitas = "";
+        echo json_encode($data);
     }
 
-    $kuota = $this->getjumlahpesanankamar($idkamar) + $this->input->post('kuota');
+    public function updatekamar($idkos,$idkamar){
 
-    $data = array(
-        'nama_kamar' => $this->input->post('nama'),
-        'harga' => $this->input->post('harga'),
-        'panjang' => $this->input->post('panjang'),
-        'lebar' => $this->input->post('lebar'),
-        'fasilitas_kamar' => $fasilitas
-    );
-    $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
-    echo $insertStatus;
-}
+        if ($this->input->post('fasilitas')) {
+            $fasilitas = implode(',', $this->input->post('fasilitas'));
+        }else{
+            $fasilitas = "";
+        }
 
+        $kuota = $this->getjumlahpesanankamar($idkamar) + $this->input->post('kuota');
 
-public function uploadimage($filename,$idkos,$idkamar = NULL){
-    $ds          = DIRECTORY_SEPARATOR;
-    $targetPath = getcwd().$ds.'photos';
-    if ($idkamar == NULL) {
-        $targetPath = $targetPath.$ds.$idkos."_";
-    }else{
-        $targetPath = $targetPath.$ds.$idkos."_".$idkamar."_";
+        $data = array(
+            'nama_kamar' => $this->input->post('nama'),
+            'harga' => $this->input->post('harga'),
+            'panjang' => $this->input->post('panjang'),
+            'lebar' => $this->input->post('lebar'),
+            'fasilitas_kamar' => $fasilitas
+        );
+        $insertStatus = $this->main_model->update_kamar($data,$idkos,$idkamar);
+        echo $insertStatus;
     }
+
+
+    public function uploadimage($filename,$idkos,$idkamar = NULL){
+        $ds          = DIRECTORY_SEPARATOR;
+        $targetPath = getcwd().$ds.'photos';
+        if ($idkamar == NULL) {
+            $targetPath = $targetPath.$ds.$idkos."_";
+        }else{
+            $targetPath = $targetPath.$ds.$idkos."_".$idkamar."_";
+        }
 
         // if (!is_dir($targetPath)) {
         //     mkdir($targetPath, 0755, true);
         // }
 
 
-    if (!empty($_FILES)) {
-        $tempFile = $_FILES['file']['tmp_name'];
-        $targetFile =  $targetPath. $filename;
-        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        if (!empty($_FILES)) {
+            $tempFile = $_FILES['file']['tmp_name'];
+            $targetFile =  $targetPath. $filename;
+            $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 
-        if ($ext == "png" || $ext == "PNG") {
-            $image = imagecreatefrompng($tempFile);
-            $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
-            imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
-            imagealphablending($bg, TRUE);
-            imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
-            imagedestroy($image);
-            imagejpeg($bg, $tempFile, 100);
-            imagedestroy($bg);
+            if ($ext == "png" || $ext == "PNG") {
+                $image = imagecreatefrompng($tempFile);
+                $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
+                imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+                imagealphablending($bg, TRUE);
+                imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+                imagedestroy($image);
+                imagejpeg($bg, $tempFile, 100);
+                imagedestroy($bg);
+            }
+            move_uploaded_file($tempFile,$targetFile.".jpg");
         }
-        move_uploaded_file($tempFile,$targetFile.".jpg");
-    }
-}
-
-public function logout(){
-    $this->load->helper('cookie');
-    delete_cookie("backendCookie");
-    $this->load->view('main/login');
-}
-
-public function securedelete($jenis, $id){
-
-    if ($jenis == 'mahasiswa') {
-        $linkedCount = 0;
-    }else if ($jenis == 'kos') {
-        $linkedCount = $this->getjumlahpesanankos($id);
-    }else if ($jenis == 'kamar') {
-        $linkedCount = $this->getjumlahpesanankamar($id);
-    }else if ($jenis == 'kamardetail') {
-        $linkedCount = $this->getjumlahpesanankamardetail($id);
     }
 
-    if ($linkedCount <= 0) {
-        $insertStatus = $this->main_model->delete($jenis,$id);
-    } else{
-        $insertStatus = "Tidak bisa menghapus. Kamar masih dalam proses pemesanan.";
+    public function logout(){
+        $this->load->helper('cookie');
+        delete_cookie("backendCookie");
+        $this->load->view('main/login');
     }
 
-    echo $insertStatus;
-}
+    public function securedelete($jenis, $id){
 
-public function getjumlahpesanankamardetail($idkamardetail){
-    $data = $this->main_model->get_data_isikamardetail($idkamardetail);
-    $count = 0;
-    if ($data){
-        foreach ($data as $row){
-            if ($row['status'] == 'Belum Bayar') {
-                date_default_timezone_set('Asia/Jakarta');
-                $now = time();
-                $expire = strtotime($row['kadaluarsa']);
-                if ($now < $expire) {
+        if ($jenis == 'mahasiswa') {
+            $linkedCount = 0;
+        }else if ($jenis == 'kos') {
+            $linkedCount = $this->getjumlahpesanankos($id);
+        }else if ($jenis == 'kamar') {
+            $linkedCount = $this->getjumlahpesanankamar($id);
+        }else if ($jenis == 'kamardetail') {
+            $linkedCount = $this->getjumlahpesanankamardetail($id);
+        }
+
+        if ($linkedCount <= 0) {
+            $insertStatus = $this->main_model->delete($jenis,$id);
+        } else{
+            $insertStatus = "Tidak bisa menghapus. Kamar masih dalam proses pemesanan.";
+        }
+
+        echo $insertStatus;
+    }
+
+    public function getjumlahpesanankamardetail($idkamardetail){
+        $data = $this->main_model->get_data_isikamardetail($idkamardetail);
+        $count = 0;
+        if ($data){
+            foreach ($data as $row){
+                if ($row['status'] == 'Belum Bayar') {
+                    date_default_timezone_set('Asia/Jakarta');
+                    $now = time();
+                    $expire = strtotime($row['kadaluarsa']);
+                    if ($now < $expire) {
+                        $count = $count + 1;
+                    }
+                }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
                     $count = $count + 1;
                 }
-            }else if($row['status'] == 'Belum Verifikasi' || $row['status'] == 'Cek Ketersediaan'){
-                $count = $count + 1;
-            }
 
-        }
-    }
-    return $count;
-}
-
-public function insertkamardetail($idkamar){
-    $status = $this->input->post('status_kamardetail');
-
-
-    $data = array(
-        'id_kamar' => $idkamar,
-        'nama_kamardetail' => $this->input->post('nama_kamardetail'),
-        'status_kamardetail' => $status,
-    );
-
-    $insertStatus = $this->main_model->insert_new_kamardetail($data);
-
-    if ($insertStatus == 0) {
-        $insertStatus = "Failed to insert Record";
-    }
-
-    echo $insertStatus;
-}
-
-public function getkamardetail($idkamar)
-{
-    $data = $this->main_model->get_data_kamardetail($idkamar,"kamar");
-
-    if (empty($data))
-    {
-        $data = [];
-    }else{
-        foreach ($data as &$row){
-            if ($this->cekprosestransaksi($row['id_kamardetail']) == true) {
-                    //jika ada transaksi
-                $row['status']='sedang dipesan';
-            }else{
-
-                $history = $this->gethistory($row['id_kamardetail']);
-                if (empty($history)) {
-                    if ($row['status_kamardetail'] == 'buka terbatas' || $row['status_kamardetail'] == 'tutup terbatas') {
-                        $row['status_kamardetail'] = 'tutup';
-                    }
-                }
-                $row['status']=$row['status_kamardetail'];
             }
         }
+        return $count;
     }
 
-    echo json_encode($data);
-}
+    public function insertkamardetail($idkamar){
+        $status = $this->input->post('status_kamardetail');
 
 
-public function updatekamardetail($idkamardetail){
-    $nama = $this->input->post('nama_kamardetail_update');
-    $status = $this->input->post('status_kamardetail_update');
-    $bulanbuka = $this->input->post('bulan_buka');
-
-    $history = $this->gethistory($idkamardetail);
-
-    $insertStatus = NULL;
-    if ($status == "buka") {
-            //rule 1: Tidak boleh open bila ada proses transaksi yang masih berlangsung
-            //rule 2: Tidak boleh open bila belum mencapai bulan masuk pemesanan
-        if ($this->cekprosestransaksi($idkamardetail) == true) {
-                //rule 1
-            $insertStatus = 'Tidak dapat membuka kamar. Masih ada proses transaksi yang belum selesai.';
-        }else if (empty($history)) {
-            $status_kamardetail = 'buka';
-        }else {
-            $terdekat = $this->gethistoryterdekat($history);
-            if ($terdekat['vakum']==0) {
-                if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
-                    $status_kamardetail = 'buka terbatas';
-                }else{
-                        //rule 2
-                    $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
-                }
-            }else if ($terdekat['vakum']==1) {
-                if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
-                    $status_kamardetail = 'tutup terbatas';
-                }else{
-                        //rule 2
-                    $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
-                }
-            }
-        }
-    } else if($status == "tutup"){
-        if ($this->cekprosestransaksi($idkamardetail) == true){
-                //rule 1
-            $insertStatus = 'Tidak dapat menutup kamar. Masih ada proses transaksi yang belum selesai.';
-        }else{
-            $status_kamardetail = 'tutup';
-            $bulanbuka = NULL;
-        }
-
-
-    }
-
-    if ($insertStatus == NULL) {
         $data = array(
-            'nama_kamardetail' => $nama,
-            'status_kamardetail' =>$status_kamardetail,
-            'bulan_buka' => $bulanbuka
+            'id_kamar' => $idkamar,
+            'nama_kamardetail' => $this->input->post('nama_kamardetail'),
+            'status_kamardetail' => $status,
         );
 
-        $insertStatus = $this->main_model->update_kamardetail($data,$idkamardetail);
+        $insertStatus = $this->main_model->insert_new_kamardetail($data);
 
         if ($insertStatus == 0) {
-            $insertStatus = "Gagal mengubah data";
+            $insertStatus = "Failed to insert Record";
         }
+
+        echo $insertStatus;
     }
 
-    echo $insertStatus;
-}
-
-private function gethistory($idkamardetail=NULL){
-    $data = $this->main_model->get_history($idkamardetail);
-    $result = [];
-    date_default_timezone_set('Asia/Jakarta');
-    $now = time();
-    foreach ($data as $row){
-        if ($this->monthformattotime($row['tanggal_masuk'])>$now) {
-            $result[] = $row;
-        }
-    }
-    return $result;
-}
-
-private function gethistoryterdekat($datahistory){
-    $empty = true;
-    $terdekat = NULL;
-    foreach ($datahistory as $row){
-        if ($empty == true) {
-            $terdekat = $row;
-            $empty = false;
-        }else if ($this->monthformattotime($row['tanggal_masuk'])<$this->monthformattotime($terdekat['tanggal_masuk'])) {
-            $terdekat = $row;
-        }
-    }
-
-    return $terdekat;
-}
-
-private function monthformattotime($bulanmasuk){
-    return strtotime(DateTime::createFromFormat('M Y', $bulanmasuk)->format('Y-m-d'));
-}
-
-
-private function cekprosestransaksi($idkamardetail)
-{
-    $data = $this->main_model->get_mahasiswa_by_kamardetail($idkamardetail);
-
-    if (empty($data))
+    public function getkamardetail($idkamar)
     {
-        $masihproses = false;
-    } else {
-        $masihproses = false;
-            foreach ($data as &$row){ //add & to call by reference
+        $data = $this->main_model->get_data_kamardetail($idkamar,"kamar");
+
+        if (empty($data))
+        {
+            $data = [];
+        }else{
+            foreach ($data as &$row){
+                if ($this->cekprosestransaksi($row['id_kamardetail']) == true) {
+                    //jika ada transaksi
+                    $row['status']='sedang dipesan';
+                }else{
+
+                    $history = $this->gethistory($row['id_kamardetail']);
+                    if (empty($history)) {
+                        if ($row['status_kamardetail'] == 'buka terbatas' || $row['status_kamardetail'] == 'tutup terbatas') {
+                            $row['status_kamardetail'] = 'tutup';
+                        }
+                    }
+                    $row['status']=$row['status_kamardetail'];
+                }
+            }
+        }
+
+        echo json_encode($data);
+    }
+
+
+    public function updatekamardetail($idkamardetail){
+        $nama = $this->input->post('nama_kamardetail_update');
+        $status = $this->input->post('status_kamardetail_update');
+        $bulanbuka = $this->input->post('bulan_buka');
+
+        $history = $this->gethistory($idkamardetail);
+
+        $insertStatus = NULL;
+        if ($status == "buka") {
+            //rule 1: Tidak boleh open bila ada proses transaksi yang masih berlangsung
+            //rule 2: Tidak boleh open bila belum mencapai bulan masuk pemesanan
+            if ($this->cekprosestransaksi($idkamardetail) == true) {
+                //rule 1
+                $insertStatus = 'Tidak dapat membuka kamar. Masih ada proses transaksi yang belum selesai.';
+            }else if (empty($history)) {
+                $status_kamardetail = 'buka';
+            }else {
+                $terdekat = $this->gethistoryterdekat($history);
+                if ($terdekat['vakum']==0) {
+                    if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                        $status_kamardetail = 'buka terbatas';
+                    }else{
+                        //rule 2
+                        $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
+                    }
+                }else if ($terdekat['vakum']==1) {
+                    if ($this->monthformattotime($bulanbuka)<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                        $status_kamardetail = 'tutup terbatas';
+                    }else{
+                        //rule 2
+                        $insertStatus = 'Tidak dapat membuka kamar di bulan tersebut karena masih dalam masa pemesanan lain. Kamar hanya bisa dibuka setelah melewati bulan masuk pemesanan.';
+                    }
+                }
+            }
+        } else if($status == "tutup"){
+            if ($this->cekprosestransaksi($idkamardetail) == true){
+                //rule 1
+                $insertStatus = 'Tidak dapat menutup kamar. Masih ada proses transaksi yang belum selesai.';
+            }else{
+                $status_kamardetail = 'tutup';
+                $bulanbuka = NULL;
+            }
+
+
+        }
+
+        if ($insertStatus == NULL) {
+            $data = array(
+                'nama_kamardetail' => $nama,
+                'status_kamardetail' =>$status_kamardetail,
+                'bulan_buka' => $bulanbuka
+            );
+
+            $insertStatus = $this->main_model->update_kamardetail($data,$idkamardetail);
+
+            if ($insertStatus == 0) {
+                $insertStatus = "Gagal mengubah data";
+            }
+        }
+
+        echo $insertStatus;
+    }
+
+    private function gethistory($idkamardetail=NULL){
+        $data = $this->main_model->get_history($idkamardetail);
+        $result = [];
+        date_default_timezone_set('Asia/Jakarta');
+        $now = time();
+        foreach ($data as $row){
+            if ($this->monthformattotime($row['tanggal_masuk'])>$now) {
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
+
+    private function gethistoryterdekat($datahistory){
+        $empty = true;
+        $terdekat = NULL;
+        foreach ($datahistory as $row){
+            if ($empty == true) {
+                $terdekat = $row;
+                $empty = false;
+            }else if ($this->monthformattotime($row['tanggal_masuk'])<$this->monthformattotime($terdekat['tanggal_masuk'])) {
+                $terdekat = $row;
+            }
+        }
+
+        return $terdekat;
+    }
+
+    private function monthformattotime($bulanmasuk){
+        return strtotime(DateTime::createFromFormat('M Y', $bulanmasuk)->format('Y-m-d'));
+    }
+
+
+    private function cekprosestransaksi($idkamardetail)
+    {
+        $data = $this->main_model->get_mahasiswa_by_kamardetail($idkamardetail);
+
+        if (empty($data)){
+            $masihproses = false;
+        } else {
+            $masihproses = false;
+            foreach ($data as &$row){
                 unset($row['password']);
                 if ($row['status']=="Belum Bayar") {
                     date_default_timezone_set('Asia/Jakarta');
@@ -968,11 +963,35 @@ private function cekprosestransaksi($idkamardetail)
                 if ($row['status']=="Belum Bayar" || $row['status']=="Belum Verifikasi") {
                     $masihproses = true;
                 }
-                
+
             }
         }
 
         return $masihproses;
+    }
+
+    //for debugging
+    public function clearcache(){
+        $this->main_model->deletecache();
+        clearstatcache();
+        echo "menghapus cache server CI";
+    }
+
+    public function testEmail($email,$website){
+        $to = $email."@".$website;
+        $subject = "Test Kirim Email McDorm";
+        $txt = "<b>Hai!</b> <br>
+        Apakah anda berhasil menerima email ini? Jika ya, itu artinya fitur pengiriman email dapat berfungsi dengan baik di server yang dipasangi aplikasi McDorm";
+
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+        $status = mail($to,$subject,$txt,$headers);
+        if ($status) {
+            echo "Correct email to send.";
+        }else{
+             echo "Wrong format.";
+        }
     }
 
 }

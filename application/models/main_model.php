@@ -335,4 +335,9 @@ class Main_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function deletecache(){
+		$this->db->cache_off();
+		$this->db->cache_delete_all();
+	}
+
 }

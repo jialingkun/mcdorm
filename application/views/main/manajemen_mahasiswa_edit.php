@@ -315,7 +315,8 @@
     }
 
     function verifikasi(){
-
+      $('#konfirmasi').prop('disabled',true);
+      
       var r = confirm("Apakah anda ingin verifikasi?");
       if (r == true) {
         var urls='main/updateMahasiswa/verifikasi/'+getCookie("editDataSiswa")+"";
@@ -326,13 +327,17 @@
             if (response == 1) {
               alert("Verifikasi Berhasil!");
               window.location.href = 'manajemen_mahasiswa_edit';
+            }else{
+              alert(response);
             }
+            $('#konfirmasi').prop('disabled',false);
           }
         });
       } 
     }
 
     function konfirmasiKetersediaan(){
+      $('#cekketersediaan').prop('disabled',true);
       var invoice = "<div style='max-width:600px; border:1px solid black; padding:10px;'>"+$('.modal-body').html()+"</div>";
       var r = confirm("Apakah anda ingin konfirmasi ketersediaan kamar?");
       if (r == true) {
@@ -345,7 +350,11 @@
             if (response == 1) {
               alert("Konfirmasi Ketersediaan Berhasil!");
               window.location.href = 'manajemen_mahasiswa_edit';
+            }else{
+              alert(response);
             }
+
+            $('#cekketersediaan').prop('disabled',false);
           }
         });
       } 
