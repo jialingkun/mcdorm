@@ -974,6 +974,8 @@ class Main extends CI_Controller {
     public function clearcache(){
         $this->main_model->deletecache();
         clearstatcache();
+        apc_clear_cache();
+        //opcache_reset();
         echo "menghapus cache server CI";
     }
 
