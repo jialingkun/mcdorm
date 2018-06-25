@@ -973,9 +973,8 @@ class Main extends CI_Controller {
     //for debugging
     public function clearcache(){
         $this->main_model->deletecache();
-        clearstatcache();
-        apc_clear_cache();
-        //opcache_reset();
+        if (function_exists('apc_clear_cache')) apc_clear_cache();
+        if (function_exists('opcache_reset')) opcache_reset();
         echo "menghapus cache server CI";
     }
 
@@ -994,7 +993,7 @@ class Main extends CI_Controller {
         if ($status) {
             echo "Correct email to send.";
         }else{
-            $errorMessage = error_get_last()['message'];
+            $errorMessage = error_get_last();
              print_r($errorMessage);
         }
     }

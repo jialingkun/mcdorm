@@ -339,8 +339,8 @@ class Main_model extends CI_Model {
 	public function deletecache(){
 		$this->db->cache_delete_all();
 		$this->db->cache_off();
-		
-		$this->db->reset_query()
+
+		$this->db->reset_query();
 		$this->db->start_cache();
 		$this->db->stop_cache();
 		$this->db->flush_cache();
