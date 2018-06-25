@@ -4,6 +4,7 @@ class Main_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
+		$this->db->reconnect(); //debugging database result cached
 	}
 
 	public function get_admin_login()
@@ -336,8 +337,13 @@ class Main_model extends CI_Model {
 	}
 
 	public function deletecache(){
-		$this->db->cache_off();
 		$this->db->cache_delete_all();
+		$this->db->cache_off();
+		
+		$this->db->reset_query()
+		$this->db->start_cache();
+		$this->db->stop_cache();
+		$this->db->flush_cache();
 	}
 
 }

@@ -979,16 +979,18 @@ class Main extends CI_Controller {
         echo "menghapus cache server CI";
     }
 
-    public function testEmail($email,$website){
-        $to = $email."@".$website;
+    public function testEmail($email){
+        $to = $email;
         $subject = "Test Kirim Email McDorm";
         $txt = "<b>Hai!</b> <br>
         Apakah anda berhasil menerima email ini? Jika ya, itu artinya fitur pengiriman email dapat berfungsi dengan baik di server yang dipasangi aplikasi McDorm";
 
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
-        $status = mail($to,$subject,$txt,$headers);
+        //$headers = 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+        //$headers .= "MIME-Version: 1.0" . "\r\n";
+        //$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        
+        //$status = mail($to,$subject,$txt,$headers);
+        $status = mail($to,$subject,$txt);
         if ($status) {
             echo "Correct email to send.";
         }else{

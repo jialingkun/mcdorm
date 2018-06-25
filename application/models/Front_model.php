@@ -4,6 +4,8 @@ class Front_model extends CI_Model {
 	public function __construct()
 	{
 		$this->load->database();
+		$this->db->reconnect(); //debugging database result cached
+
 	}
 
 	public function duplikat_data_mahasiswa($data)
@@ -194,8 +196,8 @@ class Front_model extends CI_Model {
 	}
 
 	public function deletecache(){
-		$this->db->cache_off();
 		$this->db->cache_delete_all();
+		$this->db->cache_off();
 	}
 
 }

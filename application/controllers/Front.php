@@ -790,8 +790,8 @@ class Front extends CI_Controller {
     public function clearcache(){
         $this->front_model->deletecache();
         clearstatcache();
-        apc_clear_cache();
-        //opcache_reset();
+        if (function_exists('apc_clear_cache')) apc_clear_cache();
+        if (function_exists('opcache_reset')) opcache_reset();
         echo "menghapus cache";
 
     }
