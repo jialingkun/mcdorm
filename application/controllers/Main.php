@@ -994,7 +994,8 @@ class Main extends CI_Controller {
         if ($status) {
             echo "Correct email to send.";
         }else{
-             echo "Wrong format.";
+            $errorMessage = error_get_last()['message'];
+             print_r($errorMessage);
         }
     }
 
