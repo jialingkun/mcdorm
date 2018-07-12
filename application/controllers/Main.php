@@ -998,9 +998,9 @@ class Main extends CI_Controller {
         
         $status = mail($to,$subject,$txt,$headers);
         if ($status) {
-            echo "Correct email to send.";
+            echo "Correct email to send. Sending email to ".$to;
         }else{
-            echo "Error sending email";
+            echo "Error sending email to ".$to;
             $errorMessage = error_get_last();
             print_r($errorMessage);
         }
