@@ -54,10 +54,10 @@ class Main extends CI_Controller {
                 $this->load->helper('cookie');
 
                 $cookie= array(
-                   'name'   => 'backendCookie',
-                   'value'  => md5($data['admin']['id_admin']),
-                   'expire' => '0',
-               );
+                 'name'   => 'backendCookie',
+                 'value'  => md5($data['admin']['id_admin']),
+                 'expire' => '0',
+             );
                 $this->input->set_cookie($cookie);
                 //echo "Session created : ";
                 //$this->getcookieAdmin();
@@ -321,9 +321,11 @@ class Main extends CI_Controller {
             Detail pemesanan anda dapat dilihat pada invoice berikut:".$invoice."<br>
             *Email ini tidak untuk dibalas*";
 
+            // Always set content-type when sending HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+            $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+            $headers .= 'From: <mcdorm@machung.ac.id>'. "\r\n";
+            $headers .= 'Cc: <mcdorm@machung.ac.id>' . "\r\n";
 
         } else if ($jenis == 'konfirmasiketersediaan') {
 
@@ -350,9 +352,11 @@ class Main extends CI_Controller {
             Jika anda terlambat mengirim bukti pembayaran dalam waktu 48 jam semenjak email ini terkirim, pemesanan anda akan kadaluarsa. Silahkan lakukan pemesanan ulang atau hubungi kami untuk langkah lebih lanjut. Terima kasih. <br>
             *Email ini tidak untuk dibalas*";
 
+            // Always set content-type when sending HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+            $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+            $headers .= 'From: <mcdorm@machung.ac.id>'. "\r\n";
+            $headers .= 'Cc: <mcdorm@machung.ac.id>' . "\r\n";
 
         } else if ($jenis == 'cancel') {
             $data = array(
@@ -374,9 +378,11 @@ class Main extends CI_Controller {
             Silahkan lakukan pemesanan ulang atau hubungi kami untuk langkah lebih lanjut. Terima kasih. <br>
             *Email ini tidak untuk dibalas*";
 
+            // Always set content-type when sending HTML email
             $headers = "MIME-Version: 1.0" . "\r\n";
-            $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $headers .= 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
+            $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+            $headers .= 'From: <mcdorm@machung.ac.id>'. "\r\n";
+            $headers .= 'Cc: <mcdorm@machung.ac.id>' . "\r\n";
             
         }
 
@@ -979,22 +985,24 @@ class Main extends CI_Controller {
     }
 
     public function testEmail($email){
-        $to = $email;
+        $to = $email."@gmail.com";
         $subject = "Test Kirim Email McDorm";
         $txt = "<b>Hai!</b> <br>
         Apakah anda berhasil menerima email ini? Jika ya, itu artinya fitur pengiriman email dapat berfungsi dengan baik di server yang dipasangi aplikasi McDorm";
 
-        //$headers = 'From: <McDormAdmin@machung.ac.id>' . "\r\n";
-        //$headers .= "MIME-Version: 1.0" . "\r\n";
-        //$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+        $headers .= 'From: <mcdorm@machung.ac.id>'. "\r\n";
+        $headers .= 'Cc: <mcdorm@machung.ac.id>' . "\r\n";
         
-        //$status = mail($to,$subject,$txt,$headers);
-        $status = mail($to,$subject,$txt);
+        $status = mail($to,$subject,$txt,$headers);
         if ($status) {
             echo "Correct email to send.";
         }else{
+            echo "Error sending email";
             $errorMessage = error_get_last();
-             print_r($errorMessage);
+            print_r($errorMessage);
         }
     }
 
